@@ -13,12 +13,12 @@ _REALPATH = _Path(*_Path(_os.path.realpath(__file__)).parts[:-3]).resolve()
 if not any(_Path(p).resolve() == str(_REALPATH) for p in _sys.path if _Path(p).exists()):
     _sys.path.append(str(_REALPATH))
 
-from wsuconnect.data import load as load_data
+from ..data import load as load_data
 _fullCredentials = loads(load_data.readable('credentials.json').read_text())
 
 # from .get_dir_identifiers_new import get_dir_identifiers_new
-from wsuconnect.classes.creds import creds as _cred
-from wsuconnect.classes.subject import subject as _sub
+from ..classes.creds import creds as _cred
+from ..classes.subject import subject as _sub
 creds = _cred()
 subject = _sub()
 creds.projects = _fullCredentials['projects']
@@ -26,9 +26,9 @@ creds.masterMachineName = _fullCredentials['master_machine_name']
 
 
 #import modules
-from wsuconnect.support_tools import bids
-from wsuconnect.support_tools import condor
-from wsuconnect.support_tools import RestToolbox
+from ..support_tools import bids
+from ..support_tools import condor
+from ..support_tools import RestToolbox
 
 from .apply_brainmask import apply_brainmask
 from .check_rawdata import check_rawdata
