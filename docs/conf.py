@@ -7,6 +7,7 @@ import sphinx_rtd_theme
 
 sys.path.append(os.path.abspath('ext'))
 sys.path.append('.')
+sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
 #sys.path.insert(0,os.abspath('support_tools'))
 
 
