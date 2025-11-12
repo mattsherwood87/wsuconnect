@@ -48,8 +48,7 @@ Python Implementation
 convert_dicoms.py
 =================
 
-
-.. autoprogram:: wsuconnect.support_tools.convert_dicoms:parser
+.. autoprogram:: support_tools.convert_dicoms:parser
     :prog: command line implementation
 
 
@@ -81,7 +80,7 @@ Python Implementation
 dti_flirt.py
 ============
 
-.. autoprogram:: wsuconnect.dti_flirt:parser
+.. autoprogram:: support_tools.dti_flirt:parser
     :prog: dti_flirt.py
 
 Python Implementation
@@ -94,16 +93,16 @@ Python Implementation
 
 .. _dti_preprocess_python:
 
-dti_preprocess.py
-=================
+dti_preprocess_wf.py
+====================
 
-.. autoprogram:: wsuconnect.dti_preprocess:parser
+.. autoprogram:: support_tools.dti_preprocess_wf:parser
     :prog: dti_preprocess.py
 
 Python Implementation
 ---------------------
 
-.. automodule:: wsuconnect.support_tools.dti_preprocess
+.. automodule:: wsuconnect.support_tools.dti_preprocess_wf
     :members:
     :special-members:
 
@@ -111,7 +110,7 @@ Python Implementation
 .. _evaluate_source_file_transfer_python:
 
 evaluate_source_file_transfer.py
-=============================
+================================
 
 .. note:: the function of support_tools.evaluate_source_file_transfer does not support command line operation.
 
@@ -128,7 +127,7 @@ Python Implementation
 feat_full_firstlevel.py
 =======================
 
-.. autoprogram:: wsuconnect.support_tools.feat_full_firstlevel:parser
+.. autoprogram:: support_tools.feat_full_firstlevel:parser
     :prog: feat_full_firstlevel.py
 
 Python Implementation
@@ -159,7 +158,7 @@ Python Implementation
 flirt.py
 ========
 
-.. autoprogram:: flirt:parser
+.. autoprogram:: support_tools.flirt:parser
     :prog: flirt.py
 
 Python Implementation
@@ -172,47 +171,32 @@ Python Implementation
 
 .. _fsreconall_stage1_python:
 
-fsreconall_stage1.py
-====================
+fsreconall_stage1_wf.py
+=======================
 
-.. autoprogram:: fsreconall_stage1:parser
+.. autoprogram:: support_tools.fsreconall_stage1_wf:parser
     :prog: fsreconall_stage1.py
 
 Python Implementation
 ---------------------
 
-.. automodule:: wsuconnect.support_tools.fsreconall_stage1
+.. automodule:: wsuconnect.support_tools.fsreconall_stage1_wf
     :members:
     :special-members:
 
 
 .. _fsreconall_stage2_python:
 
-fsreconall_stage2.py
-====================
+fsreconall_stage2_wf.py
+=======================
 
-.. autoprogram:: fsreconall_stage2:parser
+.. autoprogram:: support_tools.fsreconall_stage2_wf:parser
     :prog: fsreconall_stage2.py
 
 Python Implementation
 ---------------------
 
-.. automodule:: wsuconnect.support_tools.fsreconall_stage2
-    :members:
-    :special-members:
-
-
-.. _get_scan_id_python:
-
-get_scan_id.py
-==============
-
-.. note:: the function of support_tools.get_scan_id does not support command line operation.
-
-Python Implementation
----------------------
-
-.. automodule:: wsuconnect.support_tools.get_scan_id
+.. automodule:: wsuconnect.support_tools.fsreconall_stage2_wf
     :members:
     :special-members:
 
