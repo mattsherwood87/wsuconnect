@@ -1,0 +1,98 @@
+@startuml
+!include <kubernetes/k8s-sprites-unlabeled-25pct>
+' !$AWS_DARK = true
+
+!define AWSPuml https://raw.githubusercontent.com/awslabs/aws-icons-for-plantuml/v18.0/dist
+!include AWSPuml/AWSCommon.puml
+!include AWSPuml/AWSSimplified.puml
+!include AWSPuml/Compute/EC2.puml
+!include AWSPuml/Compute/EC2Instance.puml
+!include AWSPuml/DeveloperTools/CodeBuild.puml
+!include AWSPuml/DeveloperTools/CodeCommit.puml
+!include AWSPuml/DeveloperTools/CodeDeploy.puml
+!include AWSPuml/DeveloperTools/CodePipeline.puml
+!include AWSPuml/General/User.puml
+!include AWSPuml/Groups/AWSCloud.puml
+!include AWSPuml/Groups/VPC.puml
+!include AWSPuml/Groups/AvailabilityZone.puml
+!include AWSPuml/Groups/PublicSubnet.puml
+!include AWSPuml/Groups/PrivateSubnet.puml
+!include AWSPuml/NetworkingContentDelivery/VPCNATGateway.puml
+!include AWSPuml/NetworkingContentDelivery/VPCInternetGateway.puml
+!include AWSPuml/ApplicationIntegration/SimpleNotificationService.puml
+!include AWSPuml/Storage/SimpleStorageService.puml
+
+!include AWSPuml/MachineLearning/SageMakerModel.puml
+$AWSGroupColoring(CodePipelineGroup, $AWSColor(DeveloperTools))
+!define CodePipelineGroup(g_alias, g_label="AWS CodePipeline") $AWSDefineGroup(g_alias, g_label, CodePipeline, CodePipelineGroup)
+
+!procedure $AWSIcon($service, $line1, $line2="")
+rectangle "$AWSImg($service)\n$line1\n$line2"
+!endprocedure 
+
+hide stereotype
+skinparam linetype ortho
+
+skinparam rectangle {
+    BackgroundColor $AWS_BG_COLOR
+    BorderColor Black
+    BorderColor<<special>> transparent
+}
+
+
+!include AWSPuml/Groups/PrivateSubnet.puml
+'top to bottom direction
+
+rectangle npc as "\lWSU CoNNECT NPC" {
+    rectangle master {
+        EC2Instance(nmaster, "afh1\ncollector, negotiator, schedd","")
+        note "HTCondor\nDocker\nFSL\nFreeSurfer\nAFNI\nMATLAB\npython3.10_venv\n\n20 physical cores\n40 threads" as m <<special>>
+        nmaster -[hidden]down- m
+    } 
+    rectangle execute {
+        together {
+            rectangle core {
+                EC2Instance(core_GPU1, "core-GPU1\nstartd","") 
+                note "HTCondor\nFSL\nFreeSurfer\nAFNI\nMATLAB\npython3.10_venv\n\n10 physical cores\n20 threads\n2x NVIDIA P4000" as c <<special>>
+                core_GPU1 -[hidden]down- c
+            }
+            rectangle core as core2 {
+                EC2Instance(core_afh2, "afh2\nstartd","") 
+                note "HTCondor\nDocker\npython3.10_venv\n\n20 physical cores\n40 threads" as c2 <<special>>
+                core_afh2 -[hidden]down- c2
+            }
+        }
+        together {
+            rectangle core as core3 {
+                EC2Instance(npc_core1A, "npc-core1A\nstartd","") 
+                note "HTCondor\nDocker\npython3.10_venv\n\n20 physical cores\n40 threads" as c3 <<special>>
+                npc_core1A -[hidden]down- c3
+            }
+            rectangle core as core4 {
+                EC2Instance(npc_core1B, "npc-core1B\nstartd","") 
+                note "HTCondor\nDocker\npython3.10_venv\n\n20 physical cores\n40 threads" as c4 <<special>>
+                npc_core1B -[hidden]down- c4
+            }
+            rectangle core as core5 {
+                EC2Instance(npc_core1C, "npc-core1C\nstartd","") 
+                note "HTCondor\nDocker\npython3.10_venv\n\n20 physical cores\n40 threads" as c5 <<special>>
+                npc_core1C -[hidden]down- c5
+            }
+            rectangle core as core6 {
+                EC2Instance(npc_core1D, "npc-core1D\nstartd","") 
+                note "HTCondor\nDocker\npython3.10_venv\n\n20 physical cores\n40 threads" as c6 <<special>>
+                npc_core1D -[hidden]down- c6
+            }
+        }
+    }
+}
+
+master -[hidden]down- core
+core -[hidden]left- core2
+'core -[hidden]down- core4
+core3-[hidden]left- core4
+core5-[hidden]left- core6
+master <-> execute
+
+
+@enduml

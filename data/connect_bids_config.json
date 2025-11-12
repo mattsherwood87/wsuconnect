@@ -1,0 +1,57 @@
+{
+  "name": "aslprep",
+  "entities": [
+    {
+      "name": "datatype",
+      "pattern": "[/\\\\]+(anat|beh|dwi|eeg|figures|fmap|func|ieeg|meg|micr|perf|pet)[/\\\\]+"
+    },
+    {
+      "name": "cohort",
+      "pattern": "(?:^|_)cohort-([0-9]+)",
+      "dtype": "int"
+    },
+    {
+      "name": "measure",
+      "pattern": "(?:^|_)measure-([a-zA-Z0-9]+)"
+    },
+    {
+      "name": "resolution",
+      "pattern": "res-([a-zA-Z0-9]+)"
+    },
+    {
+      "name": "density",
+      "pattern": "den-([a-zA-Z0-9]+)"
+    }
+  ],
+  "default_path_patterns": [
+    "sub-{subject}[/ses-{session}]/{datatype<func>|func}/sub-{subject}[_ses-{session}][_hash-{hash}]_task-{task}[_acq-{acquisition}][_ce-{ceagent}][_rec-{reconstruction}][_dir-{direction}][_run-{run}][_echo-{echo}][_hemi-{hemi<L|R>}][_space-{space}][_cohort-{cohort}][_den-{density}][_desc-{desc}]_{suffix<zstat|zmap>}{extension<.nii.gz|.nii|.dtseries.nii|.dtseries.json|.func.gii|.func.json>}",
+    "sub-{subject}[/ses-{session}]/{datatype<func>|func}/sub-{subject}[_ses-{session}][_hash-{hash}]_task-{task}[_acq-{acquisition}][_ce-{ceagent}][_rec-{reconstruction}][_dir-{direction}][_run-{run}][_echo-{echo}][_hemi-{hemi<L|R>}][_space-{space}][_cohort-{cohort}][_den-{density}][_desc-{desc}]_{suffix<zstat|zmap>}.{extension<nii.gz|nii>}",
+    "[desc-{desc}_]{suffix<cbf>}{extension<.json>|.json}",
+    "atlases/atlas-{atlas}/[space-{space}_]atlas-{atlas}[_cohort-{cohort}][_res-{resolution}][_desc-{desc}]_{suffix<dseg>}{extension<.nii|.nii.gz|.tsv|.json>|.nii.gz}",
+    "atlases/atlas-{atlas}/[space-{space}_]atlas-{atlas}[_cohort-{cohort}][_den-{density}][_desc-{desc}]_{suffix<dseg>}{extension<.dlabel.nii|.tsv|.json>|.dlabel.nii}",
+    "sub-{subject}[/ses-{session}]/{datatype<anat>|anat}/sub-{subject}[_ses-{session}][_acq-{acquisition}][_ce-{ceagent}][_rec-{reconstruction}]_{suffix<T1w|T2w|T1rho|T1map|T2map|T2star|FLAIR|FLASH|PDmap|PD|PDT2|inplaneT[12]|angio>}{extension<.nii|.nii.gz|.json>|.nii.gz}",
+    "sub-{subject}[/ses-{session}]/{datatype<anat>|anat}/sub-{subject}[_ses-{session}][_acq-{acquisition}][_ce-{ceagent}][_rec-{reconstruction}][_mod-{modality}]_{suffix<defacemask>}{extension<.nii|.nii.gz|.json>|.nii.gz}",
+    "sub-{subject}[/ses-{session}]/{datatype<func>|func}/sub-{subject}[_ses-{session}]_task-{task}[_acq-{acquisition}][_ce-{ceagent}][_dir-{direction}][_rec-{reconstruction}][_run-{run}][_echo-{echo}]_{suffix<bold|cbv|sbref>}{extension<.nii|.nii.gz|.json>|.nii.gz}",
+    "sub-{subject}[/ses-{session}]/{datatype<fmap>|fmap}/sub-{subject}[_ses-{session}][_acq-{acquisition}][_dir-{direction}][_run-{run}]_{fmap<phasediff|magnitude[12]|phase[12]|fieldmap>}{extension<.nii|.nii.gz|.json>|.nii.gz}",
+    "sub-{subject}[/ses-{session}]/{datatype<fmap>|fmap}/sub-{subject}[_ses-{session}][_acq-{acquisition}][_ce-{ceagent}]_dir-{direction}[_run-{run}]_{fmap<epi>}{extension<.nii|.nii.gz|.json>|.nii.gz}",
+    "sub-{subject}[/ses-{session}]/[{datatype<func|meg|beh>|func}/]sub-{subject}[_ses-{session}]_task-{task}[_acq-{acquisition}][_rec-{reconstruction}][_run-{run}][_echo-{echo}][_recording-{recording}]_{suffix<events>}{extension<.tsv|.json>|.tsv}",
+    "sub-{subject}[/ses-{session}]/[{datatype<perf|beh>|perf|perf}/]sub-{subject}[_ses-{session}][_task-{task}][_acq-{acquisition}][_rec-{reconstruction}][_run-{run}][_echo-{echo}][_recording-{recording}]_{suffix<aslcontext>}{extension<.tsv|.json>|.tsv}",
+    "sub-{subject}[/ses-{session}]/[{datatype<func|beh>|func}/]sub-{subject}[_ses-{session}]_task-{task}[_acq-{acquisition}][_rec-{reconstruction}][_run-{run}][_echo-{echo}][_recording-{recording}]_{suffix<physio|stim>}{extension<.tsv.gz|.json>|.tsv.gz}",
+    "sub-{subject}[/ses-{session}]/{datatype<func|perf>|func}/sub-{subject}[_ses-{session}][_task-{task}][_acq-{acquisition}][_ce-{ceagent}][_dir-{direction}][_rec-{reconstruction}][_run-{run}][_echo-{echo}][_space-{space}][_atlas-{atlas}][_cohort-{cohort}][_desc-{desc}]_{suffix<regressors|timeseries>|timeseries}{extension<.json|.tsv|.csv|>|.tsv}",
+    "sub-{subject}[/ses-{session}]/{datatype<perf>|perf}/sub-{subject}[_ses-{session}][_task-{task}][_acq-{acquisition}][_ce-{ceagent}][_dir-{direction}][_rec-{reconstruction}][_run-{run}][_echo-{echo}][_desc-{desc}]_{suffix<confounds>}{extension<.tsv|.json>|.tsv}",
+    "sub-{subject}[/ses-{session}]/{datatype<func>}/sub-{subject}[_ses-{session}][_task-{task}][_acq-{acquisition}][_ce-{ceagent}][_dir-{direction}][_rec-{reconstruction}][_run-{run}][_echo-{echo}][_space-{space}][_res-{resolution}][_atlas-{atlas}][_cohort-{cohort}][_desc-{desc}]_{suffix<asl|aslref|abat|abv|att|cbf|coverage|mask>}{extension<.nii|.nii.gz|.json|.csv|.tsv>|.nii.gz}",
+    "sub-{subject}[/ses-{session}]/{datatype<perf>|perf}/sub-{subject}[_ses-{session}][_task-{task}][_acq-{acquisition}][_ce-{ceagent}][_dir-{direction}][_rec-{reconstruction}][_run-{run}][_echo-{echo}][_hemi-{hemi<L|R>}][_space-{space}][_res-{resolution}][_den-{density}][_cohort-{cohort}][_desc-{desc}]_{suffix<asl|abat|abv|att|cbf>}{extension<json|.func.gii>|.func.gii}",
+    "sub-{subject}[/ses-{session}]/{datatype<figures>|figures}/sub-{subject}[_ses-{session}][_task-{task}][_acq-{acquisition}][_ce-{ceagent}][_dir-{direction}][_rec-{reconstruction}][_run-{run}][_echo-{echo}][_space-{space}][_res-{resolution}][_den-{density}][_cohort-{cohort}][_desc-{desc}]_{suffix<asl|aslref|abat|abv|att|cbf|basil|score|scrub|pvc|mask>}{extension<.svg|.png|.html>|.svg}",
+    "sub-{subject}/{datatype<figures>}/sub-{subject}[_ses-{session}][_acq-{acquisition}][_ce-{ceagent}][_rec-{reconstruction}][_run-{run}][_space-{space}][_atlas-{atlas}][_cohort-{cohort}][_desc-{desc}]_{suffix<T1w|T2w|T1rho|T1map|T2map|T2star|FLAIR|FLASH|PDmap|PD|PDT2|inplaneT[12]|angio|dseg|mask|dwi|epiref|fieldmap>}{extension<.html|.svg|.png>}",
+    "sub-{subject}/{datatype<figures>}/sub-{subject}[_ses-{session}][_acq-{acquisition}][_ce-{ceagent}][_rec-{reconstruction}][_run-{run}][_space-{space}][_atlas-{atlas}][_cohort-{cohort}][_desc-{desc}]_{suffix<dseg|mask|dwi|epiref|fieldmap>}{extension<.html|.svg|.png>}",
+    "sub-{subject}[/ses-{session}]/{datatype<anat>|anat}/sub-{subject}[_ses-{session}][_acq-{acquisition}][_ce-{ceagent}][_rec-{reconstruction}][_run-{run}]_from-{from}_to-{to}_mode-{mode<image|points>|image}_{suffix<xfm>|xfm}{extension<.txt|.h5|.json>}",
+    "sub-{subject}[/ses-{session}]/{datatype<func|perf>|perf}/sub-{subject}[_ses-{session}][_task-{task}][_acq-{acquisition}][_ce-{ceagent}][_dir-{direction}][_rec-{reconstruction}][_run-{run}]_from-{from}_to-{to}_mode-{mode<image|points>|image}_{suffix<xfm>|xfm}{extension<.txt|.h5|.json>}",
+    "[acq-{acquisition}_][ce-{ceagent}_][rec-{reconstruction}_]{suffix<T1w|T2w|T1rho|T1map|T2map|T2star|FLAIR|FLASH|PDmap|PD|PDT2|inplaneT[12]|angio>}{extension<.json>|.json}",
+    "[acq-{acquisition}_][ce-{ceagent}_][rec-{reconstruction}_][mod-{modality}_]{suffix<defacemask>}{extension<.json>|.json}",
+    "task-{task}[_acq-{acquisition}][_ce-{ceagent}][_dir-{direction}][_rec-{reconstruction}][_run-{run}][_echo-{echo}]_{suffix<bold|cbv|sbref>}{extension<.json>|.json}",
+    "[acq-{acquisition}_][dir-{direction}_][run-{run}_]{fmap<phasediff|magnitude[1-2]|phase[1-2]|fieldmap>}{extension<.json>|.json}",
+    "[acq-{acquisition}_][ce-{ceagent}_]dir-{direction}[_run-{run}]_{fmap<epi>}{extension<.json>|.json}",
+    "task-{task}[_acq-{acquisition}][_rec-{reconstruction}][_run-{run}][_echo-{echo}][_recording-{recording}]_{suffix<events>}{extension<.json>|.json}",
+    "task-{task}[_acq-{acquisition}][_rec-{reconstruction}][_run-{run}][_echo-{echo}][_recording-{recording}]_{suffix<physio|stim>}{extension<.json>}"
+  ]
+}

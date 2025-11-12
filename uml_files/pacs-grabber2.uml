@@ -1,0 +1,110 @@
+
+@startuml
+
+!define AWSPuml https://raw.githubusercontent.com/awslabs/aws-icons-for-plantuml/v18.0/dist
+!include AWSPuml/AWSCommon.puml
+!include AWSPuml/AWSSimplified.puml
+!include AWSPuml/Compute/EC2.puml
+!include AWSPuml/Compute/EC2Instance.puml
+!include AWSPuml/DeveloperTools/CodeBuild.puml
+!include AWSPuml/DeveloperTools/CodeCommit.puml
+!include AWSPuml/DeveloperTools/CodeDeploy.puml
+!include AWSPuml/DeveloperTools/CodePipeline.puml
+!include AWSPuml/General/User.puml
+!include AWSPuml/Groups/AWSCloud.puml
+!include AWSPuml/Groups/VPC.puml
+!include AWSPuml/Groups/AvailabilityZone.puml
+!include AWSPuml/Groups/PublicSubnet.puml
+!include AWSPuml/Groups/PrivateSubnet.puml
+!include AWSPuml/NetworkingContentDelivery/VPCNATGateway.puml
+!include AWSPuml/NetworkingContentDelivery/VPCInternetGateway.puml
+!include AWSPuml/ApplicationIntegration/SimpleNotificationService.puml
+!include AWSPuml/Storage/SimpleStorageService.puml
+'!include AWSPuml/Storage/StorageParticipant.puml
+
+!pragma teoz true
+skinparam sequence {
+LifeLineBorderThickness 3
+ArrowThickness 2
+BoxBackgroundColor #DCD59A
+BoxBorderColor #046A38
+BoxFontColor #046A38
+' GroupBackgroundColor #F2F1F0
+GroupBodyBackgroundColor #F2F1F0
+' GroupBorderThickness 2
+' GroupBorderColor #046A38
+' GroupFontColor #046A38
+}
+
+
+
+' participant "$StorageIMG()"
+
+'actor operator #719949
+
+
+box CoNNECT NPC Master Node #CBA052
+participant "pacs-grabber.service\n(connect_pacs_dicom_grabber.py)" as grabber #719949
+
+box wsuconnect
+participant "connect_create_raw_nii.py" as create #719949
+endbox
+
+box wsuconnect.support_tools
+participant "convert_dicoms.py" as convert #719949
+endbox
+endbox
+
+
+box CoNNECT NPC core-GPU1 #CBA052
+participant "Temporary Storage\n/PACS_m2" as pacs #719949
+endbox
+
+box WSU Centralized Storage #CBA052
+participant "sourcedata\nSubject/Session" as src #719949
+participant "rawdata\nSubject/Session" as raw #719949
+participant "code\n<project>_scan_id.json" as sid #719949
+endbox
+
+
+
+box Philips MRI #CBA052
+participant "E:/Export/data_transfer_progress" as csv #719949
+endbox
+
+{start} [->grabber
+loop PACS Is Patient Stable? 
+    pacs->grabber : DICOM Header
+    activate grabber #F8E08E
+    grabber->src : copy DICOMS
+end
+grabber->convert : Convert DICOMs to NIfTIs
+deactivate grabber
+activate convert #F8E08E
+src o-> convert : DICOM
+convert->convert : dcm2niix
+convert o-> src : save NIfTI image
+'pacs->(20)src : DICOM-to-NIfTI conversion
+convert-->grabber
+activate grabber #F8E08E
+deactivate convert
+
+grabber->create : Create BIDS-compliant NIfTI
+activate create #F8E08E
+src o-> create : read NIfTI
+sid o-> create : read project scan ID JSON control file
+create->create : format BIDS filename
+create o-> raw : save BIDS NIfTI image, JSON/txt sidecar, bval/bvec files
+create --> grabber
+deactivate create
+grabber o-> csv : update MRI console
+
+
+{end} [/-grabber
+deactivate grabber
+{end} <-> {start} : look for\nmore DICOMs
+
+
+
+
+@enduml

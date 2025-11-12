@@ -1,0 +1,100 @@
+@startuml
+!include <kubernetes/k8s-sprites-unlabeled-25pct>
+' !$AWS_DARK = true
+
+!define AWSPuml https://raw.githubusercontent.com/awslabs/aws-icons-for-plantuml/v18.0/dist
+!include AWSPuml/AWSCommon.puml
+!include AWSPuml/AWSSimplified.puml
+!include AWSPuml/Compute/EC2.puml
+!include AWSPuml/Compute/EC2Instance.puml
+!include AWSPuml/DeveloperTools/CodeBuild.puml
+!include AWSPuml/DeveloperTools/CodeCommit.puml
+!include AWSPuml/DeveloperTools/CodeDeploy.puml
+!include AWSPuml/DeveloperTools/CodePipeline.puml
+!include AWSPuml/General/User.puml
+!include AWSPuml/Groups/AWSCloud.puml
+!include AWSPuml/Groups/VPC.puml
+!include AWSPuml/Groups/AvailabilityZone.puml
+!include AWSPuml/Groups/PublicSubnet.puml
+!include AWSPuml/Groups/PrivateSubnet.puml
+!include AWSPuml/NetworkingContentDelivery/VPCNATGateway.puml
+!include AWSPuml/NetworkingContentDelivery/VPCInternetGateway.puml
+!include AWSPuml/ApplicationIntegration/SimpleNotificationService.puml
+!include AWSPuml/Storage/SimpleStorageService.puml
+
+!include AWSPuml/MachineLearning/SageMakerModel.puml
+$AWSGroupColoring(CodePipelineGroup, $AWSColor(DeveloperTools))
+!define CodePipelineGroup(g_alias, g_label="AWS CodePipeline") $AWSDefineGroup(g_alias, g_label, CodePipeline, CodePipelineGroup)
+
+!procedure $AWSIcon($service, $line1, $line2="")
+rectangle "$AWSImg($service)\n$line1\n$line2"
+!endprocedure 
+
+hide stereotype
+skinparam linetype ortho
+
+skinparam rectangle {
+    BackgroundColor $AWS_BG_COLOR
+    BorderColor transparent
+}
+
+
+!include AWSPuml/Groups/PrivateSubnet.puml
+top to bottom direction
+
+' archimate #Technology "WSU MRI subnet" as subnet <<technology-network>>
+PublicSubnetGroup(internet, "WSU Campus Network") { 
+    PrivateSubnetGroup(subnet, "WSU MRI subnet") {
+        together {
+            cloud npc as "\lWSU CoNNECT NPC" {
+                EC2Instance(master, "master\nafh1","")
+                ' component "<$master>\nmaster afh1" as master
+                together {
+                    EC2Instance(core_GPU1, "core\ncore-GPU1","") 
+                    EC2Instance(core_afh2, "core\nafh2","") 
+                    EC2Instance(npc_core1A, "core\nnpc-core1A","") 
+                    EC2Instance(npc_core1B, "core\nnpc-core1B","") 
+                    EC2Instance(npc_core1C, "core\nnpc-core1C","") 
+                    EC2Instance(npc_core1D, "core\nnpc-core1D","") 
+                }
+            }
+        }
+        together {
+            node mri as "Philips MRI" #DCD59A;line:046A38;line.bold;text:046A38 
+            node beh as "Stimulus PC" #DCD59A;line:046A38;line.bold;text:046A38 
+        }
+
+        $AWSIcon(EC2, "User VDI", "(windows)") as vdi
+        ' archimate #Technology "User VDI" as vdi <<technology-device>>
+    }
+    together {
+        frame share as "\lScalable Isilon Shares" {
+            $AWSIcon(SimpleStorageService, "resshare18", "(common)") as resshare
+            ' component "<$vol>\nresshare" as resshare
+            $AWSIcon(SimpleStorageService, "resshare19", "(AFRL/RHBCN)") as resshare19
+            $AWSIcon(SimpleStorageService, "resshare20", "(AFRL/RHBF)") as resshare20
+            $AWSIcon(SimpleStorageService, "resshare21", "(WSU)") as resshare21
+        }
+    }
+}
+
+
+' actor operator #719949
+$AWSIcon(User, "Operator", "") as operator
+
+
+
+
+mri <-u-> core_GPU1 : local network
+
+
+share <-l-> npc
+
+operator <-u-> vdi : "VPN "
+vdi <-u-> master : "ssh or XRDP"
+
+' rectangle "$SageMakerModelIMG()" as mySecondML
+
+
+
+@enduml

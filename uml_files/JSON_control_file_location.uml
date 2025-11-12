@@ -1,0 +1,20 @@
+
+@startsalt
+{
+{T 
+ +resshare
+ ++general_processing_code
+ +++helper_functions
+ +++classes
+ ++projects
+ +++<contract>
+ ++++<project>
+ +++++**code**
+ +++++derivatives
+ +++++rawdata
+ +++++sourcedata
+
+}
+}
+
+@endsalt

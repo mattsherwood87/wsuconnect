@@ -1,0 +1,39 @@
+
+@startuml
+!pragma teoz true
+skinparam sequence {
+LifeLineBorderThickness 3
+ArrowThickness 2
+BoxBackgroundColor #DCD59A
+BoxBorderColor #046A38
+BoxFontColor #046A38
+'GroupBackgroundColor #F2F1F0
+GroupBodyBackgroundColor #F2F1F0
+'GroupBorderThickness 2
+'GroupBorderColor #046A38
+'GroupFontColor #046A38
+}
+
+
+actor operator #719949\
+
+participant "Philips MRI" as mri #719949
+operator->mri : Pushes DICOM images
+box CoNNECT NPC core-GPU1 Node #CBA052
+participant Orthanc #719949
+mri->Orthanc : Transfer Request
+box Local M.2 Storage  
+participant "/PACS_m2" as share #719949
+loop all DICOM images
+    mri->share : DICOM
+end
+Orthanc-->mri : Transfer Response
+endbox
+
+endbox
+
+mri-->operator : Patient is Stable!
+
+
+
+@enduml

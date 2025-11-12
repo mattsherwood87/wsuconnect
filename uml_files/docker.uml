@@ -1,0 +1,73 @@
+@startuml
+
+!define AWSPuml https://raw.githubusercontent.com/awslabs/aws-icons-for-plantuml/v18.0/dist
+
+
+!define SPRITESURL https://raw.githubusercontent.com/plantuml-stdlib/gilbarbara-plantuml-sprites/v1.1/sprites
+!define IMAGESSURL https://raw.githubusercontent.com/plantuml-stdlib/gilbarbara-plantuml-sprites/v1.1/pngs
+!includeurl SPRITESURL/docker-icon.puml
+!include AWSPuml/AWSCommon.puml
+!include AWSPuml/AWSSimplified.puml
+!include AWSPuml/Compute/EC2.puml
+!include AWSPuml/Compute/EC2Instance.puml
+!include AWSPuml/DeveloperTools/CodeBuild.puml
+!include AWSPuml/DeveloperTools/CodeCommit.puml
+!include AWSPuml/DeveloperTools/CodeDeploy.puml
+!include AWSPuml/DeveloperTools/CodePipeline.puml
+!include AWSPuml/General/User.puml
+!include AWSPuml/Groups/AWSCloud.puml
+!include AWSPuml/Groups/VPC.puml
+!include AWSPuml/Groups/AvailabilityZone.puml
+!include AWSPuml/Groups/PublicSubnet.puml
+!include AWSPuml/Groups/PrivateSubnet.puml
+!include AWSPuml/NetworkingContentDelivery/VPCNATGateway.puml
+!include AWSPuml/NetworkingContentDelivery/VPCInternetGateway.puml
+!include AWSPuml/ApplicationIntegration/SimpleNotificationService.puml
+!include AWSPuml/Storage/SimpleStorageService.puml
+
+hide stereotype
+skinparam linetype ortho
+left to right direction
+
+skinparam rectangle {
+    BackgroundColor $AWS_BG_COLOR
+    BorderColor<<special>> transparent
+}
+
+!procedure $AWSIcon($service, $line1, $line2="")
+rectangle "$AWSImg($service)\n$line1\n$line2"
+!endprocedure 
+
+
+node master [
+    <b>master
+    ----
+    afh1
+]
+node execute {
+    component {
+        port p1 as "bind:ro"
+        port p2 as "bind:rw"
+        rectangle "<img:IMAGESSURL/docker-icon.png>\nDocker" <<special>> as C {
+            note "Ubuntu24.04\nFSL\nFreeSurfer\nAFNI\nMATLAB\npython3.10_venv" as m 
+        }
+    }
+}
+
+master -down-> execute
+
+
+together {
+    frame share as "\lScalable Isilon Shares" {
+        $AWSIcon(SimpleStorageService, "resshare18", "(common)") as resshare <<special>>
+        ' component "<$vol>\nresshare" as resshare
+        $AWSIcon(SimpleStorageService, "resshare19", "(AFRL/RHBCN)") as resshare19 <<special>>
+        resshare -[hidden]up- resshare19
+    }
+}
+
+resshare -right->p1
+p1 -> C
+resshare19 <-right->p2
+p2 <-> C
+@enduml
