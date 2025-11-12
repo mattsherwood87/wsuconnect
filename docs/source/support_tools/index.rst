@@ -24,7 +24,7 @@ bids
 Python Implementation
 ---------------------
 
-.. automodule:: support_tools.bids
+.. automodule:: wsuconnect.support_tools.bids
     :members:
 
 
@@ -38,7 +38,7 @@ condor
 Python Implementation
 ---------------------
 
-.. automodule:: support_tools.condor
+.. automodule:: wsuconnect.support_tools.condor
     :members:
     :special-members:
 
@@ -49,14 +49,14 @@ convert_dicoms.py
 =================
 
 
-.. autoprogram:: convert_dicoms:parser
+.. autoprogram:: wsuconnect.support_tools.convert_dicoms:parser
     :prog: command line implementation
 
 
 Python Implementation
 ---------------------
 
-.. automodule:: support_tools.convert_dicoms
+.. automodule:: wsuconnect.support_tools.convert_dicoms
     :members:
     :special-members:
 
@@ -71,7 +71,7 @@ copy_dirs.py
 Python Implementation
 ---------------------
 
-.. automodule:: support_tools.copy_dirs
+.. automodule:: wsuconnect.support_tools.copy_dirs
     :members:
     :special-members:
 
@@ -81,13 +81,13 @@ Python Implementation
 dti_flirt.py
 ============
 
-.. autoprogram:: dti_flirt:parser
+.. autoprogram:: wsuconnect.dti_flirt:parser
     :prog: dti_flirt.py
 
 Python Implementation
 ---------------------
 
-.. automodule:: support_tools.dti_flirt
+.. automodule:: wsuconnect.support_tools.dti_flirt
     :members:
     :special-members:
 
@@ -97,13 +97,13 @@ Python Implementation
 dti_preprocess.py
 =================
 
-.. autoprogram:: dti_preprocess:parser
+.. autoprogram:: wsuconnect.dti_preprocess:parser
     :prog: dti_preprocess.py
 
 Python Implementation
 ---------------------
 
-.. automodule:: support_tools.dti_preprocess
+.. automodule:: wsuconnect.support_tools.dti_preprocess
     :members:
     :special-members:
 
@@ -118,7 +118,7 @@ evaluate_source_file_transfer.py
 Python Implementation
 ---------------------
 
-.. automodule:: support_tools.evaluate_source_file_transfer
+.. automodule:: wsuconnect.support_tools.evaluate_source_file_transfer
     :members:
     :special-members:
 
@@ -128,13 +128,13 @@ Python Implementation
 feat_full_firstlevel.py
 =======================
 
-.. autoprogram:: feat_full_firstlevel:parser
+.. autoprogram:: wsuconnect.support_tools.feat_full_firstlevel:parser
     :prog: feat_full_firstlevel.py
 
 Python Implementation
 ---------------------
 
-.. automodule:: support_tools.feat_full_firstlevel
+.. automodule:: wsuconnect.support_tools.feat_full_firstlevel
     :members:
     :special-members:
 
@@ -149,7 +149,7 @@ flirt_pngappend.py
 Python Implementation
 ---------------------
 
-.. automodule:: support_tools.flirt_pngappend
+.. automodule:: wsuconnect.support_tools.flirt_pngappend
     :members:
     :special-members:
 
@@ -165,7 +165,7 @@ flirt.py
 Python Implementation
 ---------------------
 
-.. automodule:: support_tools.flirt
+.. automodule:: wsuconnect.support_tools.flirt
     :members:
     :special-members:
 
@@ -181,7 +181,7 @@ fsreconall_stage1.py
 Python Implementation
 ---------------------
 
-.. automodule:: support_tools.fsreconall_stage1
+.. automodule:: wsuconnect.support_tools.fsreconall_stage1
     :members:
     :special-members:
 
@@ -197,7 +197,7 @@ fsreconall_stage2.py
 Python Implementation
 ---------------------
 
-.. automodule:: support_tools.fsreconall_stage2
+.. automodule:: wsuconnect.support_tools.fsreconall_stage2
     :members:
     :special-members:
 
@@ -212,7 +212,7 @@ get_scan_id.py
 Python Implementation
 ---------------------
 
-.. automodule:: support_tools.get_scan_id
+.. automodule:: wsuconnect.support_tools.get_scan_id
     :members:
     :special-members:
 
@@ -227,7 +227,7 @@ mysql.py
 Python Implementation
 ---------------------
 
-.. automodule:: support_tools.mysql
+.. automodule:: wsuconnect.support_tools.mysql
     :members:
     :special-members:
 
@@ -242,7 +242,7 @@ prepare_examcard_html.py
 Python Implementation
 ---------------------
 
-.. automodule:: support_tools.prepare_examcard_html
+.. automodule:: wsuconnect.support_tools.prepare_examcard_html
     :members:
     :special-members:
 
@@ -257,7 +257,7 @@ remove_dirs.py
 Python Implementation
 ---------------------
 
-.. automodule:: support_tools.remove_dirs
+.. automodule:: wsuconnect.support_tools.remove_dirs
     :members:
     :special-members:
 
@@ -272,7 +272,7 @@ RestToolbox.py
 Python Implementation
 ---------------------
 
-.. automodule:: support_tools.RestToolbox
+.. automodule:: wsuconnect.support_tools.RestToolbox
     :members:
     :special-members:
 
