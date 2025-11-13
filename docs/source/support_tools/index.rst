@@ -80,7 +80,7 @@ Python Implementation
 dti_flirt.py
 ============
 
-.. autoprogram:: support_tools.dti_flirt:parser
+.. autoprogram:: wsuconnect.support_tools.dti_flirt:parser
     :prog: dti_flirt.py
 
 Python Implementation
@@ -96,7 +96,7 @@ Python Implementation
 dti_preprocess_wf.py
 ====================
 
-.. autoprogram:: support_tools.dti_preprocess_wf:parser
+.. autoprogram:: wsuconnect.support_tools.dti_preprocess_wf:parser
     :prog: dti_preprocess.py
 
 Python Implementation
@@ -127,7 +127,7 @@ Python Implementation
 feat_full_firstlevel.py
 =======================
 
-.. autoprogram:: support_tools.feat_full_firstlevel:parser
+.. autoprogram:: wsuconnect.support_tools.feat_full_firstlevel:parser
     :prog: feat_full_firstlevel.py
 
 Python Implementation
@@ -158,7 +158,7 @@ Python Implementation
 flirt.py
 ========
 
-.. autoprogram:: support_tools.flirt:parser
+.. autoprogram:: wsuconnect.support_tools.flirt:parser
     :prog: flirt.py
 
 Python Implementation
@@ -190,7 +190,7 @@ Python Implementation
 fsreconall_stage2_wf.py
 =======================
 
-.. autoprogram:: support_tools.fsreconall_stage2_wf:parser
+.. autoprogram:: wsuconnect.support_tools.fsreconall_stage2_wf:parser
     :prog: fsreconall_stage2.py
 
 Python Implementation
