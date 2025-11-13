@@ -78,7 +78,7 @@ google-pasta==0.2.0
 greenlet==3.2.4
 grpcio==1.74.0
 gt-examcard-parser==0.1.0
-h11==3.0.1
+h11
 h5py==3.15.1
 httpcore==3.0.1
 httplib2==0.22.0
