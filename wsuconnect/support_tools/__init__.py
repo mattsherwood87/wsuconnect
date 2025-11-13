@@ -13,7 +13,7 @@ _REALPATH = _Path(*_Path(_os.path.realpath(__file__)).parts[:-3]).resolve()
 if not any(_Path(p).resolve() == str(_REALPATH) for p in _sys.path if _Path(p).exists()):
     _sys.path.append(str(_REALPATH))
 
-from ..data import load as load_data
+from wsuconnect.data import load as load_data
 _fullCredentials = loads(load_data.readable('credentials.json').read_text())
 
 # from .get_dir_identifiers_new import get_dir_identifiers_new
