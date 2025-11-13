@@ -17,8 +17,8 @@ from ..data import load as load_data
 _fullCredentials = loads(load_data.readable('credentials.json').read_text())
 
 # from .get_dir_identifiers_new import get_dir_identifiers_new
-from ..classes.creds import creds as _cred
-from ..classes.subject import subject as _sub
+from wsuconnect.classes.creds import creds as _cred
+from wsuconnect.classes.subject import subject as _sub
 creds = _cred()
 subject = _sub()
 creds.projects = _fullCredentials['projects']
@@ -26,9 +26,9 @@ creds.masterMachineName = _fullCredentials['master_machine_name']
 
 
 #import modules
-from ..support_tools import bids
-from ..support_tools import condor
-from ..support_tools import RestToolbox
+from wsuconnect.support_tools import bids
+from wsuconnect.support_tools import condor
+from wsuconnect.support_tools import RestToolbox
 
 from .apply_brainmask import apply_brainmask
 from .check_rawdata import check_rawdata
