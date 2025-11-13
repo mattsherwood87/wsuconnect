@@ -10,6 +10,8 @@ sphinx:
 
 python:
   install:
+    - method: pip
+      path: .                # installs wsuconnect package from setup.py
     - requirements: docs/requirements.txt
   
 
