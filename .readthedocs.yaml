@@ -12,6 +12,8 @@ python:
   install:
     - method: pip
       path: .                # installs wsuconnect package from setup.py
+      extra_requirements:
+        - docs               # optional if you define extras_require in setup.py
     - requirements: docs/requirements.txt
   
 
