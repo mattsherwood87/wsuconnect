@@ -47,8 +47,15 @@ Python Implementation
 convert_dicoms.py
 =================
 
-.. autoprogram:: wsuconnect.support_tools.convert_dicoms:parser
+.. 
+    autoprogram:: wsuconnect.support_tools.convert_dicoms:parser
     :prog: convert_dicoms.py
+
+.. argparse::
+   :ref: wsuconnect.support_tools.convert_dicoms.parser
+   :prog: convert_dicoms
+   :nodefault:
+   :nodefaultconst:
 
 
 Python Implementation
