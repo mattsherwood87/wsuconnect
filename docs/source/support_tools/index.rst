@@ -47,8 +47,7 @@ Python Implementation
 convert_dicoms.py
 =================
 
-.. 
-    autoprogram:: wsuconnect.support_tools.convert_dicoms:parser
+.. autoprogram:: support_tools.convert_dicoms:parser
     :prog: command line implementation
 
 
