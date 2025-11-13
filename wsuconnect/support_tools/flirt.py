@@ -23,9 +23,9 @@ from pathlib import Path
 REALPATH = Path(*Path(os.path.realpath(__file__)).parts[:-3]).resolve()
 if not str(REALPATH) in sys.path:
     sys.path.append(REALPATH)
-os.environ['MPLCONFIGDIR'] = os.path.join(REALPATH,'.config','matplotlib')
+os.environ['MPLCONFIGDIR'] = str(REALPATH / '.config' / 'matplotlib')
 
-os.environ["ANTSPYNET_CACHE_DIRECTORY"] = REALPATH / 'data' / 'antsxnet_cache'
+os.environ["ANTSPYNET_CACHE_DIRECTORY"] = str(REALPATH / 'data' / 'antsxnet_cache')
 
 import support_tools as st
 
