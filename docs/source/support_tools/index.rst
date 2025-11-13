@@ -13,7 +13,6 @@ described in the previous section.
 
 
 
-
 .. _bids_python:
 
 bids
@@ -48,7 +47,7 @@ Python Implementation
 convert_dicoms.py
 =================
 
-.. autoprogram:: support_tools.convert_dicoms:parser
+.. autoprogram:: wsuconnect.support_tools.convert_dicoms:parser
     :prog: command line implementation
 
 
@@ -174,7 +173,7 @@ Python Implementation
 fsreconall_stage1_wf.py
 =======================
 
-.. autoprogram:: support_tools.fsreconall_stage1_wf:parser
+.. autoprogram:: wsuconnect.support_tools.fsreconall_stage1_wf:parser
     :prog: fsreconall_stage1.py
 
 Python Implementation
