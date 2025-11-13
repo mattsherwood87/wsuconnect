@@ -27,6 +27,8 @@ is a single core node with 40 physical cores and 756GB RAM. Processing can be co
 option to the programs described within this manual
 
 
+.. include:: containerized_processing.rst
+
 .. include:: open-source_software.rst
 
 .. include:: MySQL_database.rst
