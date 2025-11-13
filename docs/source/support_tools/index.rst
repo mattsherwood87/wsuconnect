@@ -47,7 +47,8 @@ Python Implementation
 convert_dicoms.py
 =================
 
-.. autoprogram:: wsuconnect.support_tools.convert_dicoms:parser
+.. 
+    autoprogram:: wsuconnect.support_tools.convert_dicoms:parser
     :prog: command line implementation
 
 
@@ -79,7 +80,8 @@ Python Implementation
 dti_flirt.py
 ============
 
-.. autoprogram:: wsuconnect.support_tools.dti_flirt:parser
+.. 
+    autoprogram:: wsuconnect.support_tools.dti_flirt:parser
     :prog: dti_flirt.py
 
 Python Implementation
@@ -95,7 +97,8 @@ Python Implementation
 dti_preprocess_wf.py
 ====================
 
-.. autoprogram:: wsuconnect.support_tools.dti_preprocess_wf:parser
+.. 
+    autoprogram:: wsuconnect.support_tools.dti_preprocess_wf:parser
     :prog: dti_preprocess.py
 
 Python Implementation
@@ -126,7 +129,8 @@ Python Implementation
 feat_full_firstlevel.py
 =======================
 
-.. autoprogram:: wsuconnect.support_tools.feat_full_firstlevel:parser
+.. 
+    autoprogram:: wsuconnect.support_tools.feat_full_firstlevel:parser
     :prog: feat_full_firstlevel.py
 
 Python Implementation
@@ -137,7 +141,7 @@ Python Implementation
     :special-members:
 
 
-.. _feat_full_firstlevel_python:
+.. _flirt_pngappend:
 
 flirt_pngappend.py
 ==================
@@ -157,7 +161,8 @@ Python Implementation
 flirt.py
 ========
 
-.. autoprogram:: wsuconnect.support_tools.flirt:parser
+.. 
+    autoprogram:: wsuconnect.support_tools.flirt:parser
     :prog: flirt.py
 
 Python Implementation
@@ -173,7 +178,8 @@ Python Implementation
 fsreconall_stage1_wf.py
 =======================
 
-.. autoprogram:: wsuconnect.support_tools.fsreconall_stage1_wf:parser
+.. 
+    autoprogram:: wsuconnect.support_tools.fsreconall_stage1_wf:parser
     :prog: fsreconall_stage1.py
 
 Python Implementation
@@ -189,7 +195,8 @@ Python Implementation
 fsreconall_stage2_wf.py
 =======================
 
-.. autoprogram:: wsuconnect.support_tools.fsreconall_stage2_wf:parser
+.. 
+    autoprogram:: wsuconnect.support_tools.fsreconall_stage2_wf:parser
     :prog: fsreconall_stage2.py
 
 Python Implementation
