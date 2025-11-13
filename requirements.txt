@@ -6,12 +6,12 @@ sphinxcontrib-plantuml==0.14
 sphinx-argparse
 sphinxcontrib-autoprogram
 sphinxcontrib-websupport==1.1.0
-absl-py @ file:///resshare/install_files/wheels/nisnap/absl_py-2.3.1-py3-none-any.whl#sha256=eeecf07f0c2a93ace0772c92e596ace6d3d3996c042b2128459aaae2a76de11d
-acres @ file:///resshare/install_files/wheels/templateflow/acres-0.5.0-py3-none-any.whl#sha256=fcc32b974b510897de0f041609b4234f9ff03e2e960aea088f63973fb106c772
+absl-py==2.3.1
+acres==0.5.0
 ants==0.0.7
 antspynet==0.2.9
-antspyx @ file:///resshare/install_files/wheels/nisnap/antspyx-0.6.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl#sha256=01f4940bff034bc01598bf498d43fa04c93d43b4e5caf6cb7a856a1b1c60a2ad
-anyio @ file:///resshare/install_files/python_packages/pydicom_3.0.1/anyio-4.11.0-py3-none-any.whl#sha256=0287e96f4d26d4149305414d4e3bc32f0dcd0862365a4bddea19d7a1ec38c4fc
+antspyx==0.6.1
+anyio==3.0.1
 argon2-cffi==23.1.0
 argon2-cffi-bindings==21.2.0
 arrow==1.3.0
@@ -20,25 +20,25 @@ aspose-pdf==25.3.0
 asttokens==3.0.0
 astunparse==1.6.3
 async-lru==2.0.5
-attrs @ file:///resshare/install_files/wheels/templateflow/attrs-25.4.0-py3-none-any.whl#sha256=adcf7e2a1fb3b36ac48d97835bb6d8ade15b8dcce26aba8bf1d14847b57a3373
+attrs==25.4.0
 babel==2.17.0
 beautifulsoup4==4.13.3
 bids-validator==1.14.7.post0
-bidsschematools @ file:///resshare/install_files/wheels/templateflow/bidsschematools-1.1.2-py3-none-any.whl#sha256=5d4a026de9f615f25ef675a2c075be330166bd3accdc9aeaa44979e8ff321123
+bidsschematools==1.1.2
 bleach==6.2.0
 bokeh==3.7.2
 cachetools==5.5.2
-certifi @ file:///resshare/install_files/wheels/templateflow/certifi-2025.10.5-py3-none-any.whl#sha256=0f212c2744a9bb6de0c56639a6f68afe01ecd92d91f14ae897c4fe7bbeeef0de
+certifi==2025.10.5
 cffi==1.17.1
 chardet==5.2.0
-charset-normalizer @ file:///resshare/install_files/wheels/templateflow/charset_normalizer-3.4.4-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl#sha256=11d694519d7f29d6cd09f6ac70028dba10f92f6cdd059096db198c283794ac86
+charset-normalizer==3.4.4
 chart-studio==1.1.0
 ci-info==0.3.0
-click @ file:///resshare/install_files/wheels/templateflow/click-8.3.0-py3-none-any.whl#sha256=9b9f285302c6e3064f4330c05f05b81945b2a39544279343e6e7c5f27a9baddc
+click==8.3.0
 cloudpickle==3.1.1
 comm==0.2.2
-contourpy @ file:///resshare/install_files/wheels/nisnap/contourpy-1.3.3-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl#sha256=4d00e655fcef08aba35ec9610536bfe90267d7ab5ba944f7032549c55a146da1
-coverage @ file:///resshare/install_files/wheels/nisnap/coverage-7.10.6-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl#sha256=961834e2f2b863a0e14260a9a273aff07ff7818ab6e66d2addf5628590c628f9
+contourpy==1.3.3
+coverage==7.10.6
 cryptography==44.0.2
 cssselect2==0.8.0
 cycler==0.12.1
@@ -52,37 +52,37 @@ Django==5.2
 dm-tree==0.1.9
 etelemetry==0.3.1
 exceptiongroup==1.2.2
-executing @ file:///resshare/install_files/wheels/nisnap/executing-2.2.1-py2.py3-none-any.whl#sha256=760643d3452b4d777d295bb167ccc74c64a81df23fb5e08eff250c425a4b2017
+executing==2.2.1
 fastjsonschema==2.21.1
-filelock @ file:///resshare/install_files/wheels/templateflow/filelock-3.20.0-py3-none-any.whl#sha256=339b4732ffda5cd79b13f4e2711a31b0365ce445d95d243bb996273d072546a2
+filelock==3.20.0
 flatbuffers==25.2.10
 fmriprep-docker==25.0.0
-fonttools @ file:///resshare/install_files/wheels/templateflow/fonttools-4.60.1-cp312-cp312-manylinux1_x86_64.manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_5_x86_64.whl#sha256=8177ec9676ea6e1793c8a084a90b65a9f778771998eb919d05db6d4b1c0b114c
-formulaic @ file:///resshare/install_files/wheels/templateflow/formulaic-1.2.1-py3-none-any.whl#sha256=661d6d2467aa961b9afb3a1e2a187494239793c63eb729e422d1307afa98b43b
+fonttools==4.60.1
+formulaic==1.2.1
 fqdn==1.5.1
-frozendict @ file:///resshare/install_files/wheels/templateflow/frozendict-2.4.6-py312-none-any.whl#sha256=49344abe90fb75f0f9fdefe6d4ef6d4894e640fadab71f11009d52ad97f370b9
+frozendict==2.4.6
 fslpy==3.22.0
-fsspec @ file:///resshare/install_files/wheels/templateflow/fsspec-2025.10.0-py3-none-any.whl#sha256=7c7712353ae7d875407f97715f0e1ffcc21e33d5b24556cb1e090ae9409ec61d
+fsspec==2025.10.0
 gast==0.6.0
 gevent==24.11.1
 google-auth==2.38.0
 google-auth-oauthlib==1.2.1
 google-pasta==0.2.0
-greenlet @ file:///resshare/install_files/wheels/templateflow/greenlet-3.2.4-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl#sha256=3b3812d8d0c9579967815af437d96623f45c0f2ae5f04e366de62a12d83a8fb0
-grpcio @ file:///resshare/install_files/wheels/nisnap/grpcio-1.74.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl#sha256=176d60a5168d7948539def20b2a3adcce67d72454d9ae05969a2e73f3a0feee7
+greenlet==3.2.4
+grpcio==1.74.0
 gt-examcard-parser==0.1.0
-h11 @ file:///resshare/install_files/python_packages/pydicom_3.0.1/h11-0.16.0-py3-none-any.whl#sha256=63cf8bbe7522de3bf65932fda1d9c2772064ffb3dae62d55932da54b31cb6c86
-h5py @ file:///resshare/install_files/wheels/templateflow/h5py-3.15.1-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl#sha256=25c8843fec43b2cc368aa15afa1cdf83fc5e17b1c4e10cd3771ef6c39b72e5ce
-httpcore @ file:///resshare/install_files/python_packages/pydicom_3.0.1/httpcore-1.0.9-py3-none-any.whl#sha256=2d400746a40668fc9dec9810239072b40b4484b640a8c38fd654a024c7a1bf55
+h11==3.0.1
+h5py==3.15.1
+httpcore==3.0.1
 httplib2==0.22.0
 httpx==0.28.1
-idna @ file:///resshare/install_files/wheels/templateflow/idna-3.11-py3-none-any.whl#sha256=771a87f49d9defaf64091e6e6fe9c18d4833f140bd19464795bc32d966ca37ea
+idna==3.11-py3
 imageio==2.37.0
 importlib_metadata==8.6.1
 importlib_resources==6.5.2
-interface-meta @ file:///resshare/install_files/wheels/templateflow/interface_meta-1.3.0-py3-none-any.whl#sha256=de35dc5241431886e709e20a14d6597ed07c9f1e8b4bfcffde2190ca5b700ee8
+interface-meta==1.3.0
 ipykernel==6.29.5
-ipython @ file:///resshare/install_files/wheels/nisnap/ipython-9.5.0-py3-none-any.whl#sha256=88369ffa1d5817d609120daa523a6da06d02518e582347c29f8451732a9c5e72
+ipython==9.5.0
 ipython_pygments_lexers==1.1.1
 ipywidgets==8.1.6
 isodate==0.6.1
@@ -96,7 +96,7 @@ itk-registration==5.4.3
 itk-segmentation==5.4.3
 jedi==0.19.2
 Jinja2==3.1.6
-joblib @ file:///resshare/install_files/wheels/nisnap/joblib-1.5.2-py3-none-any.whl#sha256=4e1f0bdbb987e6d843c70cf43714cb276623def372df3c22fe5266b2670bc241
+joblib==1.5.2
 json5==0.12.0
 jsonpointer==3.0.0
 jsonschema==4.23.0
@@ -113,45 +113,45 @@ jupyterlab==4.4.0
 jupyterlab_pygments==0.3.0
 jupyterlab_server==2.27.3
 jupyterlab_widgets==3.0.14
-keras @ file:///resshare/install_files/wheels/nisnap/keras-3.11.3-py3-none-any.whl#sha256=f484f050e05ee400455b05ec8c36ed35edc34de94256b6073f56cfe68f65491f
-kiwisolver @ file:///resshare/install_files/wheels/nisnap/kiwisolver-1.4.9-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl#sha256=f6008a4919fdbc0b0097089f67a1eb55d950ed7e90ce2cc3e640abadd2757a04
+keras==3.11.3
+kiwisolver==1.4.9
 lazy_loader==0.4
 libclang==18.1.1
 locket==1.0.0
 looseversion==1.3.0
-lxml @ file:///resshare/install_files/wheels/templateflow/lxml-6.0.2-cp312-cp312-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl#sha256=90a345bbeaf9d0587a3aaffb7006aa39ccb6ff0e96a57286c0cb2fd1520ea192
+lxml==6.0.2
 lz4==4.4.4
-Markdown @ file:///resshare/install_files/wheels/nisnap/markdown-3.8.2-py3-none-any.whl#sha256=5c83764dbd4e00bdd94d85a19b8d55ccca20fe35b2e678a1422b380324dd5f24
-markdown-it-py @ file:///resshare/install_files/wheels/nisnap/markdown_it_py-4.0.0-py3-none-any.whl#sha256=87327c59b172c5011896038353a81343b6754500a08cd7a4973bb48c6d578147
-MarkupSafe @ file:///resshare/install_files/wheels/templateflow/markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl#sha256=d6dd0be5b5b189d31db7cda48b91d7e0a9795f31430b7f271219ab30f1d3ac9d
-matplotlib @ file:///resshare/install_files/wheels/templateflow/matplotlib-3.10.7-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl#sha256=d5f256d49fea31f40f166a5e3131235a5d2f4b7f44520b1cf0baf1ce568ccff0
+Markdown==3.8.2
+markdown-it-py==4.0.0
+MarkupSafe==3.0.3
+matplotlib==3.10.7
 matplotlib-inline==0.1.7
 mdurl==0.1.2
 meson==1.7.2
 mistune==3.1.3
-ml_dtypes @ file:///resshare/install_files/wheels/nisnap/ml_dtypes-0.5.3-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl#sha256=1b255acada256d1fa8c35ed07b5f6d18bc21d1556f842fbc2d5718aea2cd9e55
+ml_dtypes==0.5.3
 mpmath==1.3.0
 msgpack==1.1.0
 mypy-extensions==1.0.0
-namex @ file:///resshare/install_files/wheels/nisnap/namex-0.1.0-py3-none-any.whl#sha256=e2012a474502f1e2251267062aae3114611f07df4224b6e06334c57b0f2ce87c
-narwhals @ file:///resshare/install_files/wheels/templateflow/narwhals-2.10.1-py3-none-any.whl#sha256=eed3d9ec8f821963456fef306c1ad11017995982169fca1f38f71c97d6a97b9b
+namex==0.1.0-py3
+narwhals==2.10.1
 nbclient==0.10.2
 nbconvert==7.16.6
 nbformat==5.10.4
 nest-asyncio==1.6.0
-networkx @ file:///resshare/install_files/wheels/templateflow/networkx-3.5-py3-none-any.whl#sha256=0030d386a9a06dee3565298b4a734b68589749a544acbb6c412dc9e2489ec6ec
+networkx==3.5
 neurodocker==2.0.0
 nibabel==5.3.2
-nilearn @ file:///resshare/install_files/wheels/nisnap/nilearn-0.12.1-py3-none-any.whl#sha256=2112e1cdf9f7b96e0af87d679997e834ee36534fc0a970811a703700820edc4c
+nilearn==0.12.1
 nipype==1.10.0
-nisnap @ file:///resshare/install_files/wheels/nisnap/nisnap-0.4.1-py3-none-any.whl#sha256=49fdcfcd63cb9a8584df448bda326bfbced1bb7149f00655a4da8603109fd868
-nitransforms @ file:///resshare/install_files/wheels/templateflow/nitransforms-25.1.0-py3-none-any.whl#sha256=8497a12d9040efb67f3e75925ed9cc61363543b6dfb589c7916aba6e08e38771
-niworkflows @ file:///resshare/install_files/wheels/templateflow/niworkflows-1.14.3-py3-none-any.whl#sha256=b2622a6eb56e3a4fb3ac73e6ee12b8af44ef0254651c723f75721fafe3e3e13a
-nose @ file:///resshare/install_files/wheels/nisnap/nose-1.3.7-py3-none-any.whl#sha256=9ff7c6cc443f8c51994b34a667bbcf45afd6d945be7477b52e97516fd17c53ac
+nisnap==0.4.1
+nitransforms==25.1.0
+niworkflows==1.14.3
+nose==1.3.7
 notebook==7.4.0
 notebook_shim==0.2.4
-num2words @ file:///resshare/install_files/wheels/templateflow/num2words-0.5.14-py3-none-any.whl#sha256=1c8e5b00142fc2966fd8d685001e36c4a9911e070d1b120e1beb721fa1edb33d
-numpy @ file:///resshare/install_files/wheels/templateflow/numpy-2.3.4-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl#sha256=4121c5beb58a7f9e6dfdee612cb24f4df5cd4db6e8261d7f4d7450a997a65d6a
+num2words==0.5.14
+numpy==2.3.4
 nvidia-cublas-cu12==12.4.5.8
 nvidia-cuda-cupti-cu12==12.4.127
 nvidia-cuda-nvrtc-cu12==12.4.127
@@ -167,42 +167,42 @@ nvidia-nvjitlink-cu12==12.4.127
 nvidia-nvtx-cu12==12.4.127
 oauthlib==3.2.2
 opt_einsum==3.4.0
-optree @ file:///resshare/install_files/wheels/nisnap/optree-0.17.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl#sha256=e1959cfbc38c228c8195354967cda64887b96219924b7b3759e5ee355582c1ec
+optree==0.17.0
 overrides==7.7.0
-packaging @ file:///resshare/install_files/wheels/nisnap/packaging-25.0-py3-none-any.whl#sha256=29572ef2b1f17581046b3a2227d5c611fb25ec70ca1ba8554b24b0e69331a484
-pandas @ file:///resshare/install_files/wheels/templateflow/pandas-2.3.3-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl#sha256=b3d11d2fda7eb164ef27ffc14b4fcab16a80e1ce67e9f57e19ec0afaf715ba89
+packaging25.0
+pandas==2.3.3
 pandocfilters==1.5.1
-parso @ file:///resshare/install_files/wheels/nisnap/parso-0.8.5-py2.py3-none-any.whl#sha256=646204b5ee239c396d040b90f9e272e9a8017c630092bf59980beb62fd033887
+parso==0.8.5
 partd==1.4.2
-pathlib @ file:///resshare/install_files/wheels/nisnap/pathlib-1.0.1-py3-none-any.whl#sha256=f35f95ab8b0f59e6d354090350b44a80a80635d22efdedfa84c7ad1cf0a74147
-pathlib_abc @ file:///resshare/install_files/wheels/templateflow/pathlib_abc-0.5.2-py3-none-any.whl#sha256=4c9d94cf1b23af417ce7c0417b43333b06a106c01000b286c99de230d95eefbb
+pathlib==1.0.1
+pathlib_abc==0.5.2
 patsy==1.0.1
 pexpect==4.9.0
-pillow @ file:///resshare/install_files/wheels/templateflow/pillow-12.0.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl#sha256=b87843e225e74576437fd5b6a4c2205d422754f84a06942cfaf1dc32243e45a8
-platformdirs @ file:///resshare/install_files/wheels/templateflow/platformdirs-4.5.0-py3-none-any.whl#sha256=e578a81bb873cbb89a41fcc904c7ef523cc18284b7e3b3ccf06aca1403b7ebd3
+pillow==12.0.0
+platformdirs==4.5.0
 plotly==6.0.1
 ply==3.11
 prometheus_client==0.21.1
-prompt_toolkit @ file:///resshare/install_files/wheels/nisnap/prompt_toolkit-3.0.52-py3-none-any.whl#sha256=9aac639a3bbd33284347de5ad8d68ecc044b91a762dc39b7c21095fcd6a19955
-protobuf @ file:///resshare/install_files/wheels/nisnap/protobuf-6.32.0-cp39-abi3-manylinux2014_x86_64.whl#sha256=75a2aab2bd1aeb1f5dc7c5f33bcb11d82ea8c055c9becbb41c26a8c43fd7092c
-prov @ file:///resshare/install_files/wheels/templateflow/prov-2.1.1-py3-none-any.whl#sha256=04f74f9151b68f0bda68c943e111b1275207b19e197689043644a1b355a9d035
+prompt_toolkit==3.0.52
+protobuf==6.32.0
+prov==2.1.1
 psutil==7.0.0
 ptyprocess==0.7.0
 pure_eval==0.2.3
-puremagic @ file:///resshare/install_files/wheels/templateflow/puremagic-1.30-py3-none-any.whl#sha256=5eeeb2dd86f335b9cfe8e205346612197af3500c6872dffebf26929f56e9d3c1
+puremagic==1.30
 pyarrow==19.0.1
 pyasn1==0.6.1
 pyasn1_modules==0.4.2
-pybids @ file:///resshare/install_files/wheels/templateflow/pybids-0.21.0-py3-none-any.whl#sha256=01d2fa611cbce51c03a0e8c48f8b8fd999e7f16ccb66a0bd0050d3cf558c59b0
+pybids==0.21.0
 PyCondor==0.6.0
 pycparser==2.22
-pydicom @ file:///resshare/install_files/python_packages/pydicom_3.0.1/pydicom-3.0.1-py3-none-any.whl#sha256=db32f78b2641bd7972096b8289111ddab01fb221610de8d7afa835eb938adb41
-pydot @ file:///resshare/install_files/wheels/templateflow/pydot-4.0.1-py3-none-any.whl#sha256=869c0efadd2708c0be1f916eb669f3d664ca684bc57ffb7ecc08e70d5e93fee6
-Pygments @ file:///resshare/install_files/wheels/nisnap/pygments-2.19.2-py3-none-any.whl#sha256=86540386c03d588bb81d44bc3928634ff26449851e99741617ecb9037ee5ec0b
+pydicom==3.0.1
+pydot==4.0.1
+Pygments==2.19.2
 pymeshlab==2023.12.post3
 PyMySQL==1.1.1
-pyorthanc @ file:///resshare/install_files/python_packages/pydicom_3.0.1/pyorthanc-1.22.1-py3-none-any.whl#sha256=4fcadb30aa84af57c0535ea1c5bbf1f27d3c5c215c212fc823dacff157dec4c0
-pyparsing @ file:///resshare/install_files/wheels/templateflow/pyparsing-3.2.5-py3-none-any.whl#sha256=e38a4f02064cf41fe6593d328d0512495ad1f3d8a91c4f73fc401b3079a59a5e
+pyorthanc==1.22.1
+pyparsing==3.2.5
 PyQt5==5.15.11
 PyQt5-Qt5==5.15.16
 PyQt5_sip==12.17.0
@@ -211,53 +211,53 @@ python-json-logger==3.3.0
 pytz==2025.2
 PyWavelets==1.8.0
 pyxdf==1.16.8
-pyxnat @ file:///resshare/install_files/wheels/nisnap/pyxnat-1.6.3-py3-none-any.whl#sha256=a6d84dd24486eab9731a5de5df4fb486021b095665083c2fb1d33ac1e719d3c5
-PyYAML @ file:///resshare/install_files/wheels/templateflow/pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl#sha256=ba1cc08a7ccde2d2ec775841541641e4548226580ab850948cbfda66a1befcdc
+pyxnat==1.6.3
+PyYAML==6.0.3
 pyzmq==26.4.0
-rdflib @ file:///resshare/install_files/wheels/templateflow/rdflib-7.4.0-py3-none-any.whl#sha256=0af003470404ff21bc0eb04077cc97ee96da581f2429bf42a8e163fc1c2797bc
+rdflib==7.4.0
 referencing==0.36.2
 reportlab==4.3.1
-requests @ file:///resshare/install_files/wheels/nisnap/requests-2.32.5-py3-none-any.whl#sha256=2462f94637a34fd532264295e186976db0f5d453d1cdd31473c85a6a161affb6
+requests==2.32.5
 requests-oauthlib==2.0.0
 retrying==1.3.4
 rfc3339-validator==0.1.4
 rfc3986-validator==0.1.1
-rich @ file:///resshare/install_files/wheels/nisnap/rich-14.1.0-py3-none-any.whl#sha256=536f5f1785986d6dbdea3c75205c473f970777b4a0d6c6dd1b696aa05a3fa04f
+rich==14.1.0
 rpds-py==0.24.0
 rsa==4.9
 scikit-image==0.25.2
-scikit-learn @ file:///resshare/install_files/wheels/templateflow/scikit_learn-1.7.2-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl#sha256=e5bf3d930aee75a65478df91ac1225ff89cd28e9ac7bd1196853a9229b6adb0b
-scipy @ file:///resshare/install_files/wheels/templateflow/scipy-1.16.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl#sha256=72d1717fd3b5e6ec747327ce9bda32d5463f472c9dce9f54499e81fbd50245a1
+scikit-learn==1.7.2
+scipy==1.16.3=
 seaborn==0.13.2
 Send2Trash==1.8.3
-setuptools @ file:///resshare/install_files/wheels/nisnap/setuptools-80.9.0-py3-none-any.whl#sha256=062d34222ad13e0cc312a4c02d73f059e86a4acbfbdea8f8f76b28c99f306922
+setuptools==80.9.0
 SimpleITK==2.4.1
-simplejson @ file:///resshare/install_files/wheels/templateflow/simplejson-3.20.2-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl#sha256=979ce23ea663895ae39106946ef3d78527822d918a136dbc77b9e2b7f006237e
+simplejson==3.20.2
 sip==6.10.0
 six==1.17.0
 sniffio==1.3.1
 sortedcontainers==2.4.0
 soupsieve==2.6
-SQLAlchemy @ file:///resshare/install_files/wheels/templateflow/sqlalchemy-2.0.44-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl#sha256=119dc41e7a7defcefc57189cfa0e61b1bf9c228211aba432b53fb71ef367fda1
+SQLAlchemy==2.0.44
 sqlparse==0.5.3
 stack-data==0.6.3
-statsmodels @ file:///resshare/install_files/wheels/nisnap/statsmodels-0.14.5-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl#sha256=c3dd760a6fa80cd5e0371685c697bb9c2c0e6e1f394d975e596a1e6d0bbb9372
+statsmodels==0.14.5
 svglib==1.5.1
-svgutils @ file:///resshare/install_files/wheels/templateflow/svgutils-0.3.4-py3-none-any.whl#sha256=4d08524a08126553c1a9bf2639616cf31290adea6fd235a3eb67d77c748abc00
+svgutils==0.3.4
 sympy==1.13.1
 tblib==3.1.0
-templateflow @ file:///resshare/install_files/wheels/templateflow/templateflow-25.1.1-py3-none-any.whl#sha256=5508d748597c6b3e06ea79e931cacebda837c9444d86565a1784278ecb7aec82
+templateflow==25.1.1
 tenacity==9.1.2
-tensorboard @ file:///resshare/install_files/wheels/nisnap/tensorboard-2.20.0-py3-none-any.whl#sha256=9dc9f978cb84c0723acf9a345d96c184f0293d18f166bb8d59ee098e6cfaaba6
+tensorboard==2.20.0
 tensorboard-data-server==0.7.2
-tensorflow @ file:///resshare/install_files/wheels/nisnap/tensorflow-2.20.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl#sha256=25265b0bc527e0d54b1e9cc60c44a24f44a809fe27666b905f0466471f9c52ec
+tensorflow==2.20.0
 tensorflow-estimator==2.15.0
 tensorflow-io-gcs-filesystem==0.37.1
 tensorflow-probability==0.25.0
-termcolor @ file:///resshare/install_files/wheels/nisnap/termcolor-3.1.0-py3-none-any.whl#sha256=591dd26b5c2ce03b9e43f391264626557873ce1d379019786f99b0c2bee140aa
+termcolor==3.1.0
 terminado==0.18.1
 threadpoolctl==3.6.0
-tifffile @ file:///resshare/install_files/wheels/templateflow/tifffile-2025.10.16-py3-none-any.whl#sha256=41463d979c1c262b0a5cdef2a7f95f0388a072ad82d899458b154a48609d759c
+tifffile==2025.10.16
 tinycss2==1.4.0
 toml==0.10.2
 tomli==2.2.1
@@ -267,14 +267,14 @@ tornado==6.4.2
 tqdm==4.67.1
 traitlets==5.14.3
 traits==7.0.2
-transforms3d @ file:///resshare/install_files/wheels/templateflow/transforms3d-0.4.2-py3-none-any.whl#sha256=1c70399d9e9473ecc23311fd947f727f7c69ed0b063244828c383aa1aefa5941
+transforms3d==0.4.2
 triton==3.2.0
 types-python-dateutil==2.9.0.20241206
-typing_extensions @ file:///resshare/install_files/wheels/nisnap/typing_extensions-4.15.0-py3-none-any.whl#sha256=f0fa19c6845758ab08074a0cfa8b7aecb71c999ca73d62883bc25cc018c4e548
+typing_extensions==4.15.0
 tzdata==2025.2
-universal_pathlib @ file:///resshare/install_files/wheels/templateflow/universal_pathlib-0.3.4-py3-none-any.whl#sha256=69b6250d9a79dbc33a9e6a7b0e732aece8b0e178fe0af35f104b4e207fd9d5ae
+universal_pathlib==0.3.4
 uri-template==1.3.0
-urllib3 @ file:///resshare/install_files/wheels/nisnap/urllib3-2.5.0-py3-none-any.whl#sha256=e6b01673c0fa6a13e374b50871808eb3bf7046c4b125b216f6bf1cc604cff0dc
+urllib3==2.5.0
 wcwidth==0.2.13
 webcolors==24.11.1
 webencodings==0.5.1
@@ -282,7 +282,7 @@ websocket-client==1.8.0
 Werkzeug==3.1.3
 wheel==0.45.1
 widgetsnbextension==4.0.14
-wrapt @ file:///resshare/install_files/wheels/templateflow/wrapt-2.0.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl#sha256=43dc0550ae15e33e6bb45a82a5e1b5495be2587fbaa996244b509921810ee49f
+wrapt==2.0.0
 xyzservices==2025.1.0
 zict==3.0.0
 zipp==3.21.0
