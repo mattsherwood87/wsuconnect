@@ -16,14 +16,14 @@ import datetime
 import sys
 import json
 from typing import Tuple
+from pathlib import Path
 
+#append path if necessary
+REALPATH = Path(*Path(os.path.realpath(__file__)).parts[:-2]).resolve()
+if not str(REALPATH) in sys.path:
+    sys.path.append(REALPATH)
 
-#local import
-
-REALPATH = os.path.realpath(__file__)
-sys.path.append(os.path.dirname(REALPATH))
-
-import support_tools as st
+import wsuconnect.support_tools as st
 
 
 # GLOBAL INFO

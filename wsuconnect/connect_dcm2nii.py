@@ -15,14 +15,14 @@ from pycondor import Dagman
 import datetime
 import sys
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
+# from json import loads
+from pathlib import Path
 
-
-#local import
-REALPATH = os.path.realpath(__file__)
-
-sys.path.append(os.path.dirname(REALPATH))
-import support_tools as st
-
+#append path if necessary
+REALPATH = Path(*Path(os.path.realpath(__file__)).parts[:-2]).resolve()
+if not str(REALPATH) in sys.path:
+    sys.path.append(REALPATH)
+import wsuconnect.support_tools as st
 
 # GLOBAL INFO
 #versioning
