@@ -1,0 +1,405 @@
+#!/resshare/general_processing_codes/python3_venv/bin/python
+# the command above ^^^ sets python 3.7.5 as the interpreter for this program
+
+# Created by Matthew Sherwood (matt.sherwood@wright.edu, matthew.sherwood.7.ctr@us.af.mil)
+# Created on 31 Jan 2023
+#
+# Last Modified on 11 June 2024 - changes to allow for the acceptance of classic DICOMs
+# Modified on 28 Feb 2023 - slight changes to grab path of script automatically 
+
+# ******* IMPORTS ***********
+from cmath import inf
+import os
+import pydicom 
+import argparse
+import json
+import pandas as pd
+import shutil
+import datetime
+# import numpy as np
+# import math
+import time
+import sys
+from pathlib import Path
+
+
+# ******* LOCAL IMPORTS ******
+#GLOBALS
+REALPATH = os.path.dirname(os.path.realpath(__file__))
+
+sys.path.append(REALPATH)
+from helper_functions.convert_dicoms import convert_dicoms
+from helper_functions.mysql_commands import *
+from helper_functions.read_credentials import *
+from classes.creds import *
+from connect_create_raw_nii import process_single_dir
+from helper_functions.evaluate_raw_file_transfer import evaluate_raw_file_transfer
+
+
+# ******* GLOBAL INFO *******
+#versioning
+VERSION = '2.0.1'
+DATE = '11 Jun 2024'
+
+#input argument parser
+parser = argparse.ArgumentParser()
+
+os.environ["FSLDIR"] = '/usr/local/fsl'
+os.system('FSLDIR=' + os.environ["FSLDIR"])
+# os.system('source /etc/profile.d/fsl.sh')
+
+# ******************* PARSE COMMAND LINE ARGUMENTS ********************
+def parse_arguments():
+
+    #input options for main()
+    # requiredNamed = parser.add_argument_group('required arguments')
+    # requiredNamed.add_argument('-p','--path', action="store", dest="PATH", help="define search path", default=None)
+    parser.add_argument('-v', '--version', action="store_true", dest="version", help="Display the current version")
+    # parser.add_argument('--progress', action="store_true", dest="progress", help="Show progress (default FALSE)", default=False)
+    options = parser.parse_args()
+
+    return options
+
+
+def string_convert(str_to_convert):
+    return str(str_to_convert)
+
+def time_convert(time_to_convert):
+    return datetime.datetime.strptime(time_to_convert, '%Y%m%d %H%M%S.%f')
+
+def write_log(string_to_write):
+    try:
+        if os.path.isfile(os.path.join('/Export','data_transfer_progress','connect_pacs_dicom_grabber-' + datetime.datetime.now().strftime('%Y%m') + '.log')):
+            file = open(os.path.join('/Export','data_transfer_progress','connect_pacs_dicom_grabber-' + datetime.datetime.now().strftime('%Y%m') + '.log'), 'r+')
+            l = file.readlines()
+        else:
+            file = open(os.path.join('/Export','data_transfer_progress','connect_pacs_dicom_grabber-' + datetime.datetime.now().strftime('%Y%m') + '.log'), 'x')
+            l = []
+
+        l.insert(0,string_to_write + '\n')
+        file.seek(0)
+        file.writelines(l)
+        file.close()
+
+    except Exception as e:
+        print("Error Message: {0}".format(e))
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+        print(exc_type, fname, exc_tb.tb_lineno)
+
+
+
+# ******************* MAIN ********************
+def main():
+    """
+    The entry point of this program.
+    """
+    startDateTime = datetime.datetime.now()
+    lastUpdateTime = datetime.datetime.now()
+    write_log('PACS data grabber now runing @ ' + startDateTime.strftime('%m%d%Y %H:%M:%S'))
+    write_log('Checking /PACS_m2 for new files...')
+
+    #get and evaluate options
+    # options = parse_arguments()
+    dcmPath = "/PACS_m2"
+
+    #get start time/date of code
+    df_dir = pd.DataFrame(columns=['project','inDir'])
+    ls_rawDcm = []
+    ls_pacsFiles = []
+    ls_dirs = []
+
+
+    with open(os.path.join(REALPATH,'credentials.json')) as f:
+        projectIDs = json.load(f)
+
+
+    # Loop over directory recursively
+
+    while True:
+        loopFlag = False
+        for root, dirs, files in os.walk(dcmPath, topdown=True):
+        # for path in Path(dcmPath).rglob('*'):
+            write_log('\tcopying new batch of files [' + str(len(dirs)) + '] @ ' + currentDateTime.strftime('%m%d%Y %H:%M:%S'))
+            for filename in files:
+
+                # check if file is in exception list
+                loopFlag = True
+                currentDateTime = datetime.datetime.now()
+
+                # if not ls_dirs:
+                # write_log('\tcopying new batch of files [' + str(len(files)) + '] @ ' + currentDateTime.strftime('%m%d%Y %H:%M:%S'))
+
+                try:
+                    # Create input file path and read file
+                    inFilePath = os.path.join(root,filename)
+                    if not os.path.dirname(inFilePath) in ls_dirs:
+                        ls_dirs.append(os.path.dirname(inFilePath))
+                
+                    #try to read dicom header 
+                    dcmHdr = pydicom.dcmread(inFilePath)
+
+                    # Split patient name into IRB protocol number and subject number
+                    patientNameSplit = dcmHdr.PatientName.family_name.split()
+                    
+                    # update destination path
+                    if patientNameSplit[0] in projectIDs:
+                        if 'dataDir' in projectIDs[patientNameSplit[0]]:
+                            tmp_destBasePath = projectIDs[patientNameSplit[0]]['dataDir']
+                        else:
+                    else:
+                        raise ValueError('Project ' + patientNameSplit[0] + ' not found in project_identifiers.json')
+                    tmp_destBasePath = os.path.join(tmp_destBasePath,'sourcedata')
+
+
+                    #if dcmFile.SOPClassUID == '1.2.840.10008.5.1.4.1.1.66':
+                    # if dcmHdr.ProtocolName == 'ExamCard':
+                    #     rawExamCard = dcmHdr[0x2005,0x1132][0][0x2005,0x1144].value #read private examcard tag
+                    #     dcmExamCard = rawExamCard[:rawExamCard.find('\x00')]
+                    #     dest = os.path.join(tmp_destBasePath, 
+                    #                         'sub-' + patientNameSplit[1], 
+                    #                         'ses-' + dcmHdr.StudyDate)
+                    #     if len(patientNameSplit) >=3:
+                    #         dest = dest + '-' + patientNameSplit[2]
+
+                    #     dcmExamCardXml = open(os.path.join(dest,'dcmExamCard.xml'), 'w')
+                    #     dcmExamCardXml.write(dcmExamCard)
+                    #     dcmExamCardXml.close()
+
+                    # Format Destination File Path
+                    destFilePath = os.path.join(tmp_destBasePath, 
+                                                'sub-' + patientNameSplit[1], 
+                                                'ses-' + dcmHdr.StudyDate)
+                    
+                    if len(patientNameSplit) >= 3:
+                        destFilePath = destFilePath + '-' + patientNameSplit[2]
+
+                    destFilePath = os.path.join(destFilePath, 'acq-%02d_%d_%s' % (int(dcmHdr.AcquisitionNumber), int(float(dcmHdr.SeriesTime)), dcmHdr.ProtocolName))
+                    
+                    if 'PerFrameFunctionalGroupsSequence' in dcmHdr: #dicom contains multiple frames, only expect 1 file
+                        destFilePath = os.path.join(destFilePath,
+                                                    'IM_%05d' % int(dcmHdr.InstanceNumber))
+                                            
+                    elif 'TemporalPositionIdentifier' in dcmHdr: #dicom has multiple temporal positions (part of a dynamic or functional set of images)
+                        destFilePath = os.path.join(destFilePath,
+                                                    'IM_%05d_%03d' % (int(dcmHdr.InstanceNumber), int(dcmHdr.TemporalPositionIdentifier)))
+                    
+                    else:
+                        destFilePath = os.path.join(destFilePath,
+                                                    'IM_%05d' % int(dcmHdr.InstanceNumber))
+
+                    #move file to the destination path
+                    destFilePath = destFilePath.replace(' ','_')
+                    if not os.path.exists(os.path.dirname(destFilePath)):
+                        os.makedirs(os.path.dirname(destFilePath))
+                    shutil.copyfile(inFilePath,destFilePath)
+                    ls_pacsFiles.append(inFilePath)
+                    # print(inFilePath + '\t' + destFilePath)
+
+                    #update sourcedata table with dcm files
+                    # read_credentials(projectIDs[patientNameSplit[0]]['project'])
+                    d = {}
+                    d['fullpath'] = destFilePath
+                    d['filename'] = os.path.basename(destFilePath)
+                    # sql_table_insert(creds.searchSourceTable,d))
+#                    sql_table_insert(projectIDs[patientNameSplit[0]]['project'].replace('-','_') + '_sourcedata',d)
+
+
+                    #add conversion directory to DCM list
+                    dcmDir = os.path.dirname(destFilePath)
+                    if not dcmDir in ls_rawDcm:
+                        ls_rawDcm.append(dcmDir)
+                        
+                    if not df_dir['inDir'].str.contains(os.path.dirname(dcmDir)).any():
+                        df_dir = pd.concat([df_dir,pd.DataFrame.from_dict({'project':[projectIDs[patientNameSplit[0]]['project']], 'inDir':[os.path.dirname(dcmDir)]})],ignore_index=True)
+
+                    # try:
+                    #     # if os.path.isfile(pacsFile):
+                    #     os.remove(pacsFile)
+                    #     d = os.path.dirname(pacsFile)
+                    #     while not d.endswith('PACS'):
+                    #             # if os.path.isdir(d):
+                    #             #     if len(os.listdir(d)) == 0:
+                    #         os.rmdir(d)
+                    #         d = os.path.dirname(d)
+                        
+                    #     ls_pacsFiles.append(inFilePath)
+                    # except Exception as e:
+
+                    ls_pacsFiles.append(inFilePath)  
+
+
+                except Exception as e:
+                    # try:
+                    #     if os.path.isfile(pacsFile):
+                    #         os.remove(pacsFile)
+                    #         d = os.path.dirname(pacsFile)
+                    #     while not d.endswith('PACS_m2'):
+                    #             # if os.path.isdir(d):
+                    #             #     if len(os.listdir(d)) == 0:
+                    #         os.rmdir(d)
+                    #         d = os.path.dirname(d)
+                        
+                    #     ls_pacsFiles.append(inFilePath)
+                    # except Exception as e:
+
+                    ls_pacsFiles.append(inFilePath)
+
+
+
+        # Remove DICOMS - prevent from detection in future loops
+        time.sleep(1)
+        for pacsFile in ls_pacsFiles:
+            try:
+                if os.path.isfile(pacsFile):
+                    os.remove(pacsFile)
+                    d = os.path.dirname(pacsFile)
+                while not d.endswith('PACS_m2'):
+                        # if os.path.isdir(d):
+                        #     if len(os.listdir(d)) == 0:
+                    os.rmdir(d)
+                    d = os.path.dirname(d)
+            except Exception as e:
+                print("Error Message: {0}".format(e))
+                # exc_type, exc_obj, exc_tb = sys.exc_info()
+                # fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+                # print("Error Message: {0}".format(e), exc_tb.tb_lineno)
+        
+        if ls_pacsFiles:
+            lastUpdateTime = datetime.datetime.now()
+        ls_pacsFiles = []
+
+
+        if not loopFlag and ls_rawDcm:
+            write_log('Did not find new files, waiting 60 seconds to see if more files come @ ' + datetime.datetime.now().strftime('%m%d%Y %H:%M:%S'))
+            time.sleep(60)
+
+        #wait to be stagnant for 5 minutes
+        if datetime.datetime.now() - lastUpdateTime > datetime.timedelta(minutes=5) and ls_rawDcm: #not df_dir.empty:
+            # print('Removing empty directories from PACS temporary directory')
+            # write_log('\tRemoving empty directories from PACS temporary directory @ ' + datetime.datetime.now().strftime('%m%d%Y %H:%M:%S'))
+            # for d in ls_dirs:
+            
+            #     if d == dcmPath:
+            #         break
+            #     try:
+            #         # shutil.rmtree(d, ignore_errors=True)
+            #         # if len(os.listdir(os.path.dirname(d))) == 0:
+            #         #     os.rmdir(os.path.dirname(d))
+            #         while not d.endswith('PACS_m2'):
+            #             if os.path.isdir(d):
+            #                 if len(os.listdir(d)) == 0:
+            #                     os.rmdir(d)
+            #             d = os.path.dirname(d)
+
+            #     except Exception as e:
+            #         print("Error Message: {0}".format(e))
+            #         exc_type, exc_obj, exc_tb = sys.exc_info()
+            #         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+            #         print(exc_type, fname, exc_tb.tb_lineno)
+
+            #         # write_log("\tError Message: {0}".format(e))
+            #         # write_log('\t' + str(exc_type) + ' ' + str(fname) + ' ' + str(exc_tb.tb_lineno))
+            # ls_dirs = []
+
+            # list files and add to table/resshare/projects/2023_UES/EPIC/sourcedata/sub-1106/ses-20240610-1A/acq-06_123445_B0_map
+            for destFilePath in ls_rawDcm:
+                try:
+
+                    write_log('\t' + destFilePath)
+                    write_log('\t\tconverting DICOMS and other fun stuff in @ ' + datetime.datetime.now().strftime('%m%d%Y %H:%M:%S'))
+                    #Convert DICOM to NIfTI images
+                    convert_dicoms(destFilePath,False)
+                    
+                    #insert new NIfTI images into SQL table
+                    d = {}
+                    fullpath = []
+                    filename = []
+                    for path in Path(os.path.dirname(destFilePath)).glob('*'):
+                        if not os.path.isdir(str(path)):
+                            fullpath.append(str(path))
+                            filename.append(os.path.basename(str(path)))
+                    d['fullpath'] = fullpath
+                    d['filename'] = filename
+
+                    tmp_project = ''
+                    for k in projectIDs.keys():
+                        if isinstance(projectIDs[k],dict):
+                            if 'dataDir' in projectIDs[k].keys():
+                                if projectIDs[k]['dataDir'] in destFilePath:
+                                    tmp_project = projectIDs[k]['project']
+                                    break
+                    read_credentials(tmp_project)
+                    #print(tmp_project + ' ' + destFilePath)
+                    #sql_table_insert(creds.searchSourceTable,d)
+
+
+
+                    #now I can copy nifti files!!!
+                    write_log('\t\tcreating rawdata files from sourcedata @ ' + datetime.datetime.now().strftime('%m%d%Y %H:%M:%S'))
+                    ls_updatedFiles = process_single_dir(os.path.dirname(destFilePath),False,False)[0]
+                    if ls_updatedFiles:
+                        d = {}
+                        fullpath = []
+                        filename = []
+                        baseFilename = []
+                        extension = []
+                        for f in ls_updatedFiles:
+                            fullpath.append(f)
+                            filename.append(os.path.basename(f))
+                            idx = os.path.basename(f).find('.')
+                            if idx != -1:
+                                if idx == 0:
+                                    baseFilename.append('NULL')
+                                    extension.append(os.path.basename(f))
+                                else:
+                                    baseFilename.append(os.path.basename(f)[:idx])
+                                    extension.append(os.path.basename(f)[idx+1:])
+                            else:
+                                baseFilename.append(os.path.basename(f))
+                                extension.append('NULL')
+                        d['fullpath'] = fullpath
+                        d['filename'] = filename
+                        d['basename'] = baseFilename
+                        d['extension'] = extension
+                        
+                        sql_table_insert(creds.searchTable,d)
+
+                except Exception as e:
+                    print("Error Message: {0}".format(e))
+                    exc_type, exc_obj, exc_tb = sys.exc_info()
+                    fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+                    print(exc_type, fname, exc_tb.tb_lineno)
+
+                    write_log("\t\tError Message: {0}".format(e))
+                    write_log('\t\t' + str(exc_type) + ' ' + str(fname) + ' ' + str(exc_tb.tb_lineno))
+
+
+            for index, row in df_dir.iterrows():
+                try:
+                    evaluate_raw_file_transfer(row['project'],row['inDir'])
+                except Exception as e:
+                    print("Error Message: {0}".format(e))
+                    exc_type, exc_obj, exc_tb = sys.exc_info()
+                    fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+                    print(exc_type, fname, exc_tb.tb_lineno)
+
+                    write_log("\t\tError Message: {0}".format(e))
+                    write_log('\t\t' + str(exc_type) + ' ' + str(fname) + ' ' + str(exc_tb.tb_lineno))
+
+                
+            df_dir = pd.DataFrame(columns=['project','inDir'])
+            ls_rawDcm = []
+
+
+            write_log('\tFinished processing DICOM group @ ' + datetime.datetime.now().strftime('%m%d%Y %H:%M:%S'))
+            write_log('Checking /PACS_m2 for new files...')
+
+                        
+        # except OSError as e:
+        #     print(e)
+                
+
+
+if __name__ == '__main__':
+    main()

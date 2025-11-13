@@ -1,0 +1,80 @@
+/resshare/wsuconnect/support_tools/check_rawdata.py:618: FutureWarning: Styler.applymap has been deprecated. Use Styler.map instead.
+  styled_df = d_completeData[k].style.applymap(_color_cells)
+updating MySQL tables on 20251109 @ 02:30:02
+Project: 2022-0005
+	Valid
+sub-HHM24	ses-1
+	True
+['2022-0005_HHM24_1-auditory_stroop-20251103-085852-BVXMS.log', 'sub-HHM24_ses-1_philips-scan-log.csv', 'sub-HHM24_ses-1_run-01_cbf.nii.gz', 'sub-HHM24_ses-1_run-01_cbf.json', 'sub-HHM24_ses-1_run-01_asl.nii.gz', 'sub-HHM24_ses-1_run-01_asl.json', 'sub-HHM24_ses-1_run-02_cbf.nii.gz', 'sub-HHM24_ses-1_run-02_cbf.json', 'sub-HHM24_ses-1_run-02_asl.nii.gz', 'sub-HHM24_ses-1_run-02_asl.json', 'sub-HHM24_ses-1_run-03_cbf.nii.gz', 'sub-HHM24_ses-1_run-03_cbf.json', 'sub-HHM24_ses-1_run-03_asl.nii.gz', 'sub-HHM24_ses-1_run-03_asl.json', 'sub-HHM24_ses-1_run-06_cbf.nii.gz', 'sub-HHM24_ses-1_run-06_cbf.json', 'sub-HHM24_ses-1_run-06_asl.nii.gz', 'sub-HHM24_ses-1_run-06_asl.json', 'sub-HHM24_ses-1_run-07_cbf.nii.gz', 'sub-HHM24_ses-1_run-07_cbf.json', 'sub-HHM24_ses-1_run-07_asl.nii.gz', 'sub-HHM24_ses-1_run-07_asl.json', 'sub-HHM24_ses-1_run-08_cbf.nii.gz', 'sub-HHM24_ses-1_run-08_cbf.json', 'sub-HHM24_ses-1_run-08_asl.nii.gz', 'sub-HHM24_ses-1_run-08_asl.json', 'sub-HHM24_ses-1_run-09_cbf.nii.gz', 'sub-HHM24_ses-1_run-09_cbf.json', 'sub-HHM24_ses-1_run-09_asl.nii.gz', 'sub-HHM24_ses-1_run-09_asl.json', 'sub-HHM24_ses-1_run-10_cbf.nii.gz', 'sub-HHM24_ses-1_run-10_cbf.json', 'sub-HHM24_ses-1_run-10_asl.nii.gz', 'sub-HHM24_ses-1_run-10_asl.json', 'sub-HHM24_ses-1_task-audstroop_run-01_bold.nii.gz', 'sub-HHM24_ses-1_task-audstroop_run-01_bold.json', 'sub-HHM24_ses-1_task-audstroop_run-02_bold.nii.gz', 'sub-HHM24_ses-1_task-audstroop_run-02_bold.json', 'sub-HHM24_ses-1_task-audstroop_run-03_bold.nii.gz', 'sub-HHM24_ses-1_task-audstroop_run-03_bold.json', 'sub-HHM24_ses-1_task-audstroop_run-04_bold.nii.gz', 'sub-HHM24_ses-1_task-audstroop_run-04_bold.json', 'sub-HHM24_ses-1_acq-sagittal_T1w.nii.gz', 'sub-HHM24_ses-1_acq-sagittal_T1w.json', 'sub-HHM24_ses-1_acq-coronal_T1w.nii.gz', 'sub-HHM24_ses-1_acq-coronal_T1w.json', 'sub-HHM24_ses-1_acq-axial_T1w.nii.gz', 'sub-HHM24_ses-1_acq-axial_T1w.json', 'sub-HHM24_ses-1_acq-ax_FLAIR.nii.gz', 'sub-HHM24_ses-1_acq-ax_FLAIR.json', 'sub-HHM24_ses-1_run-01_apt.nii.gz', 'sub-HHM24_ses-1_run-01_apt.json', 'sub-HHM24_ses-1_run-02_apt.nii.gz', 'sub-HHM24_ses-1_run-02_apt.json']
+['sub-HHM24_ses-1_run-04_cbf.nii.gz', 'sub-HHM24_ses-1_run-04_cbf.json', 'sub-HHM24_ses-1_run-04_asl.nii.gz', 'sub-HHM24_ses-1_run-04_asl.json', 'sub-HHM24_ses-1_run-05_cbf.nii.gz', 'sub-HHM24_ses-1_run-05_cbf.json', 'sub-HHM24_ses-1_run-05_asl.nii.gz', 'sub-HHM24_ses-1_run-05_asl.json', 'sub-HHM24_ses-1_acq-mtrasym_run-01_apt.nii.gz', 'sub-HHM24_ses-1_acq-mtrasym_run-01_apt.json', 'sub-HHM24_ses-1_acq-control_run-01_apt.nii.gz', 'sub-HHM24_ses-1_acq-control_run-01_apt.json', 'sub-HHM24_ses-1_acq-control_run-02_apt.nii.gz', 'sub-HHM24_ses-1_acq-control_run-02_apt.json', 'sub-HHM24_ses-1_acq-mtrasym_run-02_apt.nii.gz', 'sub-HHM24_ses-1_acq-mtrasym_run-02_apt.json']
+HTML file generated: /resshare20/projects/2022_KBR_Cog_Neuro_2/HyperHemo/code/processing_logs/2022-0005_rawdata_check_apt.html
+Successfully updated 2022_0005 in database CoNNECT
+	Total time: 238.0350377559662 seconds
+
+
+/resshare/wsuconnect/support_tools/check_rawdata.py:618: FutureWarning: Styler.applymap has been deprecated. Use Styler.map instead.
+  styled_df = d_completeData[k].style.applymap(_color_cells)
+updating MySQL tables on 20251110 @ 02:30:03
+Project: 2022-0005
+	Valid
+sub-HHM24	ses-1
+	True
+['2022-0005_HHM24_1-auditory_stroop-20251103-085852-BVXMS.log', 'sub-HHM24_ses-1_philips-scan-log.csv', 'sub-HHM24_ses-1_run-01_cbf.nii.gz', 'sub-HHM24_ses-1_run-01_cbf.json', 'sub-HHM24_ses-1_run-01_asl.nii.gz', 'sub-HHM24_ses-1_run-01_asl.json', 'sub-HHM24_ses-1_run-02_cbf.nii.gz', 'sub-HHM24_ses-1_run-02_cbf.json', 'sub-HHM24_ses-1_run-02_asl.nii.gz', 'sub-HHM24_ses-1_run-02_asl.json', 'sub-HHM24_ses-1_run-03_cbf.nii.gz', 'sub-HHM24_ses-1_run-03_cbf.json', 'sub-HHM24_ses-1_run-03_asl.nii.gz', 'sub-HHM24_ses-1_run-03_asl.json', 'sub-HHM24_ses-1_run-06_cbf.nii.gz', 'sub-HHM24_ses-1_run-06_cbf.json', 'sub-HHM24_ses-1_run-06_asl.nii.gz', 'sub-HHM24_ses-1_run-06_asl.json', 'sub-HHM24_ses-1_run-07_cbf.nii.gz', 'sub-HHM24_ses-1_run-07_cbf.json', 'sub-HHM24_ses-1_run-07_asl.nii.gz', 'sub-HHM24_ses-1_run-07_asl.json', 'sub-HHM24_ses-1_run-08_cbf.nii.gz', 'sub-HHM24_ses-1_run-08_cbf.json', 'sub-HHM24_ses-1_run-08_asl.nii.gz', 'sub-HHM24_ses-1_run-08_asl.json', 'sub-HHM24_ses-1_run-09_cbf.nii.gz', 'sub-HHM24_ses-1_run-09_cbf.json', 'sub-HHM24_ses-1_run-09_asl.nii.gz', 'sub-HHM24_ses-1_run-09_asl.json', 'sub-HHM24_ses-1_run-10_cbf.nii.gz', 'sub-HHM24_ses-1_run-10_cbf.json', 'sub-HHM24_ses-1_run-10_asl.nii.gz', 'sub-HHM24_ses-1_run-10_asl.json', 'sub-HHM24_ses-1_task-audstroop_run-01_bold.nii.gz', 'sub-HHM24_ses-1_task-audstroop_run-01_bold.json', 'sub-HHM24_ses-1_task-audstroop_run-02_bold.nii.gz', 'sub-HHM24_ses-1_task-audstroop_run-02_bold.json', 'sub-HHM24_ses-1_task-audstroop_run-03_bold.nii.gz', 'sub-HHM24_ses-1_task-audstroop_run-03_bold.json', 'sub-HHM24_ses-1_task-audstroop_run-04_bold.nii.gz', 'sub-HHM24_ses-1_task-audstroop_run-04_bold.json', 'sub-HHM24_ses-1_acq-sagittal_T1w.nii.gz', 'sub-HHM24_ses-1_acq-sagittal_T1w.json', 'sub-HHM24_ses-1_acq-coronal_T1w.nii.gz', 'sub-HHM24_ses-1_acq-coronal_T1w.json', 'sub-HHM24_ses-1_acq-axial_T1w.nii.gz', 'sub-HHM24_ses-1_acq-axial_T1w.json', 'sub-HHM24_ses-1_acq-ax_FLAIR.nii.gz', 'sub-HHM24_ses-1_acq-ax_FLAIR.json', 'sub-HHM24_ses-1_run-01_apt.nii.gz', 'sub-HHM24_ses-1_run-01_apt.json', 'sub-HHM24_ses-1_run-02_apt.nii.gz', 'sub-HHM24_ses-1_run-02_apt.json']
+['sub-HHM24_ses-1_run-04_cbf.nii.gz', 'sub-HHM24_ses-1_run-04_cbf.json', 'sub-HHM24_ses-1_run-04_asl.nii.gz', 'sub-HHM24_ses-1_run-04_asl.json', 'sub-HHM24_ses-1_run-05_cbf.nii.gz', 'sub-HHM24_ses-1_run-05_cbf.json', 'sub-HHM24_ses-1_run-05_asl.nii.gz', 'sub-HHM24_ses-1_run-05_asl.json', 'sub-HHM24_ses-1_acq-mtrasym_run-01_apt.nii.gz', 'sub-HHM24_ses-1_acq-mtrasym_run-01_apt.json', 'sub-HHM24_ses-1_acq-control_run-01_apt.nii.gz', 'sub-HHM24_ses-1_acq-control_run-01_apt.json', 'sub-HHM24_ses-1_acq-control_run-02_apt.nii.gz', 'sub-HHM24_ses-1_acq-control_run-02_apt.json', 'sub-HHM24_ses-1_acq-mtrasym_run-02_apt.nii.gz', 'sub-HHM24_ses-1_acq-mtrasym_run-02_apt.json']
+HTML file generated: /resshare20/projects/2022_KBR_Cog_Neuro_2/HyperHemo/code/processing_logs/2022-0005_rawdata_check_apt.html
+Successfully updated 2022_0005 in database CoNNECT
+	Total time: 239.08897829055786 seconds
+
+
+updating MySQL tables on 20251111 @ 02:30:04
+Project: 2022-0005
+	Valid
+Traceback (most recent call last):
+  File "/resshare/wsuconnect/python3_venv/lib/python3.12/site-packages/pandas/core/indexes/range.py", line 413, in get_loc
+    return self._range.index(new_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: 0 is not in range
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/resshare/wsuconnect/connect_neuro_db_update.py", line 281, in <module>
+    st.check_rawdata(project=options.PROJECT, progress=options.progress)
+  File "/resshare/wsuconnect/support_tools/check_rawdata.py", line 225, in check_rawdata
+    mask = (df_prevMissing["uuid"] == df_scanLog.loc[0,'uuid']) #(df_prevMissing["project"] == project) & (df_prevMissing["subject"] == subName) & (df_prevMissing["session"] == f"ses-{sesNum}")
+                                      ~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/resshare/wsuconnect/python3_venv/lib/python3.12/site-packages/pandas/core/indexing.py", line 1184, in __getitem__
+    return self.obj._get_value(*key, takeable=self._takeable)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/resshare/wsuconnect/python3_venv/lib/python3.12/site-packages/pandas/core/frame.py", line 4232, in _get_value
+    row = self.index.get_loc(index)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/resshare/wsuconnect/python3_venv/lib/python3.12/site-packages/pandas/core/indexes/range.py", line 415, in get_loc
+    raise KeyError(key) from err
+KeyError: 0
+updating MySQL tables on 20251112 @ 02:30:03
+Project: 2022-0005
+	Valid
+Traceback (most recent call last):
+  File "/resshare/wsuconnect/python3_venv/lib/python3.12/site-packages/pandas/core/indexes/range.py", line 413, in get_loc
+    return self._range.index(new_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: 0 is not in range
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/resshare/wsuconnect/connect_neuro_db_update.py", line 281, in <module>
+    st.check_rawdata(project=options.PROJECT, progress=options.progress)
+  File "/resshare/wsuconnect/support_tools/check_rawdata.py", line 225, in check_rawdata
+    mask = (df_prevMissing["uuid"] == df_scanLog.loc[0,'uuid']) #(df_prevMissing["project"] == project) & (df_prevMissing["subject"] == subName) & (df_prevMissing["session"] == f"ses-{sesNum}")
+                                      ~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/resshare/wsuconnect/python3_venv/lib/python3.12/site-packages/pandas/core/indexing.py", line 1184, in __getitem__
+    return self.obj._get_value(*key, takeable=self._takeable)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/resshare/wsuconnect/python3_venv/lib/python3.12/site-packages/pandas/core/frame.py", line 4232, in _get_value
+    row = self.index.get_loc(index)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/resshare/wsuconnect/python3_venv/lib/python3.12/site-packages/pandas/core/indexes/range.py", line 415, in get_loc
+    raise KeyError(key) from err
+KeyError: 0

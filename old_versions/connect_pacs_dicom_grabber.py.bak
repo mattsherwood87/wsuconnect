@@ -1,0 +1,336 @@
+#!/resshare/general_processing_codes/python3_venv/bin/python
+# the command above ^^^ sets python 3.7.5 as the interpreter for this program
+
+# Created by Matthew Sherwood (matt.sherwood@wright.edu, matthew.sherwood.7.ctr@us.af.mil)
+# Created on 31 Jan 2023
+#
+# Last Modified on 28 Feb 2023 - slight changes to grab path of script automatically 
+
+# ******* IMPORTS ***********
+from cmath import inf
+import os
+import pydicom 
+import argparse
+import json
+import pandas as pd
+import shutil
+import datetime
+# import numpy as np
+# import math
+import time
+import sys
+from pathlib import Path
+
+
+# ******* LOCAL IMPORTS ******
+#GLOBALS
+REALPATH = os.path.dirname(os.path.realpath(__file__))
+
+sys.path.append(REALPATH)
+from helper_functions.convert_dicoms import convert_dicoms
+from helper_functions.mysql_commands import *
+from helper_functions.read_credentials import *
+from classes.creds import *
+from connect_create_raw_nii import process_single_dir
+from helper_functions.evaluate_raw_file_transfer import evaluate_raw_file_transfer
+
+
+# ******* GLOBAL INFO *******
+#versioning
+VERSION = '1.0.2'
+DATE = '28 Feb 2023'
+
+#input argument parser
+parser = argparse.ArgumentParser()
+
+os.environ["FSLDIR"] = '/usr/local/fsl'
+os.system('FSLDIR=' + os.environ["FSLDIR"])
+# os.system('source /etc/profile.d/fsl.sh')
+
+# ******************* PARSE COMMAND LINE ARGUMENTS ********************
+def parse_arguments():
+
+    #input options for main()
+    # requiredNamed = parser.add_argument_group('required arguments')
+    # requiredNamed.add_argument('-p','--path', action="store", dest="PATH", help="define search path", default=None)
+    parser.add_argument('-v', '--version', action="store_true", dest="version", help="Display the current version")
+    # parser.add_argument('--progress', action="store_true", dest="progress", help="Show progress (default FALSE)", default=False)
+    options = parser.parse_args()
+
+    return options
+
+
+def string_convert(str_to_convert):
+    return str(str_to_convert)
+
+def time_convert(time_to_convert):
+    return datetime.datetime.strptime(time_to_convert, '%Y%m%d %H%M%S.%f')
+
+# ******************* MAIN ********************
+def main():
+    """
+    The entry point of this program.
+    """
+
+    #get and evaluate options
+    # options = parse_arguments()
+    dcmPath = "/resshare/PACS"
+
+    #get start time/date of code
+    startDateTime = datetime.datetime.now()
+    lastUpdateTime = datetime.datetime.now()
+    df_dir = pd.DataFrame(columns=['project','inDir'])
+
+
+    # Loop over directory recursively
+    while True:
+        try:
+            ls_dirs = []
+            for root, dirs, files in os.walk(dcmPath, topdown=True):
+            # for path in Path(dcmPath).rglob('*'):
+                for filename in files:
+                    try:
+                        # Create input file path and read file
+                        inFilePath = os.path.join(root,filename)
+                        if not os.path.dirname(inFilePath) in ls_dirs:
+                            ls_dirs.append(os.path.dirname(inFilePath))
+
+                        # check if file is in exception list
+                        currentDateTime = datetime.datetime.now()
+                        currentDate = startDateTime.strftime('%d%m%Y')
+                        currentTime = startDateTime.strftime('%H%M%S')
+                        currentDateMoYr = currentDateTime.strftime('%Y%m')
+
+                        #read csv to dataframe
+                        # if os.path.isfile(os.path.join(REALPATH,'dicom_grabber_output',currentDateMoYr + '_exception_files.csv')):
+                            # df_existingExceptions = pd.read_csv(os.path.join(REALPATH,'dicom_grabber_output',currentDateMoYr + '_exception_files.csv'))
+                            # if (df_existingExceptions['filename'].eq(inFilePath)).any():
+                            #     continue
+                    
+                        #try to read dicom header 
+                        dcmHdr = pydicom.dcmread(inFilePath)
+
+                        # check if DICOM file has been processed
+                        seriesDateMoYr = dcmHdr.StudyDate[0:6]
+                        # if os.path.isfile(os.path.join(REALPATH,'dicom_grabber_output',seriesDateMoYr + '_processed_files.csv')):
+                            # df_existingFiles = pd.read_csv(os.path.join(REALPATH,'dicom_grabber_output',seriesDateMoYr + '_processed_files.csv'))
+                            # if (df_existingFiles['input_filename'].eq(inFilePath)).any():
+                            #     continue
+
+
+                        with open(os.path.join(REALPATH,'credentials.json')) as f:
+                            projectIDs = json.load(f)
+
+                        # Split patient name into IRB protocol number and subject number
+                        patientNameSplit = dcmHdr.PatientName.family_name.split()
+                        
+                        # update destination path
+                        if patientNameSplit[0] in projectIDs:
+                            if 'dataDir' in projectIDs[patientNameSplit[0]]:
+                                tmp_destBasePath = projectIDs[patientNameSplit[0]]['dataDir']
+                            else:
+                                raise ValueError('dataDir not found in project_identifiers.json for project ' + patientNameSplit[0])
+                        else:
+                            raise ValueError('Project ' + patientNameSplit[0] + ' not found in project_identifiers.json')
+                        tmp_destBasePath = os.path.join(tmp_destBasePath,'sourcedata')
+                        
+                        # Format Destination File Path
+                        if len(patientNameSplit) >= 3:
+                            destFilePath = os.path.join(tmp_destBasePath, 
+                                                        'sub-' + patientNameSplit[1], 
+                                                        'ses-' + dcmHdr.StudyDate + '-' + patientNameSplit[2],
+                                                        'acq-%02d_%d_%s' % (int(dcmHdr.AcquisitionNumber), int(float(dcmHdr.SeriesTime)), dcmHdr.ProtocolName))
+                            
+                            if 'PerFrameFunctionalGroupsSequence' in dcmHdr: #dicom contains multiple frames, only expect 1 file
+                                destFilePath = os.path.join(destFilePath,
+                                                            'IM_%05d' % int(dcmHdr.InstanceNumber))
+                                                    
+                            elif 'TemporalPositionIdentifier' in dcmHdr: #dicom has multiple temporal positions (part of a dynamic or functional set of images)
+                                destFilePath = os.path.join(destFilePath,
+                                                            'IM_%05d_%03d' % (int(dcmHdr.InstanceNumber), int(dcmHdr.TemporalPositionIdentifier)))
+                            
+                            else:
+                                destFilePath = os.path.join(destFilePath,
+                                                            'IM_%05d' % int(dcmHdr.InstanceNumber))
+                        
+                        else:
+                            destFilePath = os.path.join(tmp_destBasePath, 
+                                                        'sub-' + patientNameSplit[1], 
+                                                        'ses-' + dcmHdr.StudyDate,
+                                                        'acq-%02d_%d_%s' % (int(dcmHdr.AcquisitionNumber), int(float(dcmHdr.SeriesTime)), dcmHdr.ProtocolName))
+                            
+                            if 'PerFrameFunctionalGroupsSequence' in dcmHdr: #dicom contains multiple frames, only expect 1 file
+                                destFilePath = os.path.join(destFilePath,
+                                                            'IM_%05d' % int(dcmHdr.InstanceNumber))
+                                                    
+                            elif 'TemporalPositionIdentifier' in dcmHdr: #dicom has multiple temporal positions (part of a dynamic or functional set of images)
+                                destFilePath = os.path.join(destFilePath,
+                                                            'IM_%05d_%03d' % (int(dcmHdr.InstanceNumber), int(dcmHdr.TemporalPositionIdentifier)))
+                            
+                            else:
+                                destFilePath = os.path.join(destFilePath,
+                                                            'IM_%05d' % int(dcmHdr.InstanceNumber))
+
+                        #move file to the destination path
+                        destFilePath = destFilePath.replace(' ','_')
+                        if not os.path.exists(os.path.dirname(destFilePath)):
+                            os.makedirs(os.path.dirname(destFilePath))
+                        shutil.copy2(inFilePath,destFilePath)
+                        print(inFilePath + '\t' + destFilePath)
+
+                        #update sourcedata table with dcm files
+                        read_credentials(projectIDs[patientNameSplit[0]]['project'])
+                        d = {}
+                        d['fullpath'] = destFilePath
+                        d['filename'] = os.path.basename(destFilePath)
+                        sql_table_insert(creds.searchSourceTable,d)
+
+                        #Convert DICOM to NIfTI images
+                        time.sleep(5)
+                        convert_dicoms(os.path.dirname(destFilePath),False)
+
+                        # list files and add to table
+                        d = {}
+                        fullpath = []
+                        filename = []
+                        for path in Path(os.path.dirname(os.path.dirname(destFilePath))).rglob('*'):
+                            if not os.path.isdir(str(path)):
+                                fullpath.append(str(path))
+                                filename.append(os.path.basename(str(path)))
+                        d['fullpath'] = fullpath
+                        d['filename'] = filename
+                        sql_table_insert(creds.searchSourceTable,d)
+
+
+
+                        #now I can copy nifti files!!!
+                        ls_updatedFiles = process_single_dir(os.path.dirname(os.path.dirname(destFilePath)),False,False)[0]
+                        if ls_updatedFiles:
+                            d = {}
+                            fullpath = []
+                            filename = []
+                            baseFilename = []
+                            extension = []
+                            for f in ls_updatedFiles:
+                                fullpath.append(f)
+                                filename.append(os.path.basename(f))
+                                idx = os.path.basename(f).find('.')
+                                if idx != -1:
+                                    if idx == 0:
+                                        baseFilename.append('NULL')
+                                        extension.append(os.path.basename(f))
+                                    else:
+                                        baseFilename.append(os.path.basename(f)[:idx])
+                                        extension.append(os.path.basename(f)[idx+1:])
+                                else:
+                                    baseFilename.append(os.path.basename(f))
+                                    extension.append('NULL')
+                            d['fullpath'] = fullpath
+                            d['filename'] = filename
+                            d['basename'] = baseFilename
+                            d['extension'] = extension
+                            
+                            sql_table_insert(creds.searchTable,d)
+
+                        if not df_dir['inDir'].str.contains(os.path.dirname(os.path.dirname(destFilePath))).any():
+                            df_dir = df_dir.append({'project':creds.project, 'inDir':os.path.dirname(os.path.dirname(destFilePath))},ignore_index=True)
+                            
+
+
+                        # **** UPDATE LOGGING INFORMATION *****
+                        #update current date/time for processing notes
+                        currentDateTime = datetime.datetime.now()
+                        lastUpdateTime = datetime.datetime.now()
+                        currentDate = currentDateTime.strftime('%Y%m%d')
+                        currentTime = currentDateTime.strftime('%H%M%S')
+                        
+                        #create dataframe
+                        if 'AcquisitionDateTime' in dcmHdr:
+                            df_temp = {'input_filename': inFilePath, 'output_filename': destFilePath, 'processed_date': currentDate, 'processed_time': currentTime, 'project': patientNameSplit[0], 'subject': patientNameSplit[1], 'series_number': '%02d' % (int(dcmHdr.AcquisitionNumber)),'protocol_name': dcmHdr.ProtocolName, 'acquisition_date': dcmHdr.StudyDate, 'acquisition_start': dcmHdr.AcquisitionDateTime[8:], 'acquisition_duration': float(dcmHdr.AcquisitionDuration), 'series_start': dcmHdr.SeriesTime, 'series_end': float(dcmHdr.SeriesTime) + float(dcmHdr.AcquisitionDuration),'instance_number': dcmHdr.InstanceNumber}
+                        else:
+                            df_temp = {'input_filename': inFilePath, 'output_filename': destFilePath, 'processed_date': currentDate, 'processed_time': currentTime, 'project': patientNameSplit[0], 'subject': patientNameSplit[1], 'series_number': '%02d' % (int(dcmHdr.AcquisitionNumber)),'protocol_name': dcmHdr.ProtocolName, 'acquisition_date': dcmHdr.StudyDate, 'acquisition_start': dcmHdr.AcquisitionTime, 'acquisition_duration': float(dcmHdr.AcquisitionDuration), 'series_start': dcmHdr.SeriesTime, 'series_end': float(dcmHdr.SeriesTime) + float(dcmHdr.AcquisitionDuration),'instance_number': dcmHdr.InstanceNumber}
+                        
+
+                        #convert dict to a pandas dataframe
+                        df_temp = pd.DataFrame(df_temp, index=[0])
+
+                        #convert series start to a time object
+                        df_temp['series_start'] = df_temp['series_start'].apply(string_convert)
+                        df_temp['series_start'] = dcmHdr.StudyDate + ' ' + df_temp['series_start']
+                        df_temp['series_start'] = df_temp['series_start'].apply(time_convert)
+
+                        #calcuate series end time
+                        acq_end = df_temp['series_start']
+                        df_temp['series_end'] = acq_end + datetime.timedelta(0,dcmHdr.AcquisitionDuration)
+
+                        #write dataframe to monthly processing csv
+                        globalFile = os.path.join(REALPATH,'dicom_grabber_output',seriesDateMoYr + '_processed_files.csv')
+                        if os.path.isfile(globalFile):
+                            df_temp.to_csv(globalFile, mode='a', index=False, header=False)
+                        else:
+                            df_temp.to_csv(globalFile, mode='a', index=False)
+
+                        #write dataframe to subject/session directory as csv
+                        subjectFile = os.path.join(os.path.dirname(os.path.dirname(destFilePath)),'scan_times.csv')
+                        if os.path.isfile(subjectFile):
+                            df_temp.to_csv(subjectFile, mode='a', index=False, header=False)
+                        else:
+                            df_temp.to_csv(subjectFile, mode='a', index=False)
+
+
+                    except Exception as e:
+                        currentDateTime = datetime.datetime.now()
+                        currentDate = startDateTime.strftime('%d%m%Y')
+                        currentTime = startDateTime.strftime('%H%M%S')
+
+                        #move file to the destination path
+                        tmp_destBasePath = os.path.join(os.path.dirname(dcmPath),'exception_files')
+                        if not os.path.exists(tmp_destBasePath):
+                            os.makedirs(tmp_destBasePath)
+                        shutil.copy2(inFilePath, os.path.join(tmp_destBasePath,os.path.basename(inFilePath)))
+                        
+                        currentDateMoYr = currentDateTime.strftime('%Y%m')
+                        df_temp = {'filename': inFilePath, 'exception': "{0}".format(e), 'processed_date': currentDate, 'processed_time': currentTime}
+                        df_temp = pd.DataFrame(df_temp, index=[0])
+
+                        #write dataframe to csv
+                        if os.path.isfile(os.path.join(REALPATH,'dicom_grabber_output',currentDateMoYr + '_exception_files.csv')):
+                            df_temp.to_csv(os.path.join(REALPATH,'dicom_grabber_output',currentDateMoYr + '_exception_files.csv'), mode='a', index=False, header=False)
+                        else:
+                            df_temp.to_csv(os.path.join(REALPATH,'dicom_grabber_output',currentDateMoYr + '_exception_files.csv'), mode='a', index=False)
+
+            # delete empty dirs
+            time.sleep(60) #wait for 60seconds each time I enter this loop, no biggie
+            for d in ls_dirs:
+               
+                if d == dcmPath:
+                    break
+                try:
+                    print(d)
+                    shutil.rmtree(d, ignore_errors=True)
+                    # if len(os.listdir(os.path.dirname(d))) == 0:
+                    #     os.rmdir(os.path.dirname(d))
+                    while not os.path.dirname(d).endswith('PACS'):
+                        d = os.path.dirname(d)
+                        if len(os.listdir(d)) == 0:
+                            os.rmdir(d)
+
+
+                except OSError as e:
+                    print(e)
+
+            if datetime.datetime.now() - lastUpdateTime > datetime.timedelta(minutes=15) and not df_dir.empty:
+                for index, row in df_dir.iterrows():
+                    evaluate_raw_file_transfer(row['project'],row['inDir'])
+
+                
+                df_dir = pd.DataFrame(columns=['project','inDir'])
+
+                        
+        except OSError as e:
+            print(e)
+                
+
+
+if __name__ == '__main__':
+    main()

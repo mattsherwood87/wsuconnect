@@ -1,0 +1,571 @@
+Found patient 20230093H 1106 5 @ 06182024 14:09:29
+	Patient is stable @ 06182024 14:09:29
+	finished copying raw DICOMS @ 06182024 14:40:59
+	finished removing patient from PACS database @ 06182024 14:41:32
+	removing empty directories from PACS temporary directory @ 06182024 14:41:32
+	creating dicoms and other activities @ 06182024 14:41:35
+	found all files in rawdata
+	finished patient @ 06182024 15:17:58
+Found patient 220230093H 1107 2B @ 06182024 15:18:58
+<class 'ValueError'> connect_pacs_dicom_grabber.py 132
+Found patient 220230093H 1107 1A @ 06182024 15:18:58
+<class 'ValueError'> connect_pacs_dicom_grabber.py 132
+Found patient 20230093H 1105 1A @ 06182024 15:23:43
+	Patient is stable @ 06182024 17:15:32
+	finished copying raw DICOMS @ 06182024 18:05:47
+	finished removing patient from PACS database @ 06182024 18:06:22
+	removing empty directories from PACS temporary directory @ 06182024 18:06:22
+	creating dicoms and other activities @ 06182024 18:07:15
+	found all files in rawdata
+	finished patient @ 06182024 18:39:20
+Found patient 20230093H 1105 1B @ 06182024 18:40:20
+	Patient is stable @ 06182024 18:40:20
+	finished copying raw DICOMS @ 06192024 09:02:18
+	finished removing patient from PACS database @ 06192024 09:02:39
+	removing empty directories from PACS temporary directory @ 06192024 09:02:39
+	creating dicoms and other activities @ 06192024 09:02:52
+	found all files in rawdata
+	finished patient @ 06192024 09:15:08
+Found patient 20230093H 1107 1A @ 06202024 16:18:06
+	Patient is stable @ 06202024 18:07:54
+	finished copying raw DICOMS @ 06202024 18:28:35
+	finished removing patient from PACS database @ 06202024 18:29:17
+	removing empty directories from PACS temporary directory @ 06202024 18:29:17
+	creating dicoms and other activities @ 06202024 18:29:18
+	did NOT find all files in rawdata
+	finished patient @ 06202024 18:31:32
+Found patient 20230093H 1107 1B @ 06202024 22:44:20
+	Patient is stable @ 06202024 22:44:20
+	finished copying raw DICOMS @ 06202024 22:51:57
+	finished removing patient from PACS database @ 06202024 22:52:10
+	removing empty directories from PACS temporary directory @ 06202024 22:52:10
+	creating dicoms and other activities @ 06202024 22:52:22
+	did NOT find all files in rawdata
+	finished patient @ 06202024 23:05:13
+Found patient 20230093H 1107 2A @ 06212024 07:11:21
+	Patient is stable @ 06212024 07:11:21
+		working new series B0 map @ 06212024 07:11:22
+		working new series CoilSurveyScan @ 06212024 07:11:22
+		working new series SenseRefScan @ 06212024 07:11:22
+		working new series B0_PreScan @ 06212024 07:11:22
+		working new series CoilSurveyScan @ 06212024 07:11:22
+		working new series B1_Calibration @ 06212024 07:11:22
+		working new series B1_Calibration @ 06212024 07:11:22
+		working new series ExamCard @ 06212024 07:11:22
+		working new series SOURCE - 3D pCASL 2min @ 06212024 07:11:22
+		working new series 3D pCASL 2min @ 06212024 07:11:25
+		working new series COR MPR 3.5min @ 06212024 07:11:25
+		working new series SAG MPR 3.5min @ 06212024 07:11:28
+		working new series AX3D T1 TFE 4.5min @ 06212024 07:11:31
+		working new series COR_PCA_Survey @ 06212024 07:11:33
+		working new series SAG_PCA_Survey @ 06212024 07:11:33
+		working new series Survey @ 06212024 07:11:33
+		working new series fMRI train4 @ 06212024 07:11:33
+		working new series fMRI train3 @ 06212024 07:16:22
+		working new series fMRI train2 @ 06212024 07:25:03
+		working new series fMRI train1 @ 06212024 07:33:33
+		working new series Survey @ 06212024 07:41:31
+		working new series Head Plan @ 06212024 07:41:32
+		working new series B0 map @ 06212024 07:41:32
+	finished copying raw DICOMS @ 06212024 07:41:35
+	finished removing patient from PACS database @ 06212024 07:42:11
+	removing empty directories from PACS temporary directory @ 06212024 07:42:11
+	creating dicoms and other activities @ 06212024 07:43:01
+	found all files in rawdata
+	finished patient @ 06212024 08:10:38
+Found patient 20230093H 1107 2B @ 06212024 09:54:17
+	Patient is stable @ 06212024 09:54:17
+		working new series B0 map @ 06212024 09:54:17
+		working new series CoilSurveyScan @ 06212024 09:54:17
+		working new series SenseRefScan @ 06212024 09:54:17
+		working new series B0_PreScan @ 06212024 09:54:17
+		working new series CoilSurveyScan @ 06212024 09:54:17
+		working new series B1_Calibration @ 06212024 09:54:17
+		working new series B1_Calibration @ 06212024 09:54:17
+		working new series ExamCard @ 06212024 09:54:17
+		working new series SOURCE - 3D pCASL 2min @ 06212024 09:54:17
+		working new series 3D pCASL 2min @ 06212024 09:54:21
+		working new series COR MPR 3.5min @ 06212024 09:54:21
+		working new series SAG MPR 3.5min @ 06212024 09:54:25
+		working new series AX3D T1 TFE 4.5min @ 06212024 09:54:28
+		working new series COR_PCA_Survey @ 06212024 09:54:30
+		working new series SAG_PCA_Survey @ 06212024 09:54:30
+		working new series Survey @ 06212024 09:54:30
+		working new series fMRI test4 @ 06212024 09:54:30
+		working new series fMRI test3 @ 06212024 10:02:00
+		working new series B0 map @ 06212024 10:10:18
+		working new series fMRI test2 @ 06212024 10:10:22
+		working new series fMRI test1 @ 06212024 10:18:30
+		working new series Survey @ 06212024 10:26:01
+		working new series Head Plan @ 06212024 10:26:02
+	finished copying raw DICOMS @ 06212024 10:26:02
+	finished removing patient from PACS database @ 06212024 10:26:33
+	removing empty directories from PACS temporary directory @ 06212024 10:26:33
+	creating dicoms and other activities @ 06212024 10:26:35
+	found all files in rawdata
+	finished patient @ 06212024 10:54:30
+Found patient 20230093H 1107 1A @ 06212024 14:15:40
+	Patient is stable @ 06212024 14:15:40
+		working new series B0 map @ 06212024 14:15:40
+		working new series CoilSurveyScan @ 06212024 14:15:41
+		working new series SenseRefScan @ 06212024 14:15:41
+		working new series B0_PreScan @ 06212024 14:15:41
+		working new series CoilSurveyScan @ 06212024 14:15:41
+		working new series B1_Calibration @ 06212024 14:15:41
+		working new series B1_Calibration @ 06212024 14:15:41
+		working new series ExamCard @ 06212024 14:15:41
+		working new series ExamCard @ 06212024 14:15:41
+		working new series rsfMRI @ 06212024 14:15:41
+		working new series SOURCE - 3D pCASL 2min @ 06212024 14:20:15
+		working new series 3D pCASL 2min @ 06212024 14:20:22
+		working new series COR MPR 3.5min @ 06212024 14:20:23
+		working new series SAG MPR 3.5min @ 06212024 14:20:28
+		working new series AX3D T1 TFE 4.5min @ 06212024 14:20:33
+		working new series COR_PCA_Survey @ 06212024 14:20:36
+		working new series SAG_PCA_Survey @ 06212024 14:20:36
+		working new series Survey @ 06212024 14:20:36
+		working new series fMRI test4 @ 06212024 14:20:37
+		working new series fMRI test3 @ 06212024 14:25:46
+		working new series B0 map @ 06212024 14:31:09
+		working new series fMRI test2 @ 06212024 14:31:14
+		working new series fMRI test1 @ 06212024 14:43:18
+		working new series Survey @ 06212024 14:51:03
+		working new series Head Plan @ 06212024 14:51:03
+	finished copying raw DICOMS @ 06212024 14:51:03
+	finished removing patient from PACS database @ 06212024 14:51:40
+	removing empty directories from PACS temporary directory @ 06212024 14:51:40
+	creating dicoms and other activities @ 06212024 14:52:37
+	found all files in rawdata
+	finished patient @ 06212024 15:25:56
+Found patient 20230093H 1107 3A @ 06252024 08:23:11
+	Patient is stable @ 06252024 08:23:11
+		working new series ExamCard @ 06252024 08:23:11
+		working new series B0 map @ 06252024 08:23:11
+		working new series COR MPR 3.5min @ 06252024 08:23:11
+		working new series SAG MPR 3.5min @ 06252024 08:23:14
+		working new series SOURCE - 3D pCASL 2min @ 06252024 08:23:17
+		working new series 3D pCASL 2min @ 06252024 08:23:20
+		working new series AX3D T1 TFE 4.5min @ 06252024 08:23:20
+		working new series COR_PCA_Survey @ 06252024 08:23:22
+		working new series SAG_PCA_Survey @ 06252024 08:23:22
+		working new series Survey @ 06252024 08:23:22
+		working new series fMRI train4 @ 06252024 08:23:22
+		working new series fMRI train3 @ 06252024 08:31:19
+		working new series B0 map @ 06252024 08:39:42
+		working new series fMRI train2 @ 06252024 08:39:46
+		working new series fMRI train1 @ 06252024 08:48:10
+		working new series Survey @ 06252024 08:56:00
+		working new series Head Plan @ 06252024 08:56:00
+	finished copying raw DICOMS @ 06252024 08:56:00
+	finished removing patient from PACS database @ 06252024 08:56:46
+	removing empty directories from PACS temporary directory @ 06252024 08:56:46
+	creating dicoms and other activities @ 06252024 08:57:38
+	found all files in rawdata
+	finished patient @ 06252024 09:30:00
+Found patient 20230093H 1105 2A @ 06252024 16:53:04
+	Patient is stable @ 06252024 16:53:04
+		working new series B0 map @ 06252024 16:53:04
+		working new series ExamCard @ 06252024 16:53:04
+		working new series SAG MPR 3.5min @ 06252024 16:53:05
+		working new series COR MPR 3.5min @ 06252024 16:53:39
+		working new series SOURCE - 3D pCASL 2min @ 06252024 16:54:12
+		working new series 3D pCASL 2min @ 06252024 16:54:53
+		working new series AX3D T1 TFE 4.5min @ 06252024 16:54:57
+		working new series COR_PCA_Survey @ 06252024 16:55:18
+		working new series SAG_PCA_Survey @ 06252024 16:55:19
+		working new series Survey @ 06252024 16:55:19
+		working new series fMRI train4 @ 06252024 16:55:21
+		working new series fMRI train3 @ 06252024 17:37:17
+		working new series B0 map @ 06252024 18:18:06
+		working new series fMRI train2 @ 06252024 18:18:24
+		working new series fMRI train1 @ 06252024 18:57:43
+		working new series Survey @ 06252024 19:35:20
+		working new series Head Plan @ 06252024 19:35:22
+	finished copying raw DICOMS @ 06252024 19:35:22
+	finished removing patient from PACS database @ 06252024 19:35:25
+	removing empty directories from PACS temporary directory @ 06252024 19:35:25
+	creating dicoms and other activities @ 06252024 19:36:17
+	did NOT find all files in rawdata
+	finished patient @ 06252024 20:14:42
+Found patient 20230093H 1107 3B @ 06262024 11:06:52
+	Patient is stable @ 06262024 12:38:13
+		working new series ExamCard @ 06262024 12:38:13
+		working new series B0 map @ 06262024 12:38:13
+		working new series SAG MPR 3.5min @ 06262024 12:38:33
+		working new series COR MPR 3.5min @ 06262024 12:38:51
+		working new series SOURCE - 3D pCASL 2min @ 06262024 12:39:11
+		working new series 3D pCASL 2min @ 06262024 12:39:33
+		working new series AX3D T1 TFE 4.5min @ 06262024 12:39:34
+		working new series COR_PCA_Survey @ 06262024 12:39:46
+		working new series SAG_PCA_Survey @ 06262024 12:39:47
+		working new series Survey @ 06262024 12:39:47
+		working new series fMRI test4 @ 06262024 12:39:47
+		working new series fMRI test3 @ 06262024 12:58:40
+		working new series B0 map @ 06262024 13:16:05
+		working new series fMRI test2 @ 06262024 13:16:12
+		working new series fMRI test1 @ 06262024 13:32:03
+		working new series Survey @ 06262024 13:45:17
+		working new series Head Plan @ 06262024 13:45:17
+	finished copying raw DICOMS @ 06262024 13:45:17
+	finished removing patient from PACS database @ 06262024 13:45:18
+	removing empty directories from PACS temporary directory @ 06262024 13:45:18
+	creating dicoms and other activities @ 06262024 13:45:19
+	found all files in rawdata
+	finished patient @ 06262024 14:20:14
+Found patient 20230093H 1107 4A @ 06262024 14:26:42
+	Patient is stable @ 06262024 16:06:40
+		working new series ExamCard @ 06262024 16:06:40
+		working new series ExamCard @ 06262024 16:06:41
+		working new series SOURCE - 3D pCASL 2min @ 06262024 16:06:41
+		working new series 3D pCASL 2min @ 06262024 16:06:54
+		working new series COR MPR 3.5min @ 06262024 16:06:57
+		working new series SAG MPR 3.5min @ 06262024 16:07:10
+		working new series AX3D T1 TFE 4.5min @ 06262024 16:07:20
+		working new series COR_PCA_Survey @ 06262024 16:07:28
+		working new series SAG_PCA_Survey @ 06262024 16:07:28
+		working new series Survey @ 06262024 16:07:28
+		working new series fMRI train4 @ 06262024 16:07:29
+		working new series fMRI train3 @ 06262024 16:20:57
+		working new series B0 map @ 06262024 16:34:40
+		working new series fMRI train2 @ 06262024 16:34:46
+		working new series fMRI train1 @ 06262024 16:47:23
+		working new series Survey @ 06262024 17:00:02
+		working new series Head Plan @ 06262024 17:00:03
+	finished copying raw DICOMS @ 06262024 17:00:03
+	finished removing patient from PACS database @ 06262024 17:00:03
+	removing empty directories from PACS temporary directory @ 06262024 17:00:03
+	creating dicoms and other activities @ 06262024 17:00:50
+	found all files in rawdata
+	finished patient @ 06262024 17:40:09
+Found patient 20230093H 1107 4B @ 06272024 09:11:39
+	Patient is stable @ 06272024 10:42:58
+		working new series ExamCard @ 06272024 10:42:58
+		working new series ExamCard @ 06272024 10:42:58
+		working new series SOURCE - 3D pCASL 2min @ 06272024 10:42:58
+		working new series 3D pCASL 2min @ 06272024 10:43:12
+		working new series COR MPR 3.5min @ 06272024 10:43:13
+		working new series SAG MPR 3.5min @ 06272024 10:43:23
+		working new series AX3D T1 TFE 4.5min @ 06272024 10:43:34
+		working new series COR_PCA_Survey @ 06272024 10:43:40
+		working new series SAG_PCA_Survey @ 06272024 10:43:42
+		working new series Survey @ 06272024 10:43:42
+		working new series fMRI test4 @ 06272024 10:43:42
+		working new series fMRI test3 @ 06272024 10:57:44
+		working new series B0 map @ 06272024 11:12:27
+		working new series fMRI test2 @ 06272024 11:12:34
+		working new series fMRI test1 @ 06272024 11:27:13
+		working new series Survey @ 06272024 11:42:29
+		working new series Head Plan @ 06272024 11:42:29
+	finished copying raw DICOMS @ 06272024 11:42:30
+	finished removing patient from PACS database @ 06272024 11:42:30
+	removing empty directories from PACS temporary directory @ 06272024 11:42:30
+	creating dicoms and other activities @ 06272024 11:43:13
+	found all files in rawdata
+	finished patient @ 06272024 12:21:37
+Found patient 20230093H 1107 5 @ 06272024 12:22:37
+	Patient is stable @ 06272024 12:42:44
+		working new series ExamCard @ 06272024 12:42:44
+		working new series ExamCard @ 06272024 12:42:48
+		working new series rsfMRI @ 06272024 12:42:52
+processing time exceeds what was expected, restart and see if that helps
+Found patient 20230093H 1107 5 @ 06272024 13:43:11
+	Patient is stable @ 06272024 13:43:11
+		working new series rsfMRI @ 06272024 13:43:11
+		working new series SOURCE - 3D pCASL 2min @ 06272024 13:57:09
+		working new series 3D pCASL 2min @ 06272024 13:57:30
+		working new series COR MPR 3.5min @ 06272024 13:57:34
+		working new series SAG MPR 3.5min @ 06272024 13:57:55
+		working new series AX3D T1 TFE 4.5min @ 06272024 13:58:16
+		working new series COR_PCA_Survey @ 06272024 13:58:27
+		working new series SAG_PCA_Survey @ 06272024 13:58:27
+		working new series Survey @ 06272024 13:58:27
+		working new series fMRI test4 @ 06272024 13:58:28
+		working new series fMRI test3 @ 06272024 14:16:31
+		working new series Head Plan @ 06272024 14:33:50
+		working new series Survey @ 06272024 14:33:51
+		working new series fMRI test1 @ 06272024 14:33:52
+		working new series fMRI test2 @ 06272024 14:48:04
+		working new series B0 map @ 06272024 14:58:37
+	finished copying raw DICOMS @ 06272024 14:58:41
+	finished removing patient from PACS database @ 06272024 14:58:44
+	removing empty directories from PACS temporary directory @ 06272024 14:58:44
+	creating dicoms and other activities @ 06272024 14:59:41
+	found all files in rawdata
+	finished patient @ 06272024 15:50:03
+Found patient 20230093H 1105 2A @ 06272024 15:50:03
+	Patient is stable @ 06272024 15:50:03
+		working new series ExamCard @ 06272024 15:50:03
+		working new series ExamCard @ 06272024 15:50:08
+		working new series SOURCE - 3D pCASL 2min @ 06272024 15:50:12
+		working new series 3D pCASL 2min @ 06272024 16:10:02
+		working new series SAG MPR 3.5min @ 06272024 16:11:45
+		working new series COR MPR 3.5min @ 06272024 16:28:34
+		working new series AX3D T1 TFE 4.5min @ 06272024 16:45:29
+		working new series COR_PCA_Survey @ 06272024 16:55:53
+		working new series SAG_PCA_Survey @ 06272024 16:56:13
+		working new series Survey @ 06272024 16:56:33
+		working new series fMRI train4 @ 06272024 16:57:14
+processing time exceeds what was expected, restart and see if that helps
+Found patient 20230093H 1105 2A @ 06272024 17:57:19
+	Patient is stable @ 06272024 17:57:19
+		working new series fMRI train4 @ 06272024 17:57:19
+		working new series fMRI train3 @ 06272024 18:11:20
+		working new series B0 map @ 06272024 18:24:41
+		working new series fMRI train2 @ 06272024 18:24:51
+		working new series fMRI train1 @ 06272024 18:37:50
+		working new series Survey @ 06272024 18:50:12
+		working new series Head Plan @ 06272024 18:50:13
+	finished copying raw DICOMS @ 06272024 18:50:14
+	finished removing patient from PACS database @ 06272024 18:50:17
+	removing empty directories from PACS temporary directory @ 06272024 18:50:17
+	creating dicoms and other activities @ 06272024 18:51:08
+	did NOT find all files in rawdata
+	finished patient @ 06272024 19:05:36
+Found patient 20230093H 1105 2B @ 06272024 19:05:37
+	Patient is stable @ 06272024 19:05:37
+		working new series ExamCard @ 06272024 19:05:37
+		working new series SOURCE - 3D pCASL 2min @ 06272024 19:05:41
+		working new series 3D pCASL 2min @ 06272024 19:26:39
+		working new series COR MPR 3.5min @ 06272024 19:28:27
+		working new series SAG MPR 3.5min @ 06272024 19:46:15
+		working new series AX3D T1 TFE 4.5min @ 06272024 20:02:54
+		working new series COR_PCA_Survey @ 06272024 20:14:00
+		working new series SAG_PCA_Survey @ 06272024 20:14:22
+		working new series Survey @ 06272024 20:14:43
+		working new series fMRI test4 @ 06272024 20:15:08
+processing time exceeds what was expected, restart and see if that helps
+Found patient 20230093H 1105 2B @ 06272024 21:15:26
+	Patient is stable @ 06272024 21:15:26
+		working new series fMRI test4 @ 06272024 21:15:26
+Found patient 20230093H 1105 2B @ 06272024 21:22:52
+	Patient is stable @ 06272024 21:22:52
+		working new series fMRI test4 @ 06272024 21:22:53
+		working new series fMRI test3 @ 06272024 21:58:11
+		working new series B0 map @ 06272024 22:30:13
+		working new series fMRI test2 @ 06272024 22:30:28
+		working new series fMRI test1 @ 06272024 23:00:36
+		working new series Survey @ 06272024 23:29:31
+		working new series Head Plan @ 06272024 23:29:32
+	finished copying raw DICOMS @ 06272024 23:29:33
+	finished removing patient from PACS database @ 06272024 23:29:37
+	removing empty directories from PACS temporary directory @ 06272024 23:29:37
+	creating dicoms and other activities @ 06272024 23:30:23
+	did NOT find all files in rawdata
+	finished patient @ 06272024 23:51:42
+Found patient 20230093H 1105 3A @ 06272024 23:51:42
+	Patient is stable @ 06272024 23:51:42
+		working new series ExamCard @ 06272024 23:51:42
+		working new series SOURCE - 3D pCASL 2min @ 06272024 23:51:47
+		working new series 3D pCASL 2min @ 06282024 00:14:22
+		working new series SAG MPR 3.5min @ 06282024 00:16:19
+		working new series COR MPR 3.5min @ 06282024 00:34:16
+		working new series AX3D T1 TFE 4.5min @ 06282024 00:53:28
+		working new series COR_PCA_Survey @ 06282024 01:05:19
+		working new series SAG_PCA_Survey @ 06282024 01:05:41
+		working new series Survey @ 06282024 01:06:04
+		working new series fMRI train4 @ 06282024 01:06:31
+processing time exceeds what was expected, restart and see if that helps
+Found patient 20230093H 1105 3A @ 06282024 02:36:43
+	Patient is stable @ 06282024 02:36:43
+		working new series fMRI train4 @ 06282024 02:36:43
+		working new series fMRI train3 @ 06282024 03:12:27
+		working new series B0 map @ 06282024 03:48:36
+		working new series fMRI train2 @ 06282024 03:48:47
+		working new series fMRI train1 @ 06282024 04:18:00
+		working new series Survey @ 06282024 04:44:16
+		working new series Head Plan @ 06282024 04:44:17
+	finished copying raw DICOMS @ 06282024 04:44:17
+	finished removing patient from PACS database @ 06282024 04:44:17
+	removing empty directories from PACS temporary directory @ 06282024 04:44:17
+	creating dicoms and other activities @ 06282024 04:45:06
+	did NOT find all files in rawdata
+	finished patient @ 06282024 05:03:56
+Found patient 20230093H 1105 3B @ 06282024 05:03:56
+	Patient is stable @ 06282024 05:03:56
+		working new series ExamCard @ 06282024 05:03:56
+		working new series SOURCE - 3D pCASL 2min @ 06282024 05:04:00
+		working new series 3D pCASL 2min @ 06282024 05:27:25
+		working new series SAG MPR 3.5min @ 06282024 05:29:27
+		working new series COR MPR 3.5min @ 06282024 05:48:09
+		working new series AX3D T1 TFE 4.5min @ 06282024 06:08:10
+		working new series COR_PCA_Survey @ 06282024 06:20:33
+		working new series SAG_PCA_Survey @ 06282024 06:20:56
+		working new series Survey @ 06282024 06:21:20
+		working new series fMRI test4 @ 06282024 06:21:48
+processing time exceeds what was expected, restart and see if that helps
+Found patient 20230093H 1105 3B @ 06282024 07:51:55
+	Patient is stable @ 06282024 07:51:55
+		working new series fMRI test4 @ 06282024 07:51:55
+		working new series fMRI test3 @ 06282024 08:08:14
+		working new series B0 map @ 06282024 08:24:46
+		working new series fMRI test2 @ 06282024 08:24:53
+		working new series fMRI test1 @ 06282024 08:40:14
+		working new series Survey @ 06282024 08:53:22
+		working new series Head Plan @ 06282024 08:53:22
+	finished copying raw DICOMS @ 06282024 08:53:23
+	finished removing patient from PACS database @ 06282024 08:53:23
+	removing empty directories from PACS temporary directory @ 06282024 08:53:23
+	creating dicoms and other activities @ 06282024 08:53:50
+	did NOT find all files in rawdata
+	finished patient @ 06282024 09:09:38
+Found patient 20230093H 1105 2A @ 06282024 09:09:38
+	Patient is stable @ 06282024 09:09:38
+		working new series ExamCard @ 06282024 09:09:38
+		working new series ExamCard @ 06282024 09:09:43
+		working new series AX3D T1 TFE 4.5min @ 06282024 09:09:48
+		working new series COR MPR 3.5min @ 06282024 09:22:40
+		working new series SAG MPR 3.5min @ 06282024 09:43:27
+Found patient 20230093H 1105 2A @ 06282024 09:59:02
+	Patient is stable @ 06282024 09:59:02
+		working new series COR MPR 3.5min @ 06282024 09:59:02
+		working new series SAG MPR 3.5min @ 06282024 09:59:04
+		working new series SOURCE - 3D pCASL 2min @ 06282024 09:59:08
+		working new series ExamCard @ 06282024 09:59:23
+		working new series ExamCard @ 06282024 09:59:23
+		working new series AX3D T1 TFE 4.5min @ 06282024 09:59:23
+	finished copying raw DICOMS @ 06282024 09:59:31
+	finished removing patient from PACS database @ 06282024 09:59:31
+	removing empty directories from PACS temporary directory @ 06282024 09:59:31
+	creating dicoms and other activities @ 06282024 09:59:31
+	did NOT find all files in rawdata
+	finished patient @ 06282024 10:16:01
+Found patient 20230093H 1105 2B @ 06282024 10:16:01
+	Patient is stable @ 06282024 10:16:01
+		working new series ExamCard @ 06282024 10:16:01
+		working new series AX3D T1 TFE 4.5min @ 06282024 10:16:06
+Found patient 20230093H 1105 2B @ 06282024 10:21:33
+	Patient is stable @ 06282024 10:21:33
+		working new series AX3D T1 TFE 4.5min @ 06282024 10:21:33
+		working new series SAG MPR 3.5min @ 06282024 10:21:39
+Found patient 20230093H 1105 2B @ 06282024 10:21:48
+	Patient is stable @ 06282024 10:21:48
+		working new series SAG MPR 3.5min @ 06282024 10:21:48
+		working new series COR MPR 3.5min @ 06282024 10:22:00
+		working new series SOURCE - 3D pCASL 2min @ 06282024 10:22:16
+		working new series ExamCard @ 06282024 10:22:36
+		working new series 3D pCASL 2min @ 06282024 10:22:36
+	finished copying raw DICOMS @ 06282024 10:22:38
+	finished removing patient from PACS database @ 06282024 10:22:38
+	removing empty directories from PACS temporary directory @ 06282024 10:22:38
+	creating dicoms and other activities @ 06282024 10:22:39
+	did NOT find all files in rawdata
+	finished patient @ 06282024 10:36:41
+Found patient 20230093H 1105 3A @ 06282024 10:36:41
+	Patient is stable @ 06282024 10:36:41
+		working new series ExamCard @ 06282024 10:36:41
+		working new series AX3D T1 TFE 4.5min @ 06282024 10:36:46
+		working new series COR MPR 3.5min @ 06282024 10:50:04
+		working new series SAG MPR 3.5min @ 06282024 11:11:07
+		working new series SOURCE - 3D pCASL 2min @ 06282024 11:30:37
+		working new series 3D pCASL 2min @ 06282024 11:55:56
+	finished copying raw DICOMS @ 06282024 11:58:07
+	finished removing patient from PACS database @ 06282024 11:58:07
+	removing empty directories from PACS temporary directory @ 06282024 11:58:07
+	creating dicoms and other activities @ 06282024 11:58:08
+	found all files in rawdata
+	finished patient @ 06282024 12:15:59
+Found patient 20230093H 1105 3B @ 06282024 12:15:59
+	Patient is stable @ 06282024 12:44:36
+		working new series ExamCard @ 06282024 12:44:36
+		working new series AX3D T1 TFE 4.5min @ 06282024 12:44:40
+		working new series COR MPR 3.5min @ 06282024 12:57:36
+		working new series SOURCE - 3D pCASL 2min @ 06282024 13:18:26
+		working new series B0 map @ 06282024 13:42:57
+		working new series 3D pCASL 2min @ 06282024 13:43:21
+		working new series COR_PCA_Survey @ 06282024 13:45:27
+		working new series SAG_PCA_Survey @ 06282024 13:45:52
+		working new series Survey @ 06282024 13:46:16
+		working new series fMRI test4 @ 06282024 13:46:46
+<class 'Exception'> connect_pacs_dicom_grabber.py 272 @ 06282024 14:34:05
+Error Message: 404
+Found patient 20230093H 1105 2A @ 06282024 14:34:05
+	Patient is stable @ 06282024 14:34:05
+		working new series ExamCard @ 06282024 14:34:05
+		working new series ExamCard @ 06282024 14:34:10
+		working new series 3D pCASL 2min @ 06282024 14:34:15
+<class 'Exception'> connect_pacs_dicom_grabber.py 272 @ 06282024 14:34:20
+Error Message: 404
+Found patient 20230093H 1105 4A @ 06282024 14:36:23
+Found patient 20230093H 1105 4A @ 06282024 14:36:25
+	Patient is stable @ 06282024 16:17:14
+		working new series B0 map @ 06282024 16:17:14
+		working new series ExamCard @ 06282024 16:17:34
+		working new series SOURCE - 3D pCASL 2min @ 06282024 16:17:34
+		working new series 3D pCASL 2min @ 06282024 16:18:11
+		working new series SAG MPR 4.5min @ 06282024 16:18:13
+		working new series COR MPR 4.5min @ 06282024 16:18:39
+		working new series AX3D T1 TFE 4.5min @ 06282024 16:19:05
+		working new series COR_PCA_Survey @ 06282024 16:19:25
+		working new series SAG_PCA_Survey @ 06282024 16:19:25
+		working new series Survey @ 06282024 16:19:26
+		working new series fMRI train4 @ 06282024 16:19:26
+		working new series fMRI train3 @ 06282024 16:51:35
+		working new series B0 map @ 06282024 17:20:50
+		working new series fMRI train2 @ 06282024 17:21:03
+		working new series fMRI train1 @ 06282024 17:49:29
+		working new series Survey @ 06282024 18:17:41
+		working new series Head Plan @ 06282024 18:17:43
+	finished copying raw DICOMS @ 06282024 18:17:44
+	finished removing patient from PACS database @ 06282024 18:17:46
+	removing empty directories from PACS temporary directory @ 06282024 18:17:46
+	creating dicoms and other activities @ 06282024 18:18:37
+	found all files in rawdata
+	finished patient @ 06282024 19:01:39
+Found patient 20230093H 1105 4B @ 06282024 19:02:39
+	Patient is stable @ 06282024 19:02:39
+		working new series B0 map @ 06282024 19:02:39
+Found patient 20230093H 1105 4B @ 06282024 19:02:48
+	Patient is stable @ 06282024 19:02:48
+		working new series B0 map @ 06282024 19:02:48
+		working new series ExamCard @ 06282024 19:03:07
+		working new series SOURCE - 3D pCASL 2min @ 06282024 19:03:07
+		working new series 3D pCASL 2min @ 06282024 19:03:45
+		working new series SAG MPR 4.5min @ 06282024 19:03:48
+		working new series COR MPR 4.5min @ 06282024 19:04:18
+		working new series AX3D T1 TFE 4.5min @ 06282024 19:04:50
+		working new series COR_PCA_Survey @ 06282024 19:05:09
+		working new series SAG_PCA_Survey @ 06282024 19:05:10
+		working new series Survey @ 06282024 19:05:11
+		working new series fMRI test4 @ 06282024 19:05:12
+		working new series fMRI test3 @ 06282024 19:37:16
+		working new series B0 map @ 06282024 20:09:04
+		working new series fMRI test2 @ 06282024 20:09:20
+		working new series fMRI test1 @ 06282024 20:41:37
+		working new series Survey @ 06282024 21:06:26
+		working new series Head Plan @ 06282024 21:06:27
+	finished copying raw DICOMS @ 06282024 21:06:27
+	finished removing patient from PACS database @ 06282024 21:06:30
+	removing empty directories from PACS temporary directory @ 06282024 21:06:30
+	creating dicoms and other activities @ 06282024 21:07:17
+	found all files in rawdata
+	finished patient @ 06282024 21:50:50
+Found patient 20230093H 1105 5 @ 06282024 21:50:50
+	Patient is stable @ 06282024 21:50:50
+		working new series B0 map @ 06282024 21:50:50
+		working new series ExamCard @ 06282024 21:51:14
+		working new series rsfMRI @ 06282024 21:51:19
+processing time exceeds what was expected, restart and see if that helps
+Found patient 20230093H 1105 5 @ 06282024 23:21:36
+	Patient is stable @ 06282024 23:21:36
+		working new series rsfMRI @ 06282024 23:21:36
+		working new series SOURCE - 3D pCASL 2min @ 06282024 23:40:22
+		working new series 3D pCASL 2min @ 06282024 23:40:51
+		working new series COR MPR 3.5min @ 06282024 23:40:54
+		working new series SAG MPR 3.5min @ 06282024 23:41:24
+		working new series AX3D T1 TFE 4.5min @ 06282024 23:41:49
+		working new series COR_PCA_Survey @ 06282024 23:42:03
+		working new series SAG_PCA_Survey @ 06282024 23:42:03
+		working new series Survey @ 06282024 23:42:04
+		working new series fMRI test4 @ 06282024 23:42:05
+		working new series fMRI test3 @ 06292024 00:06:29
+		working new series B0 map @ 06292024 00:26:35
+		working new series fMRI test2 @ 06292024 00:26:46
+		working new series fMRI test1 @ 06292024 00:48:03
+		working new series Survey @ 06292024 01:04:30
+		working new series Head Plan @ 06292024 01:04:31
+	finished copying raw DICOMS @ 06292024 01:04:31
+	finished removing patient from PACS database @ 06292024 01:04:31
+	removing empty directories from PACS temporary directory @ 06292024 01:04:31
+	creating dicoms and other activities @ 06292024 01:04:33
+	found all files in rawdata
+	finished patient @ 06292024 02:07:03

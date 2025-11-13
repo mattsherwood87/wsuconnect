@@ -1,0 +1,72 @@
+/resshare/wsuconnect/support_tools/check_rawdata.py:618: FutureWarning: Styler.applymap has been deprecated. Use Styler.map instead.
+  styled_df = d_completeData[k].style.applymap(_color_cells)
+updating MySQL tables on 20251109 @ 02:30:02
+Project: 2022-0010
+	Valid
+HTML file generated: /resshare20/projects/2022_KBR_Cog_Neuro_2/Hemo2/code/processing_logs/2022-0010_rawdata_check_apt.html
+Successfully updated 2022_0010 in database CoNNECT
+	Total time: 64.82713055610657 seconds
+
+
+/resshare/wsuconnect/support_tools/check_rawdata.py:618: FutureWarning: Styler.applymap has been deprecated. Use Styler.map instead.
+  styled_df = d_completeData[k].style.applymap(_color_cells)
+updating MySQL tables on 20251110 @ 02:30:03
+Project: 2022-0010
+	Valid
+HTML file generated: /resshare20/projects/2022_KBR_Cog_Neuro_2/Hemo2/code/processing_logs/2022-0010_rawdata_check_apt.html
+Successfully updated 2022_0010 in database CoNNECT
+	Total time: 68.66301703453064 seconds
+
+
+updating MySQL tables on 20251111 @ 02:30:04
+Project: 2022-0010
+	Valid
+Traceback (most recent call last):
+  File "/resshare/wsuconnect/python3_venv/lib/python3.12/site-packages/pandas/core/indexes/range.py", line 413, in get_loc
+    return self._range.index(new_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: 0 is not in range
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/resshare/wsuconnect/connect_neuro_db_update.py", line 281, in <module>
+    st.check_rawdata(project=options.PROJECT, progress=options.progress)
+  File "/resshare/wsuconnect/support_tools/check_rawdata.py", line 225, in check_rawdata
+    mask = (df_prevMissing["uuid"] == df_scanLog.loc[0,'uuid']) #(df_prevMissing["project"] == project) & (df_prevMissing["subject"] == subName) & (df_prevMissing["session"] == f"ses-{sesNum}")
+                                      ~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/resshare/wsuconnect/python3_venv/lib/python3.12/site-packages/pandas/core/indexing.py", line 1184, in __getitem__
+    return self.obj._get_value(*key, takeable=self._takeable)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/resshare/wsuconnect/python3_venv/lib/python3.12/site-packages/pandas/core/frame.py", line 4232, in _get_value
+    row = self.index.get_loc(index)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/resshare/wsuconnect/python3_venv/lib/python3.12/site-packages/pandas/core/indexes/range.py", line 415, in get_loc
+    raise KeyError(key) from err
+KeyError: 0
+updating MySQL tables on 20251112 @ 02:30:03
+Project: 2022-0010
+	Valid
+Traceback (most recent call last):
+  File "/resshare/wsuconnect/python3_venv/lib/python3.12/site-packages/pandas/core/indexes/range.py", line 413, in get_loc
+    return self._range.index(new_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: 0 is not in range
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/resshare/wsuconnect/connect_neuro_db_update.py", line 281, in <module>
+    st.check_rawdata(project=options.PROJECT, progress=options.progress)
+  File "/resshare/wsuconnect/support_tools/check_rawdata.py", line 225, in check_rawdata
+    mask = (df_prevMissing["uuid"] == df_scanLog.loc[0,'uuid']) #(df_prevMissing["project"] == project) & (df_prevMissing["subject"] == subName) & (df_prevMissing["session"] == f"ses-{sesNum}")
+                                      ~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/resshare/wsuconnect/python3_venv/lib/python3.12/site-packages/pandas/core/indexing.py", line 1184, in __getitem__
+    return self.obj._get_value(*key, takeable=self._takeable)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/resshare/wsuconnect/python3_venv/lib/python3.12/site-packages/pandas/core/frame.py", line 4232, in _get_value
+    row = self.index.get_loc(index)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/resshare/wsuconnect/python3_venv/lib/python3.12/site-packages/pandas/core/indexes/range.py", line 415, in get_loc
+    raise KeyError(key) from err
+KeyError: 0

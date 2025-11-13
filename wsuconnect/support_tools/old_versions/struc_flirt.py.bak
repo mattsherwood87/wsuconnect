@@ -1,0 +1,290 @@
+#!/usr/bin/env python3
+# the command above ^^^ sets python 3.10.10 as the interpreter for this program
+
+# Created by Matthew Sherwood (matt.sherwood@wright.edu, matthew.sherwood.7.ctr@us.af.mil)
+# Created on 22 Jan 2021
+#
+# Last Modified on 26 April 2023
+# Modified on 2 Jan 2021
+
+
+import sys
+import os
+import argparse
+import re
+import json
+from nipype.interfaces import fsl
+from glob import glob as glob
+import datetime
+
+#local import
+
+REALPATH = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+sys.path.append(REALPATH)
+from helper_functions.flirt_pngappend import *
+from helper_functions.get_dir_identifiers import *
+from helper_functions.bids_commands import *
+
+
+
+
+VERSION = '2.0.1'
+DATE = '26 April 2023'
+
+
+parser = argparse.ArgumentParser('struc_flirt.py: perform FLIRT registration between structural and standard brain images')
+FSLDIR = os.environ["FSLDIR"]
+
+
+def parse_arguments():
+
+    #input options for main()
+    parser.add_argument('IN_FILE')
+    parser.add_argument('REF_FILE')
+    parser.add_argument('DATA_DIR')
+    parser.add_argument('flirtParamsFile')
+    parser.add_argument('--bet-params',action='store',dest='BET_PARAMS',default=None)
+    parser.add_argument('--no-bet',action='store_true',dest='NO_BET',default=False)
+    parser.add_argument('--overwrite',action='store_true',dest='OVERWRITE',default=False)
+    parser.add_argument('--progress',action='store_true',dest='progress',default=False)
+    options = parser.parse_args()
+    return options
+
+
+def set_default(obj):
+    if isinstance(obj, set):
+        return list(obj)
+    raise TypeError
+
+
+# ******************* s3 bucket check ********************
+def struc_flirt(IN_FILE,REF_FILE,DATA_DIR,flirtParamsFile,*args,**kwargs):
+    overwriteFlag = kwargs.get('overwrite',False)
+    betParamsFile = kwargs.get('bet_params',None)
+    progress = kwargs.get('progress',False)
+    outputFileList = []
+
+    try:
+        now = datetime.datetime.now()
+
+
+        if progress:
+            print('\n\nstruc_flirt.py version ' + VERSION + ' dated ' + DATE + '\n')
+            print('running @ ' + now.strftime("%m-%d-%Y %H:%M:%S") + '\n')
+            print('Reading JSON files')
+
+        try:
+            with open(flirtParamsFile) as j:
+                flirtParams = json.load(j)
+
+                #asl sql_query inputs
+                if '__general_comment__' in flirtParams:
+                    flirtParams.pop('__general_comment__')
+                if 'asl_regexstr' in flirtParams:
+                    flirtParams.pop('asl_regexstr')
+                if 'struc_regexstr' in flirtParams:
+                    flirtParams.pop('struc_regexstr')
+                if 'inclusion_list' in flirtParams:
+                    flirtParams.pop('inclusion_list')
+                if 'exclusion_list' in flirtParams:
+                    flirtParams.pop('exclusion_list')
+                if 'mcflirt' in flirtParams:
+                    flirtParams.pop('mcflirt')
+                if 'asl_2d' in flirtParams:
+                    flirtParams.pop('asl_2d')
+
+            if betParamsFile:
+                with open(betParamsFile) as j:
+                    betParams = json.load(j)
+                if '__general_comment__' in betParams:
+                    betParams.pop('__general_comment__')
+            else:
+                print('WARNING: skipping BET')
+                print('\nBET selected to run as default but no BET JSON parameter file was specified')
+
+        except FileNotFoundError as e:
+            print("Error Message: {0}".format(e))
+            return
+        
+
+        strucFile = IN_FILE
+        if progress:
+            print('Structural File Found: ' + strucFile)
+            
+        strucFileDir = os.path.dirname(strucFile)
+        subName, sesNum = get_dir_identifiers(strucFileDir)
+        strucFlirtOutputDir = os.path.join(DATA_DIR,'derivatives','sub-' + subName,'ses-' + sesNum,'flirt','anat')#create base path and filename for move
+        strucBetOutputDir = os.path.join(DATA_DIR,'derivatives','sub-' + subName,'ses-' + sesNum,'bet','anat')#create base path and filename for move
+
+        #create output directories
+        if not os.path.isdir(strucBetOutputDir) and betParamsFile:
+            os.makedirs(strucBetOutputDir)
+
+        if not os.path.isdir(strucFlirtOutputDir):
+            os.makedirs(strucFlirtOutputDir)
+
+        
+        #Check if FLIRT output exists
+        performFlirtFlag = False
+        if (not glob(os.path.join(strucFlirtOutputDir,'*.mat')) or not glob(os.path.join(strucFlirtOutputDir,'highres2standard.png'))) or overwriteFlag:
+            performFlirtFlag = True
+        
+        #output exists and we are not overwriting
+        if not performFlirtFlag and progress:
+            print('Skipping FLIRT: must have found highres2standard in the output directory ' + strucFlirtOutputDir)
+
+        #output doesn't exist or we are overwriting
+        elif performFlirtFlag:
+
+
+            # **********************************
+            # perform BET on struc input
+            # **********************************
+            strucBidsLabels = get_bids_labels(strucFile)
+            strucBidsLabels['process'] = 'fslbet'
+            strucBidsLabels['resolution'] = 'hi'
+            strucBidsLabels['description'] = 'brain'
+            strucBidsLabels['extension'] = 'nii.gz'
+            strucFile_brain = os.path.join(strucBetOutputDir,get_bids_filename(subject=subName,session=sesNum,**strucBidsLabels))
+                    
+            #continue with BET
+            if os.path.isfile(strucFile_brain) and not overwriteFlag:
+                if progress:
+                    print('Skipping BET: brain extracted file found: ' + strucFile_brain)
+                    
+            else:
+                if progress:
+                    print('Performing BET on ' + strucFile)
+                    print('\tOUTPUT: ' + strucFile_brain)
+                btr = fsl.BET(**betParams)
+                btr.inputs.in_file = strucFile
+                btr.inputs.out_file = strucFile_brain
+                btr.run()
+                outputFileList.append(btr.inputs.out_file)
+                if progress:
+                    print('\tSuccess!')
+
+                #write JSON sidecar file
+                d = {}
+                d['FslBetParameters'] = betParams.copy()
+                d['Sources'] = ['bids:raw:' + btr.inputs.in_file.split(DATA_DIR + os.sep)[1]]
+                d['SpatialReference'] = 'orig'
+                d['SkullStripped'] = True
+                d['Resolution'] = {'hi': 'matched to original T1w resolution'}
+                with open(btr.inputs.out_file.split('.')[0] + '.json', 'w') as fp:
+                    json.dump(d, fp, indent=4)
+
+
+                
+            # create brain mask
+            # ----------------------------------
+            strucBidsLabels['description'] = 'brain'
+            strucBidsLabels['extension'] = 'nii.gz'
+            strucBidsLabels['suffix'] = 'mask'
+            strucFile_brainmask = os.path.join(strucBetOutputDir,get_bids_filename(subject=subName,session=sesNum,**strucBidsLabels))
+            os.system('fslmaths ' + strucFile_brain + ' -bin ' + strucFile_brainmask)
+
+            #write corresponding JSON file
+            d = {}
+            d['FslBetParameters'] = betParams.copy()
+            d['Sources'] = ['bids:raw:' + strucFile.split(DATA_DIR + os.sep)[1],
+                'bids:derivatives:' + strucFile_brain.split(DATA_DIR + os.sep)[1]]
+            d['SpatialReference'] = 'orig'
+            d['SkullStripped'] = True
+            d['Type'] = 'Brain'
+            d['Resolution'] = {'hi': 'matched to original T1w resolution'}
+            with open(strucFile_brainmask.split('.')[0] + '.json', 'w') as fp:
+                json.dump(d, fp, indent=4) 
+
+            #update structural file for flirt
+            strucFile = strucFile_brain
+
+
+            # **********************************
+            # run FLIRT on T1w
+            # **********************************
+            flt = fsl.FLIRT(**flirtParams)
+            flt.inputs.in_file = strucFile_brain
+            flt.inputs.reference = REF_FILE
+            strucBidsLabels['process'] = 'flirt'
+            strucBidsLabels['description'] = 'brain'
+            strucBidsLabels['space'] = 'MNI152NLin6ASym'
+            strucBidsLabels['extension'] = 'nii.gz'
+            if '1mm' in REF_FILE:
+                strucBidsLabels['resolution'] = '1mm'
+                flt.inputs.out_file = os.path.join(strucFlirtOutputDir,get_bids_filename(subject=subName,session=sesNum,**strucBidsLabels))
+            else:
+                strucBidsLabels['resolution'] = '2mm'
+                flt.inputs.out_file = os.path.join(strucFlirtOutputDir,get_bids_filename(subject=subName,session=sesNum,**strucBidsLabels))
+            
+            flt.inputs.out_matrix_file = os.path.join(strucFlirtOutputDir,'highres2standard.mat')
+            if progress:
+                print('Performing FLIRT:')
+                print('\tInput File: ' + flt.inputs.in_file)
+                print('\tReference: ' + flt.inputs.reference)
+                print('\tOut File: ' + flt.inputs.out_file)
+                print('\tOut Matrix File: ' + flt.inputs.out_matrix_file)
+            flt.run()
+            outputFileList.append(flt.inputs.out_file)
+            outputFileList.append(flt.inputs.out_matrix_file)
+            if progress:
+                print('\tSuccess!')
+
+
+            # invert registration matrix
+            # ----------------------------------
+            invt = fsl.ConvertXFM()
+            invt.inputs.in_file = os.path.join(strucFlirtOutputDir,'highres2standard.mat')
+            invt.inputs.invert_xfm = True
+            invt.inputs.out_file = os.path.join(strucFlirtOutputDir,'standard2highres.mat')
+            invt.run() 
+            outputFileList.append(invt.inputs.out_file)
+
+            #write JSON sidecar files
+            d = {}
+            d['FlirtParameters'] = flirtParams.copy()
+            d['Sources'] = ['bids:derivatives:' + flt.inputs.in_file.split(DATA_DIR + os.sep)[1]]
+            d['SpatialReference'] = 'file:' + flt.inputs.reference
+            d['RegistrationFiles'] = ['bids:derivatives:' + flt.inputs.out_matrix_file.split(DATA_DIR + os.sep)[1],
+                                      'bids:derivatives:' + invt.inputs.out_file.split(DATA_DIR + os.sep)[1]]
+            d['SkullStripped'] = True
+            d['Resolution'] = {strucBidsLabels['resolution']: 'matched to FSL MNI152_T1_2mm_brain'}
+            with open(flt.inputs.out_file.split('.')[0] + '.json', 'w') as fp:
+                json.dump(d, fp, indent=4)   
+
+            
+            # create registration PNG graphic
+            # ----------------------------------
+            flirt_pngappend(flt.inputs.out_file,flt.inputs.reference,os.path.join(strucFlirtOutputDir,'highres2standard.png'))
+            outputFileList.append(os.path.join(strucFlirtOutputDir,'highres2standard.png'))
+
+
+    except Exception as e:
+        print("Error Message: {0}".format(e))
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+        print(exc_type, fname, exc_tb.tb_lineno)
+        return
+
+
+def main():
+    """
+    The entry point of this program.
+    """
+    options = parse_arguments()
+    argsDict = {}
+    if options.BET_PARAMS:
+        argsDict['bet_params'] = options.BET_PARAMS
+    if options.OVERWRITE:
+        argsDict['overwrite'] = options.OVERWRITE
+    if options.progress:
+        argsDict['progress'] = options.progress
+    struc_flirt(options.IN_FILE,options.REF_FILE,options.DATA_DIR,options.flirtParamsFile,**argsDict)
+
+
+if __name__ == '__main__':
+    main()
+
+    
+
+

@@ -1,0 +1,224 @@
+{
+	"2025-0001": {
+		"charged_scan_time_hrs": 1.5,
+		"charged_scan_time_mins": 90,
+		"project": "test",
+		"total_scan_fee": 1000
+	},
+	"2025-0002": {
+		"charged_scan_time_hrs": 1,
+		"charged_scan_time_mins": 60,
+		"project": "test",
+		"total_scan_fee": 1000
+	},
+	"2025-0003": {
+		"charged_scan_time_hrs": "255.00",
+		"charged_scan_time_mins": "255.00",
+		"project": "2022-0005",
+		"total_scan_fee": "1,156.00"
+	},
+	"2025-0004": {
+		"charged_scan_time_hrs": "1,305.00",
+		"charged_scan_time_mins": "1,305.00",
+		"project": "20230093H",
+		"total_scan_fee": "5,916.00"
+	},
+	"2025-0005": {
+		"charged_scan_time_hrs": "3,840.00",
+		"charged_scan_time_mins": "3,840.00",
+		"project": "20240100H",
+		"total_scan_fee": "17,408.00"
+	},
+	"2025-0006": {
+		"charged_scan_time_hrs": "810.00",
+		"charged_scan_time_mins": "810.00",
+		"project": "2022-0005",
+		"total_scan_fee": "3,672.00"
+	},
+	"2025-0007": {
+		"charged_scan_time_hrs": "540.00",
+		"charged_scan_time_mins": "540.00",
+		"project": "2022-0010",
+		"total_scan_fee": "2,448.00"
+	},
+	"2025-0008": {
+		"charged_scan_time_hrs": "75.00",
+		"charged_scan_time_mins": "75.00",
+		"project": "2024-663",
+		"total_scan_fee": "340.00"
+	},
+	"2025-0009": {
+		"charged_scan_time_hrs": "2,640.00",
+		"charged_scan_time_mins": "2,640.00",
+		"project": "20240100H",
+		"total_scan_fee": "11,968.00"
+	},
+	"2025-0010": {
+		"charged_scan_time_hrs": "210.00",
+		"charged_scan_time_mins": "210.00",
+		"project": "2022-0010",
+		"total_scan_fee": "952.00"
+	},
+	"2025-0011": {
+		"charged_scan_time_hrs": "165.00",
+		"charged_scan_time_mins": "165.00",
+		"project": "2024-663",
+		"total_scan_fee": "748.00"
+	},
+	"2025-0012": {
+		"charged_scan_time_hrs": "2,760.00",
+		"charged_scan_time_mins": "2,760.00",
+		"project": "20240100H",
+		"total_scan_fee": "12,512.00"
+	},
+	"2025-0013": {
+		"charged_scan_time_hrs": "420.00",
+		"charged_scan_time_mins": "420.00",
+		"project": "2022-0005",
+		"total_scan_fee": "1,904.00"
+	},
+	"2025-0014": {
+		"charged_scan_time_hrs": "75.00",
+		"charged_scan_time_mins": "75.00",
+		"project": "2024-663",
+		"total_scan_fee": "340.00"
+	},
+	"2025-0015": {
+		"charged_scan_time_hrs": "1,080.00",
+		"charged_scan_time_mins": "1,080.00",
+		"project": "20240100H",
+		"total_scan_fee": "4,896.00"
+	},
+	"2025-0016": {
+		"charged_scan_time_hrs": "315.00",
+		"charged_scan_time_mins": "315.00",
+		"project": "2022-0005",
+		"total_scan_fee": "1,428.00"
+	},
+	"2025-0017": {
+		"charged_scan_time_hrs": "1,365.00",
+		"charged_scan_time_mins": "1,365.00",
+		"project": "20230093H",
+		"total_scan_fee": "6,188.00"
+	},
+	"2025-0018": {
+		"charged_scan_time_hrs": "1,080.00",
+		"charged_scan_time_mins": "1,080.00",
+		"project": "20240100H",
+		"total_scan_fee": "4,896.00"
+	},
+	"2025-0019": {
+		"charged_scan_time_hrs": "315.00",
+		"charged_scan_time_mins": "315.00",
+		"project": "20250044H",
+		"total_scan_fee": "1,428.00"
+	},
+	"2025-0020": {
+		"charged_scan_time_hrs": "180.00",
+		"charged_scan_time_mins": "180.00",
+		"project": "2022-0005",
+		"total_scan_fee": "816.00"
+	},
+	"2025-0021": {
+		"charged_scan_time_hrs": "210.00",
+		"charged_scan_time_mins": "210.00",
+		"project": "2022-0010",
+		"total_scan_fee": "952.00"
+	},
+	"2025-0022": {
+		"charged_scan_time_hrs": "150.00",
+		"charged_scan_time_mins": "150.00",
+		"project": "2024-663",
+		"total_scan_fee": "680.00"
+	},
+	"2025-0023": {
+		"charged_scan_time_hrs": "4,380.00",
+		"charged_scan_time_mins": "4,380.00",
+		"project": "20240100H",
+		"total_scan_fee": "19,856.00"
+	},
+	"2025-0024": {
+		"charged_scan_time_hrs": "510.00",
+		"charged_scan_time_mins": "510.00",
+		"project": "20250044H",
+		"total_scan_fee": "2,312.00"
+	},
+	"2025-0025": {
+		"charged_scan_time_hrs": "120.00",
+		"charged_scan_time_mins": "120.00",
+		"project": "2022-0005",
+		"total_scan_fee": "544.00"
+	},
+	"2025-0026": {
+		"charged_scan_time_hrs": "1,590.00",
+		"charged_scan_time_mins": "1,590.00",
+		"project": "20230093H",
+		"total_scan_fee": "7,208.00"
+	},
+	"2025-0027": {
+		"charged_scan_time_hrs": "135.00",
+		"charged_scan_time_mins": "135.00",
+		"project": "2024-663",
+		"total_scan_fee": "612.00"
+	},
+	"2025-0028": {
+		"charged_scan_time_hrs": "450.00",
+		"charged_scan_time_mins": "450.00",
+		"project": "20250044H",
+		"total_scan_fee": "2,040.00"
+	},
+	"2025-0029": {
+		"charged_scan_time_hrs": "180.00",
+		"charged_scan_time_mins": "180.00",
+		"project": "2022-0010",
+		"total_scan_fee": "816.00"
+	},
+	"2025-0030": {
+		"charged_scan_time_hrs": "2,190.00",
+		"charged_scan_time_mins": "2,190.00",
+		"project": "20230093H",
+		"total_scan_fee": "9,928.00"
+	},
+	"2025-0031": {
+		"charged_scan_time_hrs": "450.00",
+		"charged_scan_time_mins": "450.00",
+		"project": "2024-663",
+		"total_scan_fee": "2,040.00"
+	},
+	"2025-0032": {
+		"charged_scan_time_hrs": "330.00",
+		"charged_scan_time_mins": "330.00",
+		"project": "20250044H",
+		"total_scan_fee": "1,496.00"
+	},
+	"2025-0033": {
+		"charged_scan_time_hrs": "105.00",
+		"charged_scan_time_mins": "105.00",
+		"project": "2022-0005",
+		"total_scan_fee": "476.00"
+	},
+	"2025-0034": {
+		"charged_scan_time_hrs": "105.00",
+		"charged_scan_time_mins": "105.00",
+		"project": "2022-0005",
+		"total_scan_fee": "476.00"
+	},
+	"2025-0035": {
+		"charged_scan_time_hrs": "105.00",
+		"charged_scan_time_mins": "105.00",
+		"project": "2022-0010",
+		"total_scan_fee": "476.00"
+	},
+	"2025-0036": {
+		"charged_scan_time_hrs": "3,450.00",
+		"charged_scan_time_mins": "3,450.00",
+		"project": "20230093H",
+		"total_scan_fee": "15,640.00"
+	},
+	"2025-0037": {
+		"charged_scan_time_hrs": "390.00",
+		"charged_scan_time_mins": "390.00",
+		"project": "2024-663",
+		"total_scan_fee": "1,768.00"
+	}
+}

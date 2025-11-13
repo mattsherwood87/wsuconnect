@@ -1,0 +1,2953 @@
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:88: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202503060000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202503060000.log
+	ON: 2025-03-06 01:30:23.904788
+
+Exam:2025-03-06	13:14:55.27	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 01
+
+Exam:2025-03-06	16:25:37.99	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:88: DtypeWarning: Columns (10,11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202503070000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202503070000.log
+	ON: 2025-03-07 01:30:53.689636
+
+Exam:2025-03-07	10:55:14.91	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 
+
+Exam:2025-03-07	11:08:13.34	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to R57 3T ACR Mag Field Homogeneity 07-Jan-2020
+
+Exam:2025-03-07	11:08:20.41	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 
+
+Exam:2025-03-07	11:08:23.46	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to R57 3T ACR Phantom 3-FEB-2020
+
+Exam:2025-03-07	11:30:32.90	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202503080000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202503080000.log
+	ON: 2025-03-08 01:30:27.342055
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202503090000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202503090000.log
+	ON: 2025-03-09 01:30:50.509380
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:88: DtypeWarning: Columns (11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202503100000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202503100000.log
+	ON: 2025-03-10 01:30:14.632582
+
+Exam:2025-03-10	07:56:49.37	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 01
+
+Exam:2025-03-10	08:33:22.38	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 
+
+Exam:2025-03-10	08:35:55.13	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 
+
+Exam:2025-03-10	08:40:29.30	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 
+
+Exam:2025-03-10	08:40:54.87	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 01
+
+Exam:2025-03-10	10:03:12.04	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 
+
+Exam:2025-03-10	10:03:52.46	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 02
+	SUB: 441306 SESSION: 02
+
+Exam:2025-03-10	11:33:01.79	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 
+
+Exam:2025-03-10	11:33:18.39	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 03
+	SUB: 441306 SESSION: 03
+
+Exam:2025-03-10	12:35:10.66	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 
+
+Exam:2025-03-10	13:31:05.04	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 441306 SESSION: 04
+
+Exam:2025-03-10	14:25:16.38	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 
+
+Exam:2025-03-10	14:25:40.39	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 441306 SESSION: 05
+
+Exam:2025-03-10	16:19:48.19	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 
+
+Exam:2025-03-10	17:32:36.00	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 441306 SESSION: 06
+
+Exam:2025-03-10	18:22:54.65	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:88: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202503110000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202503110000.log
+	ON: 2025-03-11 01:30:47.692777
+
+Exam:2025-03-11	09:01:37.36	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 
+
+Exam:2025-03-11	09:04:01.60	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 441306 SESSION: 07
+
+Exam:2025-03-11	11:06:32.46	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 
+
+Exam:2025-03-11	11:11:07.75	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202503120000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202503120000.log
+	ON: 2025-03-12 01:30:15.892221
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202503130000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202503130000.log
+	ON: 2025-03-13 01:30:11.122298
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:88: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202503140000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202503140000.log
+	ON: 2025-03-14 01:30:40.669831
+
+Exam:2025-03-14	07:30:14.88	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 01
+	SUB: 171116 SESSION: 01
+
+Exam:2025-03-14	09:12:49.04	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 
+
+Exam:2025-03-14	09:47:26.49	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 02
+	SUB: 171116 SESSION: 02
+
+Exam:2025-03-14	10:35:28.30	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 
+
+Exam:2025-03-14	10:36:21.82	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 03
+	SUB: 171116 SESSION: 03
+
+Exam:2025-03-14	11:54:41.47	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 
+
+Exam:2025-03-14	11:55:17.56	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 171116 SESSION: 04
+
+Exam:2025-03-14	13:48:13.54	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 
+
+Exam:2025-03-14	14:22:35.62	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to R57 3T ACR Phantom 3-FEB-2020
+
+Exam:2025-03-14	14:52:42.55	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 
+
+Exam:2025-03-14	14:53:01.43	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 171116 SESSION: 05
+
+Exam:2025-03-14	15:44:17.15	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 
+
+Exam:2025-03-14	16:32:25.96	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 
+
+Exam:2025-03-14	16:32:30.54	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 
+
+Exam:2025-03-14	16:53:02.96	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 171116 SESSION: 06
+
+Exam:2025-03-14	17:44:00.66	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:88: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202503150000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202503150000.log
+	ON: 2025-03-15 01:30:49.451649
+
+Exam:2025-03-15	08:41:39.67	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 171116 SESSION: 06
+
+Exam:2025-03-15	09:20:56.45	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 
+
+Exam:2025-03-15	09:43:05.52	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202503160000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202503160000.log
+	ON: 2025-03-16 01:30:15.045263
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:88: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202503170000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202503170000.log
+	ON: 2025-03-17 01:30:21.911230
+
+Exam:2025-03-17	06:47:41.00	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 
+
+Exam:2025-03-17	06:47:46.66	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 
+
+Exam:2025-03-17	06:47:51.56	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 
+
+Exam:2025-03-17	06:53:25.98	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2022.0005 HyperHemo
+
+Exam:2025-03-17	06:54:48.66	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 
+
+Exam:2025-03-17	08:57:20.27	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 
+
+Exam:2025-03-17	08:59:10.62	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 
+
+Exam:2025-03-17	09:01:07.85	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 
+
+Exam:2025-03-17	09:01:56.14	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2022.0005 HyperHemo
+	SUB: HHM17 SESSION: 1
+
+Exam:2025-03-17	12:04:53.15	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202503180000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202503180000.log
+	ON: 2025-03-18 01:30:11.239348
+
+Exam:2025-03-18	11:45:03.94	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2023-379_PTSD_phase1
+
+Exam:2025-03-18	13:23:54.79	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 
+
+Exam:2025-03-18	13:41:15.37	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2022.0010 HER
+	SUB: HER12 SESSION: 1
+
+Exam:2025-03-18	15:24:15.91	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202503190000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202503190000.log
+	ON: 2025-03-19 01:30:13.038434
+
+Exam:2025-03-19	08:35:44.71	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2023-379_PTSD_phase1
+
+Exam:2025-03-19	08:42:09.27	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 
+
+Exam:2025-03-19	08:43:35.45	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-663_PTSD_phase2
+
+Exam:2025-03-19	11:05:39.47	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 
+
+Exam:2025-03-19	11:06:30.14	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2022.0005 HyperHemo
+
+Exam:2025-03-19	11:09:24.41	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 
+
+Exam:2025-03-19	13:00:19.72	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 
+
+Exam:2025-03-19	13:00:28.46	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 
+
+Exam:2025-03-19	13:00:34.84	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 
+
+Exam:2025-03-19	13:00:46.86	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 
+
+Exam:2025-03-19	13:01:30.60	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2022.0005 HyperHemo
+	SUB: HHM15 SESSION: 1
+
+Exam:2025-03-19	15:41:53.01	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202503200000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202503200000.log
+	ON: 2025-03-20 01:30:10.820850
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202503210000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202503210000.log
+	ON: 2025-03-21 01:30:13.712827
+
+Exam:2025-03-21	08:24:08.61	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2022.0010 HER
+	SUB: HER15 SESSION: 1
+
+Exam:2025-03-21	08:27:21.61	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2022.0010 HER
+	SUB: HER15 SESSION: 1
+
+Exam:2025-03-21	13:12:31.23	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2022.0005 HyperHemo
+	SUB: HHM15 SESSION: 2
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202503220000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202503220000.log
+	ON: 2025-03-22 01:30:18.904305
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202503230000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202503230000.log
+	ON: 2025-03-23 01:30:27.098757
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202503240000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202503240000.log
+	ON: 2025-03-24 01:30:10.551267
+
+Exam:2025-03-24	08:50:38.25	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2022.0010 HER
+	SUB: HER15 SESSION: 2
+
+Exam:2025-03-24	10:50:08.34	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to R57 3T ACR Phantom 3-FEB-2020
+
+Exam:2025-03-24	13:35:21.57	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2022.0010 HER
+	SUB: HER12 SESSION: 2
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202503250000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202503250000.log
+	ON: 2025-03-25 01:30:13.628429
+
+Exam:2025-03-25	06:26:39.97	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2022.0005 HyperHemo
+	SUB: HHM16 SESSION: 2
+
+Exam:2025-03-25	13:28:37.22	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2022.0010 HER
+	SUB: HER12 SESSION: 2
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202503260000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202503260000.log
+	ON: 2025-03-26 01:30:13.371861
+
+Exam:2025-03-26	13:22:06.87	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2022.0010 HER
+	SUB: HER13 SESSION: 2
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202503270000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202503270000.log
+	ON: 2025-03-27 01:30:13.947423
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202503280000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202503280000.log
+	ON: 2025-03-28 01:30:26.493990
+
+Exam:2025-03-28	08:31:40.77	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 01
+
+Exam:2025-03-28	11:20:01.08	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 02
+	SUB: 211211 SESSION: 02
+
+Exam:2025-03-28	12:22:40.81	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 03
+	SUB: 211211 SESSION: 03
+
+Exam:2025-03-28	13:25:25.85	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 211211 SESSION: 04
+
+Exam:2025-03-28	16:26:46.02	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 211211 SESSION: 05
+
+Exam:2025-03-28	18:20:28.01	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 211211 SESSION: 06
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202503290000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202503290000.log
+	ON: 2025-03-29 01:30:15.276117
+
+Exam:2025-03-29	10:08:02.98	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 211211 SESSION: 07
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202503300000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202503300000.log
+	ON: 2025-03-30 01:30:12.215215
+Traceback (most recent call last):
+  File "/resshare/wsuconnect/connect_mri_system_log_grabber.py", line 56, in <module>
+    currentDateTime = currentDateTime.replace(day=currentDateTime.day - 1)
+ValueError: day is out of range for month
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (10,11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250401
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202504010000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202504010000.log
+	ON: 2025-04-01 01:30:08.775146
+
+Exam:2025-04-01	10:29:59.26	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 311203 SESSION: 07
+20250402
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202504020000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202504020000.log
+	ON: 2025-04-02 01:30:14.368925
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (10,11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250403
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202504030000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202504030000.log
+	ON: 2025-04-03 01:32:17.059055
+
+Exam:2025-04-03	14:27:46.51	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1A
+	SUB: 999 SESSION: 1A
+
+Exam:2025-04-03	16:12:39.96	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to R57 3T ACR Phantom 3-FEB-2020
+20250404
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202504040000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202504040000.log
+	ON: 2025-04-04 01:30:43.976686
+20250405
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202504050000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202504050000.log
+	ON: 2025-04-05 01:32:47.209707
+20250406
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202504060000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202504060000.log
+	ON: 2025-04-06 01:31:31.269839
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250407
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202504070000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202504070000.log
+	ON: 2025-04-07 01:31:25.953303
+
+Exam:2025-04-07	08:49:52.15	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 01
+	SUB: 541312 SESSION: 01
+
+Exam:2025-04-07	09:11:02.42	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 01
+	SUB: 541312 SESSION: 01
+
+Exam:2025-04-07	10:58:22.77	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 02
+	SUB: 541312 SESSION: 02
+
+Exam:2025-04-07	12:15:07.38	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 03
+	SUB: 541312 SESSION: 03
+
+Exam:2025-04-07	13:13:24.48	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 541312 SESSION: 04
+
+Exam:2025-04-07	16:12:33.38	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 541312 SESSION: 05
+
+Exam:2025-04-07	17:52:46.65	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 541312 SESSION: 06
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250408
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202504080000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202504080000.log
+	ON: 2025-04-08 01:31:25.816149
+
+Exam:2025-04-08	09:38:42.53	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 541312 SESSION: 07
+
+Exam:2025-04-08	10:54:58.75	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to R57 3T ACR Phantom 3-FEB-2020
+
+Exam:2025-04-08	12:25:55.18	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 01
+	SUB: 541312 SESSION: 07
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250409
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202504090000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202504090000.log
+	ON: 2025-04-09 01:30:38.958387
+
+Exam:2025-04-09	08:23:09.33	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+
+Exam:2025-04-09	13:24:38.25	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 01
+Traceback (most recent call last):
+  File "/resshare/wsuconnect/connect_mri_system_log_grabber.py", line 33, in <module>
+    from connect_mri_system_log_grabber_p2 import connect_mri_system_log_grabber_p2
+  File "/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py", line 14, in <module>
+    import pandas as pd
+  File "/resshare/wsuconnect/python3_venv/lib/python3.10/site-packages/pandas/__init__.py", line 16, in <module>
+    raise ImportError(
+ImportError: Unable to import required dependencies:
+numpy: Error importing numpy: you should not try to import numpy from
+        its source directory; please exit the numpy source tree, and relaunch
+        your python interpreter from there.
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:208: SyntaxWarning: invalid escape sequence '\.'
+  df_dynamicScans = df_redScan[df_redScan['event'].str.contains('Performing dynamic scan 1\.',na=False,regex=True)]
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250411
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202504110000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202504110000.log
+	ON: 2025-04-11 01:31:06.111341
+
+Exam:2025-04-11	08:41:41.87	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 01
+	SUB: 361310 SESSION: 01
+
+Exam:2025-04-11	10:50:28.53	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 02
+	SUB: 361310 SESSION: 02
+
+Exam:2025-04-11	11:56:53.74	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 03
+	SUB: 361310 SESSION: 03
+
+Exam:2025-04-11	14:27:03.91	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 361310 SESSION: 04
+
+Exam:2025-04-11	15:30:32.20	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 361310 SESSION: 05
+
+Exam:2025-04-11	17:14:22.12	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 361310 SESSION: 06
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250412
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202504120000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202504120000.log
+	ON: 2025-04-12 01:31:16.073235
+
+Exam:2025-04-12	09:47:58.43	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 361310 SESSION: 07
+20250413
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202504130000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202504130000.log
+	ON: 2025-04-13 01:30:25.983720
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (10,11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250414
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202504140000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202504140000.log
+	ON: 2025-04-14 01:31:32.221180
+
+Exam:2025-04-14	08:43:53.48	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 01
+	SUB: 571314 SESSION: 01
+
+Exam:2025-04-14	11:12:18.56	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 02
+	SUB: 571314 SESSION: 02
+
+Exam:2025-04-14	11:55:23.76	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 03
+	SUB: 571314 SESSION: 03
+
+Exam:2025-04-14	13:17:43.96	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 571314 SESSION: 04
+
+Exam:2025-04-14	15:08:33.05	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 02
+
+Exam:2025-04-14	15:10:01.38	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-663_PTSD_phase2
+
+Exam:2025-04-14	16:13:15.71	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+
+Exam:2025-04-14	16:36:21.47	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 571314 SESSION: 05
+
+Exam:2025-04-14	17:31:22.07	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+
+Exam:2025-04-14	17:41:44.96	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 01
+
+Exam:2025-04-14	17:44:37.48	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+
+Exam:2025-04-14	17:46:14.74	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 03
+
+Exam:2025-04-14	17:47:11.24	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 02
+	SUB: 571314 SESSION: 06
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250415
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202504150000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202504150000.log
+	ON: 2025-04-15 01:31:23.258123
+
+Exam:2025-04-15	09:53:56.18	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 571314 SESSION: 07
+
+Exam:2025-04-15	10:58:29.06	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-663_PTSD_phase2
+	SUB: 12150104 SESSION: 2
+
+Exam:2025-04-15	14:03:10.02	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1A
+	SUB: 9993 SESSION: 1A
+
+Exam:2025-04-15	14:58:26.15	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to Knee
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250416
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202504160000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202504160000.log
+	ON: 2025-04-16 01:31:56.250139
+
+Exam:2025-04-16	12:13:29.03	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-663_PTSD_phase2
+
+Exam:2025-04-16	14:32:26.49	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2022.0010 HER
+	SUB: HER14 SESSION: 1
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250417
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202504170000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202504170000.log
+	ON: 2025-04-17 01:31:11.193956
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250418
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202504180000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202504180000.log
+	ON: 2025-04-18 01:30:38.427647
+
+Exam:2025-04-18	07:31:46.02	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2022.0010 HER
+	SUB: HER14 SESSION: 2
+
+Exam:2025-04-18	07:36:32.22	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2022.0010 HER
+	SUB: HER14 SESSION: 2
+
+Exam:2025-04-18	09:17:54.70	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to R57 3T ACR Phantom 3-FEB-2020
+20250419
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202504190000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202504190000.log
+	ON: 2025-04-19 01:34:11.343949
+20250420
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202504200000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202504200000.log
+	ON: 2025-04-20 01:33:21.567428
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250421
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202504210000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202504210000.log
+	ON: 2025-04-21 01:31:13.556895
+
+Exam:2025-04-21	08:51:27.78	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-663_PTSD_phase2
+	SUB: 16211908 SESSION: 1
+
+Exam:2025-04-21	08:59:19.73	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-663_PTSD_phase2
+	SUB: 16211908 SESSION: 1
+
+Exam:2025-04-21	11:20:02.97	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-663_PTSD_phase2
+	SUB: 16211908 SESSION: 1
+20250422
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202504220000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202504220000.log
+	ON: 2025-04-22 01:32:15.706609
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250423
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202504230000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202504230000.log
+	ON: 2025-04-23 01:32:09.224276
+
+Exam:2025-04-23	08:41:27.03	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 01
+	SUB: 681210 SESSION: 01
+
+Exam:2025-04-23	11:21:23.14	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 02
+	SUB: 681210 SESSION: 02
+
+Exam:2025-04-23	12:36:15.47	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 03
+	SUB: 681210 SESSION: 03
+
+Exam:2025-04-23	13:52:13.67	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 681210 SESSION: 04
+
+Exam:2025-04-23	16:49:03.45	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 681210 SESSION: 05
+
+Exam:2025-04-23	17:40:23.93	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 681210 SESSION: 06
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250424
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202504240000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202504240000.log
+	ON: 2025-04-24 01:31:52.990763
+
+Exam:2025-04-24	10:39:55.24	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 681210 SESSION: 07
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250425
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202504250000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202504250000.log
+	ON: 2025-04-25 01:30:52.328474
+
+Exam:2025-04-25	08:44:49.47	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 01
+	SUB: 681102 SESSION: 01
+
+Exam:2025-04-25	11:13:05.26	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 02
+	SUB: 681102 SESSION: 02
+
+Exam:2025-04-25	11:57:51.75	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 03
+	SUB: 681102 SESSION: 03
+
+Exam:2025-04-25	14:10:05.83	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 681102 SESSION: 04
+
+Exam:2025-04-25	15:06:30.48	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 681102 SESSION: 05
+
+Exam:2025-04-25	17:21:29.22	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 681102 SESSION: 06
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250426
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202504260000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202504260000.log
+	ON: 2025-04-26 01:31:34.479672
+
+Exam:2025-04-26	09:55:15.22	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 681102 SESSION: 06
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250427
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202504270000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202504270000.log
+	ON: 2025-04-27 01:31:58.408788
+
+Exam:2025-04-27	15:15:03.09	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 02
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250428
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202504280000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202504280000.log
+	ON: 2025-04-28 01:35:08.146419
+
+Exam:2025-04-28	12:20:00.75	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to R57 3T ACR Phantom 3-FEB-2020
+20250429
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202504290000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202504290000.log
+	ON: 2025-04-29 01:32:54.179676
+20250430
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202504300000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202504300000.log
+	ON: 2025-04-30 01:31:02.101096
+20250501
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202505010000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202505010000.log
+	ON: 2025-05-01 01:31:12.701696
+20250502
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202505020000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202505020000.log
+	ON: 2025-05-02 01:31:22.900584
+20250503
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202505030000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202505030000.log
+	ON: 2025-05-03 01:30:36.060866
+20250504
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202505040000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202505040000.log
+	ON: 2025-05-04 01:31:29.650541
+20250505
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202505050000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202505050000.log
+	ON: 2025-05-05 01:32:06.679993
+20250506
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202505060000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202505060000.log
+	ON: 2025-05-06 01:30:52.599972
+20250507
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202505070000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202505070000.log
+	ON: 2025-05-07 01:31:53.660258
+20250508
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202505080000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202505080000.log
+	ON: 2025-05-08 01:33:49.113013
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250509
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202505090000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202505090000.log
+	ON: 2025-05-09 01:31:30.604212
+
+Exam:2025-05-09	09:51:38.91	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2022.0005 HyperHemo
+	SUB: HHM18 SESSION: 1
+20250510
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202505100000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202505100000.log
+	ON: 2025-05-10 01:31:34.386476
+20250511
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202505110000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202505110000.log
+	ON: 2025-05-11 01:30:39.678472
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250512
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202505120000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202505120000.log
+	ON: 2025-05-12 01:31:27.316918
+
+Exam:2025-05-12	09:07:08.46	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 01
+	SUB: 151315 SESSION: 01
+
+Exam:2025-05-12	10:57:05.21	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 02
+	SUB: 151315 SESSION: 02
+
+Exam:2025-05-12	12:00:13.12	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 03
+	SUB: 151315 SESSION: 03
+
+Exam:2025-05-12	13:59:32.51	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 151315 SESSION: 04
+
+Exam:2025-05-12	15:58:01.56	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 151315 SESSION: 05
+
+Exam:2025-05-12	17:56:27.03	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 151315 SESSION: 06
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250513
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202505130000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202505130000.log
+	ON: 2025-05-13 01:30:44.568211
+
+Exam:2025-05-13	09:57:37.04	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 151315 SESSION: 07
+20250514
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202505140000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202505140000.log
+	ON: 2025-05-14 01:32:41.956024
+20250515
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202505150000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202505150000.log
+	ON: 2025-05-15 01:32:52.931214
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250516
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202505160000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202505160000.log
+	ON: 2025-05-16 01:33:56.435261
+
+Exam:2025-05-16	08:47:55.70	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 01
+	SUB: 121216 SESSION: 01
+
+Exam:2025-05-16	10:40:28.45	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 02
+
+Exam:2025-05-16	11:49:54.04	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 03
+	SUB: 121216 SESSION: 03
+
+Exam:2025-05-16	13:51:25.17	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 121216 SESSION: 04
+
+Exam:2025-05-16	15:48:01.72	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 121216 SESSION: 05
+
+Exam:2025-05-16	17:51:14.36	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 121216 SESSION: 06
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250517
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202505170000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202505170000.log
+	ON: 2025-05-17 01:33:22.812973
+
+Exam:2025-05-17	09:48:17.54	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 121216 SESSION: 07
+20250518
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202505180000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202505180000.log
+	ON: 2025-05-18 01:31:39.143882
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250519
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202505190000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202505190000.log
+	ON: 2025-05-19 01:31:27.674196
+
+Exam:2025-05-19	11:10:28.13	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-663_PTSD_phase2
+	SUB: 16211908 SESSION: 2
+20250520
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202505200000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202505200000.log
+	ON: 2025-05-20 01:32:58.906857
+20250521
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202505210000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202505210000.log
+	ON: 2025-05-21 01:32:16.769878
+20250522
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202505220000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202505220000.log
+	ON: 2025-05-22 01:33:50.952380
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250523
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202505230000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202505230000.log
+	ON: 2025-05-23 01:31:56.548239
+
+Exam:2025-05-23	08:50:01.30	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2022.0005 HyperHemo
+	SUB: HHM SESSION: 19
+
+Exam:2025-05-23	11:28:51.85	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to R57 3T ACR Phantom 3-FEB-2020
+mount error(113): could not connect to 10.11.0.30Unable to find suitable address.
+mount error(113): could not connect to 10.11.0.30Unable to find suitable address.
+20250525
+20250526
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202505260000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202505260000.log
+	ON: 2025-05-26 01:38:00.885810
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (11) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250527
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202505270000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202505270000.log
+	ON: 2025-05-27 01:37:24.012132
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250528
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202505280000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202505280000.log
+	ON: 2025-05-28 01:33:41.935600
+
+Exam:2025-05-28	14:18:49.31	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 01
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250529
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202505290000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202505290000.log
+	ON: 2025-05-29 01:32:28.916087
+
+Exam:2025-05-29	07:51:19.48	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2022.0005 HyperHemo
+	SUB: HHM20 SESSION: 1
+
+Exam:2025-05-29	09:48:51.83	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to R57 3T ACR Phantom 3-FEB-2020
+
+Exam:2025-05-29	15:30:54.93	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 01
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250530
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202505300000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202505300000.log
+	ON: 2025-05-30 01:30:35.874051
+
+Exam:2025-05-30	09:12:15.80	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2022.0005 HyperHemo
+	SUB: HHM19 SESSION: 2
+20250531
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202505310000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202505310000.log
+	ON: 2025-05-31 01:30:16.676639
+20250601
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202506010000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202506010000.log
+	ON: 2025-06-01 01:30:08.932378
+20250602
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202506020000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202506020000.log
+	ON: 2025-06-02 01:30:12.373397
+20250603
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202506030000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202506030000.log
+	ON: 2025-06-03 01:30:08.957782
+
+Exam:2025-06-03	08:57:15.21	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to DIAN SHORT VERSION
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (10,11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250604
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202506040000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202506040000.log
+	ON: 2025-06-04 01:30:08.669838
+
+Exam:2025-06-04	12:52:03.87	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1A
+cannot access local variable 'scanDates' where it is not associated with a value
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250605
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202506050000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202506050000.log
+	ON: 2025-06-05 01:30:08.273483
+
+Exam:2025-06-05	12:41:30.48	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1A
+cannot access local variable 'scanDates' where it is not associated with a value
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250606
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202506060000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202506060000.log
+	ON: 2025-06-06 01:30:07.999283
+
+Exam:2025-06-06	08:53:57.21	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 01
+	SUB: 501106 SESSION: 01
+
+Exam:2025-06-06	09:17:51.00	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 01
+	SUB: 501106 SESSION: 01
+
+Exam:2025-06-06	10:51:20.20	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 02
+	SUB: 501106 SESSION: 02
+
+Exam:2025-06-06	12:00:22.86	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 03
+	SUB: 501106 SESSION: 03
+
+Exam:2025-06-06	13:16:40.02	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 501106 SESSION: 04
+
+Exam:2025-06-06	16:14:57.56	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+
+Exam:2025-06-06	17:07:45.66	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 501106 SESSION: 06
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250607
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202506070000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202506070000.log
+	ON: 2025-06-07 01:30:08.609060
+
+Exam:2025-06-07	09:55:42.45	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 501106 SESSION: 07
+20250608
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202506080000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202506080000.log
+	ON: 2025-06-08 01:30:09.441751
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (10,11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250609
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202506090000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202506090000.log
+	ON: 2025-06-09 01:30:07.023669
+
+Exam:2025-06-09	07:42:19.74	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2022.0005 HyperHemo
+	SUB: HHM20 SESSION: 2
+
+Exam:2025-06-09	09:55:47.53	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1A
+	SUB: 1124 SESSION: 1A
+
+Exam:2025-06-09	10:29:31.26	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1A
+
+Exam:2025-06-09	10:30:28.62	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1B
+
+Exam:2025-06-09	10:30:46.19	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+
+Exam:2025-06-09	10:31:29.04	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+
+Exam:2025-06-09	10:32:23.26	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 5
+
+Exam:2025-06-09	11:22:56.29	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1A
+
+Exam:2025-06-09	11:24:14.30	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1B
+
+Exam:2025-06-09	11:24:31.60	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+
+Exam:2025-06-09	11:25:19.20	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+
+Exam:2025-06-09	11:26:51.56	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+
+Exam:2025-06-09	11:29:01.97	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 5
+
+Exam:2025-06-09	11:32:13.61	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1B
+	SUB: 1124 SESSION: 1B
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250610
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202506100000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202506100000.log
+	ON: 2025-06-10 01:30:07.617332
+
+Exam:2025-06-10	09:14:49.03	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+
+Exam:2025-06-10	10:23:41.64	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+	SUB: 1124 SESSION: 2B
+
+Exam:2025-06-10	12:07:52.77	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2022.0005 HyperHemo
+	SUB: HHM21 SESSION: 1
+
+Exam:2025-06-10	12:55:13.31	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+
+Exam:2025-06-10	12:58:42.27	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+
+Exam:2025-06-10	13:03:01.23	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 5
+
+Exam:2025-06-10	13:07:03.11	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 5
+
+Exam:2025-06-10	13:56:31.30	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+
+Exam:2025-06-10	14:39:11.87	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1A
+
+Exam:2025-06-10	14:40:47.31	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1B
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250611
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202506110000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202506110000.log
+	ON: 2025-06-11 01:30:06.074867
+
+Exam:2025-06-11	09:14:36.96	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+	SUB: 1124 SESSION: 3A
+
+Exam:2025-06-11	10:40:51.55	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+	SUB: 1124 SESSION: 3B
+
+Exam:2025-06-11	11:58:20.98	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to R57 3T ACR Phantom 3-FEB-2020
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (10,11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250612
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202506120000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202506120000.log
+	ON: 2025-06-12 01:30:07.811850
+
+Exam:2025-06-12	09:02:12.62	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+
+Exam:2025-06-12	10:29:48.70	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+
+Exam:2025-06-12	10:31:12.82	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1A
+
+Exam:2025-06-12	10:32:43.12	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+
+Exam:2025-06-12	10:33:30.31	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+
+Exam:2025-06-12	10:34:26.69	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 5
+
+Exam:2025-06-12	10:35:38.90	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1A
+
+Exam:2025-06-12	10:36:48.30	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 5
+
+Exam:2025-06-12	10:38:01.77	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+
+Exam:2025-06-12	10:38:37.41	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+
+Exam:2025-06-12	10:38:58.42	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1A
+
+Exam:2025-06-12	10:40:23.01	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1B
+
+Exam:2025-06-12	10:41:17.09	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1A
+
+Exam:2025-06-12	11:55:58.40	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2022.0005 HyperHemo
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (10,11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250613
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202506130000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202506130000.log
+	ON: 2025-06-13 01:30:08.268437
+
+Exam:2025-06-13	08:53:55.45	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 5
+	SUB: 1124 SESSION: 5
+
+Exam:2025-06-13	09:17:11.31	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1A
+	SUB: 1124 SESSION: 5
+
+Exam:2025-06-13	10:15:35.02	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 5
+	SUB: 1124 SESSION: 5
+
+Exam:2025-06-13	10:18:09.85	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1A
+	SUB: 1124 SESSION: 5
+20250614
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202506140000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202506140000.log
+	ON: 2025-06-14 01:30:07.364421
+20250615
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202506150000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202506150000.log
+	ON: 2025-06-15 01:30:08.559132
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (10,11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250616
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202506160000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202506160000.log
+	ON: 2025-06-16 01:30:07.044487
+
+Exam:2025-06-16	08:48:24.82	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 01
+	SUB: 611104 SESSION: 01
+
+Exam:2025-06-16	10:43:04.32	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 02
+	SUB: 611104 SESSION: 02
+
+Exam:2025-06-16	12:18:20.30	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 03
+	SUB: 611104 SESSION: 03
+
+Exam:2025-06-16	13:18:51.66	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-AFRL-neuroinflammation
+
+Exam:2025-06-16	14:14:20.63	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+
+Exam:2025-06-16	16:01:48.70	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-AFRL-neuroinflammation
+
+Exam:2025-06-16	16:17:36.00	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 611104 SESSION: 05
+
+Exam:2025-06-16	16:23:11.64	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-AFRL-neuroinflammation
+
+Exam:2025-06-16	17:20:21.90	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 611104 SESSION: 06
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (10,11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250617
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202506170000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202506170000.log
+	ON: 2025-06-17 01:30:05.339977
+
+Exam:2025-06-17	09:37:53.33	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 611104 SESSION: 07
+
+Exam:2025-06-17	09:48:17.44	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-AFRL-neuroinflammation
+
+Exam:2025-06-17	11:11:24.50	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-AFRL-neuroinflammation
+
+Exam:2025-06-17	12:58:00.14	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-AFRL-neuroinflammation
+
+Exam:2025-06-17	13:34:29.03	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-AFRL-neuroinflammation
+
+Exam:2025-06-17	14:26:13.52	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-AFRL-neuroinflammation
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (10,11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250618
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202506180000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202506180000.log
+	ON: 2025-06-18 01:30:07.413112
+
+Exam:2025-06-18	11:07:52.01	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to R57 3T ACR Phantom 3-FEB-2020
+20250619
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202506190000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202506190000.log
+	ON: 2025-06-19 01:30:08.927436
+20250620
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202506200000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202506200000.log
+	ON: 2025-06-20 01:30:08.508925
+20250621
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202506210000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202506210000.log
+	ON: 2025-06-21 01:30:08.432461
+20250622
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202506220000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202506220000.log
+	ON: 2025-06-22 01:30:06.872502
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250623
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202506230000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202506230000.log
+	ON: 2025-06-23 01:30:08.777925
+
+Exam:2025-06-23	09:52:00.92	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1A
+
+Exam:2025-06-23	10:18:52.12	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+
+Exam:2025-06-23	10:32:13.97	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+
+Exam:2025-06-23	10:32:57.13	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1A
+	SUB: 1222 SESSION: 1A
+
+Exam:2025-06-23	11:44:20.30	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1B
+	SUB: 1222 SESSION: 1B
+
+Exam:2025-06-23	13:14:36.88	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-AFRL-neuroinflammation
+	SUB: 9999 SESSION: 2
+
+Exam:2025-06-23	13:42:14.17	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 3T_R57_Cspine_Cor_FRACTURE_wPostprocessing
+
+Exam:2025-06-23	13:56:28.72	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to ZTE/UTE Test Scans
+
+Exam:2025-06-23	14:23:50.55	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to Routine Cardiac
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (10,11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250624
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202506240000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202506240000.log
+	ON: 2025-06-24 01:30:13.536155
+
+Exam:2025-06-24	08:47:04.99	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+
+Exam:2025-06-24	08:47:23.94	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to ZTE/UTE Test Scans
+
+Exam:2025-06-24	09:18:43.91	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+
+Exam:2025-06-24	10:28:15.00	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+
+Exam:2025-06-24	10:28:52.03	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+
+Exam:2025-06-24	15:16:38.22	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-AFRL-neuroinflammation
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (10,11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250625
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202506250000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202506250000.log
+	ON: 2025-06-25 01:30:08.640273
+
+Exam:2025-06-25	08:09:09.74	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-663_PTSD_phase2
+
+Exam:2025-06-25	09:17:41.50	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+	SUB: 1222 SESSION: 3A
+
+Exam:2025-06-25	10:01:17.97	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+
+Exam:2025-06-25	10:03:06.16	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+
+Exam:2025-06-25	10:03:56.53	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 5
+
+Exam:2025-06-25	10:04:32.18	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+
+Exam:2025-06-25	10:33:17.15	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 5
+
+Exam:2025-06-25	10:35:17.42	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1A
+
+Exam:2025-06-25	10:35:49.45	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1B
+
+Exam:2025-06-25	10:36:49.84	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1A
+	SUB: 1222 SESSION: 3B
+
+Exam:2025-06-25	10:37:47.44	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1B
+	SUB: 1222 SESSION: 3B
+
+Exam:2025-06-25	10:38:13.17	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+	SUB: 1222 SESSION: 3B
+
+Exam:2025-06-25	10:39:34.17	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+	SUB: 1222 SESSION: 3B
+
+Exam:2025-06-25	10:40:38.90	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+	SUB: 1222 SESSION: 3B
+
+Exam:2025-06-25	10:41:13.89	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+	SUB: 1222 SESSION: 3B
+
+Exam:2025-06-25	10:41:39.04	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1A
+	SUB: 1222 SESSION: 3B
+
+Exam:2025-06-25	10:42:11.79	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1A
+	SUB: 1222 SESSION: 3B
+
+Exam:2025-06-25	10:43:06.93	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 5
+	SUB: 1222 SESSION: 3B
+
+Exam:2025-06-25	10:45:01.35	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+	SUB: 1222 SESSION: 3B
+
+Exam:2025-06-25	10:53:58.24	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1A
+	SUB: 1222 SESSION: 3B
+
+Exam:2025-06-25	10:56:01.52	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1B
+	SUB: 1222 SESSION: 3B
+
+Exam:2025-06-25	10:57:21.07	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+	SUB: 1222 SESSION: 3B
+
+Exam:2025-06-25	11:00:43.66	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+	SUB: 1222 SESSION: 3B
+
+Exam:2025-06-25	11:02:03.83	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 5
+
+Exam:2025-06-25	14:55:23.64	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-AFRL-neuroinflammation
+	SUB: 1922 SESSION: 2
+
+Exam:2025-06-25	15:56:20.15	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-AFRL-neuroinflammation
+
+Exam:2025-06-25	17:05:54.65	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-AFRL-neuroinflammation
+	SUB: 1666 SESSION: 2
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250626
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202506260000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202506260000.log
+	ON: 2025-06-26 01:30:06.984583
+
+Exam:2025-06-26	09:06:07.24	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+	SUB: 1222 SESSION: 4A
+
+Exam:2025-06-26	10:31:55.65	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+	SUB: 1222 SESSION: 4B
+
+Exam:2025-06-26	12:50:43.31	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2022.0005 HyperHemo
+	SUB: HHM21 SESSION: 2
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250627
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202506270000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202506270000.log
+	ON: 2025-06-27 01:30:10.967858
+
+Exam:2025-06-27	09:06:46.57	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 5
+	SUB: 1222 SESSION: 5
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250628
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202506280000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202506280000.log
+	ON: 2025-06-28 01:30:06.796671
+
+Exam:2025-06-28	08:37:20.48	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-AFRL-neuroinflammation
+	SUB: 2142 SESSION: 6
+
+Exam:2025-06-28	08:57:28.09	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-AFRL-neuroinflammation
+	SUB: 2142 SESSION: 6
+20250629
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202506290000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202506290000.log
+	ON: 2025-06-29 01:30:09.568026
+20250630
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202506300000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202506300000.log
+	ON: 2025-06-30 01:30:06.934788
+
+Exam:2025-06-30	08:38:47.28	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to R57 3T ACR Phantom 3-FEB-2020
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250701
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202507010000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202507010000.log
+	ON: 2025-07-01 01:30:08.848777
+
+Exam:2025-07-01	08:23:22.98	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2022.0010 HER
+	SUB: HER SESSION: 16
+20250702
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202507020000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202507020000.log
+	ON: 2025-07-02 01:30:06.622342
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250703
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202507030000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202507030000.log
+	ON: 2025-07-03 01:30:08.650576
+
+Exam:2025-07-03	12:04:40.53	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2022.0010 HER
+	SUB: HER SESSION: 16
+
+Exam:2025-07-03	15:19:54.93	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-AFRL-neuroinflammation
+	SUB: 1666 SESSION: 6
+
+Exam:2025-07-03	15:52:50.58	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-AFRL-neuroinflammation
+	SUB: 1666 SESSION: 6
+20250704
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202507040000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202507040000.log
+	ON: 2025-07-04 01:30:06.495555
+20250705
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202507050000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202507050000.log
+	ON: 2025-07-05 01:30:09.919249
+20250706
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202507060000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202507060000.log
+	ON: 2025-07-06 01:30:06.438911
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250707
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202507070000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202507070000.log
+	ON: 2025-07-07 01:30:08.420987
+
+Exam:2025-07-07	08:45:37.49	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 01
+	SUB: 531208 SESSION: 01
+
+Exam:2025-07-07	10:24:31.80	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 02
+	SUB: 531208 SESSION: 02
+
+Exam:2025-07-07	11:51:48.89	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 03
+	SUB: 531208 SESSION: 03
+
+Exam:2025-07-07	14:00:42.96	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 531208 SESSION: 04
+
+Exam:2025-07-07	15:49:52.02	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 531208 SESSION: 05
+
+Exam:2025-07-07	17:57:34.57	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 531208 SESSION: 06
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250708
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202507080000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202507080000.log
+	ON: 2025-07-08 01:30:06.379721
+
+Exam:2025-07-08	09:54:18.70	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 531208 SESSION: 07
+
+Exam:2025-07-08	16:00:28.75	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-AFRL-neuroinflammation
+	SUB: 1276 SESSION: 2
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250709
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202507090000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202507090000.log
+	ON: 2025-07-09 01:30:07.091594
+
+Exam:2025-07-09	12:50:26.62	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-AFRL-neuroinflammation
+	SUB: 1922 SESSION: 6
+
+Exam:2025-07-09	15:29:52.86	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-663_PTSD_phase2
+	SUB: 06180125 SESSION: 1
+
+Exam:2025-07-09	16:58:31.69	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-663_PTSD_phase2
+	SUB: 06180125 SESSION: 1
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250710
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202507100000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202507100000.log
+	ON: 2025-07-10 01:30:06.076349
+
+Exam:2025-07-10	10:15:44.67	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-663_PTSD_phase2
+	SUB: 05011905 SESSION: 1
+
+Exam:2025-07-10	11:55:16.05	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to R57 3T ACR Phantom 3-FEB-2020
+
+Exam:2025-07-10	14:16:21.06	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-663_PTSD_phase2
+	SUB: 05011905 SESSION: 1
+20250711
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202507110000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202507110000.log
+	ON: 2025-07-11 01:30:08.909546
+20250712
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202507120000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202507120000.log
+	ON: 2025-07-12 01:30:06.520086
+20250713
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202507130000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202507130000.log
+	ON: 2025-07-13 01:30:10.846083
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250714
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202507140000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202507140000.log
+	ON: 2025-07-14 01:30:07.023815
+
+Exam:2025-07-14	08:58:34.70	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 01
+	SUB: 281313 SESSION: 01
+
+Exam:2025-07-14	11:09:46.14	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 02
+	SUB: 281313 SESSION: 02
+
+Exam:2025-07-14	11:52:49.93	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 03
+	SUB: 281313 SESSION: 03
+
+Exam:2025-07-14	13:14:22.62	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 281313 SESSION: 04
+
+Exam:2025-07-14	16:07:50.53	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 281313 SESSION: 05
+
+Exam:2025-07-14	18:07:42.19	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 281313 SESSION: 06
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250715
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202507150000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202507150000.log
+	ON: 2025-07-15 01:30:05.885299
+
+Exam:2025-07-15	10:07:33.14	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 281313 SESSION: 07
+
+Exam:2025-07-15	13:52:22.92	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2022.0005 HyperHemo
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250716
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202507160000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202507160000.log
+	ON: 2025-07-16 01:30:06.363592
+
+Exam:2025-07-16	09:04:13.06	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 01
+	SUB: 181113 SESSION: 01
+
+Exam:2025-07-16	11:09:00.47	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 02
+	SUB: 181113 SESSION: 02
+
+Exam:2025-07-16	11:59:56.77	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 03
+	SUB: 181113 SESSION: 03
+
+Exam:2025-07-16	13:24:07.82	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 181113 SESSION: 04
+
+Exam:2025-07-16	16:08:59.32	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 181113 SESSION: 05
+
+Exam:2025-07-16	18:07:04.35	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 181113 SESSION: 06
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250717
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202507170000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202507170000.log
+	ON: 2025-07-17 01:30:07.912328
+
+Exam:2025-07-17	10:01:24.56	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 181113 SESSION: 07
+
+Exam:2025-07-17	11:19:13.50	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to R57 3T ACR Phantom 3-FEB-2020
+
+Exam:2025-07-17	11:21:26.33	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to R57 3T ACR Phantom 3-FEB-2020
+20250718
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202507180000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202507180000.log
+	ON: 2025-07-18 01:30:10.007334
+20250719
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202507190000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202507190000.log
+	ON: 2025-07-19 01:30:07.499080
+20250720
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202507200000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202507200000.log
+	ON: 2025-07-20 01:30:06.954049
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (10,11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250721
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202507210000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202507210000.log
+	ON: 2025-07-21 01:30:09.422091
+
+Exam:2025-07-21	08:49:04.81	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 01
+	SUB: 361317 SESSION: 01
+
+Exam:2025-07-21	10:17:17.78	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 02
+	SUB: 361317 SESSION: 02
+
+Exam:2025-07-21	11:47:52.99	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 03
+	SUB: 361317 SESSION: 03
+
+Exam:2025-07-21	13:57:10.38	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 361317 SESSION: 04
+
+Exam:2025-07-21	14:52:37.41	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 361317 SESSION: 05
+
+Exam:2025-07-21	17:20:07.06	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250722
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202507220000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202507220000.log
+	ON: 2025-07-22 01:30:08.543292
+
+Exam:2025-07-22	09:45:21.72	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 361317 SESSION: 07
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (10,11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250723
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202507230000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202507230000.log
+	ON: 2025-07-23 01:30:07.332254
+
+Exam:2025-07-23	08:12:12.59	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-AFRL-neuroinflammation
+	SUB: 2394 SESSION: 2
+
+Exam:2025-07-23	09:00:27.83	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-AFRL-neuroinflammation
+	SUB: 2394 SESSION: 2
+
+Exam:2025-07-23	09:50:17.86	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 01
+	SUB: 121201 SESSION: 01
+
+Exam:2025-07-23	11:15:00.01	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 02
+	SUB: 121201 SESSION: 02
+
+Exam:2025-07-23	12:23:13.69	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 03
+	SUB: 121201 SESSION: 03
+
+Exam:2025-07-23	13:46:34.89	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 121201 SESSION: 04
+
+Exam:2025-07-23	15:31:40.40	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 121201 SESSION: 05
+
+Exam:2025-07-23	17:34:17.97	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 121201 SESSION: 06
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (10,11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250724
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202507240000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202507240000.log
+	ON: 2025-07-24 01:30:08.280527
+
+Exam:2025-07-24	10:17:09.45	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 121201 SESSION: 07
+
+Exam:2025-07-24	11:45:38.82	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-AFRL-neuroinflammation
+	SUB: 1276 SESSION: 6
+
+Exam:2025-07-24	11:56:53.56	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-AFRL-neuroinflammation
+	SUB: 1276 SESSION: 6
+
+Exam:2025-07-24	13:25:57.64	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 3T_R57_Cspine_Cor_FRACTURE_wPostprocessing
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250725
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202507250000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202507250000.log
+	ON: 2025-07-25 01:30:08.101086
+
+Exam:2025-07-25	11:48:26.06	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 3T_R57_Cspine_Cor_FRACTURE_wPostprocessing
+
+Exam:2025-07-25	13:24:02.71	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to Ax_UTE Test Sequences
+
+Exam:2025-07-25	13:30:24.99	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-AFRL-neuroinflammation
+	SUB: 1153 SESSION: 2
+
+Exam:2025-07-25	15:10:02.88	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to R57 3T ACR Phantom 3-FEB-2020
+20250726
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202507260000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202507260000.log
+	ON: 2025-07-26 01:30:06.746111
+20250727
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202507270000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202507270000.log
+	ON: 2025-07-27 01:30:08.013479
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250728
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202507280000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202507280000.log
+	ON: 2025-07-28 01:30:07.272953
+
+Exam:2025-07-28	08:47:19.45	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 01
+	SUB: 621112 SESSION: 01
+
+Exam:2025-07-28	10:30:09.30	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 02
+	SUB: 621112 SESSION: 02
+
+Exam:2025-07-28	11:40:31.08	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 03
+	SUB: 621112 SESSION: 03
+
+Exam:2025-07-28	13:00:25.42	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+
+Exam:2025-07-28	13:29:45.31	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to Zach+ZTE
+
+Exam:2025-07-28	14:12:10.88	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 621112 SESSION: 04
+
+Exam:2025-07-28	15:44:03.41	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 621112 SESSION: 05
+
+Exam:2025-07-28	17:50:12.56	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 621112 SESSION: 06
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250729
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202507290000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202507290000.log
+	ON: 2025-07-29 01:30:07.122992
+
+Exam:2025-07-29	09:31:23.31	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 621112 SESSION: 07
+
+Exam:2025-07-29	11:27:08.28	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2022.0005 HyperHemo
+	SUB: HHM22 SESSION: 1
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (10,11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250730
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202507300000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202507300000.log
+	ON: 2025-07-30 01:30:07.932994
+
+Exam:2025-07-30	08:58:26.49	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 01
+	SUB: 531116 SESSION: 01
+
+Exam:2025-07-30	10:59:23.78	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 02
+	SUB: 531116 SESSION: 02
+
+Exam:2025-07-30	12:04:00.62	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 03
+	SUB: 531116 SESSION: 03
+
+Exam:2025-07-30	13:06:30.81	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 531116 SESSION: 04
+
+Exam:2025-07-30	14:16:30.40	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to Zach+ZTE
+
+Exam:2025-07-30	14:27:02.85	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to Zach+ZTE
+
+Exam:2025-07-30	15:11:56.91	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to NEW FRACTURE
+
+Exam:2025-07-30	16:05:50.10	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 531116 SESSION: 05
+
+Exam:2025-07-30	17:05:13.57	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 531116 SESSION: 06
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (10,11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250731
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202507310000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202507310000.log
+	ON: 2025-07-31 01:30:06.873863
+
+Exam:2025-07-31	08:56:04.82	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to DIAN SHORT VERSION
+
+Exam:2025-07-31	09:59:01.66	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 04-07
+	SUB: 531114 SESSION: 07
+
+Exam:2025-07-31	12:05:00.77	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2022.0005 HyperHemo
+	SUB: HHM22 SESSION: 2
+
+Exam:2025-07-31	13:34:40.58	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to NEW FRACTURE2
+
+Exam:2025-07-31	14:31:14.61	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to R57 3T ACR Phantom 3-FEB-2020
+20250801
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202508010000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202508010000.log
+	ON: 2025-08-01 01:30:08.573731
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (10,11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250802
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202508020000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202508020000.log
+	ON: 2025-08-02 01:30:06.895466
+
+Exam:2025-08-02	08:42:49.47	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-AFRL-neuroinflammation
+	SUB: 2394 SESSION: 6
+20250803
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202508030000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202508030000.log
+	ON: 2025-08-03 01:30:07.471027
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250804
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202508040000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202508040000.log
+	ON: 2025-08-04 01:30:07.506319
+
+Exam:2025-08-04	09:19:36.99	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-663_PTSD_phase2
+	SUB: 05011905 SESSION: 2
+
+Exam:2025-08-04	09:41:32.79	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-663_PTSD_phase2
+	SUB: 05011905 SESSION: 2
+
+Exam:2025-08-04	09:45:10.82	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-AFRL-neuroinflammation
+
+Exam:2025-08-04	09:47:03.65	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2022.0010 HER
+
+Exam:2025-08-04	09:48:29.32	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2022.0005 HyperHemo
+	SUB: HHM23 SESSION: 1
+
+Exam:2025-08-04	09:53:01.84	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1A
+
+Exam:2025-08-04	12:21:53.61	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2022.0005 HyperHemo
+	SUB: HHM23 SESSION: 1
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250805
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202508050000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202508050000.log
+	ON: 2025-08-05 01:30:06.798331
+20250806
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202508060000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202508060000.log
+	ON: 2025-08-06 01:30:07.171830
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (10,11) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250807
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202508070000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202508070000.log
+	ON: 2025-08-07 01:30:07.547265
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250808
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202508080000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202508080000.log
+	ON: 2025-08-08 01:30:08.551070
+
+Exam:2025-08-08	08:23:05.76	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to R57 3T ACR Phantom 3-FEB-2020
+
+Exam:2025-08-08	08:50:08.83	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-AFRL-neuroinflammation
+	SUB: 1153 SESSION: 6
+
+Exam:2025-08-08	16:39:14.35	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-663_PTSD_phase2
+	SUB: 06180125 SESSION: 2
+20250809
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202508090000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202508090000.log
+	ON: 2025-08-09 01:30:06.241320
+20250810
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202508100000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202508100000.log
+	ON: 2025-08-10 01:30:06.720442
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: ParserWarning: Skipping line 1855858: expected 14 fields, saw 15
+Skipping line 1856550: expected 14 fields, saw 15
+Skipping line 1857282: expected 14 fields, saw 15
+Skipping line 1857572: expected 14 fields, saw 15
+
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250811
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202508110000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202508110000.log
+	ON: 2025-08-11 01:30:06.695893
+
+Exam:2025-08-11	10:48:01.15	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1A
+	SUB: 1223 SESSION: 1A
+
+Exam:2025-08-11	11:23:32.30	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1A
+
+Exam:2025-08-11	11:30:05.85	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1B
+
+Exam:2025-08-11	11:30:41.44	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+
+Exam:2025-08-11	11:33:20.83	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+
+Exam:2025-08-11	11:37:56.44	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A(1)
+
+Exam:2025-08-11	11:38:43.96	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 5
+
+Exam:2025-08-11	12:29:44.30	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1B
+	SUB: 1223 SESSION: 1B
+
+Exam:2025-08-11	14:08:14.25	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 01
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250812
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202508120000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202508120000.log
+	ON: 2025-08-12 01:30:07.432608
+
+Exam:2025-08-12	10:15:47.05	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+	SUB: 1223 SESSION: 2A
+
+Exam:2025-08-12	11:47:06.22	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+	SUB: 1223 SESSION: 2B
+
+Exam:2025-08-12	14:03:51.25	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to UTE test
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250813
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202508130000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202508130000.log
+	ON: 2025-08-13 01:30:07.018778
+
+Exam:2025-08-13	09:57:53.07	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+	SUB: 1223 SESSION: 3A
+
+Exam:2025-08-13	11:30:33.23	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+	SUB: 1223 SESSION: 3B
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250814
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202508140000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202508140000.log
+	ON: 2025-08-14 01:30:06.723807
+
+Exam:2025-08-14	09:55:20.93	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+	SUB: 1223 SESSION: 4A
+
+Exam:2025-08-14	11:28:19.96	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1A
+
+Exam:2025-08-14	11:29:23.00	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+
+Exam:2025-08-14	11:47:10.90	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+	SUB: 1223 SESSION: 4B
+
+Exam:2025-08-14	14:08:11.89	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-AFRL-neuroinflammation
+	SUB: 1548 SESSION: 2
+
+Exam:2025-08-14	15:08:39.13	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-AFRL-neuroinflammation
+	SUB: 1548 SESSION: 2
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (10,11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250815
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202508150000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202508150000.log
+	ON: 2025-08-15 01:30:06.910205
+
+Exam:2025-08-15	10:00:08.49	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 5
+	SUB: 1223 SESSION: 5
+
+Exam:2025-08-15	11:31:52.07	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to R57 3T ACR Phantom 3-FEB-2020
+20250816
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202508160000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202508160000.log
+	ON: 2025-08-16 01:30:08.575622
+20250817
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202508170000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202508170000.log
+	ON: 2025-08-17 01:30:06.113687
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250818
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202508180000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202508180000.log
+	ON: 2025-08-18 01:30:14.877378
+
+Exam:2025-08-18	09:50:43.52	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1A
+
+Exam:2025-08-18	09:51:59.95	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1A
+	SUB: 1224 SESSION: 1A
+
+Exam:2025-08-18	11:26:16.92	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1B
+	SUB: 1224 SESSION: 1B
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250819
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202508190000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202508190000.log
+	ON: 2025-08-19 01:30:06.677349
+
+Exam:2025-08-19	09:00:16.40	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+	SUB: 1224 SESSION: 2A
+
+Exam:2025-08-19	10:31:39.30	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+	SUB: 1224 SESSION: 2B
+
+Exam:2025-08-19	12:09:22.46	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to NEW FRACTURE2
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (10,11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250820
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202508200000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202508200000.log
+	ON: 2025-08-20 01:30:07.666841
+
+Exam:2025-08-20	08:27:59.49	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+	SUB: 1224 SESSION: 3A
+
+Exam:2025-08-20	10:01:51.74	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+	SUB: 1224 SESSION: 3B
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250821
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202508210000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202508210000.log
+	ON: 2025-08-21 01:30:32.812553
+
+Exam:2025-08-21	08:58:49.94	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+	SUB: 1224 SESSION: 4A
+
+Exam:2025-08-21	10:58:38.55	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+	SUB: 1224 SESSION: 4B
+
+Exam:2025-08-21	12:54:30.27	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to R57 3T ACR Phantom 3-FEB-2020
+
+Exam:2025-08-21	13:12:00.71	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-AFRL-neuroinflammation
+	SUB: 1548 SESSION: 6
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250822
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202508220000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202508220000.log
+	ON: 2025-08-22 01:30:38.467655
+
+Exam:2025-08-22	08:46:09.24	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 5
+	SUB: 1224 SESSION: 5
+20250823
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202508230000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202508230000.log
+	ON: 2025-08-23 01:30:22.863678
+20250824
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202508240000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202508240000.log
+	ON: 2025-08-24 01:30:22.167317
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250825
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202508250000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202508250000.log
+	ON: 2025-08-25 01:30:16.044089
+
+Exam:2025-08-25	11:54:03.36	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to NEW FRACTURE2
+
+Exam:2025-08-25	11:59:53.92	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to Fracture_Head
+
+Exam:2025-08-25	12:02:55.18	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to Fracture_Head
+
+Exam:2025-08-25	12:38:27.42	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to Fracture_Head
+
+Exam:2025-08-25	12:43:14.31	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to Fracture_Head
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250826
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202508260000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202508260000.log
+	ON: 2025-08-26 01:30:23.474613
+
+Exam:2025-08-26	07:38:23.99	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to DIAN SHORT VERSION
+root
+crw-rw-rw- 1 root root 195,   0 May 26 00:07 /dev/nvidia0
+crw-rw-rw- 1 root root 195,   1 May 26 00:07 /dev/nvidia1
+crw-rw-rw- 1 root root 195, 255 May 26 00:07 /dev/nvidiactl
+crw-rw-rw- 1 root root 195, 254 May 26 00:07 /dev/nvidia-modeset
+crw-rw-rw- 1 root root 510,   0 May 26 00:07 /dev/nvidia-uvm
+crw-rw-rw- 1 root root 510,   1 May 26 00:07 /dev/nvidia-uvm-tools
+
+/dev/nvidia-caps:
+total 0
+cr-------- 1 root root 235, 1 Jul  1 23:51 nvidia-cap1
+cr--r--r-- 1 root root 235, 2 Jul  1 23:51 nvidia-cap2
+
+	libicudata.so.74 (libc6,x86-64) => /lib/x86_64-linux-gnu/libicudata.so.74
+	libicudata.so.70 (libc6,x86-64) => /lib/x86_64-linux-gnu/libicudata.so.70
+	libicudata.so (libc6,x86-64) => /lib/x86_64-linux-gnu/libicudata.so
+	libgstcuda-1.0.so.0 (libc6,x86-64) => /lib/x86_64-linux-gnu/libgstcuda-1.0.so.0
+	libcudadebugger.so.1 (libc6,x86-64) => /lib/x86_64-linux-gnu/libcudadebugger.so.1
+	libcuda.so.1 (libc6,x86-64) => /lib/x86_64-linux-gnu/libcuda.so.1
+	libcuda.so.1 (libc6) => /lib/i386-linux-gnu/libcuda.so.1
+	libcuda.so (libc6,x86-64) => /lib/x86_64-linux-gnu/libcuda.so
+	libcuda.so (libc6) => /lib/i386-linux-gnu/libcuda.so
+/usr/bin/nvidia-container-cli
+20250827
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202508270000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202508270000.log
+	ON: 2025-08-27 01:30:42.181705
+
+Exam:2025-08-27	10:44:24.33	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-AFRL-neuroinflammation
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250828
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202508280000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202508280000.log
+	ON: 2025-08-28 01:30:05.882985
+
+Exam:2025-08-28	15:15:10.13	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to R57 3T ACR Phantom 3-FEB-2020
+20250829
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202508290000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202508290000.log
+	ON: 2025-08-29 01:30:08.784410
+20250830
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202508300000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202508300000.log
+	ON: 2025-08-30 01:30:06.543871
+20250831
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202508310000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202508310000.log
+	ON: 2025-08-31 01:30:06.502319
+20250901
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202509010000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202509010000.log
+	ON: 2025-09-01 01:30:06.136803
+20250902
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202509020000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202509020000.log
+	ON: 2025-09-02 01:30:10.277981
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250903
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202509030000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202509030000.log
+	ON: 2025-09-03 01:30:22.197486
+20250904
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202509040000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202509040000.log
+	ON: 2025-09-04 01:30:07.685839
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250905
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202509050000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202509050000.log
+	ON: 2025-09-05 01:30:09.644742
+
+Exam:2025-09-05	08:57:52.83	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-AFRL-neuroinflammation
+	SUB: 1806 SESSION: 2
+
+Exam:2025-09-05	10:43:56.48	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to R57 3T ACR Phantom 3-FEB-2020
+20250906
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202509060000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202509060000.log
+	ON: 2025-09-06 01:30:07.238319
+20250907
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202509070000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202509070000.log
+	ON: 2025-09-07 01:30:07.082586
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250908
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202509080000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202509080000.log
+	ON: 2025-09-08 01:30:06.714791
+
+Exam:2025-09-08	09:17:52.94	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1A
+	SUB: 1129 SESSION: 1A
+
+Exam:2025-09-08	11:18:53.99	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1B
+	SUB: 1129 SESSION: 1B
+
+Exam:2025-09-08	12:05:44.35	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1A
+	SUB: 1225 SESSION: 1A
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (10,11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250909
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202509090000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202509090000.log
+	ON: 2025-09-09 01:30:08.491921
+
+Exam:2025-09-09	09:21:39.50	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+
+Exam:2025-09-09	10:42:12.05	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+	SUB: 1129 SESSION: 2B
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (10,11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250910
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202509100000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202509100000.log
+	ON: 2025-09-10 01:30:07.865351
+
+Exam:2025-09-10	08:41:22.89	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+	SUB: 1129 SESSION: 3A
+
+Exam:2025-09-10	10:24:02.93	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+	SUB: 1129 SESSION: 3B
+
+Exam:2025-09-10	10:24:16.81	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+	SUB: 1129 SESSION: 3B
+
+Exam:2025-09-10	10:30:46.69	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+	SUB: 1129 SESSION: 3B
+
+Exam:2025-09-10	12:22:14.06	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-663_PTSD_phase2
+	SUB: 06120120 SESSION: 1
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250911
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202509110000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202509110000.log
+	ON: 2025-09-11 01:30:12.292507
+
+Exam:2025-09-11	08:49:27.16	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+	SUB: 1129 SESSION: 4A
+
+Exam:2025-09-11	10:40:43.60	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+	SUB: 1129 SESSION: 4B
+
+Exam:2025-09-11	11:56:36.19	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to R57 3T ACR Phantom 3-FEB-2020
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (10,11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250912
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202509120000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202509120000.log
+	ON: 2025-09-12 01:30:09.600739
+
+Exam:2025-09-12	08:55:48.13	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 5
+	SUB: 1129 SESSION: 5
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250913
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202509130000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202509130000.log
+	ON: 2025-09-13 01:30:07.613412
+
+Exam:2025-09-13	08:13:53.64	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-AFRL-neuroinflammation
+	SUB: 1806 SESSION: 6
+
+Exam:2025-09-13	08:19:22.63	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-AFRL-neuroinflammation
+	SUB: 1806 SESSION: 6
+20250914
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202509140000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202509140000.log
+	ON: 2025-09-14 01:30:07.208988
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250915
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202509150000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202509150000.log
+	ON: 2025-09-15 01:30:06.294022
+
+Exam:2025-09-15	11:15:56.97	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-663_PTSD_phase2
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250916
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202509160000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202509160000.log
+	ON: 2025-09-16 01:30:14.323937
+
+Exam:2025-09-16	08:47:41.94	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2022.0010 HER
+	SUB: HER17 SESSION: 1
+
+Exam:2025-09-16	10:43:31.81	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1A
+
+Exam:2025-09-16	10:46:20.43	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1A
+
+Exam:2025-09-16	10:54:30.79	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-AFRL-neuroinflammation
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (10,11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250917
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202509170000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202509170000.log
+	ON: 2025-09-17 01:30:06.499301
+20250918
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202509180000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202509180000.log
+	ON: 2025-09-18 01:30:05.457082
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250919
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202509190000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202509190000.log
+	ON: 2025-09-19 01:30:06.743354
+
+Exam:2025-09-19	09:37:10.34	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-663_PTSD_phase2
+	SUB: 19112505 SESSION: 1
+
+Exam:2025-09-19	10:47:41.17	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to R57 3T ACR Phantom 3-FEB-2020
+20250920
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202509200000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202509200000.log
+	ON: 2025-09-20 01:30:06.312670
+20250921
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202509210000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202509210000.log
+	ON: 2025-09-21 01:30:05.047437
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250922
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202509220000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202509220000.log
+	ON: 2025-09-22 01:30:05.797228
+
+Exam:2025-09-22	08:25:25.62	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2022.0010 HER
+	SUB: HER17 SESSION: 2
+
+Exam:2025-09-22	16:09:42.13	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1B
+	SUB: 1226 SESSION: 1B
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250923
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202509230000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202509230000.log
+	ON: 2025-09-23 01:30:06.414907
+
+Exam:2025-09-23	08:42:22.10	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-AFRL-neuroinflammation
+	SUB: 1966 SESSION: 6
+
+Exam:2025-09-23	14:27:13.91	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+	SUB: 1226 SESSION: 2A
+
+Exam:2025-09-23	15:41:28.09	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+	SUB: 1226 SESSION: 2B
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (10,11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250924
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202509240000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202509240000.log
+	ON: 2025-09-24 01:30:05.569372
+
+Exam:2025-09-24	08:10:26.65	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+	SUB: 1226 SESSION: 3A
+
+Exam:2025-09-24	09:38:40.77	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+
+Exam:2025-09-24	09:38:54.32	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+	SUB: 1226 SESSION: 3B
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250925
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202509250000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202509250000.log
+	ON: 2025-09-25 01:30:06.920065
+
+Exam:2025-09-25	14:09:48.17	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+	SUB: 1226 SESSION: 4A
+
+Exam:2025-09-25	15:49:45.47	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+	SUB: 1226 SESSION: 4B
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (10,11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250926
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202509260000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202509260000.log
+	ON: 2025-09-26 01:30:07.958661
+
+Exam:2025-09-26	08:24:36.79	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-663_PTSD_phase2
+	SUB: 22090112 SESSION: 1
+
+Exam:2025-09-26	13:53:39.81	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 5
+	SUB: 1226 SESSION: 5
+20250927
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202509270000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202509270000.log
+	ON: 2025-09-27 01:30:06.672113
+20250928
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202509280000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202509280000.log
+	ON: 2025-09-28 01:30:06.610668
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250929
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202509290000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202509290000.log
+	ON: 2025-09-29 01:30:06.228981
+
+Exam:2025-09-29	09:36:52.79	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-663_PTSD_phase2
+	SUB: 11051316 SESSION: 1
+
+Exam:2025-09-29	10:55:55.67	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1A
+	SUB: 1126 SESSION: 1A
+
+Exam:2025-09-29	13:03:22.99	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1B
+	SUB: 1126 SESSION: 1B
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20250930
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202509300000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202509300000.log
+	ON: 2025-09-30 01:30:06.120414
+
+Exam:2025-09-30	09:32:17.26	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-663_PTSD_phase2
+	SUB: 21180705 SESSION: 1
+
+Exam:2025-09-30	10:58:26.49	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+	SUB: 1126 SESSION: 2A
+
+Exam:2025-09-30	12:22:35.95	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+	SUB: 1126 SESSION: 2B
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (10,11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20251001
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202510010000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202510010000.log
+	ON: 2025-10-01 01:30:08.480662
+
+Exam:2025-10-01	08:31:06.60	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-663_PTSD_phase2
+	SUB: 20180116 SESSION: 1
+
+Exam:2025-10-01	09:44:11.72	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2022.0010 HER
+	SUB: HER18 SESSION: 1
+
+Exam:2025-10-01	11:42:18.38	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+	SUB: 1126 SESSION: 3A
+
+Exam:2025-10-01	12:57:44.22	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+	SUB: 1126 SESSION: 3B
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (10,11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20251002
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202510020000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202510020000.log
+	ON: 2025-10-02 01:30:06.559950
+
+Exam:2025-10-02	10:46:10.73	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+	SUB: 1126 SESSION: 4A
+
+Exam:2025-10-02	12:11:25.17	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+	SUB: 1126 SESSION: 4B
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20251003
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202510030000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202510030000.log
+	ON: 2025-10-03 01:30:06.344047
+
+Exam:2025-10-03	09:36:58.94	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-663_PTSD_phase2
+	SUB: 08151220 SESSION: 1
+
+Exam:2025-10-03	10:54:24.31	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 5
+	SUB: 1126 SESSION: 5
+
+Exam:2025-10-03	12:42:22.21	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to R57 3T ACR Phantom 3-FEB-2020
+20251004
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202510040000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202510040000.log
+	ON: 2025-10-04 01:30:06.977263
+20251005
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202510050000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202510050000.log
+	ON: 2025-10-05 01:30:05.764443
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (10,11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20251006
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202510060000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202510060000.log
+	ON: 2025-10-06 01:30:07.229541
+
+Exam:2025-10-06	10:14:11.29	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1A
+[Errno 28] No space left on device: '/resshare19/projects/2023_UES/EPIC/rawdata/sub-1127/ses-1A/beh/sub-1127_ses-1A_philips-scan-log.csv'
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20251007
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202510070000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202510070000.log
+	ON: 2025-10-07 01:30:08.181360
+
+Exam:2025-10-07	08:29:06.55	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+[Errno 28] No space left on device: '/resshare19/projects/2023_UES/EPIC/rawdata/sub-1127/ses-2A/beh/sub-1127_ses-2A_philips-scan-log.csv'
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20251008
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202510080000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202510080000.log
+	ON: 2025-10-08 01:30:08.000584
+
+Exam:2025-10-08	09:13:24.19	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+	SUB: 1127 SESSION: 3A
+
+Exam:2025-10-08	10:49:14.54	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+
+Exam:2025-10-08	11:56:42.32	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+
+Exam:2025-10-08	15:27:32.42	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (10,11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20251009
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202510090000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202510090000.log
+	ON: 2025-10-09 01:30:05.887200
+
+Exam:2025-10-09	07:49:31.89	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+	SUB: 1127 SESSION: 4A
+
+Exam:2025-10-09	10:41:12.39	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+	SUB: 1127 SESSION: 4B
+
+Exam:2025-10-09	12:16:49.76	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2022.0005 HyperHemo
+	SUB: HHM23 SESSION: 3
+
+Exam:2025-10-09	13:50:41.63	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+	SUB: 1228 SESSION: 4A
+
+Exam:2025-10-09	15:19:07.87	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+	SUB: 1228 SESSION: 4B
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (10,11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20251010
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202510100000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202510100000.log
+	ON: 2025-10-10 01:30:05.872854
+
+Exam:2025-10-10	08:32:43.96	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-663_PTSD_phase2
+	SUB: 06120120 SESSION: 2
+
+Exam:2025-10-10	08:52:31.78	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-AFRL-neuroinflammation
+
+Exam:2025-10-10	08:52:44.34	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-663_PTSD_phase2
+	SUB: 06120120 SESSION: 2
+
+Exam:2025-10-10	09:56:12.96	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 5
+	SUB: 1127 SESSION: 5
+
+Exam:2025-10-10	11:52:51.01	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to R57 3T ACR Phantom 3-FEB-2020
+
+Exam:2025-10-10	13:43:46.53	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 5
+	SUB: 1228 SESSION: 5
+
+Exam:2025-10-10	17:38:14.23	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-AFRL-neuroinflammation
+
+Exam:2025-10-10	17:38:47.13	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20240100H session 01
+20251011
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202510110000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202510110000.log
+	ON: 2025-10-11 01:30:05.691229
+20251012
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202510120000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202510120000.log
+	ON: 2025-10-12 01:30:06.363368
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20251013
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202510130000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202510130000.log
+	ON: 2025-10-13 01:30:07.600719
+
+Exam:2025-10-13	09:59:42.25	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1A
+	SUB: 1128 SESSION: 1A
+
+Exam:2025-10-13	11:19:16.48	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1B
+	SUB: 1128 SESSION: 1B
+
+Exam:2025-10-13	12:31:21.87	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-663_PTSD_phase2
+	SUB: 21180705 SESSION: 2
+
+Exam:2025-10-13	14:41:16.67	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1A
+	SUB: 1229 SESSION: 1A
+
+Exam:2025-10-13	16:17:47.87	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1B
+	SUB: 1229 SESSION: 1B
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (10,11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20251014
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202510140000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202510140000.log
+	ON: 2025-10-14 01:30:06.991035
+
+Exam:2025-10-14	08:49:43.19	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+	SUB: 1128 SESSION: 2A
+
+Exam:2025-10-14	10:40:05.86	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+	SUB: 1128 SESSION: 2B
+
+Exam:2025-10-14	12:06:08.42	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+	SUB: 1229 SESSION: 2A
+
+Exam:2025-10-14	15:51:49.50	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (10,11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20251015
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202510150000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202510150000.log
+	ON: 2025-10-15 01:30:06.908339
+
+Exam:2025-10-15	08:59:51.74	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+	SUB: 1128 SESSION: 3A
+
+Exam:2025-10-15	10:46:12.61	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+	SUB: 1128 SESSION: 3B
+
+Exam:2025-10-15	12:08:01.92	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+	SUB: 1229 SESSION: 3A
+
+Exam:2025-10-15	15:35:07.03	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+	SUB: 1229 SESSION: 3B
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (10,11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20251016
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202510160000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202510160000.log
+	ON: 2025-10-16 01:30:06.002820
+
+Exam:2025-10-16	09:00:30.47	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+	SUB: 1128 SESSION: 4A
+
+Exam:2025-10-16	10:32:39.72	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+	SUB: 1128 SESSION: 4B
+
+Exam:2025-10-16	11:54:28.47	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+	SUB: 1229 SESSION: 4A
+
+Exam:2025-10-16	15:26:56.34	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+	SUB: 1229 SESSION: 4B
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (10,11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20251017
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202510170000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202510170000.log
+	ON: 2025-10-17 01:30:08.439220
+
+Exam:2025-10-17	08:56:53.01	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 5
+	SUB: 1128 SESSION: 5
+
+Exam:2025-10-17	10:37:15.25	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 5
+	SUB: 1229 SESSION: 5
+20251018
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202510180000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202510180000.log
+	ON: 2025-10-18 01:30:07.450991
+20251019
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202510190000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202510190000.log
+	ON: 2025-10-19 01:30:07.063872
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20251020
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202510200000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202510200000.log
+	ON: 2025-10-20 01:30:06.083430
+
+Exam:2025-10-20	10:06:54.11	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1A
+	SUB: 1130 SESSION: 1A
+
+Exam:2025-10-20	11:42:56.87	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 1B
+	SUB: 1130 SESSION: 1B
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20251021
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202510210000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202510210000.log
+	ON: 2025-10-21 01:30:06.249835
+
+Exam:2025-10-21	09:15:19.47	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+	SUB: 1130 SESSION: 2A
+
+Exam:2025-10-21	10:28:00.59	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+	SUB: 1130 SESSION: 2B
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20251022
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202510220000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202510220000.log
+	ON: 2025-10-22 01:30:06.464144
+
+Exam:2025-10-22	09:48:09.75	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+	SUB: 1130 SESSION: 3A
+
+Exam:2025-10-22	11:57:31.00	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+	SUB: 1130 SESSION: 3B
+
+Exam:2025-10-22	13:05:17.43	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-663_PTSD_phase2
+	SUB: 19112505 SESSION: 2
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20251023
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202510230000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202510230000.log
+	ON: 2025-10-23 01:31:10.923426
+
+Exam:2025-10-23	08:52:56.94	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to DIAN SHORT VERSION
+
+Exam:2025-10-23	10:10:25.11	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4A
+	SUB: 1130 SESSION: 4A
+
+Exam:2025-10-23	11:44:41.48	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 2-4B
+	SUB: 1130 SESSION: 4B
+
+Exam:2025-10-23	13:06:42.87	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-663_PTSD_phase2
+	SUB: 20010311 SESSION: 2
+
+Exam:2025-10-23	13:08:19.71	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-663_PTSD_phase2
+	SUB: 20010311 SESSION: 2
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20251024
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202510240000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202510240000.log
+	ON: 2025-10-24 01:30:06.394271
+
+Exam:2025-10-24	07:55:40.00	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-663_PTSD_phase2
+	SUB: 22090112 SESSION: 2
+
+Exam:2025-10-24	09:14:09.03	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 20230093H session 5
+	SUB: 1130 SESSION: 5
+
+Exam:2025-10-24	10:30:52.83	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to R57 3T ACR Phantom 3-FEB-2020
+20251025
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202510250000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202510250000.log
+	ON: 2025-10-25 01:30:06.102959
+20251026
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202510260000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202510260000.log
+	ON: 2025-10-26 01:30:06.532286
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (10,11,12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20251027
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202510270000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202510270000.log
+	ON: 2025-10-27 01:30:07.114455
+
+Exam:2025-10-27	08:46:14.36	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-663_PTSD_phase2
+	SUB: 11051316 SESSION: 2
+20251028
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202510280000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202510280000.log
+	ON: 2025-10-28 01:30:06.798322
+20251029
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202510290000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202510290000.log
+	ON: 2025-10-29 01:30:06.800200
+20251030
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202510300000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202510300000.log
+	ON: 2025-10-30 01:30:06.596901
+20251031
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202510310000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202510310000.log
+	ON: 2025-10-31 01:30:07.236305
+20251101
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202511010000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202511010000.log
+	ON: 2025-11-01 01:30:06.045239
+20251102
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202511020000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202511020000.log
+	ON: 2025-11-02 01:30:05.284321
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20251103
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202511030000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202511030000.log
+	ON: 2025-11-03 01:30:08.772960
+
+Exam:2025-11-03	07:56:16.76	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2022.0005 HyperHemo
+	SUB: HHM24 SESSION: 1
+
+Exam:2025-11-03	10:51:03.44	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to R57 3T ACR Phantom 3-FEB-2020
+20251104
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202511040000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202511040000.log
+	ON: 2025-11-04 01:30:05.958722
+20251105
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202511050000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202511050000.log
+	ON: 2025-11-05 01:30:07.123671
+/resshare/wsuconnect/connect_mri_system_log_grabber_p2.py:99: DtypeWarning: Columns (12,13) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(inLogFile,sep='\t',skiprows=1,on_bad_lines='warn',encoding='mac-roman',names=cols,header=None)
+20251106
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202511060000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202511060000.log
+	ON: 2025-11-06 01:30:06.271506
+
+Exam:2025-11-06	12:16:10.44	ExamOverview(MRExamCardModel): (ExamOverview) Updating Examcard name to 2024-663_PTSD_phase2
+20251107
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202511070000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202511070000.log
+	ON: 2025-11-07 01:30:03.413338
+[Errno 2] No such file or directory: '/resshare/wsuconnect/credentials.json'
+20251108
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202511080000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202511080000.log
+	ON: 2025-11-08 01:30:03.380681
+[Errno 2] No such file or directory: '/resshare/wsuconnect/credentials.json'
+20251109
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202511090000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202511090000.log
+	ON: 2025-11-09 01:30:03.064376
+[Errno 2] No such file or directory: '/resshare/wsuconnect/credentials.json'
+20251110
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202511100000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202511100000.log
+	ON: 2025-11-10 01:30:03.650825
+[Errno 2] No such file or directory: '/resshare/wsuconnect/credentials.json'
+20251111
+connect_mri_system_log_grabber.py:
+	INPUT: /Log/log202511110000.log
+	OUTPUT: /resshare/Philips_system_logs/2025/log202511110000.log
+	ON: 2025-11-11 01:30:03.000538
+[Errno 2] No such file or directory: '/resshare/wsuconnect/credentials.json'

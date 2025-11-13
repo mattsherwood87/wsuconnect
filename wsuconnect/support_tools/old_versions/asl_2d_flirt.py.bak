@@ -1,0 +1,553 @@
+#!/usr/bin/env python3
+# the command above ^^^ sets python 3.10.10 as the interpreter for this program
+
+# Created by Matthew Sherwood (matt.sherwood@wright.edu, matthew.sherwood.7.ctr@us.af.mil)
+# Created on 26 Jan 2021
+#
+# Modified on 27 Sept 2021 - update to align with direct s3 mount
+# Modified on 26 Jan 2021
+
+import sys
+import os
+import argparse
+# import boto3
+import re
+import json
+import subprocess
+from nipype.interfaces import fsl
+from glob import glob as glob
+import datetime
+
+#local import
+REALPATH = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+sys.path.append(REALPATH)
+from helper_functions.flirt_pngappend import *
+from helper_functions.get_dir_identifiers import *
+from helper_functions.bids_commands import *
+
+
+VERSION = '1.1.0'
+DATE = '25 April 2023'
+
+
+parser = argparse.ArgumentParser('asl_2d_flirt.py: perform FLIRT registration between 2D ASL and structural/standard brain images')
+FSLDIR = os.environ["FSLDIR"]
+
+# s3 = boto3.resource('s3')
+
+def parse_arguments():
+
+    #input options for main()
+    parser.add_argument('IN_FILE')
+    parser.add_argument('REF_FILE')
+    parser.add_argument('DATA_DIR')
+    parser.add_argument('--bet-params',action='store',dest='BET_PARAMS',default=None)
+    parser.add_argument('--flirt-params',action='store',dest='FLIRT_PARAMS',default=None)
+    parser.add_argument('--no-bet',action='store_true',dest='NO_BET',default=False)
+    parser.add_argument('--overwrite',action='store_true',dest='OVERWRITE',default=False)
+    parser.add_argument('--progress',action='store_true',dest='progress',default=False)
+    options = parser.parse_args()
+    return options
+
+
+# ******************* s3 bucket check ********************
+def asl_2d_flirt(IN_FILE,REF_FILE,DATA_DIR,*args,**kwargs):
+    """
+    This function performs FLIRT registration between 2D ASL and structural/standard brain images
+
+    asl_2d_flirt(IN_FILE,REF_FILE,no_bet=False,overwrite=False,flirt_params=None,bet_params=None,progress=False)
+
+    Arguments:
+
+        IN_FILE (str): fullpath to 2D ASL NIfTI file
+        
+        REF_FILE (str): fullpath to REFERENCE NIfTI destination space
+
+        DATA_DIR (str): fullpath to the project's data directory (project's 'dataDir' credential)
+
+        args (str): a sequence of program arguments
+            
+        bet_params (str): OPTIONAL fullpath to project's 2D ASL BET parameter file
+            
+        flirt_params (str): OPTIONAL fullpath to project's 2D ASL FLIRT parameter file
+            
+        no_bet (BOOL): OPTIONAL flag to perform brain extraction via FSL BET (True) or not (False) 
+            
+        overwrite (BOOL): OPTIONAL flag to overwrite existing files (True) or not (False) 
+            
+        progress (BOOL): OPTIONAL flag to display command line output providing additional details on the processing status
+
+    Returns:
+        None
+    """
+    
+    no_bet = kwargs.get('no_bet',False)
+    overwriteFlag = kwargs.get('overwrite',False)
+    flirtParamsFile = kwargs.get('flirt_params',None)
+    betParamsFile = kwargs.get('bet_params',None)
+    progress = kwargs.get('progress',False)
+    outputFileList = []
+
+    try:
+        now = datetime.datetime.now()
+
+        struc_regexStr = None
+        if progress:
+            print('\n\nasl_2d_flirt.py version ' + VERSION + ' dated ' + DATE + '\n')
+            print('running @ ' + now.strftime("%m-%d-%Y %H:%M:%S") + '\n')
+            print('Reading JSON Files')
+
+        try:
+            with open(flirtParamsFile) as j:
+                flirtParams = json.load(j)
+
+                #remove additional parameters from flirt parameter file
+                if 'asl_regexstr' in flirtParams:
+                    flirtParams.pop('asl_regexstr')
+                if 'asl_volume' in flirtParams:
+                    asl_volume = flirtParams.pop('asl_volume')
+                else:
+                    asl_volume = None
+                if 'cbf_regexstr' in flirtParams:
+                    cbf_regexStr = flirtParams.pop('cbf_regexstr')
+                if 'struc_regexstr' in flirtParams:
+                    struc_regexStr = flirtParams.pop('struc_regexstr')
+                if 'struc_regexstr' in flirtParams:
+                    struc_bidsLocation = flirtParams.pop('struc_bidsLocation')
+                if 'inclusion_list' in flirtParams:
+                    flirtParams.pop('inclusion_list')
+                if 'exclusion_list' in flirtParams:
+                    flirtParams.pop('exclusion_list')
+                if 'mcflirt' in flirtParams:
+                    flirtParams.pop('mcflirt')
+                if 'asl_2d' in flirtParams:
+                    flirtParams.pop('asl_2d')
+
+            if not no_bet:
+                with open(betParamsFile) as j:
+                    betParams = json.load(j)
+
+        except FileNotFoundError as e:
+            print("Error Message: {0}".format(e))
+            return
+
+
+        #check if file exists on local disk
+        # if s3_flag:
+        aslFile = IN_FILE
+        if not os.path.isfile(aslFile):
+            if progress:
+                print('ASL File Not Found')
+            return
+        elif progress:
+            print('ASL File Found: ' + aslFile)
+        
+        #create file inputs and outputs
+        aslFileDir = os.path.dirname(aslFile)
+        subName, sesNum = get_dir_identifiers(aslFileDir)
+        aslFlirtOutputDir = os.path.join(DATA_DIR,'derivatives','sub-' + subName,'ses-' + sesNum,'flirt','perf')#create base path and filename for move
+        aslBetOutputDir = os.path.join(DATA_DIR,'derivatives','sub-' + subName,'ses-' + sesNum,'bet','perf')#create base path and filename for move
+
+        #make output directory structure if it does not exist
+        if not os.path.isdir(aslFlirtOutputDir):
+            os.makedirs(aslFlirtOutputDir)
+
+        #look for accompanying structural data on disk in derivatives
+        if struc_bidsLocation == 'rawdata':
+            strucFile = glob(os.path.join(os.path.dirname(aslFileDir),'anat','*' + struc_regexStr + '*'))
+        if struc_bidsLocation == 'derivatives':
+            strucFile = glob(os.path.join(os.path.dirname(aslBetOutputDir),'anat','*' + struc_regexStr + '*'))
+        if len(strucFile) > 0:
+            strucFile = strucFile[0]
+        else:
+            print('ERROR: structural file ' + os.path.join(os.path.dirname(aslFileDir),'anat','*' + struc_regexStr + '*') + ' not found... skipping')
+            return
+
+        if progress and strucFile:
+            print('Structural File Found: ' + strucFile)
+
+
+        #Check if FLIRT output exists
+        performFlirtFlag = False
+        if (not glob(os.path.join(aslFlirtOutputDir,'*.mat')) or not glob(os.path.join(aslFlirtOutputDir,'example_asl2standard.png'))) or overwriteFlag:
+            performFlirtFlag = True
+        
+        #output exists and we are not overwriting
+        if not performFlirtFlag and progress:
+            print('Skipping FLIRT: must have found asl2highres in the output directory, in the local s3 directory or in the local scratch directory')
+
+        #output doesn't exist or we are overwriting
+        elif performFlirtFlag:
+
+            # **********************************
+            # get single volume for registration (maybe better with mean after running mcflirt?) 
+            # **********************************
+            if not asl_volume:
+                proc = subprocess.check_output(os.path.join(FSLDIR,'bin','fslval') + ' ' + aslFile + ' dim4',shell=True,encoding='utf-8')
+                totalVols = int(proc.split(' ')[0])
+                vols = int(vols/2)
+            else:
+                proc = subprocess.check_output(os.path.join(FSLDIR,'bin','fslval') + ' ' + aslFile + ' dim4',shell=True,encoding='utf-8')
+                totalVols = int(proc.split(' ')[0])
+                vols = int(vols/2)
+
+            #format output filename
+            if totalVols == 1:
+                outAslMidFile = aslFile
+                if progress:
+                    print('Input file only has a single volume, proceeding using: ' + outAslMidFile)
+
+            else:
+                aslBidsLabels = get_bids_labels(aslFile)
+                aslBidsLabels['process'] = 'fslroi'
+                aslBidsLabels['description'] = 'vol-' + str(vols)
+                aslBidsLabels['resolution'] = 'lo'
+                outAslMidFile = os.path.join(aslBetOutputDir,get_bids_filename(subject=subName,session=sesNum,**aslBidsLabels))
+
+
+                if os.path.isfile(outAslMidFile) and not overwriteFlag:
+                    if progress:
+                        print('Single volume file already exists: ' + outAslMidFile)
+
+                else:
+                    fslroi = fsl.ExtractROI(in_file=aslFile,roi_file=outAslMidFile,t_min=vols,t_size=1)
+                    fslroi.run()
+                    outputFileList.append(fslroi.inputs.roi_file)
+                    if progress:
+                        print('Creating sinlge volume file from volume #' + str(vols) + ' as ' + outAslMidFile)
+
+                    #write accompanying json file
+                    d = {'Sources': {'bids:derivatives:' + aslFile.split(DATA_DIR + os.sep)[1]}, 
+                        't_min':vols, 
+                        't_size':1, 
+                        'Output': 'bids:derivatives:' + outAslMidFile.split(DATA_DIR + os.sep)[1],
+                        'SkullStripped':'false',
+                        'Resolution': {'lo': 'matched to original ASL resolution'}
+                        }
+                    
+                    with open(outAslMidFile.split('.')[0] + '.json', 'w') as fp:
+                        json.dump(d, fp) 
+
+            # **********************************
+            # perform BET on ASL input
+            # **********************************
+            exAslFile = outAslMidFile
+            aslBidsLabels['process'] = 'fslbet'
+            aslBidsLabels['resolution'] = 'lo'
+            aslBidsLabels['description'] = 'vol-' + str(vols) + '-brain'
+            exAslFile_brain = os.path.join(aslBetOutputDir,get_bids_filename(subject=subName,session=sesNum,**aslBidsLabels))
+                    
+            #continue with BET
+            if os.path.isfile(exAslFile_brain) and not overwriteFlag:
+                if progress:
+                    print('Skipping BET: brain extracted file found: ' + exAslFile_brain)
+                    
+            else:
+                if progress:
+                    print('Performing BET on ' + exAslFile)
+                    print('\tOUTPUT: ' + exAslFile_brain)
+                btr = fsl.BET(**betParams)
+                btr.inputs.in_file = exAslFile
+                btr.inputs.out_file = exAslFile_brain
+                btr.run()
+                outputFileList.append(btr.inputs.out_file)
+                if progress:
+                    print('\tSuccess!')
+
+                #write corresponding JSON file
+                d = betParams.update({'Sources': {'bids:derivatives:' + btr.inputs.in_file.split(DATA_DIR + os.sep)[1]},
+                                      'SkullStripped': 'true',
+                                      'Resolution': {'lo': 'matched to original ASL resolution'}
+                                      })
+                with open(exAslFile_brain.split('.')[0] + '.json', 'w') as fp:
+                    json.dump(d, fp)
+
+
+                
+                # create brain mask
+                # ----------------------------------
+                aslBidsLabels['description'] = 'mid-vol-brain-mask'
+                exAslFile_brainmask = os.path.join(aslBetOutputDir,get_bids_filename(subject=subName,session=sesNum,**aslBidsLabels))
+                os.system('fslmaths ' + exAslFile_brain + ' -bin ' + exAslFile_brainmask)
+
+                #write corresponding JSON file
+                d = betParams.update({'Sources': {'bids:derivatives:' + exAslFile_brain.split(DATA_DIR + os.sep)[1]},
+                                      'SkullStripped': 'true',
+                                      'Resolution': {'lo': 'matched to original ASL resolution'}
+                                      })
+                with open(exAslFile_brainmask.split('.')[0] + '.json', 'w') as fp:
+                    json.dump(d, fp)    
+
+
+                # apply brain mask to CBF rawdata
+                # ----------------------------------
+                cbfFile = glob(os.path.join(aslFileDir,'*' + cbf_regexStr + '*'))
+                if len(cbfFile) > 0:
+                    cbfFile = cbfFile[0]
+                else:
+                    print('ERROR: cbf file ' + os.path.join(os.path.dirname(aslFileDir),'*' + struc_regexStr + '*') + ' not found... skipping')
+                    return
+
+                if progress and cbfFile:
+                    print('CBF File Found: ' + cbfFile)
+
+                cbfBidsLabels = get_bids_labels(cbfFile)
+                cbfBidsLabels['process'] = 'fslbet'
+                cbfBidsLabels['resolution'] = 'LR'
+                cbfBidsLabels['description'] = 'mid-vol-brain'
+                cbfFile_brain = os.path.join(aslBetOutputDir,get_bids_filename(subject=subName,session=sesNum,**cbfBidsLabels))
+                os.system('fslmaths ' + cbfFile + ' -mas ' + exAslFile_brainmask + ' ' + cbfFile_brain)
+
+                #write corresponding JSON file
+                d = betParams.update({'Sources': {'bids:derivatives:' + exAslFile_brainmask.split(DATA_DIR + os.sep)[1]},
+                                      'SkullStripped': 'true',
+                                      'Resolution': {'lo': 'matched to original ASL resolution'}
+                                      })
+                with open(cbfFile_brain.split('.')[0] + '.json', 'w') as fp:
+                    json.dump(d, fp)   
+
+
+            # **********************************
+            # run FLIRT on ASL
+            # **********************************
+            flt = fsl.FLIRT(**flirtParams)
+            flt.inputs.in_file = exAslFile_brain
+            flt.inputs.reference = strucFile
+            aslBidsLabels['process'] = 'flirt'
+            aslBidsLabels['description'] = 'mid-vol-brain'
+            aslBidsLabels['space'] = 'individual'
+            aslBidsLabels['resolution'] = 'hi'
+            flt.inputs.out_file = os.path.join(aslFlirtOutputDir,get_bids_filename(subject=subName,session=sesNum,**aslBidsLabels))
+            flt.inputs.out_matrix_file = os.path.join(aslFlirtOutputDir,'asl2highres.mat')
+            if progress:
+                print('Performing FLIRT:')
+                print('\tInput File: ' + flt.inputs.in_file)
+                print('\tReference: ' + flt.inputs.reference)
+                print('\tOut File: ' + flt.inputs.out_file)
+                print('\tOut Matrix File: ' + flt.inputs.out_matrix_file)
+            flt.run()
+            outputFileList.append(flt.inputs.out_file)
+            outputFileList.append(flt.inputs.out_matrix_file)
+            if progress:
+                print('\tSuccess!')
+
+            #write corresponding JSON files
+            d = flirtParams.update({
+                'Sources': {'bids:derivatives:' + flt.inputs.in_file.split(DATA_DIR + os.sep)[1],
+                            'bids:rawdata:' + flt.inputs.reference.split(DATA_DIR + os.sep)[1]},
+                'SkullStripped': 'true',
+                'Resolution': {'hi': 'matched to original high-resolution T1'}
+                })
+            with open(exAslFile_brain.split('.')[0] + '.json', 'w') as fp:
+                json.dump(d, fp)   
+
+            #matching .mat file
+            d = flirtParams.update({
+                'Sources': {'bids:derivatives:' + flt.inputs.in_file.split(DATA_DIR + os.sep)[1],
+                            'bids:rawdata:' + flt.inputs.reference.split(DATA_DIR + os.sep)[1]}
+                })
+            with open(flt.inputs.out_matrix_file.split('.')[0] + '.json', 'w') as fp:
+                json.dump(d, fp)  
+
+
+
+            # apply registration to corresponding CBF map
+            # ----------------------------------
+            applyxfm = fsl.ApplyXFM()
+            applyxfm.inputs.in_file = cbfFile_brain
+            applyxfm.inputs.reference = strucFile
+            applyxfm.inputs.apply_xfm = True
+
+            cbfBidsLabels['process'] = 'flirt'
+            cbfBidsLabels['description'] = 'cbf-brain'
+            cbfBidsLabels['space'] = 'individual'
+            cbfBidsLabels['resolution'] = 'hi'
+            applyxfm.inputs.out_file = os.path.join(aslFlirtOutputDir,get_bids_filename(subject=subName,session=sesNum,**cbfBidsLabels))
+            applyxfm.inputs.in_matrix_file = flt.inputs.out_matrix_file
+            if progress:
+                print('Applying transformation to CBF map dataset to produce ' + applyxfm.inputs.out_file)
+            applyxfm.run()
+            # os.system((os.path.join(FSLDIR,'bin','flirt') + 
+            #            ' -in ' + aslFile + 
+            #            ' -ref ' + strucFile + 
+            #            ' -out ' + os.path.join(kwargs['scratch_dir'],aslFileDir,aslFileBase[0] + '_highres.nii.gz') + 
+            #            ' -applyxfm -init ' + os.path.join(aslOutputDir,'example_asl2highres.mat')))
+            outputFileList.append(applyxfm.inputs.out_file)
+
+            # write BIDS sidecar
+            d = flirtParams.update({
+                'Sources': {'bids:derivatives:' + applyxfm.inputs.in_file.split(DATA_DIR + os.sep)[1],
+                            'bids:rawdata:' + applyxfm.inputs.reference.split(DATA_DIR + os.sep)[1],
+                            'bids:derivatives:' + applyxfm.inputs.in_matrix_file}
+                })
+            with open(flt.inputs.out_matrix_file.split('.')[0] + '.json', 'w') as fp:
+                json.dump(d, fp)  
+
+
+            # invert registration matrix
+            # ----------------------------------
+            invt = fsl.ConvertXFM()
+            invt.inputs.in_file = os.path.join(aslFlirtOutputDir,'asl2highres.mat')
+            invt.inputs.invert_xfm = True
+            invt.inputs.out_file = os.path.join(aslFlirtOutputDir,'highres2asl.mat')
+            invt.run() 
+            outputFileList.append(invt.inputs.out_file)
+
+            
+            # create registration PNG graphic
+            # ----------------------------------
+            flirt_pngappend(flt.inputs.out_file,strucFile,os.path.join(aslFlirtOutputDir,'asl2highres.png'))
+            outputFileList.append(os.path.join(aslFlirtOutputDir,'asl2highres.png'))
+            flirt_pngappend(applyxfm.inputs.out_file,strucFile,os.path.join(aslFlirtOutputDir,'cbf2highres.png'))
+            outputFileList.append(os.path.join(aslFlirtOutputDir,'cbf2highres.png'))
+
+
+
+
+
+            strucRegPath = os.path.join(os.path.dirname(aslFlirtOutputDir),'anat')
+            strucRegMatrix = os.path.join(strucRegPath,'highres2standard.mat')
+            if not os.path.isfile(strucRegMatrix):
+                print('Warning: cannot find structural registration file. Skipping asl2standard registration')
+                return
+
+            if progress:
+                print('Structural to standard registration found: ' + strucRegMatrix)
+
+            #find concat asl2highres with highres2standard
+            invt = fsl.ConvertXFM()
+            invt.inputs.in_file = os.path.join(aslFlirtOutputDir,'asl2highres.mat')
+            invt.inputs.in_file2 = strucRegMatrix
+            invt.inputs.concat_xfm = True
+            invt.inputs.out_file = os.path.join(aslFlirtOutputDir,'asl2standard.mat')
+            if progress:
+                print('Concatenating asl2highres.mat with highres2standard.mat to form asl2standard.mat:')
+                print('\tInput File: ' + invt.inputs.in_file)
+                print('\tInput FIle 2: ' + invt.inputs.in_file2)
+                print('\tOut File: ' + invt.inputs.out_file)
+            invt.run()
+            outputFileList.append(invt.inputs.out_file)
+            if progress:
+                print('\tSuccess!')
+
+            #find inverse
+            invt = fsl.ConvertXFM()
+            invt.inputs.in_file = os.path.join(aslFlirtOutputDir,'asl2standard.mat')
+            invt.inputs.invert_xfm = True
+            invt.inputs.out_file = os.path.join(aslFlirtOutputDir,'standard2asl.mat')
+            invt.run() 
+            outputFileList.append(invt.inputs.out_file)
+
+
+
+            #apply example_asl2standard to 4D dataset
+            applyxfm = fsl.ApplyXFM()
+            applyxfm.inputs.in_file = exAslFile_brain
+            applyxfm.inputs.reference = REF_FILE
+            applyxfm.inputs.apply_xfm = True
+            aslBidsLabels = get_bids_labels(exAslFile_brain)
+            aslBidsLabels['process'] = 'flirt'
+            aslBidsLabels['resolution'] = '2mm'
+            aslBidsLabels['space'] = 'MNI152NLin6ASym'
+            cbfFile_brain = os.path.join(aslBetOutputDir,get_bids_filename(subject=subName,session=sesNum,**cbfBidsLabels))
+            if '1mm' in REF_FILE:
+                aslBidsLabels['resolution'] = '1mm'
+                applyxfm.inputs.out_file = os.path.join(aslFlirtOutputDir,get_bids_filename(subject=subName,session=sesNum,**aslBidsLabels))
+            else:
+                aslBidsLabels['resolution'] = '2mm'
+                applyxfm.inputs.out_file = os.path.join(aslFlirtOutputDir,get_bids_filename(subject=subName,session=sesNum,**aslBidsLabels))
+            applyxfm.inputs.in_matrix_file = os.path.join(aslFlirtOutputDir,'asl2standard.mat')
+            if progress:
+                print('Applying ' + applyxfm.inputs.in_matrix_file + ' to ' + applyxfm.inputs.in_file)
+                print('\tOut File: ' + applyxfm.inputs.out_file)
+            applyxfm.run()
+
+            #write JSON sidecar
+            d = {
+                'Sources': {'bids:derivatives:' + applyxfm.inputs.in_file.split(DATA_DIR)[1],
+                            'bids:derivatives:' + applyxfm.inputs.in_matrix_file.split(DATA_DIR)[1]},
+                'Resolution': {'1mm': 'MNI152T1_1mm_brain.nii.gz',
+                               '2mm': 'MNI152T1_2mm_brain.nii.gz'},
+                'SkullStripped': 'true'
+                }
+            with open(applyxfm.inputs.out_file.split('.')[0] + '.json', 'w') as fp:
+                json.dump(d, fp)  
+
+
+
+            #apply example_asl2standard to 4D dataset
+            applyxfm = fsl.ApplyXFM()
+            applyxfm.inputs.in_file = cbfFile_brain
+            applyxfm.inputs.reference = REF_FILE
+            applyxfm.inputs.apply_xfm = True
+            aslBidsLabels = get_bids_labels(cbfFile_brain)
+            aslBidsLabels['process'] = 'flirt'
+            aslBidsLabels['resolution'] = '2mm'
+            aslBidsLabels['space'] = 'MNI152NLin6ASym'
+            cbfFile_brain = os.path.join(aslBetOutputDir,get_bids_filename(subject=subName,session=sesNum,**cbfBidsLabels))
+            if '1mm' in REF_FILE:
+                aslBidsLabels['resolution'] = '1mm'
+                applyxfm.inputs.out_file = os.path.join(aslFlirtOutputDir,get_bids_filename(subject=subName,session=sesNum,**aslBidsLabels))
+            else:
+                aslBidsLabels['resolution'] = '2mm'
+                applyxfm.inputs.out_file = os.path.join(aslFlirtOutputDir,get_bids_filename(subject=subName,session=sesNum,**aslBidsLabels))
+            applyxfm.inputs.in_matrix_file = os.path.join(aslFlirtOutputDir,'asl2standard.mat')
+            if progress:
+                print('Applying ' + applyxfm.inputs.in_matrix_file + ' to ' + applyxfm.inputs.in_file)
+                print('\tOut File: ' + applyxfm.inputs.out_file)
+            applyxfm.run()
+
+            #write JSON sidecar
+            d = {
+                'Sources': {'bids:derivatives:' + applyxfm.inputs.in_file.split(DATA_DIR)[1],
+                            'bids:derivatives:' + applyxfm.inputs.in_matrix_file.split(DATA_DIR)[1]},
+                'Resolution': {'1mm': 'MNI152T1_1mm_brain.nii.gz',
+                               '2mm': 'MNI152T1_2mm_brain.nii.gz'},
+                'SkullStripped': 'true'
+                }
+            with open(applyxfm.inputs.out_file.split('.')[0] + '.json', 'w') as fp:
+                json.dump(d, fp)  
+
+
+
+            #run pngappend
+            flirt_pngappend(applyxfm.inputs.out_file,applyxfm.inputs.reference,os.path.join(aslFlirtOutputDir,'asl2standard.png'))
+            outputFileList.append(os.path.join(aslFlirtOutputDir,'asl2standard.png'))
+
+
+            print('\n\nFLIRT (asl_flirt.py, version ' + VERSION + ' ' + DATE + ') has successfully completed for input file: ' + aslFile + '\nThe files that have been produced:')
+            print(*outputFileList, sep = "\n\t")
+
+
+    except Exception as e:
+            print("Error Message: {0}".format(e))
+            return
+
+
+def main():
+    """
+    The entry point of this program.
+    """
+    options = parse_arguments()
+    argsDict = {}
+    if options.BET_PARAMS:
+        argsDict['bet_params'] = options.BET_PARAMS
+    if options.FLIRT_PARAMS:
+        argsDict['flirt_params'] = options.FLIRT_PARAMS
+    if options.NO_BET:
+        argsDict['no_bet'] = options.NO_BET
+    if options.OVERWRITE:
+        argsDict['overwrite'] = options.OVERWRITE
+    if options.progress:
+        argsDict['progress'] = options.progress
+    if options.log:
+        argsDict['log'] = options.log
+    asl_2d_flirt(options.IN_FILE,options.REF_FILE,**argsDict)
+
+
+if __name__ == '__main__':
+    main()
+
+    
+
+

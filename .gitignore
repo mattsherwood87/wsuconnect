@@ -1,9 +1,9 @@
-credentials.json
+wsuconnect/credentials.json
 MATLAB/*
-distutils/*
-logs/*
-old_versions/*
+wsuconnect/distutils/*
+wsuconnect/logs/*
+wsuconnect/old_versions/*
 support_tools/old_versions/*
 .license
-data/glasser/*
-data/templateflow/*
+wsuconnect/data/glasser/*
+wsuconnect/data/templateflow/*
