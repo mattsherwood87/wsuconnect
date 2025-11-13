@@ -10,14 +10,41 @@ by these analysis tools to allow maximum flexibility of their implementation. Sp
 
 .. note:: At this time, these functions only support command-line usage. 
 
-.. include:: connect_create_project_db.rst
+.. 
+    include:: connect_create_project_db.rst
+        
+    include:: connect_create_raw_nii.rst
 
-.. include:: connect_create_raw_nii.rst
+    include:: connect_dcm2nii.rst
 
-.. include:: connect_dcm2nii.rst
+    include:: connect_flirt.rst
 
-.. include:: connect_flirt.rst
+connect_dcm2nii.py
+=======================
 
+.. argparse::
+   :ref: wsuconnect.connect_dcm2nii.parser
+   :prog: connect_dcm2nii
+   :nodefault:
+   :nodefaultconst:
+
+connect_flirt.py
+=======================
+
+.. argparse::
+   :ref: wsuconnect.connect_flirt.parser
+   :prog: connect_flirt
+   :nodefault:
+   :nodefaultconst:
+..
+    Python Implementation
+    ---------------------
+    automodule:: wsuconnect.support_tools.feat_full_firstlevel
+    :members:
+    :special-members:
+
+
+.. _flirt_pngappend:
 ..
     .. include:: connect_mri_system_log_grabber.rst
 

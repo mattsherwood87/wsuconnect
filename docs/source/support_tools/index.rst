@@ -18,7 +18,7 @@ described in the previous section.
 bids
 ====
 
-.. note:: the functions of support_tools.bids do not support command line operation.
+.. note:: no cli support.
 
 Python Implementation
 ---------------------
@@ -32,7 +32,7 @@ Python Implementation
 condor
 ======
 
-.. note:: the functions of support_tools.condor do not support command line operation.
+.. note:: no cli support.
 
 Python Implementation
 ---------------------
@@ -46,10 +46,6 @@ Python Implementation
 
 convert_dicoms.py
 =================
-
-.. 
-    autoprogram:: wsuconnect.support_tools.convert_dicoms:parser
-    :prog: convert_dicoms.py
 
 .. argparse::
    :ref: wsuconnect.support_tools.convert_dicoms.parser
@@ -71,7 +67,7 @@ Python Implementation
 copy_dirs.py
 ============
 
-.. note:: the function of support_tools.copy_dirs does not support command line operation.
+.. note:: no cli support.
 
 Python Implementation
 ---------------------
@@ -86,9 +82,11 @@ Python Implementation
 dti_flirt.py
 ============
 
-.. 
-    autoprogram:: wsuconnect.support_tools.dti_flirt:parser
-    :prog: dti_flirt.py
+.. argparse::
+   :ref: wsuconnect.support_tools.dti_flirt.parser
+   :prog: dti_flirt
+   :nodefault:
+   :nodefaultconst:
 
 Python Implementation
 ---------------------
@@ -103,9 +101,11 @@ Python Implementation
 dti_preprocess_wf.py
 ====================
 
-.. 
-    autoprogram:: wsuconnect.support_tools.dti_preprocess_wf:parser
-    :prog: dti_preprocess.py
+.. argparse::
+   :ref: wsuconnect.support_tools.dti_preprocess_wf.parser
+   :prog: dti_preprocess_wf
+   :nodefault:
+   :nodefaultconst:
 
 Python Implementation
 ---------------------
@@ -120,7 +120,7 @@ Python Implementation
 evaluate_source_file_transfer.py
 ================================
 
-.. note:: the function of support_tools.evaluate_source_file_transfer does not support command line operation.
+.. note:: no cli support.
 
 Python Implementation
 ---------------------
@@ -135,9 +135,11 @@ Python Implementation
 feat_full_firstlevel.py
 =======================
 
-.. 
-    autoprogram:: wsuconnect.support_tools.feat_full_firstlevel:parser
-    :prog: feat_full_firstlevel.py
+.. argparse::
+   :ref: wsuconnect.support_tools.feat_full_firstlevel.parser
+   :prog: feat_full_firstlevel
+   :nodefault:
+   :nodefaultconst:
 
 Python Implementation
 ---------------------
@@ -152,7 +154,7 @@ Python Implementation
 flirt_pngappend.py
 ==================
 
-.. note:: the function of support_tools.evaluate_raw_file_transfer does not support command line operation.
+.. note:: no cli support.
 
 Python Implementation
 ---------------------
@@ -167,9 +169,11 @@ Python Implementation
 flirt.py
 ========
 
-.. 
-    autoprogram:: wsuconnect.support_tools.flirt:parser
-    :prog: flirt.py
+.. argparse::
+   :ref: wsuconnect.support_tools.flirt.parser
+   :prog: flirt
+   :nodefault:
+   :nodefaultconst:
 
 Python Implementation
 ---------------------
@@ -184,9 +188,11 @@ Python Implementation
 fsreconall_stage1_wf.py
 =======================
 
-.. 
-    autoprogram:: wsuconnect.support_tools.fsreconall_stage1_wf:parser
-    :prog: fsreconall_stage1.py
+.. argparse::
+   :ref: wsuconnect.support_tools.fsreconall_stage1.parser
+   :prog: fsreconall_stage1
+   :nodefault:
+   :nodefaultconst:
 
 Python Implementation
 ---------------------
@@ -201,9 +207,11 @@ Python Implementation
 fsreconall_stage2_wf.py
 =======================
 
-.. 
-    autoprogram:: wsuconnect.support_tools.fsreconall_stage2_wf:parser
-    :prog: fsreconall_stage2.py
+.. argparse::
+   :ref: wsuconnect.support_tools.fsreconall_stage2.parser
+   :prog: fsreconall_stage2
+   :nodefault:
+   :nodefaultconst:
 
 Python Implementation
 ---------------------
@@ -218,7 +226,7 @@ Python Implementation
 mysql.py
 ========
 
-.. note:: the functions of support_tools.mysql do not support command line operation.
+.. note:: no cli support.
 
 Python Implementation
 ---------------------
@@ -233,7 +241,7 @@ Python Implementation
 prepare_examcard_html.py
 ========================
 
-.. note:: the function of support_tools.prepare_examcard_html does not support command line operation.
+.. note:: no cli support.
 
 Python Implementation
 ---------------------
@@ -248,7 +256,7 @@ Python Implementation
 remove_dirs.py
 ==============
 
-.. note:: the function of support_tools.remove_dirs does not support command line operation.
+.. note:: no cli support.
 
 Python Implementation
 ---------------------
@@ -263,7 +271,7 @@ Python Implementation
 RestToolbox.py
 ==============
 
-.. note:: the functions of support_tools.RestToolbox do not support command line operation.
+.. note:: no cli support.
 
 Python Implementation
 ---------------------
