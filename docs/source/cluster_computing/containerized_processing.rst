@@ -39,8 +39,9 @@ Workflow Summary
 2. **Container Launch**
    - Each task launches a container from a predefined image (e.g., ``wsuconnect/neuro``).
    - Volumes are mounted to map input data directories:
-     ::
-         docker run --rm -v /mydata:/data wsuconnect/neuro
+
+    .. code-block:: shell-session
+        $ docker run --rm -v /mydata:/data wsuconnect/neuro
 
 3. **Parallel Execution**
    - The scheduler distributes multiple Dockerized jobs across available compute nodes.
