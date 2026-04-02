@@ -22,13 +22,16 @@ workloads to be dispatched transparently from the scheduler.
 Images
 ------
 
-The CoNNECT NPC hosts its own set of docker containers. The main container is 
+The CoNNECT NPC hosts its own set of docker images. The main image is 
 wsuconnect/neuro. This is a Ubuntu 24.04 image loaded with the open-source software 
-described below and GUI access via noVNC. We also host an additional MATLAB image 
+described below and GUI access via noVNC. There is a gpu variant which provides support
+for Nvidia/cuda called wsuconnect/neuro-gpu. We also host an additional MATLAB image 
 wsuconnect/matlab:r2024b that allows GUI access through noVNC. Our own Rstudio image 
 wsuconnect/rstudio enables access to R and Rstudio (via rstudio-server) built using 
 rocker/rstudio base image. Additional images also available include pennlinc/aslprep, 
 nipreps/fmriprep, and bids/validator.
+
+Docker containers can be manually started using the commands below.
 
 Helpful Docker Commands
 ------------------------
