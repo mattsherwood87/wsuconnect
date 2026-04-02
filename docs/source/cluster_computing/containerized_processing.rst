@@ -97,6 +97,7 @@ Helpful Docker Commands
 .. seealso:: 
    Additional helpful rstudio docker commands can be found at the links below:
    https://rocker-project.org/images/versioned/rstudio.html
+   and 
    https://davetang.org/muse/2021/04/24/running-rstudio-server-with-docker/
 
 
