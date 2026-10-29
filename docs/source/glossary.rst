@@ -149,11 +149,5 @@ Computing and Storage
    storage mount
       The local mount of a :term:`storage bucket` on a CoNNECT node, written as ``<storage_mount>`` in this manual.
 
-   Amazon S3
-      Amazon Simple Storage Service, the cloud object storage used to store project data.
-
-   S3 bucket
-      A container for files (objects) in :term:`Amazon S3`. Written as *S3 bucket*, with a lowercase *b*.
-
    MySQL
       The relational database system used to index project files. Written as *MySQL*.

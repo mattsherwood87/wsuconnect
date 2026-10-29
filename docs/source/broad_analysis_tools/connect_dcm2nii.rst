@@ -10,7 +10,7 @@ are queried via MySQL for DICOM images. These DICOM images are contained within 
 conversion. The NIfTI images created are then stored in the same sourcedata directory as their source DICOM directory.
 
 .. seealso::
-    `dcm2niix <https://www.nitrc.org/plugins/mwiki/index.php/dcm2nii:MainPage>`_ is the most common tool for DICOM-to-NIfTI conversion, and is implemented on our Ubuntu 20.04 CoNNECT NPC nodes.
+    `dcm2niix <https://www.nitrc.org/plugins/mwiki/index.php/dcm2nii:MainPage>`_ is the most common tool for DICOM-to-NIfTI conversion, and is implemented on our Ubuntu 24.04 CoNNECT NPC nodes.
 
 This function can be executed via command-line only:
 

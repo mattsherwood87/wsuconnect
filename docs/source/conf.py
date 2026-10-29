@@ -41,7 +41,7 @@ intersphinx_disabled_domains = ['std']
 
 templates_path = ['_templates']
 
-exclude_patterns = ['_build','Thumbs.db','.DS_Store']
+exclude_patterns = ['_build','Thumbs.db','.DS_Store','support_tools/read_credentials.rst']
 
 
 
