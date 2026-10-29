@@ -16,10 +16,10 @@ their jumpbox VM via VMware Horizon when connected to WSU's secure network or LA
 **Master Node**
 
 The master node is the main controller of the CoNNECT NPC. Users access the master node via secure shell (SSH) connections through their 
-jumpbox. The master node has 40 physical cores and 756 GB of RAM, and runs Ubuntu 20.04. 
+jumpbox. The master node has 40 physical cores and 756 GB of RAM, and runs Ubuntu 24.04. 
 
 **Core Node(s)**
 
-Core nodes are the workhorse of the CoNNECT NPC. The core nodes run the same operating system as the master, Ubuntu 20.04. Currently, there 
+Core nodes are the workhorse of the CoNNECT NPC. The core nodes run the same operating system as the master, Ubuntu 24.04. Currently, there 
 is a single core node with 40 physical cores and 756 GB of RAM. Processing can be run on the core node(s) through :term:`HTCondor` by supplying the ``--submit``
 option to the programs described within this manual.
