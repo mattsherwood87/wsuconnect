@@ -114,7 +114,8 @@ Workflow Summary
    - Wrappers for Python job submission are defined in the custom *support tools*,
      such as :mod:`wsuconnect.support_tools.condor`.
 
-2. **Container Launch**
+2. **Container Launch (optional)**
+   - Jobs can run in a Docker container (docker universe) or directly on the node, such as a Python or bash script (vanilla universe).
    - Each task launches a container from a predefined image (e.g., ``wsuconnect/neuro``).
    - Volumes are mounted to map input data directories:
 
@@ -123,7 +124,7 @@ Workflow Summary
         $ docker run --rm -v /mydata:/data wsuconnect/neuro
 
 3. **Parallel Execution**
-   - The scheduler distributes multiple Dockerized jobs across available compute nodes.
+   - The scheduler distributes multiple jobs across available compute nodes.
    - Each node pulls the image from the local Docker cache.
 
 4. **File Access**
