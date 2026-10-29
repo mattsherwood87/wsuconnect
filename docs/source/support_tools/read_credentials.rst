@@ -8,8 +8,8 @@ Data collected and produced for each project follow the `BIDS specification <htt
 
 |
 
-A single JSON file describes various parameters for each project/program. This file is ‘credentials.json’ and is located in the main code directory on the mounted centralized storage 
-(/resshare/general_processing_codes). The table below outlines the keys and their associated descriptions for a project in the credentials file. Each project in the credentials file 
+A single JSON file describes various parameters for each project/program. This file is ``credentials.json`` and is located in the wsuconnect package's ``data/`` directory 
+(``wsuconnect/data/credentials.json``). The table below outlines the keys and their associated descriptions for a project in the credentials file. Each project in the credentials file 
 should be defined as its own key, named by the protocol number assigned by its IRB of record. For pilot studies, a short name may be used in place of the IRB number.
 
 .. _credentials_main_table:
@@ -64,7 +64,7 @@ should be defined as its own key, named by the protocol number assigned by its I
 |
 .. py:function:: read_credentials(inDir, basename)
     
-    Read the credential file (credentials.json) from the general_processing_codes directory.
+    Read the credential file (credentials.json) from the wsuconnect package's ``data/`` directory.
 
     This program returns the Project credentials into the custom creds class (**NEEDS REFERENCE**), which should be imported prior to calling read_credentials()
 
