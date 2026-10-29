@@ -62,23 +62,20 @@ version is 7.1.1; however, version 6 is installed.
 The FreeSurfer package is located at /usr/share/freesurfer. This path is stored in the FREESURFER_DIR variable available 
 in bash and C shell terminals. 
 
-common functions: 
-
-``recon-all`` is the main FreeSurfer command to begin the cortical reconstruction process. The entire process takes 12-24hrs to complete. Preferred command 
-line arguments are provided in Table 3. 
-
-.. note:: CREATE TABLE
+**Common Functions**
 
 .. code-block:: shell-session
 
     $ recon-all 
 
-
-``freeview`` is the volume and surface viewer used to assess quality of cortical reconstruction.
+Main FreeSurfer command to begin the cortical reconstruction process. The entire process takes 12-24hrs to complete. Preferred command 
+line arguments are provided in Table 3. 
 
 .. code-block:: shell-session
 
     $ freeview
+
+Volume and surface viewer used to assess the quality of cortical reconstruction.
 
 
 FMRIB Software Library (FSL)
