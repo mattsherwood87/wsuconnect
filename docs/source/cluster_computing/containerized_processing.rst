@@ -15,19 +15,19 @@ structure of the CoNNECT workflow.
 Cluster Integration
 -------------------
 
-Docker images are executed through a batch submission system **HTCondor**.
+Docker images are executed through the :term:`HTCondor` batch submission system.
 Each node in the cluster is configured with Docker, allowing containerized 
 workloads to be dispatched transparently from the scheduler.
 
 Images
 ------
 
-The CoNNECT NPC hosts its own set of docker images. The main image is 
-wsuconnect/neuro. This is a Ubuntu 24.04 image loaded with the open-source software 
-described below and GUI access via noVNC. There is a gpu variant which provides support
-for Nvidia/cuda called wsuconnect/neuro-gpu. We also host an additional MATLAB image 
-wsuconnect/matlab:r2024b that allows GUI access through noVNC. Our own Rstudio image 
-wsuconnect/rstudio enables access to R and Rstudio (via rstudio-server) built using 
+The CoNNECT NPC hosts its own set of Docker images. The main image is 
+wsuconnect/neuro. This is an Ubuntu 24.04 image loaded with the open-source software 
+described below and GUI access via noVNC. A GPU variant, wsuconnect/neuro-gpu, provides support
+for NVIDIA CUDA. We also host an additional MATLAB image 
+wsuconnect/matlab:r2024b that allows GUI access through noVNC. Our own RStudio image 
+wsuconnect/rstudio enables access to R and RStudio (via RStudio Server) and is built from the 
 rocker/rstudio base image. Additional images also available include pennlinc/aslprep, 
 nipreps/fmriprep, and bids/validator.
 
@@ -40,15 +40,15 @@ Helpful Docker Commands
 
     $ docker run -it --rm wsuconnect/neuro
 
-    Run  wsuconnect/neuro container for bash entrypoint.
+    Run the wsuconnect/neuro container with a bash entrypoint.
 
 
 .. code-block:: shell-session
 
     $ docker run -it --rm -v /path/to/local/drive:/container/path:rw wsuconnect/neuro 
 
-    Bind mount a local path to the wsuconnect/neuro container for bash entrypoint. Read-write 
-    options are: read-only (ro) and read-write (rw).
+    Bind mount a local path into the wsuconnect/neuro container with a bash entrypoint. Mount 
+    options are read-only (ro) and read-write (rw).
 
 
 .. code-block:: shell-session
@@ -63,7 +63,7 @@ Helpful Docker Commands
 
     $ docker run -it --rm -p 6080:6080 -v /resshare/wsuconnect/wsuconnect/licenses:/licenses:rw wsuconnect/matlab:r2024b -vnc
 
-    For MATLAB, GUI port access (6080) and license path should be passed. Once running, point a browser to 
+    For MATLAB, pass the GUI port (6080) and the license path. Once running, point a browser to 
     http://localhost:6080/vnc.html and use the password matlab.
 
 
@@ -71,8 +71,8 @@ Helpful Docker Commands
 
     $ docker run -it --rm -p 127.0.0.1:8787:8787 wsuconnect/rstudio
 
-    For Rstudio, you can run this to pass the rstudio-server html port 8787. Once running,
-    point a browser to http://127.0.0.1:8787 to access Rstudio. This will prompt a login using
+    For RStudio, publish the RStudio Server HTTP port 8787. Once running,
+    point a browser to http://127.0.0.1:8787 to access RStudio. This prompts for a login as the
     user rstudio.
 
 
@@ -87,7 +87,7 @@ Helpful Docker Commands
 
     $ docker run -it --rm -e DISABLE_AUTH=true -p 127.0.0.1:8787:8787 wsuconnect/rstudio
 
-    Set environment variable DISABLE_AUTH to bypass user login to Rstudio.
+    Set environment variable DISABLE_AUTH to bypass the RStudio login.
 
 
 .. code-block:: shell-session
@@ -95,10 +95,10 @@ Helpful Docker Commands
     $ docker run -it --rm -e GROUPID=1000 -p 127.0.0.1:8787:8787 wsuconnect/rstudio
 
     Set environment variable GROUPID to change the group ID of the rstudio user. This is 
-    necessary when mounting drives with specific group priveleges.
+    necessary when mounting drives with specific group privileges.
 
 .. seealso:: 
-   Additional helpful rstudio docker commands can be found at the links below:
+   Additional helpful RStudio Docker commands can be found at the links below:
    https://rocker-project.org/images/versioned/rstudio.html
    and 
    https://davetang.org/muse/2021/04/24/running-rstudio-server-with-docker/
@@ -109,9 +109,9 @@ Workflow Summary
 ----------------
 
 1. **Job Submission**
-   - Jobs are submitted using `condor_submit` or `qsub`, depending on the site scheduler.
-   - Jobs can also be submitted from python via pycondor.
-   - Wrappers for various python submission commands defined in custom *support tools*,
+   - Jobs are submitted to :term:`HTCondor` using ``condor_submit`` or ``condor_qsub``.
+   - Jobs can also be submitted from Python via PyCondor.
+   - Wrappers for Python job submission are defined in the custom *support tools*,
      such as :mod:`wsuconnect.support_tools.condor`.
 
 2. **Container Launch**
@@ -119,6 +119,7 @@ Workflow Summary
    - Volumes are mounted to map input data directories:
 
     .. code-block:: shell-session
+
         $ docker run --rm -v /mydata:/data wsuconnect/neuro
 
 3. **Parallel Execution**
@@ -127,7 +128,7 @@ Workflow Summary
 
 4. **File Access**
    - Shared network storage (e.g., NFS) ensures that containers access consistent 
-   datasets regardless of node location.
+     datasets regardless of node location.
 
 5. **Cleanup and Logging**
-   - Container logs and exit codes are collected per job by Condor.
+   - Container logs and exit codes are collected per job by HTCondor.

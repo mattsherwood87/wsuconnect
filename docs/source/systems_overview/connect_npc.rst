@@ -9,17 +9,17 @@ campus network.
 
 **Jumpbox**
 
-The jumpbox is a user-specific virtual machine (VM) running either windows or linux. The jumpbox is NIST and HIPPA compliant. A user accesses 
+The jumpbox is a user-specific virtual machine (VM) running either Windows or Linux. The jumpbox is NIST and HIPAA compliant. A user accesses 
 their jumpbox VM via VMware Horizon when connected to WSU's secure network or LAN, or connected to the network via virtual private network 
 (VPN). Users can access the remainder of the CoNNECT NPC via their jumpbox.
 
 **Master Node**
 
 The master node is the main controller of the CoNNECT NPC. Users access the master node via secure shell (SSH) connections through their 
-jumpbox. The master node has 40 physical cores and 756GB RAM, and is running Ubuntu 20.04. 
+jumpbox. The master node has 40 physical cores and 756 GB of RAM, and runs Ubuntu 20.04. 
 
 **Core Node(s)**
 
 Core nodes are the workhorse of the CoNNECT NPC. The core nodes run the same operating system as the master, Ubuntu 20.04. Currently, there 
-is a single core node with 40 physical cores and 756GB RAM. Processing can be conducted utilizing the core node(s) by supplying the *submit*
-option to the programs described within this manual
+is a single core node with 40 physical cores and 756 GB of RAM. Processing can be run on the core node(s) through :term:`HTCondor` by supplying the ``--submit``
+option to the programs described within this manual.
