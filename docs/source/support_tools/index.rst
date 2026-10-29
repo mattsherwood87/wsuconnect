@@ -9,7 +9,81 @@ Several custom support tools have been created to aid in the batch processing. T
 described in the previous section.
 
 
-.. note:: FIGURE TO BE INSERTED
+.. _support_tools_table:
+
+.. list-table:: CoNNECT support tools. *CLI*: the tool can be run from the command line. *Docker*: a connect_*.py script can run
+   the tool in the wsuconnect/neuro Docker container through :term:`HTCondor`.
+   :widths: 30 10 10 50
+   :header-rows: 1
+
+   * - **Tool**
+     - **CLI**
+     - **Docker**
+     - **Function**
+   * - :ref:`bids <bids_python>`
+     - No
+     - No
+     - Builds BIDS filenames and reads entity labels from them
+   * - :ref:`condor <condor_python>`
+     - No
+     - No
+     - Creates HTCondor submit files (Docker or vanilla universe)
+   * - :ref:`convert_dicoms.py <convert_dicoms_python>`
+     - Yes
+     - Yes
+     - Converts DICOM images to NIfTI images with dcm2niix
+   * - :ref:`copy_dirs.py <copy_dirs_python>`
+     - Yes
+     - No
+     - Copies or moves directories to one destination
+   * - :ref:`dti_flirt.py <dti_flirt_python>`
+     - Yes
+     - Yes
+     - FLIRT registration of DWI images to structural and standard space
+   * - :ref:`dti_preprocess_wf.py <dti_preprocess_python>`
+     - Yes
+     - Yes
+     - DWI preprocessing workflow (eddy, DTIFIT)
+   * - :ref:`evaluate_source_file_transfer.py <evaluate_source_file_transfer_python>`
+     - Yes
+     - No
+     - Checks that all expected files were transferred for a subject/session
+   * - :ref:`feat_full_firstlevel.py <feat_full_firstlevel_python>`
+     - Yes
+     - Yes
+     - Runs FSL FEAT first-level fMRI analysis
+   * - :ref:`flirt_pngappend.py <flirt_pngappend>`
+     - Yes
+     - No
+     - Creates a PNG overlay image to check registration
+   * - :ref:`flirt.py <flirt_python>`
+     - Yes
+     - Yes
+     - FLIRT registration, with optional brain extraction
+   * - :ref:`fsreconall_stage1_wf.py <fsreconall_stage1_python>`
+     - Yes
+     - Yes
+     - FreeSurfer recon-all, stage 1
+   * - :ref:`fsreconall_stage2_wf.py <fsreconall_stage2_python>`
+     - Yes
+     - Yes
+     - FreeSurfer recon-all, stages 2 and 3
+   * - :ref:`mysql <mysql_python>`
+     - No
+     - No
+     - Queries and updates the project MySQL tables
+   * - :ref:`prepare_examcard_html.py <prepare_examcard_html_python>`
+     - No
+     - No
+     - Prepares the HTML header for converted ExamCards
+   * - :ref:`remove_dirs.py <remove_dirs_python>`
+     - Yes
+     - No
+     - Deletes directories
+   * - :ref:`RestToolbox <RestToolbox_python>`
+     - No
+     - No
+     - REST requests (GET, POST, PUT, DELETE) to the Orthanc PACS
 
 
 

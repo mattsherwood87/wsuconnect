@@ -7,9 +7,11 @@ Picture Archiving and Communication System (PACS)
 -------------------------------------------------
 
 `Orthanc <https://www.orthanc-server.com/>`__ is the official open-source PACS in place at the WSU CoNNECT. Using this system, which runs on the 
-:doc:`master node of the CoNNECT NPC </cluster_computing/index>`, DICOM images can be sent directly from the MRI scanner to the CoNNECT NPC centralized storage.
+:term:`transfer and execute node` of the :doc:`CoNNECT NPC </cluster_computing/index>`, DICOM images can be sent directly from the MRI scanner to the CoNNECT NPC
+centralized storage.
 The PACS Grabber Service then automatically detects new DICOM images arriving at the PACS storage location, moves them to the appropriate project/subject/session's sourcedata
 directory, converts them to NIfTI images and stores them in the project/subject/session's rawdata directory according to the BIDS specification.
+See :ref:`connect_pacs_dicom_grabber.py <connect_pacs_dicom_grabber_python>` for details on the transfer to the subject/session folders.
 
 .. _orthanc_server:
 

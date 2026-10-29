@@ -4,8 +4,8 @@
 MySQL Database
 ==============
 
-A CoNNECT :term:`MySQL` database has been implemented on the master node to index files in each project's directory. This database and associated tools 
-therein are local to the master node, so core nodes cannot query or update it. Different tables must be established
+A CoNNECT :term:`MySQL` database has been implemented on the NPC :term:`transfer and execute node` to index files in each project's directory. This database and
+associated tools therein are local to the transfer and execute node, so other nodes cannot query or update it. Different tables must be established
 for each independent project, which can be developed using :doc:`this custom toolkit <../broad_analysis_tools/index>`.
 
 MySQL can be accessed through the command line:
@@ -66,7 +66,7 @@ Hyphens (``-``) are not allowed in table names and are replaced with underscores
 Helpful MySQL Commands
 ----------------------
 
-These helpful commands can be executed on the master node:
+These helpful commands can be executed on the transfer and execute node:
 
 
 Logging in to MySQL
