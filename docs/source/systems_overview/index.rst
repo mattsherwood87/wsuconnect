@@ -8,7 +8,15 @@ Systems Overview
 The CoNNECT MRI facility consists of several components described below.
 
 
-.. note:: FIGURE TO BE INSERTED
+.. _systems_overview_figure:
+
+.. figure:: ../_images/systems_overview.png
+   :align: center
+   :width: 90%
+
+   Overview of the CoNNECT systems. The MRI scanner pushes DICOM images to the Orthanc PACS on the
+   :term:`NPC`, which stores project data in BIDS directories on centralized storage. Users reach the NPC
+   through their :term:`jumpbox`.
 
 .. include:: mri.rst
 
