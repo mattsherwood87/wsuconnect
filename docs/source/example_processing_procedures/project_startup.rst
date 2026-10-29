@@ -7,7 +7,7 @@ Project Startup
 Modify credentials JSON control file
 ------------------------------------
 
-Edit the credentials.json file located at /resshare/general_processing_code
+Edit the credentials.json file located in the wsuconnect package's ``data/`` directory (``wsuconnect/data/credentials.json``).
 
 #. Add 2022-001 to the "projects" key
 #. Create a new key titled 2022-001
