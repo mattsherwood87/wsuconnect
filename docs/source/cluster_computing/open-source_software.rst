@@ -138,3 +138,79 @@ LCModel
 ^^^^^^^
 
 .. note:: To be developed
+
+
+Preprocessing Pipelines (NiPreps)
+---------------------------------
+
+The following pipelines are BIDS Apps from the `NeuroImaging PREProcessing toolS (NiPreps) <https://www.nipreps.org/>`__ community.
+Each takes a valid BIDS dataset (the project's ``rawdata`` directory) as input and writes BIDS-Derivatives outputs, including an
+HTML visual report for quality control of every subject. They are distributed as Docker images and are run on the CoNNECT NPC
+as Docker containers, either directly or through :term:`HTCondor` (see *Containerized Processing* above).
+
+All three pipelines use FreeSurfer, so a valid FreeSurfer license file must be passed to the container with ``--fs-license-file``.
+The CoNNECT FreeSurfer license is stored in the wsuconnect package's ``licenses/`` directory
+(``/resshare/wsuconnect/wsuconnect/licenses``).
+
+The general form of a BIDS App command is:
+
+.. code-block:: shell-session
+
+    $ docker run --rm \
+        -v /path/to/rawdata:/data:ro \
+        -v /path/to/derivatives:/out \
+        -v /resshare/wsuconnect/wsuconnect/licenses/license.txt:/opt/freesurfer/license.txt:ro \
+        <image> /data /out participant \
+        --participant-label <label> \
+        --fs-license-file /opt/freesurfer/license.txt
+
+where ``<image>`` is the pipeline's Docker image and ``<label>`` is the subject label without the ``sub-`` prefix.
+
+
+sMRIPrep
+^^^^^^^^
+
+sMRIPrep (structural MRI preprocessing) is a robust, reproducible workflow for anatomical (T1-weighted, and optionally T2-weighted)
+images. It performs intensity non-uniformity correction, brain extraction, tissue segmentation, spatial normalization to standard
+templates, and, optionally, cortical surface reconstruction with FreeSurfer. sMRIPrep is the anatomical workflow used inside
+fMRIPrep and ASLPrep, and can also be run on its own when only structural outputs are needed.
+
+**Docker image:** ``nipreps/smriprep``
+
+.. seealso::
+    `sMRIPrep documentation <https://www.nipreps.org/smriprep/>`__
+
+
+fMRIPrep
+^^^^^^^^
+
+fMRIPrep is a robust preprocessing pipeline for blood-oxygen-level-dependent (BOLD) functional MRI. It combines tools from FSL, ANTs,
+FreeSurfer and AFNI to perform anatomical preprocessing (via sMRIPrep), head-motion correction, slice-timing correction,
+susceptibility distortion correction using field maps, co-registration of BOLD to T1-weighted images, and resampling to standard
+spaces and surfaces. It also computes confound time series (such as framewise displacement, DVARS and CompCor components) for use in
+subsequent analyses. fMRIPrep performs minimal preprocessing; it does not apply spatial smoothing or denoising.
+
+**Docker image:** ``nipreps/fmriprep``
+
+.. seealso::
+    `fMRIPrep documentation <https://fmriprep.org/en/stable/>`__
+
+    Esteban, O., et al. (2019). fMRIPrep: a robust preprocessing pipeline for functional MRI. *Nature Methods*, 16, 111–116.
+
+
+ASLPrep
+^^^^^^^
+
+ASLPrep is a preprocessing and cerebral blood flow (CBF) computation pipeline for arterial spin labeling (ASL) perfusion MRI,
+built on the same framework as fMRIPrep. It performs anatomical preprocessing (via sMRIPrep), motion correction, susceptibility
+distortion correction, co-registration of ASL to T1-weighted images and normalization to standard space, and computes CBF maps
+using the standard single- and multi-delay models, with optional BASIL quantification and SCORE/SCRUB denoising. ASL data must be organized in the BIDS ``perf`` data type, with the
+required ``aslcontext.tsv`` file and ASL metadata in the sidecar JSON.
+
+**Docker image:** ``pennlinc/aslprep``
+
+.. seealso::
+    `ASLPrep documentation <https://aslprep.readthedocs.io/en/latest/>`__
+
+    Adebimpe, A., et al. (2022). ASLPrep: a platform for processing of arterial spin labeled MRI and quantification of regional
+    brain perfusion. *Nature Methods*, 19, 683–686.
