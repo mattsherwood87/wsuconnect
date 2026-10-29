@@ -68,8 +68,7 @@ in bash and C shell terminals.
 
     $ recon-all 
 
-Main FreeSurfer command to begin the cortical reconstruction process. The entire process takes 12-24hrs to complete. Preferred command 
-line arguments are provided in Table 3. 
+Main FreeSurfer command to begin the cortical reconstruction process. The entire process takes 12-24 hours to complete.
 
 .. code-block:: shell-session
 
