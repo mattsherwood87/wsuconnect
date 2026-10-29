@@ -46,12 +46,6 @@ record. For pilot studies, a short name may be used in place of the IRB number.
    * - title
      - string
      - Full project title
-   * - fund
-     - string
-     - Fund number for the project
-   * - org
-     - string
-     - Organization number for the project
    * - database
      - string
      - MySQL database holding the project's searchTable and searchSourceTable (see :ref:`the MySQL section of this document <mysql_db>`)
