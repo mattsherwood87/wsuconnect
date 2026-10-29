@@ -34,4 +34,5 @@ data loss, expedited data processing and rapid project development.
    example_processing_procedures/index
    support_tools/index
    project-specific_JSON_control_files/index
+   glossary
    
