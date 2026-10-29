@@ -38,12 +38,9 @@
 
   <!-- Storage -->
   <rect x="735" y="110" width="220" height="170" rx="8" fill="#d6ead0" stroke="#3d7a2b" stroke-width="2"/>
-  <text x="845" y="140" font-size="17" font-weight="bold" fill="#1f4d12" text-anchor="middle">Centralized Storage</text>
-  <text x="845" y="164" font-size="13" fill="#1f4d12" text-anchor="middle">/resshare (backed up daily)</text>
-  <text x="845" y="196" font-size="13" fill="#1f4d12" text-anchor="middle">Per-project BIDS directories:</text>
-  <text x="845" y="218" font-size="13" font-family="Menlo, Consolas, monospace" fill="#1f4d12" text-anchor="middle">sourcedata/</text>
-  <text x="845" y="238" font-size="13" font-family="Menlo, Consolas, monospace" fill="#1f4d12" text-anchor="middle">rawdata/</text>
-  <text x="845" y="258" font-size="13" font-family="Menlo, Consolas, monospace" fill="#1f4d12" text-anchor="middle">derivatives/</text>
+  <text x="845" y="180" font-size="17" font-weight="bold" fill="#1f4d12" text-anchor="middle">Centralized Storage</text>
+  <text x="845" y="206" font-size="13" fill="#1f4d12" text-anchor="middle">Enterprise-level storage</text>
+  <text x="845" y="224" font-size="13" fill="#1f4d12" text-anchor="middle">with daily backups</text>
 
   <!-- MRI isolated network switch: MRI <-> switch <-> master node -->
   <rect x="240" y="118" width="90" height="58" rx="6" fill="#e6dcf2" stroke="#6b4c9a" stroke-width="2"/>
