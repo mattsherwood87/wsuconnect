@@ -6,6 +6,10 @@
 Project-Specific JSON Control Files
 ***********************************
 
+.. contents:: On this page
+   :local:
+   :depth: 1
+
 
 The CoNNECT custom developed support tools use JSON control files stored in each project's BIDS ``code`` directory (:numref:`project_code_directory`). 
 The files are named <project_identifier>_<image_type>_<process>_input.json. Image types are listed in :numref:`input_data_types`, and available 
