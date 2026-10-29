@@ -132,6 +132,10 @@ Computing and Storage
    master node
       The main controller of the :term:`NPC`.
 
+   transfer and execute node
+      The node of the :term:`NPC` that runs the Orthanc :term:`PACS` and the :term:`MySQL` database, and holds the temporary PACS storage (``/PACS_m2``) for
+      DICOM images transferred from the MRI scanner. It also runs jobs submitted through :term:`HTCondor`.
+
    core node
       A compute node of the :term:`NPC` that runs jobs submitted through :term:`HTCondor`.
 
