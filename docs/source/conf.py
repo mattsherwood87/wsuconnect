@@ -62,9 +62,14 @@ html_sidebars = {
 }
 html_static_path = ['_static']
 html_css_files = [
-    'custom.css',
+    'css/custom.css',
 ]
 
 # -- Options for EPUB output
 epub_show_urls = 'footnote'
 numfig = True
+
+# put each parameter of long function signatures on its own line
+maximum_signature_line_length = 80
+# show function names without the full module path
+add_module_names = False
