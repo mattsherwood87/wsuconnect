@@ -6,9 +6,9 @@ CoNNECT Broad Analysis Tools
 
 There are many custom analysis tools that have been developed to provide broad processing capabilities across projects, MRI scanners, imaging parameters, and processing 
 specifications. These tools are described in this Section. Many of these tools utilize a common JSON architecture to describe project-specific inputs that are utilized 
-by these analysis tools to allow maximum flexibility of their implementation. Specifics to these JSON control files can be found at :ref:`project-specific_JSON_control_files`. 
+by these analysis tools to allow maximum flexibility of their implementation. Specifics of these JSON control files can be found in :ref:`json_control_files`. 
 
-.. note:: At this time, these functions only support cli implementation. 
+.. note:: At this time, these functions only support a command-line interface (CLI).
 
 .. 
     include:: connect_create_project_db.rst
@@ -26,14 +26,14 @@ connect_dcm2nii.py
 ==================
 
     
-This function converts DICOM images to NIfTI utilizing dcm2niix and :ref:`convert_dicoms_python`. Files within the identified Project's :ref:`searchSourceTable <read_creds_python>`
-are queried via MySQL for DICOM images. These DICOM images are contained within the Project's sourcedata directory. Directories within sourcedata that contain DICOM images are then passed to dcm2niix for 
+This function converts DICOM images to NIfTI images using :term:`dcm2niix` and :ref:`convert_dicoms_python`. Files within the identified Project's :ref:`searchSourceTable <read_creds_python>`
+are queried via :term:`MySQL` for DICOM images. These DICOM images are contained within the Project's sourcedata directory. Directories within sourcedata that contain DICOM images are then passed to dcm2niix for 
 conversion. The NIfTI images created are then stored in the same sourcedata directory as their source DICOM directory.
 
 .. seealso::
-    The `dcm2niix <https://www.nitrc.org/plugins/mwiki/index.php/dcm2nii:MainPage>`_ is the most common tool for DICOM-to-NIfTI conversion, and is implemented on our Ubuntu 24.04 CoNNECT NPC nodes.
+    `dcm2niix <https://www.nitrc.org/plugins/mwiki/index.php/dcm2nii:MainPage>`_ is the most common tool for DICOM-to-NIfTI conversion, and is implemented on our Ubuntu 24.04 CoNNECT NPC nodes.
 
-This function can be executed via cli only:
+This function can be executed via the command line only:
 
 .. argparse::
    :ref: wsuconnect.connect_dcm2nii.parser

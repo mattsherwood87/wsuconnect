@@ -2,16 +2,15 @@
 .. _read_creds_python:
 
 read_credentials.py
-===============
+===================
 
-Data collected and produced for each project will follow `BIDS specifications <https://bids-specification.readthedocs.io/en/stable/>`__ to ensure community standards are upheld, to improve 
-data integrity and conformity, and to improve data consistency and data processing optimization. 
+Data collected and produced for each project follow the `BIDS specification <https://bids-specification.readthedocs.io/en/stable/>`__ (see :ref:`data_organization`).
 
 |
 
 A single JSON file describes various parameters for each project/program. This file is ‘credentials.json’ and is located in the main code directory on the mounted centralized storage 
 (/resshare/general_processing_codes). The table below outlines the keys and their associated descriptions for a project in the credentials file. Each project in the credentials file 
-should be defined as their own key titled by their respective protocol number prescribed by their IRB of record. For pilot studies, a short name may be used in place of the IRB number.
+should be defined as its own key, named by the protocol number assigned by its IRB of record. For pilot studies, a short name may be used in place of the IRB number.
 
 .. _credentials_main_table:
 
@@ -54,7 +53,7 @@ should be defined as their own key titled by their respective protocol number pr
      - Local directory within the mounted centralized storage's 'projects' folder where data shall be located.
    * - dicom_id
      - string
-     - Unique string within the DICOM filenames to help identify DICOMS within the PACS and souredata directories
+     - Unique string within the DICOM filenames to help identify DICOM images within the PACS and sourcedata directories
    * - searchSourceTable
      - string
      - MySQL table identifying files within the project's sourcedata directory
@@ -71,7 +70,7 @@ should be defined as their own key titled by their respective protocol number pr
 
     read_credentials(project)
 
-    :param project: <project_identifier>. This should correspond to the projects IRB protocol number.
+    :param project: <project_identifier>. This should correspond to the project's IRB protocol number.
     :type project: string
     :raise Error: if credentials.json is not found
     :return: None

@@ -13,13 +13,13 @@ This function can be executed via command-line only:
     $ connect_flirt.py -p <project_identifier> --apt --asl --struc --overwrite --progress -s 
 
 -p PROJECT, --project PROJECT   **REQUIRED** project to identify the associated :ref:`searchTable <read_creds_python>` to query images with filenames containing BIDS labels specified in :ref:`main_params.input_bids_labels <flirt_json>`
---apt  utilize a 3D ATPw image as input for registration. This loads a FLIRT JSON control file <project_identifier>_apt_flirt_input.json
---asl   utilize an ASL image as input for registration. This loads a FLIRT JSON control file <project_identifier>_asl_flirt_input.json
---struc  utilize a structural image as input for registration. This loads a FLIRT JSON control file <project_identifier>_struc_flirt_input.json
+--apt  use a 3D APTw image as input for registration. This loads a FLIRT JSON control file <project_identifier>_apt_flirt_input.json
+--asl   use an ASL image as input for registration. This loads a FLIRT JSON control file <project_identifier>_asl_flirt_input.json
+--struc  use a structural (T1-weighted) image as input for registration. This loads a FLIRT JSON control file <project_identifier>_struc_flirt_input.json
 -h, --help  show the help message and exit
 --overwrite  force registration by skipping directory and database checking
 --progress  verbose mode
--s, --submit    submit conversion to the HTCondor queue for multi-threaded CPU processing
+-s, --submit    submit registration to the HTCondor queue for parallel processing
 -v, --version   display the current version
 
 

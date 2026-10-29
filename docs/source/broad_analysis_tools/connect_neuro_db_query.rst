@@ -4,7 +4,7 @@
 connect_neuro_db_query.py
 ==========================
     
-This function will query the Project's MySQL database using the provided search criteria defined below:
+This function queries the Project's MySQL database using the provided search criteria defined below:
 
 .. code-block:: shell-session
 
@@ -16,7 +16,7 @@ This function will query the Project's MySQL database using the provided search 
 
 -h, --help  show the help message and exit
 -c RETURNCOL, --col RETURNCOL   column to return (default 'fullpath')
--w SEARCHCOL, --were SEARCHCOL  column to search (default 'filename')
+-w SEARCHCOL, --where SEARCHCOL  column to search (default 'filename')
 -o ORDERBY, --orderby ORDERBY   column to sort results (default 'fullpath')
 --progress  verbose mode
 --source    search searchSourceTable instead of searchTable, as defined via the `credentials.json file <https://connect-tutorial.readthedocs.io/en/latest/support_tools/index.html#read-credentials-py>`_

@@ -10,12 +10,12 @@ connect_pacs_dicom_grabber.py
    :align: center
    :width: 30%
       
-   Sequence diagram for the CoNNECT PACS DICOM grabber python function.
+   Sequence diagram for the CoNNECT PACS DICOM grabber Python function.
     
 
-This function moves DICOM images from their local temporary PACS storage location (/resshare/PACS) to their associated sourcedata directory (:numref:`pacs_grabber_sourcedata_directory`), performs DICOM-to-NIfTI conversion via convert_dicoms.py, and 
-moves the NIfTI files into a BIDS structure within the Project's rawdata directory (:numref:`pacs_grabber_diagram`). The <project identifier>, <subject identifier>, and <session identifer> (optional) are extracted from the DICOM header 
-'Patient Name' tag. These elements are space-delimited. The <session identifier> is appended to an acquisition date identifier using the format YYYYMMDD. 
+This function moves DICOM images from their local temporary PACS storage location (/resshare/PACS) to their associated sourcedata directory (:numref:`pacs_grabber_sourcedata_directory`), performs DICOM-to-NIfTI conversion via :ref:`convert_dicoms.py <convert_dicoms_python>`, and 
+moves the NIfTI images into a BIDS structure within the Project's rawdata directory (:numref:`pacs_grabber_diagram`). The <project_identifier>, subject label, and session label (optional) are extracted from the DICOM header 
+Patient's Name (0010,0010) attribute. These elements are space-delimited. The session label is appended to an acquisition date label using the format YYYYMMDD. 
 
 
 .. _pacs_grabber_sourcedata_directory:
@@ -30,7 +30,7 @@ moves the NIfTI files into a BIDS structure within the Project's rawdata directo
 .. note:: This function is continuously running in the background on the CoNNECT NPC master node (and loaded at startup) as the pacs-grabber.service.
 
 
-This function can be executed via command-line only using the following options, HOWEVER, beware to ensure the pacs-grabber.service is stopped prior to running:
+This function can be executed via the command line only, using the following options. However, make sure the pacs-grabber.service is stopped before running it:
 
 .. code-block:: shell-session
 

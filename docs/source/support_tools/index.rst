@@ -5,7 +5,7 @@ CoNNECT Support Tools
 *********************
 
 
-Several custom support tools have been created to aid in the batch processing. These tools support parallel processing via HTCondor and SGE implemented in the custom batch processing 
+Several custom support tools have been created to aid in the batch processing. These tools support parallel processing via :term:`HTCondor` (including its SGE-style ``condor_qsub`` interface), as implemented in the custom batch processing 
 described in the previous section.
 
 
@@ -18,7 +18,7 @@ described in the previous section.
 bids
 ====
 
-.. note:: no cli support.
+.. note:: No command-line interface (CLI) support.
 
 Python Implementation
 ---------------------
@@ -32,7 +32,7 @@ Python Implementation
 condor
 ======
 
-.. note:: no cli support.
+.. note:: No command-line interface (CLI) support.
 
 Python Implementation
 ---------------------
@@ -67,7 +67,7 @@ Python Implementation
 copy_dirs.py
 ============
 
-.. note:: no cli support.
+.. note:: No command-line interface (CLI) support.
 
 Python Implementation
 ---------------------
@@ -120,7 +120,7 @@ Python Implementation
 evaluate_source_file_transfer.py
 ================================
 
-.. note:: no cli support.
+.. note:: No command-line interface (CLI) support.
 
 Python Implementation
 ---------------------
@@ -154,7 +154,7 @@ Python Implementation
 flirt_pngappend.py
 ==================
 
-.. note:: no cli support.
+.. note:: No command-line interface (CLI) support.
 
 Python Implementation
 ---------------------
@@ -226,7 +226,7 @@ Python Implementation
 mysql.py
 ========
 
-.. note:: no cli support.
+.. note:: No command-line interface (CLI) support.
 
 Python Implementation
 ---------------------
@@ -241,7 +241,7 @@ Python Implementation
 prepare_examcard_html.py
 ========================
 
-.. note:: no cli support.
+.. note:: No command-line interface (CLI) support.
 
 Python Implementation
 ---------------------
@@ -256,7 +256,7 @@ Python Implementation
 remove_dirs.py
 ==============
 
-.. note:: no cli support.
+.. note:: No command-line interface (CLI) support.
 
 Python Implementation
 ---------------------
@@ -271,7 +271,7 @@ Python Implementation
 RestToolbox.py
 ==============
 
-.. note:: no cli support.
+.. note:: No command-line interface (CLI) support.
 
 Python Implementation
 ---------------------

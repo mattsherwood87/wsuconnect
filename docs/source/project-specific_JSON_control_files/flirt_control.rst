@@ -4,11 +4,11 @@
 FLIRT JSON Control File
 ==============================================
 
-FLIRT parameters can be found in “<project_identifier>_<input-datatype>_flirt_input.json” (see :numref:`input_data_types` for a list of 
-available input data types). The available parameters are provided in :numref:`flirt_json_table`.
+FLIRT parameters are defined in “<project_identifier>_<image_type>_flirt_input.json” (see :numref:`input_data_types` for a list of 
+available image types). The available parameters are provided in :numref:`flirt_json_table`.
 
 .. seealso:: 
-  flirt.py also supports the execution of brain extraction, controlled through its own `JSON file <https://connect-tutorial.readthedocs.io/en/latest/project-specific_JSON_control_files/index.html#brain-extraction-bet>`__
+  flirt.py also supports brain extraction, controlled through its own :ref:`BET JSON control file <bet_json>`.
 
 
 **Sample FLIRT JSON control files**
@@ -34,7 +34,7 @@ available input data types). The available parameters are provided in :numref:`f
    * - fslroi
      - OPTIONAL
      - boolean
-     - perform fslroi to extract a single volume from input 4D image. Extracts the center volume unless the 'volume' key of the main_image_params
+     - perform fslroi to extract a single volume from the input 4D image. Extracts the center volume unless the 'volume' key of main_image_params is specified
    * - bet
      - OPTIONAL
      - boolean
@@ -42,11 +42,11 @@ available input data types). The available parameters are provided in :numref:`f
    * - inclusion_list
      - OPTIONAL
      - list[string]
-     - list of strings for option search inclusion criteria
+     - list of strings for optional search inclusion criteria
    * - exclusion_list
      - OPTIONAL
      - list[string]
-     - list of strings for option search exclusion criteria
+     - list of strings for optional search exclusion criteria
    * - main_image_params
      - OPTIONAL
      - dictionary
@@ -58,7 +58,7 @@ available input data types). The available parameters are provided in :numref:`f
    * - flirt_params
      - REQUIRED
      - dictionary
-     - FLIRT parameters as described in `Our FLIRT input Table <https://connect-tutorial.readthedocs.io/en/latest/project-specific_JSON_control_files/flirt_table.html>`__
+     - FLIRT parameters as described in the :ref:`FLIRT parameter table <flirt_params_file>`
    * - secondary_image_params
      - OPTIONAL
      - dictionary
@@ -69,7 +69,7 @@ available input data types). The available parameters are provided in :numref:`f
      - parameters as described in :numref:`FLIRT_std_image`
 
 Required Input Image Parameters
--------------------------
+-------------------------------
 
 **main_image_params** 
 
@@ -88,11 +88,11 @@ These keys are used to identify the main input image for registration.
    * - input_bids_labels
      - REQUIRED
      - dictionary
-     - A bids filename dictionary as explained in **NEEDS REFERENCE**
+     - A :ref:`BIDS entity dictionary <get_bids_filename_table>`
    * - output_bids_location
      - REQUIRED
      - string
-     - bids derivatives sub-folder (derivatives -> sub-XXX -> ses-YYY - > output_bids_location)
+     - BIDS derivatives subdirectory (derivatives -> sub-<label> -> ses-<label> -> output_bids_location)
    * - output_matrix_base
      - REQUIRED
      - string
@@ -100,11 +100,11 @@ These keys are used to identify the main input image for registration.
    * - output_bids_labels
      - REQUIRED
      - dictionary
-     - A bids filename dictionary as explained in **NEEDS REFERENCE**
+     - A :ref:`BIDS entity dictionary <get_bids_filename_table>`
    * - output_json_values
      - REQUIRED
      - dictionary
-     - Key-value pairs to additionally insert into the JSON sidecar accompanying input-to-reference transformed image
+     - Key-value pairs to additionally insert into the sidecar JSON accompanying input-to-reference transformed image
    * - volume
      - OPTIONAL
      - integer
@@ -132,23 +132,23 @@ These keys are used to identify the reference image for registration.
    * - input_bids_location
      - OPTIONAL
      - string
-     - Input bids location: rawdata or derivatives (required if type bids)
+     - Input BIDS location: rawdata or derivatives (required if type is bids)
    * - input_bids_labels
      - OPTIONAL
      - dictionary
-     - A bids filename dictionary as explained in **NEEDS REFERENCE** (required if type bids)
+     - A :ref:`BIDS entity dictionary <get_bids_filename_table>` (required if type is bids)
    * - output_bids_labels
      - OPTIONAL
      - dictionary
-     - Supplemental bids filename dictionary as explained in **NEEDS REFERENCE** (required if type bids)
+     - Supplemental :ref:`BIDS entity dictionary <get_bids_filename_table>` (required if type is bids)
    * - output_matrix_base
      - OPTIONAL
      - string
-     - base element for the output registration matrix (highres in highres2standard.mat) (required if type bids)
+     - base element for the output registration matrix (highres in highres2standard.mat) (required if type is bids)
    * - output_json_values
      - OPTIONAL
      - dictionary
-     - Supplemental key-value pairs to additionally insert into the JSON sidecar accompanying input-to-reference transformed image (required if type bids)
+     - Supplemental key-value pairs to additionally insert into the sidecar JSON accompanying input-to-reference transformed image (required if type is bids)
    
 |
 FLIRT Parameters
@@ -156,9 +156,9 @@ FLIRT Parameters
 
 **flirt_params**
 
-These parameters contains most of the inputs described in the nipype python extension manual for `FSL FLIRT 
-<https://nipype.readthedocs.io/en/0.12.1/interfaces/generated/nipype.interfaces.fsl.preprocess.html#flirt>`__. See a table of our specific inputs :ref:`HERE 
-<flirt_params_file>`.
+These parameters contain most of the inputs described in the Nipype interface documentation for `FSL FLIRT 
+<https://nipype.readthedocs.io/en/0.12.1/interfaces/generated/nipype.interfaces.fsl.preprocess.html#flirt>`__. See the :ref:`FLIRT parameter table 
+<flirt_params_file>` for our specific inputs.
 
 
 
@@ -183,7 +183,7 @@ These keys should be defined if the user would like to apply the registered outp
    * - input_bids_labels
      - REQUIRED
      - dictionary
-     - A bids filename dictionary as explained in **NEEDS REFERENCE**
+     - A :ref:`BIDS entity dictionary <get_bids_filename_table>`
    * - output_matrix_base
      - REQUIRED
      - string
@@ -191,12 +191,12 @@ These keys should be defined if the user would like to apply the registered outp
    * - output_bids_labels
      - REQUIRED
      - dictionary
-     - Supplemental bids filename dictionary as explained in **NEEDS REFERENCE**
+     - Supplemental :ref:`BIDS entity dictionary <get_bids_filename_table>`
 
 |
 **standard_reference_params** 
 
-These keys should be defined if the user would like to register input to a standard reference image (either )
+These keys should be defined if the user would like to register the input to a standard-space reference image
 
 .. _FLIRT_std_image:
 
@@ -211,7 +211,7 @@ These keys should be defined if the user would like to register input to a stand
    * - file
      - REQUIRED
      - string
-     - Standard reference filename located within the FSL standard data directory
+     - Standard-space reference filename located within the FSL standard data directory
    * - type
      - REQUIRED
      - string
@@ -223,10 +223,10 @@ These keys should be defined if the user would like to register input to a stand
    * - output_bids_labels
      - REQUIRED
      - dictionary
-     - Supplemental bids filename dictionary as explained in **NEEDS REFERENCE**
+     - Supplemental :ref:`BIDS entity dictionary <get_bids_filename_table>`
    * - output_json_values
      - REQUIRED
      - dictionary
-     - Supplemental key-value pairs to additionally insert into the JSON sidecar accompanying input-to-standard transformed image
+     - Supplemental key-value pairs to additionally insert into the sidecar JSON accompanying input-to-standard transformed image
 
      
