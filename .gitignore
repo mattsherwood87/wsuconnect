@@ -7,3 +7,7 @@ support_tools/old_versions/*
 .license
 wsuconnect/data/glasser/*
 wsuconnect/data/templateflow/*
+
+# macOS Finder metadata (any directory)
+.DS_Store
+._*
