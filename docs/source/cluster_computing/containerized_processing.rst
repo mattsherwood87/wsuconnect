@@ -31,6 +31,47 @@ wsuconnect/rstudio enables access to R and RStudio (via RStudio Server) and is b
 rocker/rstudio base image. Additional images also available include pennlinc/aslprep, 
 nipreps/fmriprep, nipreps/smriprep, and bids/validator.
 
+.. list-table:: Docker images available on the CoNNECT NPC.
+   :widths: 22 10 48 20
+   :header-rows: 1
+
+   * - **Image**
+     - **Version**
+     - **Description**
+     - **Access**
+   * - wsuconnect/neuro
+     - 26.1.0
+     - Main CoNNECT image: Ubuntu 24.04 with the open-source neuroimaging software
+     - Bash; GUI via noVNC
+   * - wsuconnect/neuro-gpu
+     - 26.1.0
+     - GPU variant of wsuconnect/neuro with NVIDIA CUDA support
+     - Bash; GUI via noVNC
+   * - wsuconnect/matlab
+     - R2024b
+     - MATLAB (license mounted from the wsuconnect package's ``licenses/`` folder)
+     - GUI via noVNC
+   * - wsuconnect/rstudio
+     - 26.1.0
+     - R and RStudio Server, built from the rocker/rstudio base image
+     - Browser
+   * - nipreps/smriprep
+     - 0.19.5
+     - sMRIPrep anatomical preprocessing (BIDS App)
+     - Command line
+   * - nipreps/fmriprep
+     - 25.2.5
+     - fMRIPrep functional preprocessing (BIDS App)
+     - Command line
+   * - pennlinc/aslprep
+     - 26.0
+     - ASLPrep arterial spin labeling preprocessing (BIDS App)
+     - Command line
+   * - bids/validator
+     - 1.15.0
+     - BIDS Validator, checks a dataset against the BIDS specification
+     - Command line
+
 Docker containers can be manually started using the commands below.
 
 Helpful Docker Commands
