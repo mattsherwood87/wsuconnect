@@ -19,7 +19,7 @@ actor operator #719949\
 
 participant "Philips MRI" as mri #719949
 operator->mri : Pushes DICOM images
-box CoNNECT NPC core-GPU1 Node #CBA052
+box CoNNECT NPC Transfer and Execute Node #CBA052
 participant Orthanc #719949
 mri->Orthanc : Transfer Request
 box Local M.2 Storage  
