@@ -167,11 +167,11 @@ Workflow Summary
 
 3. **Parallel Execution**
    - The scheduler distributes multiple jobs across available compute nodes.
-   - Each node pulls the image from the local Docker cache.
+   - For Docker jobs, each node starts the container from its copy of the image, pulling the image first if necessary.
 
 4. **File Access**
-   - Shared network storage (e.g., NFS) ensures that containers access consistent 
-     datasets regardless of node location.
+   - Every node mounts the project's centralized storage bucket (:term:`storage mount`), so jobs read and write the same
+     project data regardless of the node they run on. Docker jobs bind mount the storage into the container.
 
 5. **Cleanup and Logging**
    - Container logs and exit codes are collected per job by HTCondor.

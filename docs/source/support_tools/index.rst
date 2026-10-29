@@ -32,6 +32,10 @@ described in the previous section.
      - Yes
      - Yes
      - Converts DICOM images to NIfTI images with dcm2niix
+   * - :ref:`creds <read_creds_python>`
+     - No
+     - No
+     - Reads a project's entry from credentials.json
    * - :ref:`copy_dirs.py <copy_dirs_python>`
      - Yes
      - No
@@ -135,6 +139,8 @@ Python Implementation
     :members:
     :special-members:
 
+
+.. include:: read_credentials.rst
 
 .. _copy_dirs_python:
 
