@@ -1,0 +1,43 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  body { margin:0; background:#fff; font-family: Helvetica, Arial, sans-serif; }
+  .wrap { width: 1080px; padding: 28px 32px; box-sizing: border-box; }
+  h1 { font-size: 20px; margin: 0 0 18px; color:#333; }
+  table { border-collapse: collapse; }
+  td { padding: 3px 0; vertical-align: middle; }
+  td.t { font-family: Menlo, Consolas, "DejaVu Sans Mono", monospace; font-size: 15px; white-space: pre; color:#222; padding-right: 28px; }
+  td.c { font-size: 13px; color:#555; }
+  .lvl { display:inline-block; width:20px; height:20px; border-radius:50%; background:#c0392b; color:#fff; font-size:12px; font-weight:bold; text-align:center; line-height:20px; margin-right:8px; font-family: Helvetica, Arial, sans-serif; }
+  .mount { color:#1f4d12; font-weight:bold; }
+  .proj  { color:#7a3d00; font-weight:bold; }
+  .grant { color:#1d3f66; font-weight:bold; }
+  .title { color:#3f2a63; font-weight:bold; }
+  .bids  { color:#0b6e6e; font-weight:bold; }
+  .bidssub { color:#0b6e6e; font-weight:bold; }
+  .dim   { color:#999; }
+  tr.bidsrow td.t, tr.bidsrow td.c { background:#e6f4f4; }
+  .legend { margin-top:16px; font-size:12px; color:#555; }
+</style></head>
+<body><div class="wrap">
+<h1>Directory Structure of Centralized Storage Buckets</h1>
+<table>
+<tr><td class="t"><span class="mount">&lt;storage_mount&gt;/</span></td><td class="c"><span class="lvl">1</span>Local mount of a storage share (access limited to approved users)</td></tr>
+<tr><td class="t">└── <span class="proj">projects/</span></td><td class="c"></td></tr>
+<tr><td class="t">    ├── <span class="grant">&lt;contract_year&gt;_&lt;funding_source&gt;/</span></td><td class="c"><span class="lvl">2</span>One folder per contract / funding source</td></tr>
+<tr><td class="t">    │   ├── <span class="title">&lt;project_title&gt;/</span></td><td class="c"><span class="lvl">3</span>One folder per project</td></tr>
+<tr class="bidsrow"><td class="t">    │   │   ├── <span class="bids">code/</span></td><td class="c"><span class="lvl">4</span>Project scripts and JSON control files</td></tr>
+<tr class="bidsrow"><td class="t">    │   │   ├── <span class="bids">sourcedata/</span></td><td class="c">Original DICOM images from the MRI, before conversion</td></tr>
+<tr class="bidsrow"><td class="t">    │   │   ├── <span class="bids">rawdata/</span></td><td class="c">BIDS dataset of NIfTI images and sidecar JSON files</td></tr>
+<tr class="bidsrow"><td class="t">    │   │   │   ├── dataset_description.json</td><td class="c">Required BIDS dataset metadata</td></tr>
+<tr class="bidsrow"><td class="t">    │   │   │   ├── participants.tsv</td><td class="c">One row per subject (participant_id and demographics)</td></tr>
+<tr class="bidsrow"><td class="t">    │   │   │   ├── participants.json</td><td class="c">Describes the columns of participants.tsv</td></tr>
+<tr class="bidsrow"><td class="t">    │   │   │   └── <span class="bidssub">sub-&lt;label&gt;/</span></td><td class="c">One folder per subject</td></tr>
+<tr class="bidsrow"><td class="t">    │   │   │       └── <span class="bidssub">ses-&lt;label&gt;/</span></td><td class="c">One folder per session (scan visit)</td></tr>
+<tr class="bidsrow"><td class="t">    │   │   │           └── <span class="bidssub">&lt;data_type&gt;/</span></td><td class="c">e.g., anat, func, dwi, fmap, perf</td></tr>
+<tr class="bidsrow"><td class="t">    │   │   └── <span class="bids">derivatives/</span></td><td class="c">Pipeline outputs (e.g., fmriprep/, aslprep/), kept separate from raw data</td></tr>
+<tr><td class="t">    │   └── <span class="dim">&lt;project_title&gt;/</span></td><td class="c dim">Additional projects under the same contract</td></tr>
+<tr><td class="t">    └── <span class="dim">&lt;contract_year&gt;_&lt;funding_source&gt;/</span></td><td class="c dim">Additional contracts</td></tr>
+</table>
+<div class="legend">Shaded rows (level 4) are the BIDS directories created inside every project folder.</div>
+</div></body></html>

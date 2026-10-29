@@ -5,14 +5,36 @@ Data Management
 Centralized Storage
 -------------------
 
-Centralized storage has been made available.
+CoNNECT data are kept on enterprise-level centralized storage with daily backups. The storage is divided into
+:term:`storage buckets <storage bucket>`. Access to each bucket is limited to the approved users for the projects it holds. This is
+controlled in two places: by IT on the storage side, and by the mount permissions on the CoNNECT nodes.
+
+Each bucket is mounted on the :term:`NPC` nodes, where it appears as a local directory. This manual refers to that directory as
+the :term:`storage mount` and writes it as ``<storage_mount>``.
 
 
-File Share
-----------
+.. _storage_directory_structure:
 
-A file share has been created in /resshare. Any documents or directories created here will be backed up daily but will also be 
-available on the master and any core nodes.
+Directory Structure
+-------------------
+
+Every storage bucket follows the same directory structure (:numref:`storage_directory_structure_figure`):
+
+#. ``<storage_mount>/``: the local mount of the centralized storage bucket.
+#. ``projects/<contract_year>_<funding_source>/``: one folder for each contract or funding source.
+#. ``<project_title>/``: one folder for each project under that contract.
+#. ``code/``, ``sourcedata/``, ``rawdata/`` and ``derivatives/``: the BIDS directories inside every project folder
+   (see :ref:`data_organization`).
+
+.. _storage_directory_structure_figure:
+
+.. figure:: ../_images/storage_directory_structure.png
+   :align: center
+   :width: 90%
+
+   Directory structure of the centralized storage buckets. The shaded rows are the BIDS directories created inside every
+   project folder. Inside ``rawdata``, each subject folder (``sub-<label>``) holds one folder per session (``ses-<label>``),
+   and each session folder holds one folder per :term:`data type` (for example, ``anat``, ``func``, ``dwi``, ``fmap`` or ``perf``).
 
 
 .. _data_organization:

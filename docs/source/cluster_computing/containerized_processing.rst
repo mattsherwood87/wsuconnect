@@ -61,9 +61,10 @@ Helpful Docker Commands
 
 .. code-block:: shell-session
 
-    $ docker run -it --rm -p 6080:6080 -v /resshare/wsuconnect/wsuconnect/licenses:/licenses:rw wsuconnect/matlab:r2024b -vnc
+    $ docker run -it --rm -p 6080:6080 -v <wsuconnect>/licenses:/licenses:rw wsuconnect/matlab:r2024b -vnc
 
-    For MATLAB, pass the GUI port (6080) and the license path. Once running, point a browser to 
+    For MATLAB, pass the GUI port (6080) and the license path. ``<wsuconnect>`` is the full path to the folder where the
+    wsuconnect package is installed; Docker needs the full path for a bind mount. Once running, point a browser to 
     http://localhost:6080/vnc.html and use the password matlab.
 
 
