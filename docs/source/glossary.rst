@@ -138,6 +138,13 @@ Computing and Storage
    HTCondor
       The job scheduler used to distribute processing across the :term:`NPC`. Written as *HTCondor*.
 
+   storage bucket
+      A share on the CoNNECT centralized storage. Access to each bucket is limited to approved users, by IT on the storage
+      side and by the mount permissions on the CoNNECT nodes. See :ref:`storage_directory_structure`.
+
+   storage mount
+      The local mount of a :term:`storage bucket` on a CoNNECT node, written as ``<storage_mount>`` in this manual.
+
    Amazon S3
       Amazon Simple Storage Service, the cloud object storage used to store project data.
 

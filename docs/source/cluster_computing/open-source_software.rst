@@ -150,7 +150,7 @@ as Docker containers, either directly or through :term:`HTCondor` (see *Containe
 
 All three pipelines use FreeSurfer, so a valid FreeSurfer license file must be passed to the container with ``--fs-license-file``.
 The CoNNECT FreeSurfer license is stored in the wsuconnect package's ``licenses/`` directory
-(``/resshare/wsuconnect/wsuconnect/licenses``).
+(``wsuconnect/licenses/license.txt``).
 
 The general form of a BIDS App command is:
 
@@ -159,12 +159,13 @@ The general form of a BIDS App command is:
     $ docker run --rm \
         -v /path/to/rawdata:/data:ro \
         -v /path/to/derivatives:/out \
-        -v /resshare/wsuconnect/wsuconnect/licenses/license.txt:/opt/freesurfer/license.txt:ro \
+        -v <wsuconnect>/licenses/license.txt:/opt/freesurfer/license.txt:ro \
         <image> /data /out participant \
         --participant-label <label> \
         --fs-license-file /opt/freesurfer/license.txt
 
-where ``<image>`` is the pipeline's Docker image and ``<label>`` is the subject label without the ``sub-`` prefix.
+where ``<image>`` is the pipeline's Docker image, ``<label>`` is the subject label without the ``sub-`` prefix, and
+``<wsuconnect>`` is the full path to the folder where the wsuconnect package is installed (Docker needs the full path for a bind mount).
 
 
 sMRIPrep
