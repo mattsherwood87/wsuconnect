@@ -2,12 +2,12 @@
 .. _bet_json:
 
 Brain Extraction JSON Control File
-======================
+==================================
 
-Brain extraction parameters (:numref:`bet_json_table`) for FSL BET or ANTs Brain Extraction can be found in “<project_identifier>_<input-datatype>_bet_input.json". 
+Brain extraction parameters (:numref:`bet_json_table`) for FSL BET or ANTs brain extraction are defined in “<project_identifier>_<image_type>_bet_input.json". 
 
 .. seealso:: 
-  This file contains the inputs described in the nipype python extension manual for `FSL BET <https://nipype.readthedocs.io/en/0.12.0/interfaces/generated/nipype.interfaces.fsl.preprocess.html#bet>`__ 
+  This file contains the inputs described in the Nipype interface documentation for `FSL BET <https://nipype.readthedocs.io/en/0.12.0/interfaces/generated/nipype.interfaces.fsl.preprocess.html#bet>`__ 
   or `ANTs Brain Extraction <https://nipype.readthedocs.io/en/latest/api/generated/nipype.interfaces.ants.segmentation.html#brainextraction>`__. 
 
 **Sample Brain Extraction JSON control files**
@@ -19,7 +19,7 @@ Brain extraction parameters (:numref:`bet_json_table`) for FSL BET or ANTs Brain
 
 .. _bet_json_table:
 
-.. list-table:: Available Keys in the bet control JSON file.
+.. list-table:: Available keys in the BET JSON control file.
     :widths: 30 15 15 40
     :header-rows: 1
 
@@ -41,7 +41,7 @@ Brain extraction parameters (:numref:`bet_json_table`) for FSL BET or ANTs Brain
       - brain extraction parameters as described in :numref:`fsl_bet_inputs` and :numref:`ants_bet_inputs`
 
 
-BET-Specific parameters
+BET-Specific Parameters
 -----------------------
 
 FSL BET
@@ -49,7 +49,7 @@ FSL BET
 
 .. _fsl_bet_inputs:
 
-.. list-table:: Available Keys in the bet control JSON file. Input and output files do not need specified here.
+.. list-table:: FSL BET keys in the BET JSON control file. Input and output files do not need to be specified here.
     :widths: 30 15 15 40
     :header-rows: 1
 
@@ -88,7 +88,7 @@ FSL BET
     * - mesh
       - OPTIONAL
       - boolean
-      - generate a vtk mesh brain surface
+      - generate a VTK mesh brain surface
     * - no_output
       - OPTIONAL
       - boolean
@@ -100,11 +100,11 @@ FSL BET
     * - output_type
       - OPTIONAL
       - string
-      - FSL output type ('NIFTI_PAIR', 'NIFTI_PARI_GZ', 'NIFTI_GZ', 'NIFTI')
+      - FSL output type ('NIFTI_PAIR', 'NIFTI_PAIR_GZ', 'NIFTI_GZ', 'NIFTI')
     * - padding
       - OPTIONAL
       - boolean
-      - improve BET if FOV is very small in Z
+      - improve BET if the field of view (FOV) is very small in Z
     * - radius
       - OPTIONAL
       - integer
@@ -120,7 +120,7 @@ FSL BET
     * - robust
       - OPTIONAL
       - boolean
-      - Robust brain centre estimation (iterates BET several times)
+      - Robust brain center estimation (iterates BET several times)
     * - skull
       - OPTIONAL
       - boolean
@@ -152,7 +152,7 @@ ANTs Brain Extraction
 
 .. _ants_bet_inputs:
 
-.. list-table:: Available Keys in the bet control JSON file.
+.. list-table:: ANTs brain extraction keys in the BET JSON control file.
     :widths: 30 15 15 40
     :header-rows: 1
 
@@ -201,14 +201,14 @@ ANTs Brain Extraction
 Optional Parameters
 -------------------
 
-**T2/T2 FLAIR** 
+**T2-weighted / FLAIR** 
 
 .. note:: 
     T2 functionality has not been implemented or evaluated.
 
 .. _t2_input:
 
-.. list-table:: T2/T2 FLAIR input dictionary keys.
+.. list-table:: T2-weighted / FLAIR input dictionary keys.
     :widths: 30 15 15 40
     :header-rows: 1
 
@@ -219,9 +219,9 @@ Optional Parameters
     * - input_bids_location
       - REQUIRED
       - string
-      - Location of original, non-brain extracted T2 or T2 FLAIR image: 'rawdata' or 'derivatives'
+      - Location of the original, non-brain-extracted T2-weighted or FLAIR image: 'rawdata' or 'derivatives'
     * - input_bids_parameters
       - REQUIRED
       - dictionary
-      - A bids filename dictionary as explained in **NEEDS REFERENCE**
+      - A :ref:`BIDS entity dictionary <get_bids_filename_table>`
 

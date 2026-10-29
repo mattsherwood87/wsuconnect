@@ -5,7 +5,7 @@ connect_rawdata_check.py
 ==========================
 
     
-This function creates a table to indicate the absence (0) or presence (1) of MRI rawdata (NIfTI). Rawdata are identified via the project's 
+This function creates a table indicating the absence (0) or presence (1) of MRI raw data (NIfTI images) in rawdata. Raw data are identified via the project's 
 :ref:`scan ID JSON control file <scan_id_json>`. An output table in CSV format is created in the Project's 'processing_logs' directory titled 
 <project_identifier>_rawdata_check.csv.
 
