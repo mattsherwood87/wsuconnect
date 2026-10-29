@@ -40,6 +40,8 @@ option to the programs described within this manual.
 
 .. include:: containerized_processing.rst
 
+.. include:: common_condor_commands.rst
+
 .. include:: open-source_software.rst
 
 .. include:: MySQL_database.rst

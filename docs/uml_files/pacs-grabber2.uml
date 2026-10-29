@@ -56,7 +56,7 @@ endbox
 endbox
 
 
-box CoNNECT NPC core-GPU1 #CBA052
+box Transfer and Execute Node #CBA052
 participant "Temporary Storage\n/PACS_m2" as pacs #719949
 endbox
 
