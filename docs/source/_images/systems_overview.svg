@@ -34,7 +34,7 @@
   <text x="495" y="314" font-size="14" font-weight="bold" fill="#1d3f66" text-anchor="middle">Jumpbox (user VM)</text>
   <text x="495" y="332" font-size="12" fill="#1d3f66" text-anchor="middle">Windows or Linux</text>
   <line x1="495" y1="292" x2="495" y2="264" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
-  <text x="505" y="282" font-size="12" fill="#333">SSH</text>
+  <text x="505" y="282" font-size="12" fill="#333">SSH / RDP to nodes</text>
 
   <!-- Storage -->
   <rect x="735" y="110" width="220" height="170" rx="8" fill="#d6ead0" stroke="#3d7a2b" stroke-width="2"/>
