@@ -29,7 +29,7 @@ for NVIDIA CUDA. We also host an additional MATLAB image
 wsuconnect/matlab:r2024b that allows GUI access through noVNC. Our own RStudio image 
 wsuconnect/rstudio enables access to R and RStudio (via RStudio Server) and is built from the 
 rocker/rstudio base image. Additional images also available include pennlinc/aslprep, 
-nipreps/fmriprep, and bids/validator.
+nipreps/fmriprep, nipreps/smriprep, and bids/validator.
 
 Docker containers can be manually started using the commands below.
 

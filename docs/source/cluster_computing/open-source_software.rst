@@ -149,6 +149,8 @@ HTML visual report for quality control of every subject. They are distributed as
 as Docker containers, either directly or through :term:`HTCondor` (see *Containerized Processing* above).
 
 All three pipelines use FreeSurfer, so a valid FreeSurfer license file must be passed to the container with ``--fs-license-file``.
+The CoNNECT FreeSurfer license is stored in the wsuconnect package's ``licenses/`` directory
+(``/resshare/wsuconnect/wsuconnect/licenses``).
 
 The general form of a BIDS App command is:
 
@@ -157,7 +159,7 @@ The general form of a BIDS App command is:
     $ docker run --rm \
         -v /path/to/rawdata:/data:ro \
         -v /path/to/derivatives:/out \
-        -v /path/to/license.txt:/opt/freesurfer/license.txt:ro \
+        -v /resshare/wsuconnect/wsuconnect/licenses/license.txt:/opt/freesurfer/license.txt:ro \
         <image> /data /out participant \
         --participant-label <label> \
         --fs-license-file /opt/freesurfer/license.txt
