@@ -33,7 +33,7 @@ DATE = '17 April 2023'
 # ******************* PARSE COMMAND LINE ARGUMENTS ********************
 #input argument parser
 parser = argparse.ArgumentParser(description="Check each participant's derivatives against the project's derivatives_input.json and write a derivatives_check.csv to code/processing_logs.")
-parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="select a project: " + ' '.join(st.creds.projects), default=None)
+parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="select a project (project identifier in credentials.json)", default=None)
 #parser.add_argument('--overwrite', action="store_true", dest="OVERWRITE", help="Force processing by skipping directory and database checking", default=False)
 #parser.add_argument('-l', '--load', action="store_true", dest="DOWNLOAD", help="Download files to local disk if they do not exist", default=False)
 #parser.add_argument('-s', '--submit', action="store_true", dest="SUBMIT", help="Submit jobs to HTCondor for parallel processing", default=False)

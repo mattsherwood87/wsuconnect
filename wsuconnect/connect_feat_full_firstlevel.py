@@ -39,7 +39,7 @@ FSLDIR = os.environ["FSLDIR"]
 # ******************* PARSE COMMAND LINE ARGUMENTS ********************
 #input argument parser
 parser = argparse.ArgumentParser(description="Run FSL FEAT first-level fMRI analysis for a project, as defined in the project's feat_full_firstlevel_input.json.")
-parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="Perform full firstlevel FEAT for the selected project: " + ' '.join(st.creds.projects), default=None)
+parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="Perform full firstlevel FEAT for the selected project (project identifier in credentials.json)", default=None)
 
 parser.add_argument('--overwrite', action="store_true", dest="OVERWRITE", help="Force processing by skipping directory and database checking", default=False)
 parser.add_argument('-s', '--submit', action="store_true", dest="SUBMIT", help="Submit jobs to HTCondor for parallel processing", default=False)

@@ -37,7 +37,7 @@ DATE = '15 July 2024'
 #input argument parser
 parser = argparse.ArgumentParser(description="Compute segmentation statistics (CBF, APT, DTI, fMRI or T1w) within FreeSurfer aparc+aseg regions, as defined in the project's compute_segstats_input.json.")
 
-parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="select a project: " + ' '.join(st.creds.projects), default=None)
+parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="select a project (project identifier in credentials.json)", default=None)
 parser.add_argument('--cbf', action="store_true", dest="cbf", help="Compute segstats for CBF")
 parser.add_argument('--apt', action="store_true", dest="apt", help="Compute segstats for APT")
 parser.add_argument('--dti', action="store_true", dest="dti", help="Compute segstats for DTI")

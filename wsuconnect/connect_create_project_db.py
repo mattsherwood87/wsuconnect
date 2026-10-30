@@ -32,7 +32,7 @@ DATE = '1 April 2023'
 # ******************* PARSE COMMAND LINE ARGUMENTS ********************
 #input argument parser
 parser = argparse.ArgumentParser(description="Create a project's searchTable and searchSourceTable in the CoNNECT MySQL database, as defined in credentials.json.")
-parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="create the tables for the selected project: " + ' '.join(st.creds.projects), default=None)
+parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="create the tables for the selected project (project identifier in credentials.json)", default=None)
 parser.add_argument('-v', '--version', help="Display the current version", action="store_true", dest="version")
 parser.add_argument('--progress', help="Show progress (default FALSE)", action="store_true", dest="progress", default=False)
 

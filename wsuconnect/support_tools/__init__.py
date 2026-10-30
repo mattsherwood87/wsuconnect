@@ -14,7 +14,11 @@ if not any(_Path(p).resolve() == str(_REALPATH) for p in _sys.path if _Path(p).e
     _sys.path.append(str(_REALPATH))
 
 from wsuconnect.data import load as _load_data
-_fullCredentials = _loads(_load_data.readable('credentials.json').read_text())
+try:
+    _fullCredentials = _loads(_load_data.readable('credentials.json').read_text())
+except FileNotFoundError:
+    #credentials.json is not tracked in git (e.g., Read the Docs builds)
+    _fullCredentials = {'projects': [], 'master_machine_name': ''}
 
 # from .get_dir_identifiers_new import get_dir_identifiers_new
 from wsuconnect.classes.creds import creds as _cred

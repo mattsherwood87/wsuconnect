@@ -29,7 +29,7 @@ DATE = '21 Nov 2024'
 
 # ******************* PARSE COMMAND LINE ARGUMENTS ********************
 parser = argparse.ArgumentParser(description="Rename a project's rawdata files after a change to scan_id.json, by comparing the new file with the previous version (scan_id.json.bak).")
-parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="select a project: " + ' '.join(st.creds.projects))
+parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="select a project (project identifier in credentials.json)")
 parser.add_argument('--old-scan-id', action="store", dest="OLDSCANID", help="filename of old scan IDs", default=None)
 parser.add_argument('-t', '--test', action="store_true", dest="TEST", help="print the planned changes only, do not apply them", default=False)
 parser.add_argument('-v', '--version', action="store_true", dest="version", help="Display the current version")

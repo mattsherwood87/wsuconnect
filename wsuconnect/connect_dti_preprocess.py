@@ -36,7 +36,7 @@ FSLDIR = os.environ["FSLDIR"]
 # ******************* PARSE COMMAND LINE ARGUMENTS ********************
 #input argument parser
 parser = argparse.ArgumentParser(description="Preprocess DTI images for a project, as defined in the project's dti_preprocess_input.json.")
-parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="Perform DTI preprocessing for the selected project: " + ' '.join(st.creds.projects), default=None)
+parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="Perform DTI preprocessing for the selected project (project identifier in credentials.json)", default=None)
 
 parser.add_argument('--overwrite', action="store_true", dest="OVERWRITE", help="Force processing by skipping directory and database checking", default=False)
 parser.add_argument('--subjects', action='store', dest='SUBJECTS', default=None, nargs='+', help='optional subject identifier(s), skips check of participants.tsv. Multiple inputs accepted through space delimiter')
