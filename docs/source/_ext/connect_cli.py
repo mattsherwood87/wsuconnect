@@ -25,8 +25,12 @@ class PyCliProgram(PyFunction):
         name, _, args = sig.partition(' ')
         signode += addnodes.desc_name(name, name)
         if args:
-            signode += addnodes.desc_sig_space()
-            signode += addnodes.desc_sig_element('', args, classes=['sig-cli-args'])
+            # one option per line, like the multi-line function signatures
+            plist = addnodes.desc_parameterlist()
+            plist['multi_line_parameter_list'] = True
+            for arg in args.split(' || '):
+                plist += addnodes.desc_parameter(arg, arg)
+            signode += plist
         return name, ''
 
     def add_target_and_index(self, name_cls, sig, signode):
@@ -59,7 +63,7 @@ def _usage_args(parser):
             if a.nargs in ('+', '*'):
                 flag += ' ...'
         parts.append(flag if a.required or not a.option_strings else '[' + flag + ']')
-    return ' '.join(parts)
+    return ' || '.join(parts)
 
 
 class ConnectCli(Directive):
