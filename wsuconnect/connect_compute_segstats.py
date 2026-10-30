@@ -20,10 +20,10 @@ import re
 
 
 #local import
-REALPATH = os.path.dirname(os.path.realpath(__file__))
-sys.path.append(REALPATH)
+# REALPATH = os.path.dirname(os.path.realpath(__file__))
+# sys.path.append(REALPATH)
 
-import support_tools as st
+import wsuconnect.support_tools as st
 
 
 
@@ -41,6 +41,7 @@ parser.add_argument('-p','--project', required=True, action="store", dest="PROJE
 parser.add_argument('--cbf', action="store_true", dest="cbf", help="Compute segstats for CBF")
 parser.add_argument('--apt', action="store_true", dest="apt", help="Compute segstats for APT")
 parser.add_argument('--dti', action="store_true", dest="dti", help="Compute segstats for DTI")
+parser.add_argument('--func', action="store_true", dest="func", help="Compute segstats for fMRI")
 parser.add_argument('--t1w', action="store_true", dest="T1w", help="Compute segstats for T1W")
 parser.add_argument('-s', '--submit', action="store_true", dest="SUBMIT", help="Submit conversion to condor for parallel conversion", default=False)
 parser.add_argument('-v', '--version', action="store_true", dest="version", help="Display the current version")
@@ -83,7 +84,7 @@ if __name__ == '__main__':
 
     ls_inputType = []
     for k, v in vars(options).items():
-        if k in ['cbf','apt','dti','T1w'] and k in segstatsInput.keys() and v:
+        if k in ['cbf','apt','dti','func','T1w'] and k in segstatsInput.keys() and v:
             ls_inputType.append(k)
     if not ls_inputType:
         parser.print_help()
@@ -136,6 +137,7 @@ if __name__ == '__main__':
         df_participants = df_participants[~df_participants['discard']]
 
     #search each raw directory
+    # allSegsToProcess = st.mysql.sql_query(searchtable=st.creds.searchTable,regex='aseg.mgz',searchcol='filename',progress=False,exclusion=['aparc','DKTatlas','a2009s','a2005'])
     allSegsToProcess = st.mysql.sql_query(searchtable=st.creds.searchTable,regex='aseg.mgz',searchcol='filename',progress=False,inclusion=["aparc+"],exclusion=['DKTatlas','a2009s','a2005'])
     # df_fullDataMatrix = pd.read_csv(outputCsv)
     segstats_flag = False
@@ -143,10 +145,12 @@ if __name__ == '__main__':
         print(asegToProcess)
 
         if 'fsaverage' in asegToProcess:
+            print('\tskipping...')
             continue
         st.subject.get_id(asegToProcess)
         st.subject.check(st.creds.dataDir)
-
+        print(f"\tsub-{st.subject.id}, ses-{st.subject.sesNum}, discard: {st.subject.discard}")
+        
         if st.subject.discard:
             continue
 
@@ -158,11 +162,13 @@ if __name__ == '__main__':
             #loop over any files found using specified search criteria
             if segstatsInput['fmriprep']:
                 # print(os.path.join(st.creds.dataDir,'derivatives','sub-' + st.subject.id,'ses-*',*segstatsInput[inputType]['regex']))
+                print(os.path.join(st.creds.dataDir,'derivatives','sub-' + st.subject.id,'ses-*',*segstatsInput[inputType]['regex']))
                 inTargFiles = glob(os.path.join(st.creds.dataDir,'derivatives','sub-' + st.subject.id,'ses-*',*segstatsInput[inputType]['regex']))
             else:
+                print(os.path.join(st.creds.dataDir,'derivatives','sub-' + st.subject.id,'ses-' + st.subject.sesNum,*segstatsInput[inputType]['regex']))
                 inTargFiles = glob(os.path.join(st.creds.dataDir,'derivatives','sub-' + st.subject.id,'ses-' + st.subject.sesNum,*segstatsInput[inputType]['regex']))
 
-            # print(len(inTargFiles))
+            print(len(inTargFiles))
             for inTargFile in inTargFiles:
                 st.subject.get_id(inTargFile)
                 outDir = os.path.join(st.creds.dataDir,'derivatives','sub-' + st.subject.id, 'ses-' + st.subject.sesNum,segstatsInput[inputType]['type'])

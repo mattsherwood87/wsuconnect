@@ -6,12 +6,17 @@
 # Modified on 15 Nov 2024 - implement docker within condor jobs
 
 import os,sys
+from pathlib import Path
 
 #local import
-REALPATH = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
-REALPATH = os.path.join('/resshare','wsuconnect')
-sys.path.append(REALPATH)
+# REALPATH = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+# REALPATH = os.path.join('/resshare','wsuconnect')
+# sys.path.append(REALPATH)
 # print(REALPATH)
+
+REALPATH = Path(*Path(os.path.realpath(__file__)).parts[:-1]).resolve()
+if not any(Path(p).resolve() == str(REALPATH) for p in sys.path if Path(p).exists()):
+    sys.path.append(str(REALPATH))
 
 #versioning
 VERSION = '2.0.1'
@@ -27,7 +32,7 @@ if "FREESURFER_HOME" in os.environ:
 
 
 # ******************* CREATE PYTHON JOB ********************
-def create_bin_condor_job(jobName: str,exeName: str,machineNames: list,submit: str,error: str,output: str, log:str, dagman: str,docker: bool = False, docker_image: str = 'wsuconnect/neuro', docker_mount_if: str = None, request_cpus: int = 1, request_memory: str = '5g'):
+def create_bin_condor_job(jobName: str,exeName: str,machineNames: list,submit: str,error: str,output: str, log:str, dagman: str,docker: bool = False, docker_image: str = 'wsuconnect/neuro', docker_mount_if: str = None, request_cpus: int = 1, request_memory: str = '5g', extra_lines: list = None, requirements: str = None):
     """
     Creates a pycondor job object to implement a binary from /usr/bin.
 
@@ -78,13 +83,25 @@ def create_bin_condor_job(jobName: str,exeName: str,machineNames: list,submit: s
 
     from pycondor import Job
     #create machine requirements string
-    reqs = ''
+    if requirements:
+        reqs = requirements 
+    else:
+        reqs = ''
     if machineNames:
+        if requirements:
+            reqs += " && ("
         for c in range(len(machineNames)):
             if c > 0:
                 reqs += ' || '
-            reqs += 'Machine == "' + machineNames[c] + '"'
+            reqs += f'stringListMember("{machineNames[c]}", Machine)'#Machine == "' + machineNames[c] + '"'
+        
+        if requirements:
+            reqs += ")"
+
+    # print(reqs)
     extraLines = ['stream_output = True','RunAsOwner = True']
+    if extra_lines:
+        extraLines.extend(extra_lines)
 
     #create job
     # print(os.path.join(REALPATH,'helper_functions',exeName))
@@ -171,7 +188,7 @@ def create_freesurfer_condor_job(jobName: str,exeName: str,machineNames: list,su
 
     #create job
     if not docker:
-        job_out = Job(name=jobName, executable=os.path.join(FREESURFERDIR,'bin',exeName), submit=submit, error=error, output=output, log=log, dag=dagman, getenv=True, extra_lines=extraLines, requirements=reqs, universe='vanilla')
+        job_out = Job(name=jobName, executable=exeName, submit=submit, error=error, output=output, log=log, dag=dagman, getenv=True, extra_lines=extraLines, requirements=reqs, universe='vanilla')
     else:
         extraLines.append('docker_image = ' + docker_image)
         if docker_mount_if == 'resshare19':
@@ -269,7 +286,7 @@ def create_fsl_condor_job(jobName: str,exeName: str,machineNames: list,submit: s
 
 
 # ******************* CREATE PYTHON JOB ********************
-def create_python_condor_job(jobName: str,exeName: str,machineNames: list,submit: str,error: str,output: str,log:str,dagman: str,docker: bool = False, docker_image: str = 'wsuconnect/neuro', docker_mount_if: str = None, request_cpus: int = 1, request_memory: str = '5g', extra_lines: list = None):
+def create_python_condor_job(jobName: str,exeName: str,machineNames: list,submit: str,error: str,output: str,log:str,dagman: str,docker: bool = False, docker_image: str = 'wsuconnect/neuro', docker_mount_if: str = None, request_cpus: int = 1, request_memory: str = '5g', extra_lines: list = None, requirements: str = None):
     """
     Creates a pycondor job object to implement python functions from support_tools.
 
@@ -320,12 +337,22 @@ def create_python_condor_job(jobName: str,exeName: str,machineNames: list,submit
     from pycondor import Job
 
     #create machine requirements string
-    reqs = ''
+    if requirements:
+        reqs = requirements 
+    else:
+        reqs = ''
     if machineNames:
+        if requirements:
+            reqs += " && ("
         for c in range(len(machineNames)):
             if c > 0:
                 reqs += ' || '
-            reqs += 'Machine == "' + machineNames[c] + '"'
+            reqs += f'stringListMember("{machineNames[c]}", Machine)'#Machine == "' + machineNames[c] + '"'
+        
+        if requirements:
+            reqs += ")"
+
+    # print(reqs)
     extraLines = ['stream_output = True', 'RunAsOwner = True', 'docker_volume_mounts =', 'initialdir = /docker_wd']
     if extra_lines:
         extraLines.extend(extra_lines)
@@ -333,7 +360,7 @@ def create_python_condor_job(jobName: str,exeName: str,machineNames: list,submit
     #create job
     # print(os.path.join(REALPATH,'helper_functions',exeName))
     if not docker:
-        job_out = Job(name=jobName, executable=os.path.join(REALPATH,'support_tools',exeName), submit=submit, error=error, output=output, log=log, dag=dagman, getenv=True, extra_lines=extraLines, requirements=reqs, universe='vanilla',request_cpus=request_cpus,request_memory=request_memory)
+        job_out = Job(name=jobName, executable=os.path.join(REALPATH.parent,exeName), submit=submit, error=error, output=output, log=log, dag=dagman, getenv=True, extra_lines=extraLines, requirements=reqs, universe='vanilla',request_cpus=request_cpus,request_memory=request_memory)
     else:
         extraLines.append('docker_image = ' + docker_image)
         extraLines.append('docker_volume_mounts = /resshare:/resshare:ro')
@@ -347,7 +374,7 @@ def create_python_condor_job(jobName: str,exeName: str,machineNames: list,submit
             extraLines.extend(["+MOUNT_RESSHARE19 = false", "+MOUNT_RESSHARE20 = false", "+MOUNT_RESSHARE21 = false", "+MOUNT_RESSHARE22 = true"])
 
         # job_out = Job(jobName, executable=os.path.join(REALPATH,'support_tools',exeName), submit=submit, error=error, output=output, log=log, dag=dagman, getenv=False, extra_lines=extraLines, requirements=reqs, universe='docker',request_cpus=request_cpus,request_memory=request_memory)
-        job_out = Job(jobName, executable=os.path.join(REALPATH,'support_tools',exeName), submit=submit, error=error, output=output, log=log, dag=dagman, getenv=False, extra_lines=extraLines, requirements=reqs, universe='docker',request_cpus=request_cpus,request_memory=request_memory)
+        job_out = Job(jobName, executable=os.path.join(REALPATH.parent,exeName), submit=submit, error=error, output=output, log=log, dag=dagman, getenv=False, extra_lines=extraLines, requirements=reqs, universe='docker',request_cpus=request_cpus,request_memory=request_memory)
 
     return job_out
 
@@ -415,7 +442,7 @@ def create_python_venv_condor_job(jobName: str,exeName: str,machineNames: list,s
     #create job
     # print(os.path.join(REALPATH,'helper_functions',exeName))
     if not docker:
-        job_out = Job(name=jobName, executable=os.path.join(REALPATH,'python3_venv','bin',exeName), submit=submit, error=error, output=output, log=log, dag=dagman, getenv=True, extra_lines=extraLines,request_cpus=request_cpus,request_memory=request_memory,requirements=reqs, universe='vanilla')
+        job_out = Job(name=jobName, executable=os.path.join(Path(*REALPATH.parts[0:2]).resolve(),'python3_venv','bin',exeName), submit=submit, error=error, output=output, log=log, dag=dagman, getenv=True, extra_lines=extraLines,request_cpus=request_cpus,request_memory=request_memory,requirements=reqs, universe='vanilla')
     else:
         extraLines.append('docker_image = ' + docker_image)
         if docker_mount_if == 'resshare19':
@@ -427,7 +454,7 @@ def create_python_venv_condor_job(jobName: str,exeName: str,machineNames: list,s
         elif docker_mount_if == 'resshare22':
             extraLines.extend(["+MOUNT_RESSHARE19 = false", "+MOUNT_RESSHARE20 = false", "+MOUNT_RESSHARE21 = false", "+MOUNT_RESSHARE22 = true"])
 
-        job_out = Job(jobName, executable=os.path.join(REALPATH,'python3_venv',exeName), submit=submit, error=error, output=output, log=log, dag=dagman, getenv=False, extra_lines=extraLines, requirements=reqs, universe='docker',request_cpus=request_cpus,request_memory=request_memory)
+        job_out = Job(jobName, executable=os.path.join(Path(*REALPATH.parts[0:2]).resolve(),'python3_venv',exeName), submit=submit, error=error, output=output, log=log, dag=dagman, getenv=False, extra_lines=extraLines, requirements=reqs, universe='docker',request_cpus=request_cpus,request_memory=request_memory)
 
     return job_out
 

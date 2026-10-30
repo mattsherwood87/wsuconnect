@@ -15,14 +15,14 @@ import traceback
 
 #local import
 
-REALPATH = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
-REALPATH = os.path.join('/resshare','wsuconnect')
-sys.path.append(REALPATH)
+# REALPATH = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+# REALPATH = os.path.join('/resshare','wsuconnect')
+# sys.path.append(REALPATH)
 
-import support_tools as st
+import wsuconnect.support_tools as st
 
 
-FSLDIR = '/opt/fsl-6.0.7'
+FSLDIR = '/usr/local/fsl'
 FREESURFERDIR = None
 if "FSLDIR" in os.environ:
     FSLDIR = os.environ["FSLDIR"]
@@ -121,7 +121,7 @@ def get_scan_id(inDir: str,basename: str) -> Tuple[str, str, dict]:
 
                 if stopFlag:
                     bidsDir = scanId[imageType]['BidsDir']
-                    scanName = st.bids.get_bids_filename(**scanId[imageType]['bids_labels'])
+                    scanName = st.mybids.get_bids_filename(**scanId[imageType]['bids_labels'])
                     # scanName = scanId[imageType]['ScanName']
                     scanKeys = scanId[imageType]
                     break
@@ -137,7 +137,7 @@ def get_scan_id(inDir: str,basename: str) -> Tuple[str, str, dict]:
         print(f"\tException type: {exc_type.__name__}")
         print(f"\tException message: {e}")
         traceback.print_exc()
-        outputTxt = os.path.join(st.creds.dataDir,'derivatives','processing_logs',st.creds.project + '_scan_id.error')
+        outputTxt = os.path.join(st.creds.dataDir,'code','processing_logs',st.creds.project + '_scan_id.error')
         with open(outputTxt,'a+') as txtFile:
             txtFile.write('ERROR: ' + basename + ' \n\t')
             txtFile.write(str(e))

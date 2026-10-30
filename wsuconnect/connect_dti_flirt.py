@@ -10,7 +10,7 @@
 # Modified on 21 Jan 2021 
 
 import os
-from numpy.core.numeric import convolve
+from numpy._core.numeric import convolve
 import argparse
 from pycondor import Job, Dagman
 import datetime
@@ -21,10 +21,10 @@ from glob import glob
 
 #local import
 
-REALPATH = os.path.realpath(__file__)
-sys.path.append(os.path.dirname(REALPATH))
+# REALPATH = os.path.realpath(__file__)
+# sys.path.append(os.path.dirname(REALPATH))
 
-import support_tools as st
+import wsuconnect.support_tools as st
 
 
 # GLOBAL INFO
@@ -81,7 +81,8 @@ if __name__ == '__main__':
         print("Error Message: {0}".format(e))
         sys.exit()
 
-    regexStr = st.bids.get_bids_filename(**flirtInput['main_image_params']['input_bids_labels'])
+    regexStr = st.mybids.get_bids_filename(**flirtInput['main_image_params']['input_bids_labels'])
+    print(regexStr)
 
     if not incExcDict:
         filesToProcess = st.mysql.sql_query(database=st.creds.database,searchtable=st.creds.searchTable,searchcol='fullpath',regex=regexStr,progress=False)
@@ -90,6 +91,7 @@ if __name__ == '__main__':
 
     # loop throught files
     filesToProcess.sort()
+    print(filesToProcess)
     flirt_flag = False
     for f in filesToProcess:
 

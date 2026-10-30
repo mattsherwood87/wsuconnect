@@ -3,9 +3,9 @@
 # Copywrite Matthew Sherwood (matt.sherwood@wright.edu, matthew.sherwood.7.ctr@us.af.mil)
 # Created on 21 Jan 2021
 #
-# v3.0.0 on 1 April 2023
 # Modified on 20 Oct 2021 - elimination of mysql database in supplement of list bucket from boto3
 # modified on 21 Jan 2021
+# modified on 29 OCT 2026 - addition of update/creating a credentials table from credentials.json
 
 import sys
 import os
@@ -14,18 +14,19 @@ import pymysql.cursors
 import traceback
 from pathlib import Path
 import pandas as pd
+import numpy as np
 from datetime import timedelta, datetime
 
 
 #append path if necessary
-REALPATH = Path(*Path(os.path.realpath(__file__)).parts[:-4]).resolve()
-if not str(REALPATH) in sys.path:
-    sys.path.append(REALPATH)
-from wsuconnect import support_tools as st
+# REALPATH = Path(*Path(os.path.realpath(__file__)).parts[:-4]).resolve()
+# if not str(REALPATH) in sys.path:
+#     sys.path.append(REALPATH)
+import wsuconnect.support_tools as st
 
 
-VERSION = '4.0.0'
-DATE = '5 April 2023'
+VERSION = '5.0.0'
+DATE = '29 OCT 2026'
 
 
 def fix_time_str(x: str|timedelta|pd.Timedelta):
@@ -387,23 +388,30 @@ def sql_multiple_query(searchtable: str, regex: str, database: str='CoNNECT', re
 
 
 # ******************* CREATE TABLES FOR A NEW PROJECT ********************
-def sql_create_project_tables(progress: bool=False):
+def sql_create_project_tables(project: str, progress: bool=False):
     """
     This function creates the searchTable and searchSourceTable tables in the database for a given project, all specified in support_tools.creds object.
 
-    :param progress: flag to display command line output providing additional details on the processing status, defaults to False
-    :type progress: bool, optional
+
+    Parameters
+    ----------
+    project : str
+        project string
+    progress : bool, optional
+        flag to display command line output providing additional details on the processing status, defaults to False
     """    
     
     #connect to sql database
+    st.creds.read(project)
     sqlConnection = create_mysql_connection('10.11.0.31','ubuntu','neuroscience',st.creds.database,progress)
     sqlCursor = sqlConnection.cursor()
 
     #create table
     if not sql_check_table_exists(sqlConnection.cursor(),st.creds.searchTable):
-        sqlCMD ="""CREATE TABLE %s ( fullpath char(255), filename varchar(255), basename varchar(255), extension varchar(48) );""" % (st.creds.searchTable)
+        sqlCMD =f"CREATE TABLE {st.creds.searchTable} ( fullpath char(255), filename varchar(255), basename varchar(255), extension varchar(48) );"
 
         #run command
+        print(sqlCMD)
         sqlCursor.execute(sqlCMD)
     else:
         print('WARNING: table ' + st.creds.searchTable + ' already exists')
@@ -639,7 +647,7 @@ def create_mysql_connection(host_name: str, user_name:str , user_password: str, 
 #         return None
 
 # ******************* APPEND ITEM(S) TO TABLE ********************
-def sql_mri_tracking_insert(subject: str, session: str, project: str, date: str, all_data: bool=None, number_checks: int=0, scan_start_time: str=None, scan_end_time: str=None, arrival_time: str=None, departure_time: str=None, scheduled_duration: str=None, scan_duration: str=None, charged_time: str=None, direct_fee: str=None, table: str='mri_tracking'):
+def sql_mri_tracking_insert(subject: str, session: str, project: str, date: str, all_data: bool=None, number_checks: int=0, scan_start_time: str=None, scan_end_time: str=None, arrival_time: str=None, departure_time: str=None, scheduled_duration: str=None, scan_duration: str=None, charged_time: str=None, direct_fee: str=None, counter: int=None, table: str='mri_tracking'):    
     """
     insert new row into the SQL table for mri usage tracking
 
@@ -684,9 +692,9 @@ def sql_mri_tracking_insert(subject: str, session: str, project: str, date: str,
 
         if sql_check_table_exists(sqlCursor,table):
             uid = generate_unique_id(subject, session, date)
-            sqlCMD =f"INSERT INTO `{table}` (uuid, subject, session, project, date, all_data, number_checks, scan_start_time, scan_end_time, arrival_time, departure_time, scheduled_duration, scan_duration, charged_time, direct_fee) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+            sqlCMD =f"INSERT INTO `{table}` (uuid, subject, session, project, date, all_data, number_checks, scan_start_time, scan_end_time, arrival_time, departure_time, scheduled_duration, scan_duration, charged_time, direct_fee, counter) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
             # print(sqlCMD)
-            sqlCursor.execute(sqlCMD, (uid, subject, session, project, date, all_data, number_checks, scan_start_time, scan_end_time, arrival_time, departure_time, scheduled_duration, scan_duration, charged_time, direct_fee))
+            sqlCursor.execute(sqlCMD, (uid, subject, session, project, date, all_data, number_checks, scan_start_time, scan_end_time, arrival_time, departure_time, scheduled_duration, scan_duration, charged_time, direct_fee, counter))
         
         # commit changes and close connection
         sqlConnection.commit()
@@ -718,6 +726,11 @@ def sql_mri_tracking_set(entries: pd.DataFrame, table: str='mri_tracking'):
         # cast column to object so it can hold strings
         if col in entries.columns:
             entries[col] = entries[col].astype(object).apply(fix_time_str)
+
+    entries = entries.where(pd.notnull(entries), None)
+    entries = entries.replace({np.nan: None})
+    # print(entries)
+
     
 
     if sql_check_table_exists(sqlCursor,table) and 'uuid' in entries.columns:
@@ -805,6 +818,7 @@ def sql_mri_tracking_query(returncol: str='*', searchcol: str='date', orderby: s
     pandas.DataFrame
         output dataframe containing all items matching the specified search criteria
     """
+    from types import NoneType
     
     #connect to sql database
     sqlConnection = create_mysql_connection(host_name='10.11.0.31',user_name='ubuntu',user_password='neuroscience',db_name=st.creds.database,progress=False)
@@ -814,16 +828,28 @@ def sql_mri_tracking_query(returncol: str='*', searchcol: str='date', orderby: s
     if sql_check_table_exists(sqlCursor,table):
 
         #create query
-        if regex:
-            sqlQuery = """SELECT %s FROM %s WHERE %s REGEXP "%s" """ % (returncol,table,searchcol,regex)
-            if subject:
-                sqlQuery +=  """and subject = "%s" """ % (subject)
-            if session:
-                sqlQuery +=  """and session = "%s" """ % (session)
-            if project:
-                sqlQuery +=  """and project = "%s" """ % (project)
+        if not isinstance(regex,NoneType):
+            if isinstance(regex,bool):
+                sqlQuery = "SELECT %s FROM %s WHERE %s = %s " % (returncol,table,searchcol,regex)
+                if subject:
+                    sqlQuery +=  """and subject = "%s" """ % (subject)
+                if session:
+                    sqlQuery +=  """and session = "%s" """ % (session)
+                if project:
+                    sqlQuery +=  """and project = "%s" """ % (project)
 
-            sqlQuery += "ORDER BY %s;" % (orderby)
+                sqlQuery += "ORDER BY %s;" % (orderby)
+
+            else:
+                sqlQuery = """SELECT %s FROM %s WHERE %s REGEXP "%s" """ % (returncol,table,searchcol,regex)
+                if subject:
+                    sqlQuery +=  """and subject = "%s" """ % (subject)
+                if session:
+                    sqlQuery +=  """and session = "%s" """ % (session)
+                if project:
+                    sqlQuery +=  """and project = "%s" """ % (project)
+
+                sqlQuery += "ORDER BY %s;" % (orderby)
         elif year or month:
             sqlQuery = """SELECT %s FROM %s WHERE """ % (returncol,table)
             if year:
@@ -870,5 +896,145 @@ def sql_mri_tracking_query(returncol: str='*', searchcol: str='date', orderby: s
     df = pd.DataFrame(rows, columns=columns)
     sqlConnection.close()
 
+    # cols_to_fix = ['scan_start_time','scan_end_time','arrival_time','departure_time','scheduled_duration','scan_duration','charged_time']
+    # df = df.copy()  # make sure it’s independent
+
+    # for col in cols_to_fix:
+    #     # cast column to object so it can hold strings
+    #     if col in df.columns:
+    #         df[col] = df[col].astype(object).apply(fix_time_str)
+
     #get sql returned list
     return df
+
+
+# ******************* QUERY FOR DIRECTORIES CONTAINING DICOMS ********************
+def sql_mri_tracking_query_counter(table: str='mri_tracking', subject: str=None, project: str=None) -> int:
+    """
+    Find all items in a MySql table that match the specified search string regex.
+
+    
+    Parameters
+    ----------
+    table : str
+        mysql table to query, by default 'mri_tracking'
+
+    Returns
+    -------
+    int
+        output participant counter
+    """
+    from types import NoneType
+    
+    #connect to sql database
+    sqlConnection = create_mysql_connection(host_name='10.11.0.31',user_name='ubuntu',user_password='neuroscience',db_name=st.creds.database,progress=False)
+    sqlCursor = sqlConnection.cursor()
+
+
+    if sql_check_table_exists(sqlCursor,table):
+        sqlQuery = "SELECT * FROM %s WHERE counter IS NOT NULL ORDER BY date DESC, scan_start_time DESC LIMIT 1;" % (table)
+    
+    # run query to get last counter value
+    # print(sqlQuery)
+    sqlCursor.execute(sqlQuery)
+    # Get column names
+    columns = [desc[0] for desc in sqlCursor.description]
+
+    # Convert to DataFrame
+    rows = sqlCursor.fetchall()
+    df = pd.DataFrame(rows, columns=columns)
+
+
+    # see if subject already has been counted
+    if sql_check_table_exists(sqlCursor,table) and (subject or project):
+        sqlQuery = """SELECT * FROM %s WHERE""" % (table)
+        if subject:
+            if project:
+                sqlQuery += """ subject = "%s" and project = "%s";""" % (subject, project)
+        else:
+            sqlQuery += """ project = "%s";""" % (project)
+        sqlCursor.execute(sqlQuery)
+        rows = sqlCursor.fetchone()
+    else:
+        rows = None
+
+    #only return counter if subject has not been counted yet
+    if not rows:
+        counter = int(df.loc[df.index[0], "counter"])
+    else:
+        counter = None
+    sqlConnection.close() 
+
+    #get sql returned list
+    return counter
+
+
+# ******************* CREATE/UPDATE PROJECT CREDENTIALS TABLE ********************
+def sql_credentials_set(table: str='projects', database: str='CoNNECT', progress: bool=False):
+    """
+    This function reads the credentials file (credentials.json) from the wsuconnect package's data/ 
+    directory and creates or updates a table with one row per project. Existing projects are updated 
+    and new projects are inserted, keyed by the project identifier.
+
+    Parameters
+    ----------
+    table : str, optional
+        target table in the database, by default 'projects'
+    database : str, optional
+        target MySQL database, by default 'CoNNECT'
+    progress : bool, optional
+        flag to display command line output providing additional details on the processing status, by default False
+    """
+    from json import loads
+    from wsuconnect.data import load as load_data
+
+    # project keys to store (list values are stored as comma-separated strings)
+    cols = ['title','description','dataDir','database','dicom_id','examCardName','fund','org',
+            'searchTable','searchSourceTable','dockerMountIf','machineNames','gpuMachineNames','contact']
+
+    d_creds = loads(load_data.readable('credentials.json').read_text())
+
+    #connect to sql database
+    sqlConnection = create_mysql_connection('10.11.0.31','ubuntu','neuroscience',database,progress)
+    sqlCursor = sqlConnection.cursor()
+
+    try:
+        # create table if it does not exist
+        if not sql_check_table_exists(sqlCursor,table):
+            colDefs = ', '.join([f"`{c}` text" for c in cols])
+            sqlCursor.execute(f"CREATE TABLE `{table}` ( `project` varchar(64) NOT NULL PRIMARY KEY, {colDefs} );")
+            if progress:
+                print('Created table ' + table)
+
+        # insert new projects and update existing ones
+        colNames = ', '.join(['`project`'] + [f"`{c}`" for c in cols])
+        placeholders = ', '.join(['%s'] * (len(cols) + 1))
+        updates = ', '.join([f"`{c}` = VALUES(`{c}`)" for c in cols])
+        sqlCmd = f"INSERT INTO `{table}` ({colNames}) VALUES ({placeholders}) ON DUPLICATE KEY UPDATE {updates}"
+
+        for project in d_creds['projects']:
+            if not project in d_creds:
+                print('WARNING: project ' + project + ' listed in projects but not defined in credentials.json')
+                continue
+            values = [project]
+            for c in cols:
+                v = d_creds[project].get(c)
+                values.append(','.join(v) if isinstance(v,list) else v)
+            sqlCursor.execute(sqlCmd, tuple(values))
+            if progress:
+                print('\tset ' + project)
+
+        # commit changes and close connection
+        sqlConnection.commit()
+
+    except Exception as e:
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        filename = exc_tb.tb_frame.f_code.co_filename
+        lineno = exc_tb.tb_lineno
+        print(f"Exception occurred in file: {filename}, line: {lineno}")
+        print(f"\tException type: {exc_type.__name__}")
+        print(f"\tException message: {e}")
+        traceback.print_exc()
+
+    finally:
+        sqlConnection.close()

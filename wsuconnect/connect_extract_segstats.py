@@ -20,9 +20,9 @@ import re
 
 
 #local import
-REALPATH = os.path.dirname(os.path.realpath(__file__))
-sys.path.append(REALPATH)
-import support_tools as st
+# REALPATH = os.path.dirname(os.path.realpath(__file__))
+# sys.path.append(REALPATH)
+import wsuconnect.support_tools as st
 
 
 # GLOBAL INFO
@@ -104,7 +104,19 @@ if __name__ == '__main__':
         log = os.path.join(base,'segstats_' + now + '.log')
         dagman = Dagman(name=options.PROJECT + '-segstats', submit=submit)
 
-        job_segstats = st.condor.create_freesurfer_condor_job('mri_segstats','mri_segstats',st.creds.machineNames,submit,error,output,log,dagman)
+        job_segstats = st.condor.create_python_condor_job('mri_segstats',
+                                                              'mri_segstats',
+                                                              st.creds.machineNames,
+                                                              submit,
+                                                              error,
+                                                              output,
+                                                              log,
+                                                              dagman,
+                                                              docker=True,
+                                                              docker_image='wsuconnect/neuro:docker',
+                                                              docker_mount_if=st.creds.dockerMountIf,
+                                                              request_cpus=1,
+                                                              request_memory='2g')
         segstats_flag = False
 
     try:

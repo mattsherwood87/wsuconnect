@@ -19,10 +19,10 @@ import shutil
 
 
 #local import
-REALPATH = os.path.realpath(__file__)
-sys.path.append(os.path.dirname(REALPATH))
+# REALPATH = os.path.realpath(__file__)
+# sys.path.append(os.path.dirname(REALPATH))
 
-import support_tools as st
+import wsuconnect.support_tools as st
 
 
 # GLOBAL INFO
@@ -57,7 +57,7 @@ def evaluate_args(options):
 
 
 # ******************* EVALUATE INPUT ARGUMENTS ********************
-def add_json_sidecar_key(inFile):
+def add_json_sidecar_key(inFile,progress=False):
     #get time info for verbose option
 
 
@@ -91,15 +91,28 @@ def add_json_sidecar_key(inFile):
             #fMRI modifiers
             for k in ['SliceTiming',
                         'TaskName',
-                        'Units']:
+                        'Units',
+                        'SeriesDescription']:
                 if k in scanKeys.keys():
                     imgHeader[k] = scanKeys[k]
                     b_mod = True
 
             #general modifiers
-            if 'PhaseEncodingAxis' in imgHeader.keys():
-                imgHeader['PhaseEncodingDirection'] = imgHeader.pop('PhaseEncodingAxis')
+            if 'IntendedFor' in scanKeys.keys():
+                old_sub = "sub-X"
+                old_ses = "ses-Y"
+
+                iFor = [
+                    p.replace(old_sub, f"sub-{st.subject.id}").replace(old_ses, f"ses-{st.subject.sesNum}")
+                    for p in scanKeys["IntendedFor"]
+                ]
+                imgHeader['IntendedFor'] = iFor
                 b_mod = True
+
+
+            # if 'PhaseEncodingAxis' in imgHeader.keys():
+            #     imgHeader['PhaseEncodingDirection'] = imgHeader.pop('PhaseEncodingAxis')
+            #     b_mod = True
 
             if 'EstimatedEffectiveEchoSpacing' in imgHeader.keys():
                 imgHeader['EffectiveEchoSpacing'] = imgHeader.pop('EstimatedEffectiveEchoSpacing')
@@ -112,11 +125,17 @@ def add_json_sidecar_key(inFile):
 
             #B0 map modifiers
             if 'B0FieldSource' in scanKeys.keys():
-                imgHeader['B0FieldSource'] = f"scanKeys['B0FieldSource']{st.subject.sesNum}"
+                if isinstance(scanKeys['B0FieldSource'], list):
+                    imgHeader['B0FieldSource'] = [
+                        f"{p}_{st.subject.sesNum}"
+                        for p in scanKeys['B0FieldSource']
+                    ]
+                else:
+                    imgHeader['B0FieldSource'] = f"{scanKeys['B0FieldSource']}_{st.subject.sesNum}"
                 b_mod = True
 
             if 'B0FieldIdentifier' in scanKeys.keys():
-                imgHeader['B0FieldIdentifier'] = f"scanKeys['B0FieldIdentifier']{st.subject.sesNum}"
+                imgHeader['B0FieldIdentifier'] = f"{scanKeys['B0FieldIdentifier']}_{st.subject.sesNum}"
                 b_mod = True
 
             #ASL modifiers
@@ -134,7 +153,8 @@ def add_json_sidecar_key(inFile):
                       "LabelingPulseMaximumGradient",
                       "LabelingPulseAverageB1",
                       "LabelingPulseDuration",
-                      "LabelingPulseInterval"
+                      "LabelingPulseInterval",
+                      "PhaseEncodingDirection"
                       ]:
                 if k in scanKeys.keys():
                     imgHeader[k] = scanKeys[k]
@@ -147,6 +167,8 @@ def add_json_sidecar_key(inFile):
             #write modified JSON sidecar
             if b_mod:
                 with open(baseOutput, 'w') as j:
+                    if progress:
+                        print(f'modifying {baseOutput}')
                     json.dump(imgHeader, j, indent='\t', sort_keys=True)
 
     #catch any errors
@@ -173,17 +195,29 @@ if __name__ == '__main__':
     
     for root, dirs, files in os.walk(os.path.join(st.creds.dataDir,'rawdata')):
         for f in files:
-            if '.json' not in f:
+            if '.json' not in f or 'ses' not in f or 'sub' not in f:
                 continue
 
             fullpath = os.path.join(root,f)
-            with open(fullpath, 'r') as j:
-                imgHeader = json.load(j)
+            add_json_sidecar_key(fullpath, options.progress)
+            # with open(fullpath, 'r') as j:
+            #     imgHeader = json.load(j)
 
-            if 'PostlabelingDelay' in imgHeader.keys():
-                imgHeader.pop('PostlabelingDelay')
-                imgHeader['PostLabelingDelay'] = 1.8
+            # sourceDir = os.path.dirname(fullpath)
+            # filename = os.path.basename(fullpath)
+            # filename_split = os.path.splitext(filename)
+            # scanName, bidsDir, scanKeys = st.get_scan_id(sourceDir,filename_split[0])
 
-                with open(fullpath,'w') as j:
-                    json.dump(imgHeader,j, indent='\t', sort_keys=True)
+            # if 'SeriesDescription' in scanKeys:
+            #     imgHeader['SeriesDescription'] = scanKeys['SeriesDescription']
+            #     with open(fullpath,'w') as j:
+            #         json.dump(imgHeader,j, indent='\t', sort_keys=True)
+            #     print(f"modified {fullpath}")
+
+            # if 'PostlabelingDelay' in imgHeader.keys():
+            #     imgHeader.pop('PostlabelingDelay')
+            #     imgHeader['PostLabelingDelay'] = 1.8
+
+            #     with open(fullpath,'w') as j:
+            #         json.dump(imgHeader,j, indent='\t', sort_keys=True)
    

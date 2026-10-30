@@ -12,8 +12,8 @@ import argparse
 import shutil
 import time
 
-REALPATH = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
-sys.path.append(REALPATH)
+# REALPATH = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+# sys.path.append(REALPATH)
 
 
 #versioning

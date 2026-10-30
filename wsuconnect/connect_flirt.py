@@ -16,12 +16,12 @@ import datetime
 import sys
 import json
 from typing import Tuple
-from pathlib import Path
 
-#append path if necessary
-REALPATH = Path(*Path(os.path.realpath(__file__)).parts[:-2]).resolve()
-if not str(REALPATH) in sys.path:
-    sys.path.append(REALPATH)
+
+#local import
+
+# REALPATH = os.path.realpath(__file__)
+# sys.path.append(os.path.dirname(REALPATH))
 
 import wsuconnect.support_tools as st
 
@@ -108,7 +108,7 @@ def modality_process(modality: str,options: dict, flag: bool=False, job: Job=Non
         print("Error Message: {0}".format(e))
         sys.exit()
 
-    regexStr = st.bids.get_bids_filename(**flirtInput['main_image_params']['input_bids_labels']).split('_')
+    regexStr = st.mybids.get_bids_filename(**flirtInput['main_image_params']['input_bids_labels']).split('_')
     incExcDict['inclusion'] += regexStr[2:]
 
     if not incExcDict:

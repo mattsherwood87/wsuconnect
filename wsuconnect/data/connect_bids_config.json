@@ -1,5 +1,5 @@
 {
-  "name": "aslprep",
+  "name": "wsuconnect",
   "entities": [
     {
       "name": "datatype",
@@ -24,8 +24,9 @@
     }
   ],
   "default_path_patterns": [
-    "sub-{subject}[/ses-{session}]/{datatype<func>|func}/sub-{subject}[_ses-{session}][_hash-{hash}]_task-{task}[_acq-{acquisition}][_ce-{ceagent}][_rec-{reconstruction}][_dir-{direction}][_run-{run}][_echo-{echo}][_hemi-{hemi<L|R>}][_space-{space}][_cohort-{cohort}][_den-{density}][_desc-{desc}]_{suffix<zstat|zmap>}{extension<.nii.gz|.nii|.dtseries.nii|.dtseries.json|.func.gii|.func.json>}",
-    "sub-{subject}[/ses-{session}]/{datatype<func>|func}/sub-{subject}[_ses-{session}][_hash-{hash}]_task-{task}[_acq-{acquisition}][_ce-{ceagent}][_rec-{reconstruction}][_dir-{direction}][_run-{run}][_echo-{echo}][_hemi-{hemi<L|R>}][_space-{space}][_cohort-{cohort}][_den-{density}][_desc-{desc}]_{suffix<zstat|zmap>}.{extension<nii.gz|nii>}",
-    "sub-{subject}[/ses-{session}]/{datatype}/sub-{subject}[_ses-{session}][_hash-{hash}]_task-{task}[_acq-{acquisition}][_ce-{ceagent}][_rec-{reconstruction}][_dir-{direction}][_run-{run}][_echo-{echo}][_hemi-{hemi<L|R>}][_space-{space}][_cohort-{cohort}][_den-{density}][_desc-{desc}]_{suffix}.{extension<txt|ptseries.txt>}"
+    "sub-{subject}[/ses-{session}]/{datatype<func|perf>|func}/sub-{subject}[_ses-{session}][_hash-{hash}][_task-{task}][_acq-{acquisition}][_ce-{ceagent}][_rec-{reconstruction}][_dir-{direction}][_run-{run}][_echo-{echo}][_hemi-{hemi<L|R>}][_space-{space}][_cohort-{cohort}][_den-{density}][_desc-{desc}]_{suffix<zstat|zmap>}{extension<.nii.gz|.nii|.dtseries.nii|.dtseries.json|.func.gii|.func.json>}",
+    "sub-{subject}[/ses-{session}]/{datatype<func|perf>|func}/sub-{subject}[_ses-{session}][_hash-{hash}][_task-{task}][_acq-{acquisition}][_ce-{ceagent}][_rec-{reconstruction}][_dir-{direction}][_run-{run}][_echo-{echo}][_hemi-{hemi<L|R>}][_space-{space}][_cohort-{cohort}][_den-{density}][_desc-{desc}]_{suffix<zstat|zmap>}.{extension<nii.gz|nii>}",
+    "sub-{subject}[/ses-{session}]/{datatype<func|perf>|func}/sub-{subject}[_ses-{session}][_hash-{hash}][_task-{task}][_acq-{acquisition}][_ce-{ceagent}][_rec-{reconstruction}][_dir-{direction}][_run-{run}][_echo-{echo}][_hemi-{hemi<L|R>}][_space-{space}][_cohort-{cohort}][_den-{density}][_desc-{desc}]_{suffix}{extension<.txt|.ptseries.txt>}",
+    "sub-{subject}[/ses-{session}]/{datatype<func|perf>|func}/sub-{subject}[_ses-{session}][_hash-{hash}][_task-{task}][_acq-{acquisition}][_ce-{ceagent}][_rec-{reconstruction}][_dir-{direction}][_run-{run}][_echo-{echo}][_hemi-{hemi<L|R>}][_space-{space}][_cohort-{cohort}][_den-{density}][_desc-{desc}]_{suffix}.{extension<txt|ptseries.txt>}"
   ]
 }

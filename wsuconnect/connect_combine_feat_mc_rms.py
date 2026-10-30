@@ -15,10 +15,10 @@ import pandas as pd
 
 
 #local import
-REALPATH = os.path.realpath(__file__)
+# REALPATH = os.path.realpath(__file__)
 
-sys.path.append(os.path.dirname(REALPATH))
-import support_tools as st
+# sys.path.append(os.path.dirname(REALPATH))
+import wsuconnect.support_tools as st
 
 
 # GLOBAL INFO

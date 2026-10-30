@@ -40,7 +40,7 @@ REALPATH = Path(*Path(os.path.realpath(__file__)).parts[:-2]).resolve()
 if not REALPATH in sys.path:
     sys.path.append(REALPATH)
     
-import support_tools as st
+import wsuconnect.support_tools as st
 from wsuconnect.data import load as load_data
 
 
@@ -449,13 +449,13 @@ if __name__ == '__main__':
 
         hours, minutes, seconds = split_total_seconds(charge / 60)
         df_scanLog.loc[index,'charged time'] = charge
-        df_scanLog.loc[index,'direct scan fee'] = 272 * charge
+        df_scanLog.loc[index,'direct scan fee'] = df_scanLog.loc[index,'rate'] * charge
 
         
         if not df_db.empty:
             # print(df_db)
             df_db.loc[db_idx,'charged_time'] = f"{hours:02}:{minutes:02}:{seconds:02}"
-            df_db.loc[db_idx,'direct_fee'] = 272 * charge
+            df_db.loc[db_idx,'direct_fee'] = df_scanLog.loc[index,'direct scan fee']
 
             print(df_db.iloc[0])
             st.mysql.sql_mri_tracking_set(df_db)

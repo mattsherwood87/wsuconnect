@@ -15,14 +15,14 @@ from pycondor import Dagman
 import datetime
 import sys
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
-# from json import loads
-from pathlib import Path
 
-#append path if necessary
-REALPATH = Path(*Path(os.path.realpath(__file__)).parts[:-2]).resolve()
-if not str(REALPATH) in sys.path:
-    sys.path.append(REALPATH)
+
+#local import
+# REALPATH = os.path.realpath(__file__)
+
+# sys.path.append(os.path.dirname(REALPATH))
 import wsuconnect.support_tools as st
+
 
 # GLOBAL INFO
 #versioning
@@ -68,7 +68,7 @@ if __name__ == '__main__':
     st.creds.read(options.PROJECT)
 
     # find all directories to process
-    source_dirsToProcess = sorted([x[0] for x in os.walk(os.path.join(st.creds.dataDir,'sourcedata')) if 'acq-' in os.path.basename(x[0])])
+    source_dirsToProcess = sorted([p for p, d, _ in os.walk(os.path.join(st.creds.dataDir, 'sourcedata')) if os.path.basename(p).startswith("ses-") and not d.clear()])
     source_dirsToProcess = list(set(source_dirsToProcess))
 
     now = datetime.datetime.today().strftime('%Y%m%d_%H%M')
@@ -103,6 +103,9 @@ if __name__ == '__main__':
                                                       docker_mount_if=st.creds.dockerMountIf,
                                                       request_cpus=1,
                                                       request_memory=5000)
+                                                      
+            job_dcm2nii.set("docker_extra_arguments", "--user root")
+
         else:
             job_dcm2nii = st.condor.create_python_condor_job('dcm2niix',
                                                       'convert_dicoms.py',
@@ -120,10 +123,10 @@ if __name__ == '__main__':
         # source_singleDir = source_singleDir.replace(creds.s3_prefix + '/','')
         if not options.OVERWRITE:
             #check output_dir for niftis on both sql db (processed_data) and local dir (optional override flag)
-            subjectName,sessionNum = st.get_dir_identifiers(source_singleDir) #get subject name from filename
+            st.subject.get_id(source_singleDir) #get subject name from filename
 
             #check processed_data directory for nifti images
-            processedDataOutput = os.path.join('rawdata','sub-' + subjectName,'ses-' + sessionNum)#create base path and filename for move
+            processedDataOutput = os.path.join('rawdata','sub-' + st.subject.id,'ses-' + st.subject.sesNum)#create base path and filename for move
             processedFlag = st.mysql.sql_query_dir_check('nii.gz',processedDataOutput,False)
 
             #continue if no files in processed_data directory for given subject/session
@@ -140,7 +143,7 @@ if __name__ == '__main__':
                 else:
                     str_args = '-i ' + source_singleDir
                     if options.progress:
-                        str_args += ' --progress'
+                        str_args += ' --source-dir --progress'
                     job_dcm2nii.add_arg(str_args)
                     if options.progress:
                         print('Added directory to conversion queue ' + source_singleDir)               
@@ -151,7 +154,9 @@ if __name__ == '__main__':
             if not options.SUBMIT and not options.DOCKER:
                 st.convert_dicoms(source_singleDir,options.progress)
             else:
-                job_dcm2nii.add_arg('-i ' + source_singleDir + ' --progress')
+                if options.progress:
+                    print('Added directory to conversion queue ' + source_singleDir)   
+                job_dcm2nii.add_arg('-i ' + source_singleDir + ' --source-dir --progress')
         
     if options.SUBMIT or options.DOCKER:
         # job_sleep.add_child(job_dcm2nii)

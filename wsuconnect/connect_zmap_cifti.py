@@ -1,5 +1,5 @@
 #!/resshare/python3_venv/bin/python
-# the command above ^^^ sets python 3.10.9 as the interpreter for this program
+# the command above ^^^ sets python 3.12.3 as the interpreter for this program
 
 # Created by Matthew Sherwood (matt.sherwood@wright.edu, matthew.sherwood.7.ctr@us.af.mil)
 #
@@ -19,10 +19,14 @@ from bids.layout.writing import build_path
 
 
 #local import
-REALPATH = os.path.realpath(__file__)
+# REALPATH = os.path.realpath(__file__)
 
-sys.path.append(os.path.dirname(REALPATH))
-import support_tools as st
+REALPATH = Path(*Path(os.path.realpath(__file__)).parts[:-1]).resolve()
+if not any(Path(p).resolve() == str(REALPATH) for p in sys.path if Path(p).exists()):
+    sys.path.append(str(REALPATH))
+
+# sys.path.append(os.path.dirname(REALPATH))
+import wsuconnect.support_tools as st
 
 
 # GLOBAL INFO
@@ -39,7 +43,7 @@ parser.add_argument('--overwrite', action="store_true", dest="OVERWRITE", help="
 parser.add_argument('--subjects', action='store', dest='SUBJECTS', default=None, nargs='+', help='optional subject identifier(s), skips check of participants.tsv. Multiple inputs accepted through space delimiter')
 parser.add_argument('-t', '--task-id', action='store', dest='TASKID', help='select a specific task to be processed', default=None)
 parser.add_argument('-s', '--submit', action="store_true", dest="SUBMIT", help="Submit conversion to condor for parallel conversion", default=False)
-parser.add_argument('--image', action="store", dest="IMAGE", help="docker selected image for aslprep - default pennlinc/aslprep:latest", default="pennlinc/aslprep:latest")
+parser.add_argument('--image', action="store", dest="IMAGE", help="docker selected image for aslprep - default pennlinc/aslprep:latest", default="nipreps/fmriprep:latest")
 parser.add_argument('-v', '--version', action="store_true", dest="version", help="Display the current version")
 parser.add_argument('--progress', action="store_true", dest="progress", help="Show progress (default FALSE)", default=False)
 parser.add_argument('--test', action="store_true", dest="test", help="only print command lines to execute, do not run", default=False)
@@ -84,13 +88,14 @@ if __name__ == '__main__':
     
     # derivatives_dir = Path(st.creds.dataDir) / 'derivatives'
     
+    # print(df_participants)
     
     for index, row in df_participants.iterrows():
         
         participant_id = row['participant_id']
         # participant_folder = derivatives_dir / participant_id
 
-        bold_files = st.mysql.sql_query(database=st.creds.database,searchtable=st.creds.searchTable,regex="zstat",searchcol="fullpath",returncol="fullpath",progress=False,inclusion=[participant_id,'nii.gz'],exclusion=['space'])
+        bold_files = st.mysql.sql_query(database=st.creds.database,searchtable=st.creds.searchTable,regex="zstat",searchcol="fullpath",returncol="fullpath",progress=False,inclusion=[participant_id,'nii.gz'],exclusion=['space','work'])
  
         # Skip the participant if their folder already exists (we should really do some other check, derivative folder may contain other types of data)
         # if os.path.exists(participant_folder):
@@ -101,29 +106,11 @@ if __name__ == '__main__':
         cpus = 1
         mem = 4000
 
-
-        for bold_file in bold_files:
-            # e = st.bids.get_bids_labels(bold_file)
-            # id_keys = ['session','task','acquisition','run','description']
-            # print(os.path.basename(bold_file))
-            # print(e)
-            # entities = {}
-            # for k in e.keys():
-            #     if k in id_keys:
-            #         entities[k] = e[k]
-            # print(entities)
-            # template = "[_ses-{session}][_task-{task}][_acq-{acquisition}][_run-{run}][_desc-{description}]"
-            # logname = build_path(entities,template)
-
-            # submit = base / f"zmap_cifti_{participant_id}{logname}_{now}.submit"
-            # error = base / f"zmap_cifti_{participant_id}{logname}_{now}.error"
-            # output = base / f"zmap_cifti_{participant_id}{logname}_{now}.output"
-            # log = base / f"zmap_cifti_{participant_id}{logname}_{now}.log"
-            # dagman = Dagman(name=f"{options.PROJECT}_z-cifti_{participant_id}{logname}", submit=submit)
+        if not bold_files:
+            print(participant_id)
 
 
-
-            
+        for bold_file in bold_files:            
             submit = base / f"zmap_cifti_{participant_id}_{now}.submit"
             error = base / f"zmap_cifti_{participant_id}_{now}.error"
             output = base / f"zmap_cifti_{participant_id}_{now}.output"
@@ -160,7 +147,7 @@ if __name__ == '__main__':
                 argStr += " -v /resshare22:/resshare22:rw"
 
             #add remaining docker commands to the argument string
-            argStr += f' --user=root --entrypoint /bin/bash -m 4g --cpus=1 {options.IMAGE} {os.path.join(os.path.dirname(REALPATH),"support_tools","python_aslprep_wrapper.sh")} {os.path.join(os.path.dirname(REALPATH),"support_tools","zmap_cifti_wf.py")} '
+            argStr += f' --user=root --entrypoint /bin/bash -m 4g --cpus=1 {options.IMAGE} {REALPATH / "support_tools" / "python_fmriprep_wrapper.sh"} /opt/conda/envs/fmriprep/bin/python3.12 {REALPATH / "support_tools" / "zmap_cifti_wf.py"} '
 
             argStr += ' '.join(['--bold-file',bold_file,
                                 '--data-dir',st.creds.dataDir,
@@ -169,9 +156,9 @@ if __name__ == '__main__':
             job_do_cifti.add_arg(argStr)
 
             if options.progress:
-                print('Added job for aslprep for participant ' + row['participant_id'].split('sub-')[-1]) 
+                print('Added job for zmap_cifti_wf for participant ' + row['participant_id'].split('sub-')[-1]) 
             dagman.build_submit()
 
-            print('\n\n docker pennlinc/aslprep job submitted to condor. please run condor_q -all to check status')
+            print('\n\n docker nipreps/fmriprep job submitted to condor. please run condor_q -all to check status')
     
 

@@ -41,9 +41,9 @@ def compute_segstats(in_file: str, in_seg: str, out_dir: str, overwrite: str=Fal
 
 
 
-    if not os.path.isfile(os.path.join(out_dir,os.path.basename(outFile).replace('.nii.gz','.dat'))) or overwrite:
-        os.system('mri_segstats --seg ' + in_seg + ' --nonempty --ctab-default --in ' + outFile + ' --sum ' + os.path.join(out_dir,os.path.basename(outFile).replace('.nii.gz','.dat')))
-        print(f"Output stats saved to: {os.path.join(out_dir,os.path.basename(outFile).replace('.nii.gz','.dat'))}")
+    if not os.path.isfile(os.path.join(out_dir,os.path.basename(outFile).replace('.nii.gz','_aparc+aseg.dat'))) or overwrite:
+        os.system('mri_segstats --seg ' + in_seg + ' --nonempty --ctab-default --in ' + outFile + ' --sum ' + os.path.join(out_dir,os.path.basename(outFile).replace('.nii.gz','_aparc+aseg.dat')))
+        print(f"Output stats saved to: {os.path.join(out_dir,os.path.basename(outFile).replace('.nii.gz','_aseg.dat'))}")
 
 
 if __name__ == '__main__':

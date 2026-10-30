@@ -14,10 +14,12 @@ import re
 from glob import glob as glob
 
 
-REALPATH = os.path.realpath(__file__)
-sys.path.append(os.path.dirname(REALPATH))
+# REALPATH = os.path.realpath(__file__)
+# sys.path.append(os.path.dirname(REALPATH))
 
-import support_tools as st
+REALPATH = os.path.dirname(os.path.realpath(__file__))
+
+import wsuconnect.support_tools as st
 
 # GLOBAL INFO
 #versioning
@@ -28,7 +30,7 @@ DATE = '23 April 2024'
 # ******************* PARSE COMMAND LINE ARGUMENTS ********************
 #input argument parser
 parser = argparse.ArgumentParser(os.path.basename(REALPATH) + ' - Create ExamCard Tables')
-parser.add_argument('-p','--project', require=True, action="store", dest="PROJECT", help="load the selected projects examcards from scanorder.txt: " + ' '.join(st.creds.projects), default=None)
+parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="load the selected projects examcards from scanorder.txt: " + ' '.join(st.creds.projects), default=None)
 # parser.add_argument('-r','--raw', action="store_true", dest="RAW", help="Command line argument to update the raw_data table for the selected project (default FALSE)", default=False)
 parser.add_argument('-v', '--version', help="Display the current version", action="store_true", dest="version")
 parser.add_argument('-i', '--in-dir', help="Use a specific directory rather than a project directory", action="store", default=None, dest="INDIR")
@@ -66,7 +68,7 @@ if __name__ == '__main__':
 
     # setup HTML headers
     newD = st.prepare_examcard_html()
-
+    newD = newD.split("\n")
 
 
     # inFiles = glob(os.path.join(ecardDir, '*.txt'))

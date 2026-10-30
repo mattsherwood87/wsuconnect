@@ -16,12 +16,12 @@ import datetime
 import traceback
 
 #local import
-REALPATH = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+# REALPATH = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+# # sys.path.append(REALPATH)
+# # REALPATH = os.path.join('/resshare','general_processing_codes')
+# REALPATH = os.path.join('/resshare','wsuconnect')
 # sys.path.append(REALPATH)
-# REALPATH = os.path.join('/resshare','general_processing_codes')
-REALPATH = os.path.join('/resshare','wsuconnect')
-sys.path.append(REALPATH)
-import support_tools as st
+import wsuconnect.support_tools as st
 
 
 

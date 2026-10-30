@@ -36,11 +36,11 @@ def check_rawdata(project: str, progress: bool = False, date: str = None):
     from json import loads
 
     #local import
-    REALPATH = Path('/resshare')
-    if not str(REALPATH) in sys.path:
-        sys.path.append(REALPATH)
+    # REALPATH = Path('/resshare')
+    # if not str(REALPATH) in sys.path:
+    #     sys.path.append(REALPATH)
 
-    from wsuconnect import support_tools as st
+    import wsuconnect.support_tools as st
 
     today = datetime.date.today()
     if not date:
@@ -79,6 +79,12 @@ def check_rawdata(project: str, progress: bool = False, date: str = None):
             if '__general_comment__' in scanIds.keys():
                 scanIds.pop('__general_comment__')
 
+        for k in list(scanIds.keys()):
+            if 'raw' in scanIds[k].keys():
+                if not scanIds[k]['raw']:
+                    scanIds.pop(k)
+        
+
         #read participants tsv file
         df_participants = pd.read_csv(groupIdFile, sep='\t')
         
@@ -94,7 +100,7 @@ def check_rawdata(project: str, progress: bool = False, date: str = None):
 
 
     #load any participants with missing data
-    df_prevMissing = st.mysql.sql_mri_tracking_query(regex=False, searchcol='all_data')
+    # df_prevMissing = st.mysql.sql_mri_tracking_query(regex=False, searchcol='all_data')
 
     dirs = os.listdir(os.path.join(st.creds.dataDir,'rawdata'))
     for d in dirs:
@@ -220,17 +226,17 @@ def check_rawdata(project: str, progress: bool = False, date: str = None):
 
 
             #see if subjects/session needs rechecked
-            matching_idx = pd.Index([])
+            df_prevMissing = pd.DataFrame([])
             if not b_newSubject:
-                mask = (df_prevMissing["uuid"] == df_scanLog.loc[0,'uuid']) #(df_prevMissing["project"] == project) & (df_prevMissing["subject"] == subName) & (df_prevMissing["session"] == f"ses-{sesNum}")
-                matching_idx = df_prevMissing.index[mask]
-                if not matching_idx.empty:
-                    b_newSubject = True
+                df_prevMissing = st.mysql.sql_mri_tracking_query(regex=False, searchcol='all_data', project=project, subject=subName, session=f"ses-{sesNum}")
+                if not df_prevMissing.empty:
+                    if df_prevMissing.loc[0,'number_checks'] < 5:
+                        b_newSubject = True
 
 
 
             #look for raw nifti's
-            b_allData = np.nan
+            b_allData = True
             for k in scanIds:
                 if not isinstance(scanIds[k],dict):
                     continue
@@ -240,7 +246,7 @@ def check_rawdata(project: str, progress: bool = False, date: str = None):
 
                 if 'bids_labels' in scanIds[k].keys():
                     # print(scanIds[k]['bids_labels'])
-                    scanName = st.bids.get_bids_filename(**scanIds[k]['bids_labels'])[1:]
+                    scanName = st.mybids.get_bids_filename(**scanIds[k]['bids_labels'])[1:]
                     match = [x for x in filesToProcess if scanName + '.nii.gz' in x]
                     matchJson = [x for x in filesToProcess if scanName + '.json' in x]
 
@@ -252,8 +258,8 @@ def check_rawdata(project: str, progress: bool = False, date: str = None):
                         d_dataMatrix[scanIds[k]['BidsDir']][scanName] = 1
                         l_foundFiles.append(os.path.basename(match[0]))
                         l_foundFiles.append(os.path.basename(matchJson[0]))
-                        if b_allData == np.nan:
-                            b_allData = True
+                        # if b_allData == np.nan:
+                        #     b_allData = True
                     else:
                         # exec(f"d_{scanIds[k]['BidsDir']}Matrix[scanName] = 0")
                         d_dataMatrix[scanIds[k]['BidsDir']][scanName] = 0
@@ -287,8 +293,8 @@ def check_rawdata(project: str, progress: bool = False, date: str = None):
                         # exec(f"d_{scanIds[k]['BidsDir']}Matrix[k] = 1")
                         d_dataMatrix[scanIds[k]['BidsDir']][k] = 1
                         l_foundFiles.append(os.path.basename(match[0]))
-                        if b_allData == np.nan:
-                            b_allData = True
+                        # if b_allData == np.nan:
+                        #     b_allData = True
                     else:
                         # exec(f"d_{scanIds[k]['BidsDir']}Matrix[k] = 0")
                         d_dataMatrix[scanIds[k]['BidsDir']][k] = 0
@@ -385,12 +391,22 @@ def check_rawdata(project: str, progress: bool = False, date: str = None):
             if b_newSubject:
                 print(f"{subName}\t{fullSesNum}")
                 print(f"\t{b_newSubject}")
-                print(l_foundFiles)
-                print(l_missingFiles)
+                print(f"\t{b_allData}")
+                # print(l_foundFiles)
+                # print(l_missingFiles)
+                print(df_prevMissing)
                 if b_allData:
-                    if not matching_idx.empty:
-                        df_prevMissing.loc[matching_idx,'all_data'] = True
+                    if not df_prevMissing.empty:
+                        df_prevMissing.loc[0,'all_data'] = 1
+                        num_checks = df_prevMissing.loc[0, "number_checks"]
+                        df_prevMissing.loc[0,'number_checks'] = num_checks + 1
                         st.mysql.sql_mri_tracking_set(df_prevMissing)
+                    else:
+                        print(df_scanLog)
+                        df_scanLog.loc[0,'all_data'] = 1
+                        num_checks = df_scanLog.loc[0, "number_checks"]
+                        df_scanLog.loc[0, "number_checks"] = num_checks + 1
+                        st.mysql.sql_mri_tracking_set(df_scanLog)
 
                     format_str = '\t' + '\n\t'.join(l_foundFiles)
 
@@ -418,11 +434,17 @@ You're Welcome
 Sincerely,
 Wright State CoNNECT Team
                     """
-                elif not matching_idx.empty:
-                    #update number of checks
-                    num_checks = df_prevMissing.loc[matching_idx, "num_checks"].iloc[0]
-                    df_prevMissing.loc[matching_idx, "num_checks"] = num_checks + 1
-                    st.mysql.sql_mri_tracking_set(df_prevMissing)
+                else:
+                    if not df_prevMissing.empty:
+                        #update number of checks
+                        num_checks = df_prevMissing.loc[0, "number_checks"]
+                        df_prevMissing.loc[0, "number_checks"] = num_checks + 1
+                        st.mysql.sql_mri_tracking_set(df_prevMissing)
+                    else:
+                        num_checks = df_scanLog.loc[0, "number_checks"]
+                        df_scanLog.loc[0, "number_checks"] = num_checks + 1
+                        st.mysql.sql_mri_tracking_set(df_scanLog)
+
 
                     #format some email text
                     format_str = '\t' + '\n\t'.join(l_missingFiles)
@@ -453,7 +475,7 @@ DISCLAIMER: You must still confirm all data was transferred prior to source remo
 You're Welcome,
 
 Matthew Sherwood, PhD
-Director, CoNNECT
+Founding Director, CoNNECT
                     """
 
                 #send EMAIL message
@@ -597,7 +619,7 @@ Director, CoNNECT
     for k in d_bidsDirs.keys():
         new_html_output = ""
         if not d_completeData[k].empty:
-            styled_df = d_completeData[k].style.applymap(_color_cells)
+            styled_df = d_completeData[k].style.map(_color_cells)
             html_table = styled_df.to_html(index=False)
 
             new_html_output = html_output + f"""

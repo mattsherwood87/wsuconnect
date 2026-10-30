@@ -15,10 +15,10 @@ import glob
 
 
 #local import
-REALPATH = os.path.realpath(__file__)
+# REALPATH = os.path.realpath(__file__)
 
-sys.path.append(os.path.dirname(REALPATH))
-import support_tools as st
+# sys.path.append(os.path.dirname(REALPATH))
+import wsuconnect.support_tools as st
 
 
 # GLOBAL INFO
@@ -155,7 +155,7 @@ if __name__ == '__main__':
             svgFiles = st.mysql.sql_query(database=st.creds.database,searchtable=st.creds.searchTable,searchcol='fullpath',regex=f'desc-{figType}_cbf.svg',exclusion=['bak'],inclusion=['derivatives',f'{subName}','figures'])
             count = 1
             for svgFile in sorted(svgFiles):
-                lbls = st.bids.get_bids_labels(svgFile)
+                lbls = st.mybids.get_bids_labels(svgFile)
                 st.subject.get_id(svgFile)
                 h2str = 'Reports for: '
                 if st.subject.sesNum:

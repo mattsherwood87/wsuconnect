@@ -19,10 +19,9 @@ import argparse
 from pathlib import Path
 
 
-REALPATH = os.path.realpath(__file__)
-sys.path.append(os.path.dirname(REALPATH))
+REALPATH = Path(*Path(os.path.realpath(__file__)).parts[:-1]).resolve()
 
-import support_tools as st
+import wsuconnect.support_tools as st
 
 # GLOBAL INFO
 #versioning
@@ -59,7 +58,7 @@ if __name__ == '__main__':
 
     #create tables
     st.creds.read(options.PROJECT)
-    st.mysql.sql_create_project_tables()
+    st.mysql.sql_create_project_tables(project=options.PROJECT)
     print("\nSuccessfully created tables " + st.creds.searchTable + " & " + st.creds.searchSourceTable + " in database " + st.creds.database)        
 
 

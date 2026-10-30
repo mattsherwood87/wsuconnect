@@ -22,18 +22,22 @@ import json
 
 import ants
 import traceback
+from pathlib import Path
 
 
 #local import
-REALPATH = os.path.realpath(__file__)
-sys.path.append(os.path.dirname(REALPATH))
-os.environ["ANTSPYNET_CACHE_DIRECTORY"] = os.path.join(REALPATH,'support_tools','antsxnet_cache')
+
+REALPATH = Path(*Path(os.path.realpath(__file__)).parts[:-1]).resolve()
+if not any(Path(p).resolve() == str(REALPATH) for p in sys.path if Path(p).exists()):
+    sys.path.append(str(REALPATH))
+from data import load as load_data
+os.environ["ANTSPYNET_CACHE_DIRECTORY"] = str(load_data('antsxnet_cache'))
 
 # import antspynet
 from nipype.interfaces import fsl
 
 
-import support_tools as st
+import wsuconnect.support_tools as st
 
 
 # GLOBAL INFO
@@ -210,7 +214,7 @@ def process_single_dir(inDir,progress,override):
 
                             #perform antspynet BET if T1w image
                             # if 'suffix' in scanKeys.keys():
-                            if 'T1w' in baseOutput:
+                            if 'T1w' in baseOutput and not 'fracture' in baseOutput and not 'rec-' in baseOutput:
                                 try:
 
                                     # bet = fsl.BET(frac=0.6, robust=True)
@@ -218,14 +222,18 @@ def process_single_dir(inDir,progress,override):
                                     # inImg = ants.image_read(f"{baseOutput}.nii.gz")
                                     #brainSeg = antspynet.brain_extraction(inImg, modality="t1", antsxnet_cache_directory=os.path.join(REALPATH,'support_tools','antsxnet_cache'), verbose=True)
                                     # brainSeg = antspynet.brain_extraction(inImg, modality="t1", verbose=True)
-                                    sKeys = st.bids.get_bids_labels(baseOutput)
-                                    sKeys['desc'] = 'brain'
+                                    sKeys = st.mybids.get_bids_labels(baseOutput)
+                                    # sKeys['description'] = 'brain'
                                     sKeys['extension'] = 'nii.gz'
-                                    sKeys['suffix'] = 'T1w'
-                                    main_file_brain = st.bids.get_bids_filename(subject=st.subject.id,session=st.subject.sesNum,**sKeys)
+                                    sKeys['suffix'] = 'T1w_brain'
+                                    if not 'subject' in sKeys:
+                                        sKeys['subject'] = st.subject.id
+                                    if not 'session' in sKeys:
+                                        sKeys['session'] = st.subject.sesNum
+                                    main_file_brain = st.mybids.get_bids_filename(**sKeys)
 
                                     argStr = f"{os.path.join(REALPATH,'support_tools','run_antspynet_bet.py')} -i {baseOutput}.nii.gz -o {os.path.join(outDir,main_file_brain)}"
-                                    os.system(f"docker run -it --rm -v /resshare:/resshare:ro -v {outDir}:{outDir}:rw wsuconnect/neuro {argStr}")
+                                    os.system(f"docker run --rm -v /resshare:/resshare:ro -v {outDir}:{outDir}:rw wsuconnect/neuro {argStr}")
 
                                     # bet.inputs.out_file = main_file_brain
                                     # bet.run()
@@ -262,12 +270,21 @@ def process_single_dir(inDir,progress,override):
                                         b_mod = True
 
                                 #general modifiers
-                                if 'PhaseEncodingDirection' in scanKeys.keys():
-                                    imgHeader['PhaseEncodingDirection'] = scanKeys['PhaseEncodingDirection']
+                                if 'IntendedFor' in scanKeys.keys():
+                                    old_sub = "sub-X"
+                                    old_ses = "ses-Y"
+
+                                    iFor = [
+                                        p.replace(old_sub, f"sub-{st.subject.id}").replace(old_ses, f"ses-{st.subject.sesNum}")
+                                        for p in scanKeys["IntendedFor"]
+                                    ]
+                                    imgHeader['IntendedFor'] = iFor
                                     b_mod = True
-                                elif 'PhaseEncodingAxis' in imgHeader.keys():
-                                    imgHeader['PhaseEncodingDirection'] = imgHeader.pop('PhaseEncodingAxis')
-                                    b_mod = True
+
+                                #general modifiers
+                                # elif 'PhaseEncodingAxis' in imgHeader.keys():
+                                #     imgHeader['PhaseEncodingDirection'] = imgHeader.pop('PhaseEncodingAxis')
+                                #     b_mod = True
 
                                 if 'EstimatedEffectiveEchoSpacing' in imgHeader.keys():
                                     imgHeader['EffectiveEchoSpacing'] = imgHeader.pop('EstimatedEffectiveEchoSpacing')
@@ -280,7 +297,13 @@ def process_single_dir(inDir,progress,override):
 
                                 #B0 map modifiers
                                 if 'B0FieldSource' in scanKeys.keys():
-                                    imgHeader['B0FieldSource'] = f"{scanKeys['B0FieldSource']}_{st.subject.sesNum}"
+                                    if isinstance(scanKeys['B0FieldSource'], list):
+                                        imgHeader['B0FieldSource'] = [
+                                            f"{p}_{st.subject.sesNum}"
+                                            for p in scanKeys['B0FieldSource']
+                                        ]
+                                    else:
+                                        imgHeader['B0FieldSource'] = f"{scanKeys['B0FieldSource']}_{st.subject.sesNum}"
                                     b_mod = True
 
                                 if 'B0FieldIdentifier' in scanKeys.keys():
@@ -303,7 +326,8 @@ def process_single_dir(inDir,progress,override):
                                           "LabelingPulseMaximumGradient",
                                           "LabelingPulseAverageB1",
                                           "LabelingPulseDuration",
-                                          "LabelingPulseInterval"
+                                          "LabelingPulseInterval",
+                                          "PhaseEncodingDirection"
                                           ]:
                                     if k in scanKeys.keys():
                                         imgHeader[k] = scanKeys[k]

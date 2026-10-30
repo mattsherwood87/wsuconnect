@@ -23,10 +23,10 @@ from nilearn.masking import apply_mask, unmask
 
 #local import
 
-REALPATH = os.path.realpath(__file__)
-sys.path.append(os.path.dirname(REALPATH))
+# REALPATH = os.path.realpath(__file__)
+# sys.path.append(os.path.dirname(REALPATH))
 
-import support_tools as st
+import wsuconnect.support_tools as st
 
 
 # GLOBAL INFO
@@ -117,7 +117,7 @@ def modality_process(options: dict):
             print('WAARNING: subject excluded from analysis. To perform the analysis run with the skip ID check option.')
             continue
 
-        boldInputLabels = st.bids.get_bids_labels(f)
+        boldInputLabels = st.mybids.get_bids_labels(f)
         if not 'task' in boldInputLabels.keys():
             continue
         elif boldInputLabels['task'] in featInput.keys():
@@ -151,7 +151,7 @@ def modality_process(options: dict):
         #look for accompanying structural data on disk in derivatives
         mainFileDir = os.path.dirname(f)
         if refImage and 'highres_files' in featInput[boldTask]['line_pairs'].keys():
-            ref_regexStr = st.bids.get_bids_filename(**refImageParams['input_bids_labels'])
+            ref_regexStr = st.mybids.get_bids_filename(**refImageParams['input_bids_labels'])
             # mainFileDir = os.path.dirname(f)
             mainBetOutputDir = os.path.join(st.creds.dataDir,'derivatives','sub-' + st.subject.id,'ses-' + st.subject.sesNum,refImageParams['input_bids_type'])#create base path and filename for move
 

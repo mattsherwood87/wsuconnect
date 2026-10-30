@@ -24,14 +24,16 @@ from pathlib import Path
 from chardet import detect
 import codecs
 import numpy as np
+from pathlib import Path
+import traceback
 
 
 # ******* LOCAL IMPORTS ******
 #GLOBALS
-REALPATH = os.path.dirname(os.path.realpath(__file__))
-
-sys.path.append(REALPATH)
-import support_tools as st
+REALPATH = Path(*Path(os.path.realpath(__file__)).parts[:-1]).resolve()
+if not any(Path(p).resolve() == str(REALPATH) for p in sys.path if Path(p).exists()):
+    sys.path.append(str(REALPATH))
+import wsuconnect.support_tools as st
 
 
 # ******* GLOBAL INFO *******
@@ -88,11 +90,12 @@ def connect_mri_system_log_grabber_p2(inLogFile: str, offset: int = None):
     :param inLogFile: _description_
     :type inLogFile: str
     """    
+    from wsuconnect.data import load as load_data
+    from json import loads
     
     try:
-
-        with open(os.path.join(REALPATH,'credentials.json')) as f:
-            projectIDs = json.load(f)
+        #read credentials.json
+        projectIDs = loads(load_data.readable('credentials.json').read_text())
 
         #read default mac-roman format
         cols = ['c1','date','time','c4','c5','c6','c7','c8','logger','event','c11','c12','c13','c14']
@@ -169,6 +172,9 @@ def connect_mri_system_log_grabber_p2(inLogFile: str, offset: int = None):
             else:
                 dt_startT = datetime.datetime.strptime(df_exams['time'].iloc[e], '%H:%M:%S.%f')
 
+            dt = datetime.datetime.strptime(df_out['date'].iloc[0], '%Y-%m-%d')
+            dt_startT = dt_startT.replace(year=dt.year, month=dt.month, day=dt.day)
+
 
 
             #find all unique scan starts that follow button press
@@ -233,78 +239,79 @@ def connect_mri_system_log_grabber_p2(inLogFile: str, offset: int = None):
 
             #get project credentials
             if proj:
+                print(f"\tProject: {proj}")
                 st.creds.read(proj)
 
                 a = datetime.datetime.strptime(df_out['date'].iloc[0], '%Y-%m-%d')
-                # ls_dirs = st.mysql.sql_query_dirs(a.strftime('%Y%m%d'),False,False,inclusion='rawdata')
-                if os.path.isfile(os.path.join(REALPATH,'processing_logs',a.strftime('%Y'),a.strftime('%Y%m') + '_scan_dates.json')):
-                    with open(os.path.join(REALPATH,'processing_logs',a.strftime('%Y'),a.strftime('%Y%m') + '_scan_dates.json')) as f:
-                        scanDates = json.load(f)
-                
-                ls_dirs = []
-                if a.strftime('%Y%m%d') in scanDates.keys():
-                    for k in scanDates[a.strftime('%Y%m%d')]:
-                        k_split = k.split('_')
-                        ls_dirs.append(os.path.join(st.creds.dataDir,'rawdata',k_split[0],k_split[1]))
-
-                ls_newDirs = []
-                for d in ls_dirs:
-                    if os.path.isdir(d):
-                        ls_newDirs.append(d)
-                if not ls_newDirs:
+                df_scanLog = st.mysql.sql_mri_tracking_query(
+                    regex=a.strftime('%Y-%m-%d'), 
+                    searchcol='date',
+                    project=proj
+                )
+                if df_scanLog.empty:
+                    print(f"\tWARNING: empty query 'date' = {a.strftime('%Y-%m-%d')}")
                     continue
 
-                #only 1 subject on this day
-                if len(ls_newDirs) == 1:
-                    if not os.path.isdir(os.path.join(ls_newDirs[0],'beh')):
-                        os.makedirs(os.path.join(ls_newDirs[0],'beh'))
-                    st.subject.get_id(ls_newDirs[0])
-                    df_out.to_csv(os.path.join(ls_newDirs[0],'beh','sub-' + st.subject.id + '_ses-' + st.subject.fullSesNum + '_philips-scan-log.csv'))
-                    if not os.path.isdir(d.replace('rawdata','sourcedata')):
-                        os.makedirs(d.replace('rawdata','sourcedata'))
-                    df_out.to_csv(os.path.join(d.replace('rawdata','sourcedata'),'sub-' + st.subject.id + '_ses-' + st.subject.fullSesNum + '_philips-scan-log.csv'))
-                    print('\tSUB: ' + st.subject.id + ' SESSION: ' + st.subject.fullSesNum)
+                if len(df_scanLog) == 1: #only 1 participant from this project on this date
+                    print("\tonly 1 participant returned from query on this date")
+                    subDir = Path(st.creds.dataDir) / 'rawdata' / df_scanLog.iat[0, df_scanLog.columns.get_loc("subject")] / df_scanLog.iat[0, df_scanLog.columns.get_loc("session")]
+                    behDir = subDir / 'beh'
+                    behDir.mkdir(exist_ok=True)
 
-                else:
-                    for d in ls_newDirs:
-                        dt_t = None
-                        jsonFiles = st.mysql.sql_query(regex=d,searchtable=st.creds.searchTable,inclusion='json',searchcol='fullpath')
-                        for j in jsonFiles:
-                            with open(j) as f:
-                                jsonData = json.load(f)
-                            if 'PROJECTION' in jsonData['ImageType']:
-                                continue
-                            if 'AcquisitionTime' in jsonData.keys():
-                                t = jsonData['AcquisitionTime']
-                            if not dt_t:
-                                dt_t = datetime.datetime.strptime(t, '%H:%M:%S.%f')
-                            else:
-                                dt_newt = datetime.datetime.strptime(t, '%H:%M:%S.%f')
-                                diff = dt_newt - dt_t
-                                if diff.days < 0:
-                                    dt_t = dt_newt
+                    df_out.to_csv(behDir / f"{df_scanLog.iat[0, df_scanLog.columns.get_loc("subject")]}_{df_scanLog.iat[0, df_scanLog.columns.get_loc("session")]}_philips-scan-log.csv")
+                    srcDir = Path(str(subDir).replace("rawdata", "sourcedata"))
+                    srcDir.mkdir(exist_ok=True)
+                    df_out.to_csv(srcDir / f"{df_scanLog.iat[0, df_scanLog.columns.get_loc("subject")]}_{df_scanLog.iat[0, df_scanLog.columns.get_loc("session")]}_philips-scan-log.csv")
+                    print('\tSUB: ' + df_scanLog.iat[0, df_scanLog.columns.get_loc("subject")] + ' SESSION: ' + df_scanLog.iat[0, df_scanLog.columns.get_loc("session")])
 
-                        #dt_t is the earliest scan
-                        if dt_t:
-                            diff = dt_t - dt_startT
-                            if diff.days < 0:
-                                diff = dt_startT - dt_t
-                            if diff.seconds < 60*15:
-                                if not os.path.isdir(os.path.join(d,'beh')):
-                                    os.makedirs(os.path.join(d,'beh'))
-                                st.subject.get_id(d)
-                                df_out.to_csv(os.path.join(d,'beh','sub-' + st.subject.id + '_ses-' + st.subject.fullSesNum + '_philips-scan-log.csv'))
+                else: #more than 1 participant from this project on this date
+                    print("\tmultiple participants returned from query on this date... determining the associated participant with this scan")
+                    b_found = False
+                    last_diff = None
+                    for idx, row in df_scanLog.iterrows():
+                        dt_t = a + row['scan_start_time'].to_pytimedelta()
 
-                                if not os.path.isdir(d.replace('rawdata','sourcedata')):
-                                    os.makedirs(d.replace('rawdata','sourcedata'))
-                                df_out.to_csv(os.path.join(d.replace('rawdata','sourcedata'),'sub-' + st.subject.id + '_ses-' + st.subject.fullSesNum + '_philips-scan-log.csv'))
-                                print('\tSUB: ' + st.subject.id + ' SESSION: ' + st.subject.fullSesNum)
-                                break
+                        diff = dt_t - dt_startT
+                        if diff.days < 0:
+                            diff = dt_startT - dt_t
+                        #put second check in
+                        if not last_diff:
+                            last_diff = diff
+                            df_tmp = row
+                        else:
+                            if last_diff > diff:
+                                last_diff = diff
+                                df_tmp = row
+
+                        if diff.seconds < 60*15: #this subject is the one
+                            subDir = Path(st.creds.dataDir) / 'rawdata' / row["subject"] / row["session"]
+                            behDir = subDir / 'beh'
+                            behDir.mkdir(exist_ok=True)
+                            df_out.to_csv(behDir / f"{row["subject"]}_{row["session"]}_philips-scan-log.csv")
+                            srcDir = Path(str(subDir).replace("rawdata", "sourcedata"))
+                            srcDir.mkdir(exist_ok=True)
+                            df_out.to_csv(srcDir / f"{row["subject"]}_{row["session"]}_philips-scan-log.csv")
+                            print('\tSUB: ' + row["subject"] + ' SESSION: ' + row["session"])
+                            b_found = True
+                            break
+
+                    if not b_found:
+                        print("\tWARNING: no subject found within 15 minutes of examcard time, defaulting to the closest participant scan_start_time")
+                        subDir = Path(st.creds.dataDir) / 'rawdata' / df_tmp["subject"] / df_tmp["session"]
+                        behDir = subDir / 'beh'
+                        behDir.mkdir(exist_ok=True)
+                        df_out.to_csv(behDir / f"{df_tmp["subject"]}_{df_tmp["session"]}_philips-scan-log.csv")
+                        srcDir = Path(str(subDir).replace("rawdata", "sourcedata"))
+                        srcDir.mkdir(exist_ok=True)
+                        df_out.to_csv(srcDir / f"{df_tmp["subject"]}_{df_tmp["session"]}_philips-scan-log.csv")
+                        print('\tSUB: ' + df_tmp["subject"] + ' SESSION: ' + df_tmp["session"])
+
+
 
     except OSError as e:
-        print(e)
+        traceback.print_exc()
     except Exception as e:
-        print(e)
+        traceback.print_exc()
                     
 
        

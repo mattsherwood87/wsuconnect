@@ -32,12 +32,19 @@ def apply_brainmask(dataDir: str, subid: str):
     import sys 
     from nipype.interfaces.fsl.maths import ApplyMask
     from glob import glob
+    from pathlib import Path
     try:
         # time.sleep(300) #wait just a few minutes
         inDir = os.path.join(dataDir,'derivatives',subid,'anat')
         if not os.path.isdir(inDir):
-            print(f"ERROR: input directory {inDir} does not exist, exiting...")
-            sys.exit()
+
+            p = Path(dataDir) / 'derivatives' / subid / 'ses-*' / 'anat'
+            dirs = glob(str(p))
+            if len(dirs) != 1:
+                print(f"ERROR: input directory {inDir} does not exist, exiting...")
+                sys.exit()
+            else:
+                inDir = dirs[0]
 
         print(f"INPUT DIR: {dataDir}")
         print(f"SUBJECT ID: {subid}")

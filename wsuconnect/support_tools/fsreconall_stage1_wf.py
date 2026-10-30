@@ -14,9 +14,9 @@ import argparse
 from pathlib import Path
 
 #append path if necessary
-REALPATH = Path(*Path(os.path.realpath(__file__)).parts[:-3]).resolve()
-if not str(REALPATH) in sys.path:
-    sys.path.append(REALPATH)
+# REALPATH = Path(*Path(os.path.realpath(__file__)).parts[:-3]).resolve()
+# if not str(REALPATH) in sys.path:
+#     sys.path.append(REALPATH)
 
 
 

@@ -1,10 +1,10 @@
-#!/opt/conda/envs/aslprep/bin/python3.11
+#!/opt/conda/envs/fmriprep/bin/python3.12
 # zmap_cifti_wf.py
 
 # Copywrite: Matthew Sherwood (matt.sherwood@wright.edu, matthew.sherwood.7.ctr@us.af.mil)
 # Created on 5 November 2025
 #
-# This file runs in the python enviroment on pennlinc/aslprep docker image. Must bind mount /resshare/wsuconnect to /resshare/wsuconnect.
+# This file runs in the python enviroment on nipreps/fmriprep docker image. Must bind mount /resshare/wsuconnect to /resshare/wsuconnect.
 #
 #versioning
 
@@ -17,9 +17,11 @@
 # """
 import os
 import sys
-aslprep_dir = "/opt/conda/envs/aslprep/lib/python3.11/site-packages"  # replace * with actual version
-if os.path.exists(aslprep_dir):
-    sys.path.insert(0, aslprep_dir)
+fmriprep_dir = "/opt/conda/envs/fmriprep/lib/python3.12/site-packages"  # replace * with actual version
+if os.path.exists(fmriprep_dir):
+    sys.path.insert(0, fmriprep_dir)
+print("Python version:", sys.version)
+print("Python executable path:", sys.executable)
 
 
 from nipype import config, logging
@@ -32,7 +34,7 @@ from niworkflows.interfaces.bids import DerivativesDataSink as BaseDerivativesDa
 
 import sys
 import os
-REALPATH = '/resshare'
+REALPATH = '/resshare/wsuconnect'
 if not REALPATH in sys.path:
     sys.path.append(REALPATH)
 from wsuconnect.data import load as load_data
@@ -53,7 +55,7 @@ config_entities = frozenset({e['name'] for e in merged_entities})
 
 class DerivativesDataSink(BaseDerivativesDataSink):
     """Store derivative files.
-    A child class of the niworkflows DerivativesDataSink, using aslprep's configuration files.
+    A child class of the niworkflows DerivativesDataSink, using wsuconnect's configuration files.
     """
     out_path_base = ''
     _allowed_entities = set(config_entities)
@@ -129,8 +131,6 @@ def init_zmap_cifti_wf(datadir: str, subject: str, bold_file: Path):
     #output zmap in T1wref space to derivatives folder
     ds_zmap_t1w = pe.Node(DerivativesDataSink(base_directory=str(deriv_dir),
                                               out_path_base=".",
-                                              desc="act",
-                                              suffix="zstat",
                                               space="T1w",
                                               compress=True,
                                               source_file=str(bold_file),
@@ -175,7 +175,8 @@ def init_zmap_cifti_wf(datadir: str, subject: str, bold_file: Path):
     grayords_wf = init_bold_grayords_wf(grayord_density="91k",mem_gb=1,repetition_time=2,name="zmap_grayords_wf")
     workflow.connect([(fsLR_wf, grayords_wf, [("outputnode.bold_fsLR", "inputnode.bold_fsLR")])])
 
-    
+    #Transform to MNI6 
+    #-----------------------------------------------------------------------
     pattern = str(deriv_dir / f"sub-{subject}" / "anat" / "*from-T1w_to-MNI152NLin6Asym_mode-image_xfm.h5")
     t1ref_to_MNI6_xfm = glob.glob(pattern)
     warp_zt1ref_to_MNI6 = pe.Node(ApplyTransforms(dimension=3,
@@ -189,30 +190,69 @@ def init_zmap_cifti_wf(datadir: str, subject: str, bold_file: Path):
     )
 
 
-    ds_zmap_MNI6 = pe.Node(DerivativesDataSink(base_directory=str(deriv_dir),
-                                               out_path_base=".",
-                                               desc="act",
-                                               suffix="zstat",
-                                               space="MNI152NLin6Asym",
-                                               compress=True,
-                                               source_file=str(bold_file),
-                                               datatype="func"),
-                           name="ds_zmap_MNI6"
+    ds_zmap_MNI6 = pe.Node(
+        DerivativesDataSink(
+            base_directory=str(deriv_dir),
+            out_path_base=".",
+            space="MNI152NLin6Asym",
+            compress=True,
+            source_file=str(bold_file),
+            datatype="func"),
+        name="ds_zmap_MNI6"
     )
     workflow.connect([(warp_zt1ref_to_MNI6, ds_zmap_MNI6, [("output_image", "in_file")])])
 
     ref = Reference('MNI152NLin6Asym',{'res': 2})
-    select_MNI6_tpl = pe.Node(TemplateFlowSelect(template=ref.fullname,
-                                                 resolution=ref.spec['res']),
-                              name='select_MNI6_tpl')
+    select_MNI6_tpl = pe.Node(
+        TemplateFlowSelect(
+            template=ref.fullname,
+            template_spec=ref.spec),
+        name='select_MNI6_tpl'
+    )
     workflow.connect([(select_MNI6_tpl, warp_zt1ref_to_MNI6, [("brain_mask", "reference_image")])])
     workflow.connect([(z2t1ref, warp_zt1ref_to_MNI6, [("output_image", "input_image")])])
     workflow.connect([(warp_zt1ref_to_MNI6, grayords_wf, [("output_image", "inputnode.bold_std")])])
 
+    #Transform to MNI152NLin2009cAsym
+    #-----------------------------------------------------------------------
+    pattern = str(deriv_dir / f"sub-{subject}" / "anat" / "*from-T1w_to-MNI152NLin2009cAsym_mode-image_xfm.h5")
+    t1ref_to_MNI2009_xfm = glob.glob(pattern)
+    warp_zt1ref_to_MNI2009 = pe.Node(ApplyTransforms(dimension=3,
+                                                  interpolation="LanczosWindowedSinc",
+                                                  float=True,
+                                                  input_image_type=3,
+                                                  args="-v",
+                                                  transforms=t1ref_to_MNI2009_xfm),
+                                  name=f'zt1ref2MNI2009',
+                                  mem_gb=1
+    )
+
+    ds_zmap_MNI2009 = pe.Node(DerivativesDataSink(base_directory=str(deriv_dir),
+                                               out_path_base=".",
+                                               space="MNI152NLin2009cAsym",
+                                               compress=True,
+                                               source_file=str(bold_file),
+                                               datatype="func"),
+                           name="ds_zmap_MNI2009"
+    )
+    workflow.connect([(warp_zt1ref_to_MNI2009, ds_zmap_MNI2009, [("output_image", "in_file")])])
+
+
+    ref = Reference('MNI152NLin2009cAsym',{'res': 2})
+    select_MNI2009_tpl = pe.Node(
+        TemplateFlowSelect(
+            template=ref.fullname,
+            template_spec=ref.spec),
+        name='select_MNI2009_tpl'
+    )
+    workflow.connect([(select_MNI2009_tpl, warp_zt1ref_to_MNI2009, [("brain_mask", "reference_image")])])
+    workflow.connect([(z2t1ref, warp_zt1ref_to_MNI2009, [("output_image", "input_image")])])
+
+
+    #Grab CIFTI output in derivatives
+    #-----------------------------------------------------------------------
     ds_zmap_cifti = pe.Node(DerivativesDataSink(base_directory=str(deriv_dir),
                                                 out_path_base=".",
-                                                desc="act",
-                                                suffix="zstat",
                                                 space="fsLR",
                                                 density="91k",
                                                 compress=False,
@@ -232,4 +272,17 @@ if __name__ == '__main__':
     options = parser.parse_args()
     wf = init_zmap_cifti_wf(datadir=options.DATADIR, subject=options.SUBJECTID, bold_file=Path(options.BOLDFILE))
     wf.write_graph(graph2use='flat', format='png')
-    wf.run()
+    result = wf.run()
+
+
+    #log commandlines
+    print("-" * 60)
+    for node_res in result.nodes():
+        print(f"Node: {node_res.name}")
+        runtime = getattr(node_res.result, "runtime", None)
+        if runtime:
+            # runtime is a Bunch
+            cmdline = getattr(runtime, "cmdline", None)
+            if cmdline:
+                print(cmdline)
+        print("-" * 60)

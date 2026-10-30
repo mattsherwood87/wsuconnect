@@ -17,7 +17,7 @@ REALPATH = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 REALPATH = os.path.join('/resshare','wsuconnect')
 sys.path.append(REALPATH)
 
-import support_tools as st
+import wsuconnect.support_tools as st
 
 FSLDIR = None
 if "FSLDIR" in os.environ:

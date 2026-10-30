@@ -12,9 +12,9 @@ import os
 import sys
 import argparse
 
-REALPATH = os.path.dirname(os.path.realpath(__file__))
-sys.path.append(REALPATH)
-import support_tools as st
+# REALPATH = os.path.dirname(os.path.realpath(__file__))
+# sys.path.append(REALPATH)
+import wsuconnect.support_tools as st
 
 
 #versioning

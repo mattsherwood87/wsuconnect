@@ -32,6 +32,9 @@ parser.add_argument('--overwrite',action='store_true',dest='OVERWRITE',default=F
 parser.add_argument('--progress',action='store_true',dest='progress',default=False, help='flag to display command line output providing additional details on the processing status')
 
 
+
+
+
 #function to append png
 def pngappend(in_file: str, ref_file: str, out_file: str):
     """_summary_
@@ -50,7 +53,7 @@ def pngappend(in_file: str, ref_file: str, out_file: str):
     return out_file
 
 
-def c3d_affine_tool(source_file: str, reference_file: str, transform_file: str, itk_transform: str, fsl2ras: bool):
+def c3d_affine_tool(source_file: str, reference_file: str, transform_file: str, fsl2ras: bool, itk_transform: str=None):
     """_summary_
 
     Args:
@@ -75,15 +78,19 @@ def c3d_affine_tool(source_file: str, reference_file: str, transform_file: str, 
     class C3dAffineToolPatched(C3dAffineTool):
         output_spec = C3dAffineToolOutputSpecPatched
 
-    itk_transform = itk_transform.replace('.mat','.txt')
 
     c3d = C3dAffineToolPatched()
     c3d.inputs.source_file = source_file
     c3d.inputs.reference_file = reference_file
     c3d.inputs.transform_file = transform_file
-    c3d.inputs.itk_transform = itk_transform
+    if itk_transform:
+        itk_transform = itk_transform.replace('.mat','.txt')
+        c3d.inputs.itk_transform = itk_transform
     c3d.inputs.fsl2ras = fsl2ras
 
+    # print(itk_transform)
+    # print(c3d.cmdline)
+    c3d.run()
 
     return itk_transform
 
@@ -105,6 +112,7 @@ def applytransforms(input_image: str, reference_image: str, transform1: str, tra
 
     
     from nipype.interfaces.ants import ApplyTransforms
+    # ApplyTransforms.input_spec.class_traits()['transforms'].trait_type.exists = False
     at = ApplyTransforms()
     at.inputs.input_image = input_image
     at.inputs.reference_image = reference_image
@@ -144,6 +152,7 @@ def dti_flirt(IN_FILE: str, DATA_DIR: str, FLIRT_PARAMS: str, overwrite: bool=Fa
     :raises Exception: general error encountered during execution
     """
     from wsuconnect import support_tools as st
+    from wsuconnect.data import load as load_data
     from nipype.interfaces import fsl
     import nipype.pipeline.engine as pe
     from nipype.interfaces.utility import Function
@@ -193,7 +202,7 @@ def dti_flirt(IN_FILE: str, DATA_DIR: str, FLIRT_PARAMS: str, overwrite: bool=Fa
                     if stdImageParams['type'] == 'FSL':
                         stdImageFile = os.path.join(FSLDIR,'data','standard',stdImageParams['file'])
                     elif 'tpl' in stdImageParams['type']:
-                        stdImageFile = os.path.join(REALPATH,'templateflow',stdImageParams['type'],stdImageParams['file'])
+                        stdImageFile = str(load_data('templateflow') / stdImageParams['type'] / stdImageParams['file'])
                     elif stdImageParams['type'] == 'file':
                         stdImageFile = stdImageParams['file']
                         if not os.path.isfile(stdImageFile) and progress:
@@ -236,11 +245,13 @@ def dti_flirt(IN_FILE: str, DATA_DIR: str, FLIRT_PARAMS: str, overwrite: bool=Fa
 
         #look for accompanying structural data on disk in derivatives
         if refImage and not refImageParams['type'] == 'std':
-            ref_regexStr = st.bids.get_bids_filename(**refImageParams['input_bids_labels'])
+            ref_regexStr = st.mybids.get_bids_filename(**refImageParams['input_bids_labels'])
             # if refImageParams['input_bids_location'] == 'raw':
             #     refImageFile = glob(os.path.join(DATA_DIR,'rawdata','sub-' + st.subject.id,'ses-' + st.subject.sesNum,'anat','*' + ref_regexStr + '*'))
             if refImageParams['input_bids_location'] == 'derivatives':
                 refImageFile = glob(os.path.join(DATA_DIR,'derivatives','sub-' + st.subject.id,'anat','*' + ref_regexStr + '*'))
+                if not refImageFile and 'session' in refImageParams.keys():
+                    refImageFile = glob(os.path.join(DATA_DIR,'derivatives',f'sub-{st.subject.id}',f'ses-{refImageParams['session']}', 'anat',f'*{ref_regexStr}*'))
             else:
                 print('ERROR: structural file "bids_location" not supported')
                 print('/tCannot perform FLIRT... exiting')
@@ -270,11 +281,11 @@ def dti_flirt(IN_FILE: str, DATA_DIR: str, FLIRT_PARAMS: str, overwrite: bool=Fa
             return
         
 
-        mainBidsLabels = st.bids.get_bids_labels(mainFile)
+        mainBidsLabels = st.mybids.get_bids_labels(mainFile)
         secBidsLabels = mainBidsLabels.copy()
-        secFiles = glob(os.path.join(DATA_DIR,'derivatives','sub-' + st.subject.id,'ses-' + st.subject.sesNum,'dtifit',mainParams['output_bids_location'],'*.nii.gz'))
+        secFiles = glob(os.path.join(DATA_DIR,'derivatives','sub-' + st.subject.id,'ses-' + st.subject.sesNum,mainParams['output_bids_location'],'*.nii.gz'))
         if not secFiles:
-            print('WARNING: secondary image files not found in  ' + os.path.join(DATA_DIR,'derivatives','sub-' + st.subject.id,'ses-' + st.subject.sesNum,'dtifit',mainParams['output_bids_location'],'*.nii.gz'))
+            print('WARNING: secondary image files not found in  ' + os.path.join(DATA_DIR,'derivatives','sub-' + st.subject.id,'ses-' + st.subject.sesNum,mainParams['output_bids_location'],'*.nii.gz'))
             print('\tSKIPPING application of transforms to secondary images')
             
         if progress and secFiles:
@@ -309,7 +320,7 @@ def dti_flirt(IN_FILE: str, DATA_DIR: str, FLIRT_PARAMS: str, overwrite: bool=Fa
                     fltBidsLabels[k] = refImageParams['output_bids_labels'][k]
                 if 'brain' in mainFile:
                     fltBidsLabels['description'] = 'brain'
-            n_flt.inputs.out_file = os.path.join(mainFlirtOutputDir,st.bids.get_bids_filename(subject=st.subject.id,session=st.subject.sesNum,**fltBidsLabels))
+            n_flt.inputs.out_file = os.path.join(mainFlirtOutputDir,st.mybids.get_bids_filename(subject=st.subject.id,**fltBidsLabels))
             if refImageParams['type'] == 'std':
                 n_flt.inputs.out_matrix_file = os.path.join(mainFlirtOutputDir,mainParams['out_matrix_base'] + '2' + stdImageParams['out_matrix_suffix'] + '.mat')
             else:
@@ -368,10 +379,10 @@ def dti_flirt(IN_FILE: str, DATA_DIR: str, FLIRT_PARAMS: str, overwrite: bool=Fa
             #     applyxfm.inputs.in_file = secFile
             #     applyxfm.inputs.reference = refImageFile
             #     applyxfm.inputs.apply_xfm = True
-            #     applyBidsLabels = st.bids.get_bids_labels(secFile)
+            #     applyBidsLabels = st.mybids.get_bids_labels(secFile)
             #     applyBidsLabels = refImageParams['output_bids_labels'].copy()
-            #     applyBidsLabels['suffix'] = 'dwi_' + st.bids.get_bids_labels(secFile)['suffix']
-            #     applyxfm.inputs.out_file = os.path.join(mainFlirtOutputDir,st.bids.get_bids_filename(subject=st.subject.id,session=st.subject.sesNum,**applyBidsLabels))
+            #     applyBidsLabels['suffix'] = 'dwi_' + st.mybids.get_bids_labels(secFile)['suffix']
+            #     applyxfm.inputs.out_file = os.path.join(mainFlirtOutputDir,st.mybids.get_bids_filename(subject=st.subject.id,session=st.subject.sesNum,**applyBidsLabels))
             #     applyxfm.inputs.in_matrix_file = flt.inputs.out_matrix_file
 
 
@@ -462,13 +473,13 @@ def dti_flirt(IN_FILE: str, DATA_DIR: str, FLIRT_PARAMS: str, overwrite: bool=Fa
                 # for k in stdImageParams['output_bids_labels'].keys():
                 #     applyBidsLabels[k] = stdImageParams['output_bids_labels'][k]
                 # cmd = CommandLine(f"antsApplyTransforms -d 3 -i {flt.inputs.in_file} -r {stdImageFile} "
-                #                   f"-o [" + os.path.join(mainFlirtOutputDir,f'sub-{st.subject.id}_{stdImageParams["out_h5_suffix"]}') + ",1]," +  os.path.join(mainFlirtOutputDir,st.bids.get_bids_filename(subject=st.subject.id,session=st.subject.sesNum,**applyBidsLabels))
+                #                   f"-o [" + os.path.join(mainFlirtOutputDir,f'sub-{st.subject.id}_{stdImageParams["out_h5_suffix"]}') + ",1]," +  os.path.join(mainFlirtOutputDir,st.mybids.get_bids_filename(subject=st.subject.id,session=st.subject.sesNum,**applyBidsLabels))
                 #                   f" -t fmriprep_T1_to_MNI.h5 -t dti2t1_ants.txt -n Linear")
                 # res = cmd.run()
 
 
                 #convert FSL dwi2T1w transform .mat to ANTS itk format
-                n_c3d = pe.Node(interface=Function(input_names=["source_file","reference_file","transform_file","itk_transform","fsl2ras"],
+                n_c3d = pe.Node(interface=Function(input_names=["source_file","reference_file","transform_file","fsl2ras","itk_transform"],
                                                     output_names=["itk_transform"],
                                                     function=c3d_affine_tool),
                                 name='c3d_affine_tool')
@@ -497,7 +508,7 @@ def dti_flirt(IN_FILE: str, DATA_DIR: str, FLIRT_PARAMS: str, overwrite: bool=Fa
                     applyBidsLabels[k] = stdImageParams['output_bids_labels'][k]
                 suffix = applyBidsLabels['suffix']
                 applyBidsLabels['suffix'] = 'xfm'
-                n_at.inputs.output_image = os.path.join(mainFlirtOutputDir,f'sub-{st.subject.id}_{stdImageParams["out_h5_suffix"]}')#os.path.join(mainFlirtOutputDir,st.bids.get_bids_filename(subject=st.subject.id,session=st.subject.sesNum,**applyBidsLabels))
+                n_at.inputs.output_image = os.path.join(mainFlirtOutputDir,f'sub-{st.subject.id}_{stdImageParams["out_h5_suffix"]}')#os.path.join(mainFlirtOutputDir,st.mybids.get_bids_filename(subject=st.subject.id,session=st.subject.sesNum,**applyBidsLabels))
                 
                 WF.connect([(n_c3d,n_at,[('itk_transform','transform2')])])
                 
@@ -515,7 +526,7 @@ def dti_flirt(IN_FILE: str, DATA_DIR: str, FLIRT_PARAMS: str, overwrite: bool=Fa
                 n_at2.inputs.interpolation = n_at.inputs.interpolation
                 n_at2.inputs.input_image = n_at.inputs.input_image
                 n_at2.inputs.print_out_composite_warp_file = False
-                n_at2.inputs.output_image = os.path.join(mainFlirtOutputDir,st.bids.get_bids_filename(subject=st.subject.id,session=st.subject.sesNum,**applyBidsLabels))
+                n_at2.inputs.output_image = os.path.join(mainFlirtOutputDir,st.mybids.get_bids_filename(subject=st.subject.id,**applyBidsLabels))
                 
                 WF.connect([(n_c3d,n_at2,[('itk_transform','transform2')])])
 
@@ -527,7 +538,7 @@ def dti_flirt(IN_FILE: str, DATA_DIR: str, FLIRT_PARAMS: str, overwrite: bool=Fa
                 # applyBidsLabels = mainBidsLabels.copy()
                 # for k in refImageParams['output_bids_labels'].keys():
                 #     applyBidsLabels[k] = stdImageParams['output_bids_labels'][k]
-                # applyxfm.inputs.out_file = os.path.join(mainFlirtOutputDir,st.bids.get_bids_filename(subject=st.subject.id,session=st.subject.sesNum,**applyBidsLabels))
+                # applyxfm.inputs.out_file = os.path.join(mainFlirtOutputDir,st.mybids.get_bids_filename(subject=st.subject.id,session=st.subject.sesNum,**applyBidsLabels))
                 # applyxfm.inputs.in_matrix_file = os.path.join(mainFlirtOutputDir,mainParams['out_matrix_base'] + '2' + stdImageParams['out_matrix_suffix'] + '.mat')
 
 
@@ -577,10 +588,10 @@ def dti_flirt(IN_FILE: str, DATA_DIR: str, FLIRT_PARAMS: str, overwrite: bool=Fa
                 #     applyxfm.inputs.in_file = secFile
                 #     applyxfm.inputs.reference = refImageFile
                 #     applyxfm.inputs.apply_xfm = True
-                #     applyBidsLabels = st.bids.get_bids_labels(secFile)
+                #     applyBidsLabels = st.mybids.get_bids_labels(secFile)
                 #     applyBidsLabels = stdImageParams['output_bids_labels'].copy()
-                #     applyBidsLabels['suffix'] = 'dwi_' + st.bids.get_bids_labels(secFile)['suffix']
-                #     applyxfm.inputs.out_file = os.path.join(mainFlirtOutputDir,st.bids.get_bids_filename(subject=st.subject.id,session=st.subject.sesNum,**applyBidsLabels))
+                #     applyBidsLabels['suffix'] = 'dwi_' + st.mybids.get_bids_labels(secFile)['suffix']
+                #     applyxfm.inputs.out_file = os.path.join(mainFlirtOutputDir,st.mybids.get_bids_filename(subject=st.subject.id,session=st.subject.sesNum,**applyBidsLabels))
                 #     applyxfm.inputs.in_matrix_file = flt.inputs.out_matrix_file
 
 

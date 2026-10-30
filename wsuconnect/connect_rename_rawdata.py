@@ -14,10 +14,10 @@ import shutil
 
 
 #local import
-REALPATH = os.path.realpath(__file__)
+# REALPATH = os.path.realpath(__file__)
 
-sys.path.append(os.path.dirname(REALPATH))
-import support_tools as st
+# sys.path.append(os.path.dirname(REALPATH))
+import wsuconnect.support_tools as st
 
 
 # GLOBAL INFO
@@ -82,7 +82,7 @@ if __name__ == '__main__':
         if not 'bids_labels' in old_inputParams[k] and not "BidsDir" in inputParams[k]:
             continue
         if 'bids_labels' in old_inputParams[k]:
-            orig_filename = st.bids.get_bids_filename(**old_inputParams[k]['bids_labels'], extension='nii.gz')
+            orig_filename = st.mybids.get_bids_filename(**old_inputParams[k]['bids_labels'], extension='nii.gz')
         else:
             orig_filename = inputParams[k]['BidsDir']
 
@@ -94,7 +94,7 @@ if __name__ == '__main__':
                 continue
             st.subject.get_id(f)
             if 'bids_labels' in old_inputParams[k]:
-                new_filename = st.bids.get_bids_filename(subject=st.subject.id,session=st.subject.sesNum,**inputParams[k]['bids_labels'],extension='nii.gz')
+                new_filename = st.mybids.get_bids_filename(subject=st.subject.id,session=st.subject.sesNum,**inputParams[k]['bids_labels'],extension='nii.gz')
             else:
                 new_filename = os.path.basename(f)
             bidsDir = inputParams[k]['BidsDir']

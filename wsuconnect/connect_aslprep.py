@@ -3,6 +3,7 @@
 
 # Created by Matthew Sherwood (matt.sherwood@wright.edu, matthew.sherwood.7.ctr@us.af.mil)
 #
+# Modified on 11 June 2026 - added support for various aslprep version images
 # Modified on 10 October 2025 - added image as an input to select various aslprep versions
 #
 # v1.1.0 on 6 February 2025
@@ -16,19 +17,20 @@ import sys
 import json
 import pandas as pd
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
+from pathlib import Path
 
 
 #local import
-REALPATH = os.path.realpath(__file__)
+REALPATH = Path(*Path(os.path.realpath(__file__)).parts[:-1]).resolve()
 
-sys.path.append(os.path.dirname(REALPATH))
-import support_tools as st
+# sys.path.append(os.path.dirname(REALPATH))
+import wsuconnect.support_tools as st
 
 
 # GLOBAL INFO
 #versioning
-VERSION = '1.1.0'
-DATE = '10 October 2025'
+VERSION = '1.2.0'
+DATE = '11 June 2026'
 
 
 
@@ -38,7 +40,7 @@ parser.add_argument('-p','--project', required=True, action="store", dest="PROJE
 parser.add_argument('--overwrite', action="store_true", dest="OVERWRITE", help="Force conversion by skipping directory and database checking", default=False)
 parser.add_argument('--subjects', action='store', dest='SUBJECTS', default=None, nargs='+', help='optional subject identifier(s), skips check of participants.tsv. Multiple inputs accepted through space delimiter')
 # parser.add_argument('--docker', action="store_true", dest="DOCKER", help="Submit conversion to HTCondor and process in wsuconnect/neuro docker container [default=False]", default=False)
-parser.add_argument('-t', '--task-id', action='store', dest='TASKID', help='select a specific task to be processed', default=None)
+# parser.add_argument('-t', '--task-id', action='store', dest='TASKID', help='select a specific task to be processed', default=None)
 parser.add_argument('-s', '--submit', action="store_true", dest="SUBMIT", help="Submit conversion to condor for parallel conversion", default=False)
 parser.add_argument('--image', action="store", dest="IMAGE", help="docker selected image for aslprep - default pennlinc/aslprep:latest", default="pennlinc/aslprep:latest")
 parser.add_argument('-v', '--version', action="store_true", dest="version", help="Display the current version")
@@ -110,7 +112,7 @@ if __name__ == '__main__':
         # if os.path.exists(participant_folder):
         #     continue  # Move to the next participant
 
-        filter_file = os.path.join(st.creds.dataDir,'rawdata','bids_filter.json')
+        # filter_file = os.path.join(st.creds.dataDir,'rawdata','bids_filter.json')
 
 
         #NEED TO MOVE THESE ARGS TO *_fmriprep_input.json
@@ -123,10 +125,12 @@ if __name__ == '__main__':
         else:
             mem = 16384
 
+        if 'image' in inputParams['strings'].keys():
+            options.IMAGE = inputParams['strings']['image']
+            inputParams['strings'].pop('image')
         #setup initial args
-        str_args = ' '.join(["run --rm",
-                              "-e TEMPLATEFLOW_HOME=/home/aslprep/.cache/templateflow",
-                              "-v /resshare/wsuconnect/data/templateflow:/home/aslprep/.cache/templateflow:ro",
+        str_args = ' '.join(["-e TEMPLATEFLOW_HOME=/home/aslprep/.cache/templateflow",
+                              f"-v {REALPATH}/data/templateflow:/home/aslprep/.cache/templateflow:ro",
                               f"-m {mem}M",
                               f"--cpus={cpus}",
                               f"-v {inputParams['strings']['fs-license-file']}:{inputParams['strings']['fs-license-file']}:ro",
@@ -268,7 +272,7 @@ if __name__ == '__main__':
                 argStr += " -v /resshare22:/resshare22:rw"
 
             #add remaining docker commands to the argument string
-            argStr += f' --user=root --entrypoint bash -m 1g --cpus=1 nipreps/fmriprep {os.path.join(os.path.dirname(REALPATH),"support_tools","python_wrapper.sh")} {os.path.join(os.path.dirname(REALPATH),"support_tools","move_html.py")} '
+            argStr += f' --user=root --entrypoint bash -m 1g --cpus=1 nipreps/fmriprep {REALPATH / "support_tools" / "python_wrapper.sh"} {REALPATH / "support_tools" / "move_html.py"} '
 
             argStr += ' '.join(['--data-dir',
                                         st.creds.dataDir,

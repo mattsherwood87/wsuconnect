@@ -29,7 +29,7 @@ if not any(Path(p).resolve() == str(REALPATH) for p in sys.path if Path(p).exist
     sys.path.append(str(REALPATH))
 
 # import support_tools as st
-from wsuconnect import support_tools as st
+import wsuconnect.support_tools as st
 
 # GLOBAL INFO
 #versioning
@@ -117,6 +117,21 @@ def update_table(options):
 
         if options.MAIN or (not options.MAIN and not options.SOURCE):
             for projectDir in [d for d in projectDirs if not any(string in d for string in exclude)]:
+
+                desiredMode = 0o770
+                # Get current file mode
+                fileStat = os.stat(os.path.join(st.creds.dataDir,projectDir))
+                currentMode = fileStat.st_mode & 0o777  # Extract permission bits
+
+                if currentMode != desiredMode:
+                    # if options.PROGRESS:
+                    #     print('changing file permissions to 770')
+                    try:
+                        os.chmod(os.path.join(st.creds.dataDir,projectDir), desiredMode)
+                    except:
+                        if options.progress:
+                            print("\tcannot change permissions or ownership")
+
                 for f in list(Path(os.path.join(st.creds.dataDir,projectDir)).rglob('*')):
                     if f.is_symlink():
                         continue

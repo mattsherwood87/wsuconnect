@@ -3,10 +3,15 @@ MATLAB/*
 wsuconnect/distutils/*
 wsuconnect/logs/*
 wsuconnect/old_versions/*
-support_tools/old_versions/*
+wsuconnect/data/*
+wsuconnect/licenses/*
+wsuconnect/__pycache__/*
+wsuconnect/support_tools/old_versions/*
+wsuconnect/support_tools/__pycache__/*
+old_versions/*
+Philips_system_logs/*
+distutils/*
 .license
-wsuconnect/data/glasser/*
-wsuconnect/data/templateflow/*
 
 # macOS Finder metadata (any directory)
 .DS_Store

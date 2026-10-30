@@ -1,10 +1,13 @@
-#!/usr/bin/env python3
-# the command above ^^^ sets python 3.10.10 as the interpreter for this program
+#!/resshare/python3_venv/bin/python
+# the command above ^^^ sets python 3.10.9 as the interpreter for this program
 
 # Created by Matthew Sherwood (matt.sherwood@wright.edu, matthew.sherwood.7.ctr@us.af.mil)
 # Created on 19 June 2023
 #
 # Last Modified on 
+#versioning
+VERSION = '1.0.0'
+DATE = '19 June 2023'
 
 # ******* IMPORTS ***********
 from cmath import inf
@@ -15,40 +18,24 @@ import datetime
 # import numpy as np
 # import math
 import time
-# from pathlib import Path
 
 
 # ******* LOCAL IMPORTS ******
-#sys.path.append(os.path.abspath(os.path.join(os.environ['SCRATCH_DIR'],'python')))
-#from helper_functions.convert_dicoms import convert_dicoms
 
 
 # ******* GLOBAL INFO *******
-#versioning
-VERSION = '1.0.0'
-DATE = '19 June 2023'
-
-#input argument parser
-parser = argparse.ArgumentParser()
 
 #GLOBALS
-REALPATH = os.path.dirname(os.path.realpath(__file__))
+# REALPATH = os.path.dirname(os.path.realpath(__file__))
 
 # ******************* PARSE COMMAND LINE ARGUMENTS ********************
-def parse_arguments():
+parser = argparse.ArgumentParser()
+parser.add_argument('-v', '--version', action="store_true", dest="version", help="Display the current version")
 
-    #input options for main()
-    # requiredNamed = parser.add_argument_group('required arguments')
-    # requiredNamed.add_argument('-p','--path', action="store", dest="PATH", help="define search path", default=None)
-    parser.add_argument('-v', '--version', action="store_true", dest="version", help="Display the current version")
-    # parser.add_argument('--progress', action="store_true", dest="progress", help="Show progress (default FALSE)", default=False)
-    options = parser.parse_args()
-
-    return options
 
 
 # ******************* MAIN ********************
-def main():
+if __name__ == '__main__':
     """
     The entry point of this program.
     """
@@ -79,7 +66,7 @@ def main():
         for filename in files:
             if not filename + '\n' in l:
                 try:
-                    if '.log' in filename or '.csv' in filename or '.xdf' in filename and not 'inputs' in root:
+                    if '.log' in filename or '.csv' in filename and not 'inputs' in root:
                         print(filename)
                         shutil.copyfile(os.path.join(root,filename),os.path.join(outLogPath,filename))
                         
@@ -102,5 +89,3 @@ def main():
                 print('file ' + filename + ' skipped')                
 
 
-if __name__ == '__main__':
-    main()

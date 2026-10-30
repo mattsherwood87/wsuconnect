@@ -19,23 +19,17 @@ def prepare_examcard_html():
 
     footer {{
     font-size: 9px;
-        # newD.append('color: #f00;
     text-align: center;
     }}
 
     header {{
     font-size: 9px;
-        # newD.append('color: #f00;
     text-align: center;
     }}
 
-    @page {{
+    @page {{s
     size: 8.5in 11in; margin: 0.5in 0.5in 0.5in 0.5in;
     }}
-        # newD.append('@media screen {{
-        # newD.append('footer {{
-        # newD.append('display: none; }}
-        # newD.append('}}
     .tab {{
     display: inline-block;
     margin-left: 2em;
@@ -54,7 +48,6 @@ def prepare_examcard_html():
     page-break-inside: avoid;
     position: relative;
     width: 100%;
-        # newD.append('top:1em;   //match size of header
     left:0px;
     right:0px; }}
     html, body {{
@@ -63,14 +56,6 @@ def prepare_examcard_html():
     .hidden-print {{
     display: none; }}
     }}
-        # newD.append('table {{ border: none; border-collapse: collapse; }}
-        # newD.append('td {{ border: 1px solid black; }}
-        # newD.append('td table {{ border: none; }}
-        # newD.append('.border-none {{
-        # newD.append('border-collapse: collapse;
-        # newD.append('border: none;
-        # newD.append('width: 100%; cellspacing: 0; cellpadding: 2; align: Left;
-        # newD.append('}}
 
     .border-none td {{
     border: 1px solid black;

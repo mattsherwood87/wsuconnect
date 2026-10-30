@@ -13,13 +13,17 @@ import datetime
 import sys
 from glob import glob as glob
 import json
+from pathlib import Path
 
 #local import
 
-REALPATH = os.path.realpath(__file__)
-sys.path.append(os.path.dirname(REALPATH))
+# REALPATH = os.path.realpath(__file__)
+# sys.path.append(os.path.dirname(REALPATH))
+REALPATH = Path(*Path(os.path.realpath(__file__)).parts[:-1]).resolve()
+if not any(Path(p).resolve() == str(REALPATH) for p in sys.path if Path(p).exists()):
+    sys.path.append(str(REALPATH))
 
-import support_tools as st
+import wsuconnect.support_tools as st
 
 
 # GLOBAL INFO
@@ -107,7 +111,7 @@ if __name__ == '__main__':
 
 
     #find all DTI files for processing
-    regexStr = st.bids.get_bids_filename(**dtiInput['main_image_params']['input_bids_labels'])
+    regexStr = st.mybids.get_bids_filename(**dtiInput['main_image_params']['input_bids_labels'])
 
     if not incExcDict:
         filesToProcess = st.mysql.sql_query(database=st.creds.database,searchtable=st.creds.searchTable,searchcol='fullpath',regex=regexStr,progress=False)
@@ -117,6 +121,7 @@ if __name__ == '__main__':
 
     # loop throught files
     filesToProcess.sort()
+    count = 0
     for f in filesToProcess:
 
         #get subject name and see if they should be discarded
@@ -155,23 +160,38 @@ if __name__ == '__main__':
             if options.SUBMIT:
                 #create condor job
                 if dtiInput['eddy_params']['use_cuda']:
-                    job_dti = st.condor.create_bin_condor_job('dti_preprocess',
-                                                              'docker',
+
+                    gpu_uuids = ["GPU-43fdd86b", "GPU-578d2352"]
+                    job_dti = st.condor.create_python_condor_job('dti_preprocess',
+                    # job_dti = st.condor.create_bin_condor_job('dti_preprocess',
+                                                              'run_docker_gpu.sh',
                                                               st.creds.gpuMachineNames,
                                                               submit,
                                                               error,
                                                               output,
                                                               log,
                                                               dagman,
-                                                              request_cpus=2,
-                                                              request_memory='5g')
+                                                              request_cpus=1,
+                                                              request_memory='5g',
+                                                              requirements="(GPUS > 0)")#,
+                                                            #   extra_lines=['request_gpus = 0.16666'])#,f'docker_environment = "CUDA_VISIBLE_DEVICES={count}"'])#,'request_gpus = 1/12',
+                                                              #requirements=f"""(Target.GPUId == "{gpu_uuids[count]}")""")
+                    if count == 1:
+                        count = 0
+                    else:
+                        count = 1
                     
                 else:
-                    job_dti = st.condor.create_python_condor_job('dti_preprocess','dti_preprocess.py',st.creds.machineNames,submit,error,output,log,dagman)                    
-
+                    gpu_uuids = ["GPU-43fdd86b", "GPU-578d2352"]
+                    job_dti = st.condor.create_python_condor_job('dti_preprocess','dti_preprocess.py',st.creds.machineNames,submit,error,output,log,dagman,extra_lines=['request_gpus = 1', 'environment = "CUDA_VISIBLE_DEVICES=$(CUDA_VISIBLE_DEVICES)"'])                    
+                    if count == 1:
+                        count = 0
+                    else:
+                        count = 1
 
                 #create docker argument string with initial mount commands
-                argStr = f"run --rm -v /resshare:/resshare:ro"
+                #run 
+                argStr = f"--rm -v /resshare:/resshare:ro"
                 if st.creds.dockerMountIf == 'resshare19':
                     argStr += " -v /resshare19:/resshare19:rw"
                 elif st.creds.dockerMountIf == 'resshare20':
@@ -181,8 +201,8 @@ if __name__ == '__main__':
                 elif st.creds.dockerMountIf == 'resshare22':
                     argStr += " -v /resshare22:/resshare22:rw"
 
-                #add remaining docker commands to the argument string
-                argStr += f' --user=root --runtime=nvidia --gpus all -m 10g --cpus=3 wsuconnect/neuro-gpu {os.path.join(os.path.dirname(REALPATH),"support_tools","dti_preproc_wrapper.sh")}'
+                #add remaining docker commands to the argument string   #--gpus all
+                argStr += f' --user=root --runtime=nvidia -m 5g --cpus=1 wsuconnect/neuro-gpu {REALPATH / "support_tools" / "dti_preproc_wrapper.sh"}'
 
                 #add dti_preprocess.py aruments to the docker arguments
                 argStr += (' ' + f + ' ' + 

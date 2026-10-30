@@ -30,7 +30,7 @@ DATE = '17 July 2023'
 
 #GLOBALS
 REALPATH = os.path.dirname(os.path.realpath(__file__))
-from connect_mri_system_log_grabber_p2 import connect_mri_system_log_grabber_p2
+from wsuconnect.connect_mri_system_log_grabber_p2 import connect_mri_system_log_grabber_p2
 
 # ******************* PARSE COMMAND LINE ARGUMENTS ********************
 parser = argparse.ArgumentParser()

@@ -7,7 +7,7 @@
 
 import os
 
-def get_bids_filename(subject: str=None, session: str=None, acquisition: str=None, task: str=None, direction: str=None, run: str=None, process: str=None, resolution: str=None, space: str=None, description: str=None, suffix: str=None, extension: str=None) -> str:
+def get_bids_filename(subject: str=None, session: str=None, acquisition: str=None, task: str=None, direction: str=None, run: str=None, process: str=None, echo: str=None, reconstruction: str=None, resolution: str=None, space: str=None, contrast: str=None, description: str=None, suffix: str=None, extension: str=None) -> str:
     """
     return bids compliant filename from input labels
 
@@ -55,7 +55,7 @@ def get_bids_filename(subject: str=None, session: str=None, acquisition: str=Non
     from bids.layout.writing import build_path
     entities = {k: v for k, v in locals().items() if v is not None}
 
-    template = "[sub-{subject}][_ses-{session}][_task-{task}][_acq-{acquisition}][_ce-{ceagent}][_dir-{direction}][_rec-{reconstruction}][_run-{run}][_echo-{echo}][_space-{space}][_res-{resolution}][_den-{density}][_cohort-{cohort}][_from-{from}_to-{to}_mode-{mode}][_desc-{description}][_{suffix}][.{extension}]"
+    template = "[sub-{subject}][_ses-{session}][_task-{task}][_acq-{acquisition}][_ce-{ceagent}][_dir-{direction}][_rec-{reconstruction}][_run-{run}][_echo-{echo}][_space-{space}][_res-{resolution}][_den-{density}][_cohort-{cohort}][_from-{from}_to-{to}_mode-{mode}][_desc-{description}][_contrast-{contrast}][_{suffix}][.{extension}]"
     filename = build_path(entities,template)
 
     # d_keyId = {'session':'ses', 
@@ -99,14 +99,23 @@ def get_bids_labels(IN_FILE: str) -> dict:
     :return: bids filename labels
     :rtype: dict
     """
+    from bids.layout import Config
+    c = Config.load('bids')
+    from bids.layout.models import Entity
+    c.entities['contrast'] = Entity(name="contrast", pattern=r"[_/\\]+contrast-([a-zA-Z0-9]+)", directory=None)
+    c.entities['description'] = Entity(name="description", pattern=r"[_/\\]+desc-([a-zA-Z0-9]+)", directory=None)
+    c.entities['resolution'] = Entity(name="resolution", pattern=r"[_/\\]+res-([a-zA-Z0-9]+)", directory=None)
+    c.entities['density'] = Entity(name="density", pattern=r"[_/\\]+den-([a-zA-Z0-9]+)", directory=None)
 
     from bids.layout import parse_file_entities
     filename = os.path.basename(IN_FILE)
-    labels = parse_file_entities(filename)
+    labels = parse_file_entities(filename, entities=list(c.entities.values()))
     if 'extension' in labels:
         labels['extension'] = labels['extension'].lstrip('.')
     if 'desc' in labels:
         labels['description'] = labels.pop('desc')
+    if 'res' in labels:
+        labels['resolution'] = labels.pop('res')
     # labels = {}
     
 

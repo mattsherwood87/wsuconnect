@@ -4,8 +4,8 @@
 # Created on 23 Dec 2020
 
 #versioning
-_VERSION = '2.0.1'
-_DATE = '21 Nov 2024'
+_VERSION = '2.0.2'
+_DATE = '17 June 2026'
 
 
 import os as _os
@@ -30,6 +30,7 @@ class creds:
         self.masterMachineName = ""
         self.database = "CoNNECT"
         self.dataDir = ""
+        self.dataPath = _Path()
         self.dicom_id = ""
         self.examCardName = ""
         self.fund = ""
@@ -75,6 +76,8 @@ class creds:
                 for k in fullCredentials[project].keys():
                     if not '__comment__' in k:
                         setattr(self,k,fullCredentials[project][k])
+                        if k == "dataDir":
+                            setattr(self, "dataPath", _Path(fullCredentials[project][k]))
             else:
                 raise _InvalidProjectError
             return True

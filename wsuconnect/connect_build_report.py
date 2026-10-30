@@ -29,11 +29,11 @@ from PIL import Image as PILImage
 import xml.etree.ElementTree as ET
 import pandas as pd
 
-REALPATH = os.path.realpath(__file__)
+# REALPATH = os.path.realpath(__file__)
 
-sys.path.append(os.path.dirname(REALPATH))
+# sys.path.append(os.path.dirname(REALPATH))
 
-import support_tools as st
+import wsuconnect.support_tools as st
 
 # GLOBAL INFO
 #versioning
@@ -281,13 +281,13 @@ def create_pdf(output_filename, subName):
                     d_xorMask = np.where(d_bgImgMask > 0, (~map1).astype(float), np.nan)
                     xorMask = nib.Nifti1Image(d_xorMask, bgImg.affine, bgImg.header)
 
-                    d_labels = st.bids.get_bids_labels(niiFile)
+                    d_labels = st.mybids.get_bids_labels(niiFile)
                     d_labels['description'] = figType
                     d_labels['suffix'] = 'deltacbf'
                     d_labels['extension'] = 'png'
 
                     st.subject.get_id(niiFile)
-                    outPng = st.bids.get_bids_filename(subject=st.subject.id,session=st.subject.sesNum,**d_labels)
+                    outPng = st.mybids.get_bids_filename(subject=st.subject.id,session=st.subject.sesNum,**d_labels)
                     outPng = os.path.join('/resshare','tmp',outPng)
                     # outPng = os.path.join(os.path.dirname(niiFile),outPng)
                     print(outPng)
@@ -325,7 +325,7 @@ def create_pdf(output_filename, subName):
 
 
                     d_labels['suffix'] = 'deltaposcbf'
-                    outPng = st.bids.get_bids_filename(subject=st.subject.id,session=st.subject.sesNum,**d_labels)
+                    outPng = st.mybids.get_bids_filename(subject=st.subject.id,session=st.subject.sesNum,**d_labels)
                     outPng = os.path.join('/resshare',outPng)
                     plotting.plot_stat_map(
                         diffCbfImg,
@@ -352,7 +352,7 @@ def create_pdf(output_filename, subName):
 
 
                     d_labels['suffix'] = 'deltanegcbf'
-                    outPng = st.bids.get_bids_filename(subject=st.subject.id,session=st.subject.sesNum,**d_labels)
+                    outPng = st.mybids.get_bids_filename(subject=st.subject.id,session=st.subject.sesNum,**d_labels)
                     outPng = os.path.join('/resshare',outPng)
                     diffCbfImg = math_img("(-1 * img1)", img1=diffCbfImg)
 

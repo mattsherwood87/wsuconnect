@@ -20,6 +20,7 @@ import time as tm
 import sys
 from pathlib import Path
 from datetime import datetime, timedelta, time
+import traceback
 #versioning
 VERSION = '4.0.1'
 DATE = '25 October 2024'
@@ -31,17 +32,19 @@ REALPATH = Path(*Path(os.path.realpath(__file__)).parts[:-2]).resolve()
 if not REALPATH in sys.path:
     sys.path.append(REALPATH)
     
-import support_tools as st
-from connect_create_raw_nii import process_single_dir
+import wsuconnect.support_tools as st
+from wsuconnect.connect_create_raw_nii import process_single_dir
 
 # ******* GLOBAL INFO *******
+
+DCMPATH = "/PACS_m2"
 
 
 os.environ["FSLDIR"] = '/usr/local/fsl'
 os.system('FSLDIR=' + os.environ["FSLDIR"])
 
 #input argument parser
-parser = argparse.ArgumentParser('This program monitors a source directory (/PACS_ms) for new files (DICOM), determines the associated project and subject information, moves the files to the target sourcedata directory, converts to NIfTI, and creates the rawdata directory according to BIDS structure.')
+parser = argparse.ArgumentParser(f'This program monitors a source directory ({DCMPATH}) for new files (DICOM), determines the associated project and subject information, moves the files to the target sourcedata directory, converts to NIfTI, and creates the rawdata directory according to BIDS structure.')
 parser.add_argument('-v', '--version', action="store_true", dest="version", help="Display the current version")
  
 
@@ -96,16 +99,17 @@ def main():
     startDateTime = datetime.now()
     # lastUpdateTime = datetime.datetime.now()
     write_log('PACS data grabber now runing @ ' + startDateTime.strftime('%m%d%Y %H:%M:%S'))
-    write_log('Checking /PACS_m2 for new files...')
+    write_log(f'Checking {DCMPATH} for new files...')
 
     #get and evaluate options
     # options = parse_arguments()
-    dcmPath = "/PACS_m2"
     URL = 'http://10.11.0.31:8042'
 
     #get start time/date of code
     df_dir = pd.DataFrame(columns=['project','inDir'])
-    df_procData = pd.DataFrame()
+    # df_procData = pd.DataFrame()
+    df_procData = pd.DataFrame(columns=['subject','ls_rawDcm','project','sourcedataDir','ls_inDir','ls_acqNum','stableFlag','continueFlag'])
+    df_procData.set_index('subject', inplace=True)
     ls_rawDcm = []
     ls_pacsFiles = []
     ls_dirs = []
@@ -113,16 +117,16 @@ def main():
     continueFlag = True
 
 
-    projectIDs = loads(load_data.readable('credentials.json').read_text())
 
 
     # Loop over directory recursively
     writeLoopFlag = True
 
     while True:
+        projectIDs = loads(load_data.readable('credentials.json').read_text())
         loopFlag = False
         tm.sleep(30)
-        for root, dirs, files in os.walk(dcmPath, topdown=True):
+        for root, dirs, files in os.walk(DCMPATH, topdown=True):
             
             for filename in files:
 
@@ -140,21 +144,26 @@ def main():
                     inFilePath = os.path.join(root,filename)
                 
                     #try to read dicom header 
-                    dcmHdr = pydicom.dcmread(inFilePath)
+                    dcmHdr = pydicom.dcmread(inFilePath, stop_before_pixels=True)
 
                     # Split patient name into IRB protocol number and subject number
-                    if not dcmHdr.PatientName.family_name in df_procData.keys():
-                        df_procData[dcmHdr.PatientName.family_name] = {
+                    personName = str(dcmHdr[0x0010,0x0010].value)
+                    if not personName in df_procData.index: #patientname
+
+                        # print(f"new patient {personName}")
+                        df_procData.loc[personName] = {
                             'ls_rawDcm': [],
                             'project': '',
                             'sourcedataDir': '',
                             'ls_inDir': [],
+                            'ls_acqNum': [],
                             'stableFlag': False,
-                            'continueFlag': False
+                            'continueFlag': True
                         }
-                    patientNameSplit = dcmHdr.PatientName.family_name.split()
-                    if not df_procData[dcmHdr.PatientName.family_name]['project']:
-                        df_procData[dcmHdr.PatientName.family_name]['project'] = patientNameSplit[0]
+
+                    patientNameSplit = personName.split()
+                    if not df_procData.loc[personName,'project']:
+                        df_procData.loc[personName,'project'] = patientNameSplit[0]
                     
                     # update destination path
                     if patientNameSplit[0] in projectIDs:
@@ -169,88 +178,131 @@ def main():
 
                     # Format Destination File Path
                     destFilePath = os.path.join(tmp_destBasePath, 
-                                                'sub-' + patientNameSplit[1])
+                                                f'sub-{patientNameSplit[1]}')
                     
-                    if len(patientNameSplit) >= 3:
-                        destFilePath = os.path.join(destFilePath, 'ses-' + patientNameSplit[2])
-                    else:
-                        destFilePath = os.path.join(destFilePath, 'ses-' + dcmHdr.StudyDate)
+                    if (0x0008,0x0020) in dcmHdr: #studydate
+                        studyDate = dcmHdr[0x008,0x0020].value
+                    elif (0x0008,0x0021) in dcmHdr: #seriesdate
+                        studyDate = dcmHdr[0x008,0x0021].value
+                    else: #acquisitiondate
+                        studyDate = dcmHdr[0x008,0x0022].value
 
+                    if len(patientNameSplit) >= 3:
+                        destFilePath = os.path.join(destFilePath, f'ses-{patientNameSplit[2]}')
+                    else:
+                        destFilePath = os.path.join(destFilePath, f'ses-{studyDate}')
                     destFilePath = os.path.join(destFilePath, 'acq-%02d_%d_%s' % (int(dcmHdr.AcquisitionNumber), int(float(dcmHdr.SeriesTime)), dcmHdr.ProtocolName))
                     destFilePath = os.path.join(destFilePath, filename)
 
-                    # d_scanLog = {}
-                    # try:
-                    #     d_scanLog = loads(load_data.readable(dcmHdr.StudyDate[0:4],dcmHdr.StudyDate[0:6] + '_scan_dates.json').read_text())
-                    # except FileNotFoundError:
-                    #     print('did not find scan_dates.json file')
 
-                    #check if subject/session for this date is in database
-                    formatted_date = f"{dcmHdr.StudyDate[:4]}-{dcmHdr.StudyDate[4:6]}-{dcmHdr.StudyDate[6:]}"
-                    if len(patientNameSplit) >= 3:
-                        df_scanLog = st.mysql.sql_mri_tracking_query(regex=formatted_date, 
-                                                                     searchcol='date',
-                                                                     project=f"sub-{patientNameSplit[0]}",
-                                                                     subject=f"sub-{patientNameSplit[1]}", 
-                                                                     session=f"ses-{patientNameSplit[2]}")
-                    else:
-                        df_scanLog = st.mysql.sql_mri_tracking_query(regex=formatted_date, 
-                                                                     searchcol='date',
-                                                                     project=f"sub-{patientNameSplit[0]}",
-                                                                     subject=f"sub-{patientNameSplit[1]}")
-                    b_fileUpdated = not df_scanLog.empty
+                    #check if subject/session for this date is in database - ONLY if this hasn't been checked before (once per acquisition)
+                    # print(df_procData[["ls_acqNum"]].assign(index=df_procData.index))
+                    if (0x0020,0x0012) in dcmHdr: #acquisitionnumber
+                        acquisitionNumber = dcmHdr[0x020,0x0012].value
+                    else: #seriesnumber fallback
+                        acquisitionNumber = dcmHdr[0x020,0x0011].value
+                    if not acquisitionNumber in df_procData.loc[personName,'ls_acqNum']:
+                        #add acquisition number to tracking dataframe
+                        # print(df_procData[["sourcedataDir", "ls_acqNum"]].assign(index=df_procData.index))
 
-
-                    try:
-                        formatted_time = f"{dcmHdr['AcquisitionTime'][0:2]}:{dcmHdr['AcquisitionTime'][2:4]}:{dcmHdr['AcquisitionTime'][4:6]}"
-                        acq_start = datetime(1900, 1, 1, dcmHdr['AcquisitionTime'][0:2], dcmHdr['AcquisitionTime'][2:4], dcmHdr['AcquisitionTime'][4:6], 0)  # arbitrary date
-                        acq_end = acq_start + timedelta(seconds=dcmHdr['AcquisitionDuration'])
-                        # end_time = acq_end.time()
-                        acq_end = timedelta(hours=acq_end.hour,minutes=acq_end.minute,seconds=acq_end.second)
-                        formatted_end_time = acq_end.strftime("%H:%M:%S")
-                    except:
-                        formatted_time = None
-                        formatted_end_time = None
-
-
-                    #subject/session/date does not exist in mri_tracking SQL table, then add
-                    if b_fileUpdated:
+                        #query database for subject/session entry
+                        formatted_date = f"{studyDate[:4]}-{studyDate[4:6]}-{studyDate[6:]}"
                         if len(patientNameSplit) >= 3:
-                            st.mysql.sql_mri_tracking_insert(project=f"sub-{patientNameSplit[0]}",
-                                                             subject=f"sub-{patientNameSplit[1]}", 
-                                                             session=f"ses-{patientNameSplit[2]}", 
-                                                             date=formatted_date, 
-                                                             scan_start_time=formatted_time, 
-                                                             scan_end_time=formatted_end_time)
+                            df_scanLog = st.mysql.sql_mri_tracking_query(regex=formatted_date, 
+                                                                        searchcol='date',
+                                                                        project=f"{patientNameSplit[0]}",
+                                                                        subject=f"sub-{patientNameSplit[1]}", 
+                                                                        session=f"ses-{patientNameSplit[2]}")
                         else:
-                            st.mysql.sql_mri_tracking_insert(project=f"sub-{patientNameSplit[0]}",
-                                                             subject=f"sub-{patientNameSplit[1]}", 
-                                                             session=f"ses-{dcmHdr.StudyDate}", 
-                                                             date=formatted_date, 
-                                                             scan_start_time=formatted_time, 
-                                                             scan_end_time=formatted_end_time)
-                        # formatted = f"{date_str[:4]}-{date_str[4:6]}-{date_str[6:]}"
-                        # p = load_data(dcmHdr.StudyDate[0:4])
-                        # p.mkdir(exist_ok=True)
-                        # p = load_data(f"{dcmHdr.StudyDate[0:4]}/{dcmHdr.StudyDate[0:6]}_scan_dates.json")
-                        # with open(str(p),'w') as j:
-                        #     json.dump(d_scanLog,j,indent='\t', sort_keys=True)
+                            df_scanLog = st.mysql.sql_mri_tracking_query(regex=formatted_date, 
+                                                                        searchcol='date',
+                                                                        project=f"{patientNameSplit[0]}",
+                                                                        subject=f"sub-{patientNameSplit[1]}",
+                                                                        session=f"ses-{studyDate}")
+                        
+                        #format start and end time for database and database updating
+                        
+                        if (0x0008,0x0032) in dcmHdr: #acquisitiontime
+                            acquisitionTime = dcmHdr[0x008,0x0032].value
+                        else: #seriestime fallback
+                            acquisitionTime = dcmHdr[0x008,0x0031].value
+                        acq_start = None
+                        acq_end = None
+                        formatted_time = f"{acquisitionTime[0:2]}:{acquisitionTime[2:4]}:{acquisitionTime[4:6]}"
+                        try:
+                            if (0x0018,0x9073) in dcmHdr: #acquisitionduration
+                                acquisitionDuration = dcmHdr[0x0018,0x9073].value
+                            else:
+                                acquisitionDuration = 60 #default fallback, 60s
+                            acq_start = datetime(1900, 1, 1, int(acquisitionTime[0:2]), int(acquisitionTime[2:4]), int(acquisitionTime[4:6]), 0)  # arbitrary date
+                            acq_end = acq_start + timedelta(seconds=int(acquisitionDuration))
+                            acq_end = timedelta(hours=acq_end.hour,minutes=acq_end.minute,seconds=acq_end.second)
+                            formatted_end_time = (datetime.min + acq_end).time().strftime("%H:%M:%S")
+                        except:
+                            traceback.print_exc()
+                            formatted_end_time = None
 
-                    #subject/session/date does exist in mri_tracking SQL table, update start or end time as necessary
-                    else:
-                        t = timedelta(hours=dcmHdr['AcquisitionTime'][0:2], minutes=dcmHdr['AcquisitionTime'][2:4], seconds=dcmHdr['AcquisitionTime'][4:6])
-                        start_t = df_scanLog.loc[0, 'scan_start_time']
-                        start_t = start_t.to_pytimedelta() if isinstance(start_t, pd.Timedelta) else start_t
-                        end_t = df_scanLog.loc[0, 'scan_end_time']
-                        end_t = start_t.to_pytimedelta() if isinstance(start_t, pd.Timedelta) else start_t
-                        if acq_start and start_t:
-                            if t < start_t:
-                                df_scanLog.loc[0, 'scan_start_time'] = formatted_time
-                                st.mysql.sql_mri_tracking_set(df_scanLog)
-                        if acq_end and end_t:
-                            if acq_end > end_t:
-                                df_scanLog.loc[0, 'scan_end_time'] = formatted_end_time
-                                st.mysql.sql_mri_tracking_set(df_scanLog)
+
+                        #subject/session/date does not exist in mri_tracking SQL table, then add
+                        if df_scanLog.empty:
+                            counter = st.mysql.sql_mri_tracking_query_counter(subject=f"sub-{patientNameSplit[1]}", project=f"{patientNameSplit[0]}")
+                            if counter:
+                                counter += 1
+                            print(f"inserting {personName} into sql table with counter {counter}")
+                            if len(patientNameSplit) >= 3:
+                                st.mysql.sql_mri_tracking_insert(project=f"{patientNameSplit[0]}",
+                                                                subject=f"sub-{patientNameSplit[1]}", 
+                                                                session=f"ses-{patientNameSplit[2]}", 
+                                                                date=formatted_date, 
+                                                                scan_start_time=formatted_time, 
+                                                                scan_end_time=formatted_end_time,
+                                                                all_data=False,
+                                                                number_checks=0,
+                                                                counter=counter)
+                            else:
+                                st.mysql.sql_mri_tracking_insert(project=f"{patientNameSplit[0]}",
+                                                                subject=f"sub-{patientNameSplit[1]}", 
+                                                                session=f"ses-{studyDate}", 
+                                                                date=formatted_date, 
+                                                                scan_start_time=formatted_time, 
+                                                                scan_end_time=formatted_end_time,
+                                                                all_data=False,
+                                                                number_checks=0,
+                                                                counter=counter)
+
+                        #subject/session/date does exist in mri_tracking SQL table, update start or end time as necessary
+                        else:
+                            print(f'sequence start: {formatted_time}, sequence end {formatted_end_time}')
+                            t = timedelta(hours=int(acquisitionTime[0:2]), minutes=int(acquisitionTime[2:4]), seconds=int(acquisitionTime[4:6]))
+                            start_t = df_scanLog.loc[0, 'scan_start_time']
+                            start_t = start_t.to_pytimedelta() if isinstance(start_t, pd.Timedelta) else start_t
+                            end_t = df_scanLog.loc[0, 'scan_end_time']
+                            end_t = end_t.to_pytimedelta() if isinstance(end_t, pd.Timedelta) else end_t
+                            if formatted_time:
+                                if start_t:
+                                    if t < start_t:
+                                        print(f'scan start updated: {formatted_time}')
+                                        df_scanLog.loc[0, 'scan_start_time'] = formatted_time
+                                        st.mysql.sql_mri_tracking_set(df_scanLog)
+                                else:
+                                    print(f'scan start updated: {formatted_time}')
+                                    df_scanLog.loc[0, 'scan_start_time'] = formatted_time
+                                    st.mysql.sql_mri_tracking_set(df_scanLog)
+                            if acq_end:
+                                if end_t:
+                                    if acq_end > end_t:
+                                        print(f'scan end updated: {formatted_end_time}')
+                                        df_scanLog.loc[0, 'scan_end_time'] = formatted_end_time
+                                        st.mysql.sql_mri_tracking_set(df_scanLog)
+                                else:
+                                    print(f'scan end updated: {formatted_end_time}')
+                                    df_scanLog.loc[0, 'scan_start_time'] = formatted_time
+                                    st.mysql.sql_mri_tracking_set(df_scanLog)
+
+                        #add acquisition number if we made it this far!!
+                        tmp_ls = df_procData.loc[personName,'ls_acqNum']
+                        tmp_ls.append(acquisitionNumber)
+                        df_procData.at[personName,'ls_acqNum'] = tmp_ls
                     
                     
 
@@ -271,49 +323,62 @@ def main():
 
                     #add conversion directory to DCM list
                     dcmDir = os.path.dirname(destFilePath)
-                    if not dcmDir in df_procData[dcmHdr.PatientName.family_name]['ls_rawDcm']:
+                    if not dcmDir in df_procData.loc[personName,'ls_rawDcm']:
                         # ls_rawDcm.append(dcmDir)
-                        tmp_ls = df_procData[dcmHdr.PatientName.family_name]['ls_rawDcm']
+                        tmp_ls = df_procData.loc[personName,'ls_rawDcm']
                         tmp_ls.append(dcmDir)
-                        df_procData[dcmHdr.PatientName.family_name]['ls_rawDcm'] = tmp_ls
+                        df_procData.at[personName,'ls_rawDcm'] = tmp_ls
+                        # print(f"setting ls_rawDcm {tmp_ls}")
 
                     #subject/session sourcedata directory 
-                    if not df_procData[dcmHdr.PatientName.family_name]['sourcedataDir']:
-                        df_procData[dcmHdr.PatientName.family_name]['sourcedataDir'] = os.path.dirname(dcmDir)
+                    if not df_procData.loc[personName,'sourcedataDir']:
+                        df_procData.loc[personName,'sourcedataDir'] = os.path.dirname(dcmDir)
+                        # print(f"setting ls_rawDcm {os.path.dirname(dcmDir)}")
                         
-                    if not df_procData[dcmHdr.PatientName.family_name]['ls_inDir']:
-                        df_procData[dcmHdr.PatientName.family_name]['ls_inDir'] = [os.path.dirname(inFilePath)]
-                    elif not bool([s for s in df_procData[dcmHdr.PatientName.family_name]['ls_inDir'] if (os.path.dirname(dcmDir) in s)]):
-                        tmp_ls = df_procData[dcmHdr.PatientName.family_name]['ls_inDir']
+                    if not df_procData.loc[personName,'ls_inDir']:
+                        df_procData.loc[personName,'ls_inDir'] = [os.path.dirname(inFilePath)]
+                        # print(f"setting ls_rawDcm {os.path.dirname(inFilePath)}")
+                    elif not bool([s for s in df_procData.loc[personName,'ls_inDir'] if (os.path.dirname(dcmDir) in s)]):
+                        tmp_ls = df_procData.loc[personName,'ls_inDir']
                         tmp_ls.append(os.path.dirname(inFilePath))
-                        df_procData[dcmHdr.PatientName.family_name]['ls_inDir'] = tmp_ls 
+                        df_procData.at[personName,'ls_inDir'] = tmp_ls 
 
                 except TypeError as e:
                     ls_pacsFiles.append(inFilePath)
+                    traceback.print_exc()
 
                 except pydicom.errors.InvalidDicomError as e:
                     ls_pacsFiles.append(inFilePath)
+                    traceback.print_exc()
+
+                except AttributeError as e:
+                    ls_pacsFiles.append(inFilePath)
+                    print('Attribute Error ')
 
                 except Exception as e:
                     ls_pacsFiles.append(inFilePath)
+                    traceback.print_exc()
 
 
 
         # Remove DICOMS - prevent from detection in future loops
         tm.sleep(1)
-        for pacsFile in ls_pacsFiles:
-            try:
-                if os.path.isfile(pacsFile):
-                    os.remove(pacsFile)
-                    d = os.path.dirname(pacsFile)
-                while not d.endswith('PACS_m2'):
-                    os.rmdir(d)
-                    d = os.path.dirname(d)
-            except Exception as e:
-                a=e
-                # print("Error Message: stop {0}".format(e))
-        
         if ls_pacsFiles:
+            print(f"removing some files from {DCMPATH}")
+            for pacsFile in ls_pacsFiles:
+                try:
+                    if os.path.isfile(pacsFile):
+                        os.remove(pacsFile)
+                        d = os.path.dirname(pacsFile)
+                    while not d.endswith('PACS_m2'):
+                        os.rmdir(d)
+                        d = os.path.dirname(d)
+                except OSError as e:
+                    a=e #do nothing
+                except Exception as e:
+                    traceback.print_exc()
+                    # print("Error Message: stop {0}".format(e))
+        
             ls_pacsFiles = []
 
 
@@ -323,41 +388,50 @@ def main():
                 d_patientInfo = st.RestToolbox.DoGet(URL + '/patients/' + patientUID)
                 if not 'MainDicomTags' in d_patientInfo.keys():
                     continue
-                if d_patientInfo['MainDicomTags']['PatientName'] in df_procData.keys() and d_patientInfo['IsStable']:
-                    df_procData[d_patientInfo['MainDicomTags']['PatientName']]['stableFlag'] = True
+                # d_patientInfo = st.RestToolbox.DoGet(f'{URL}/studies/{d_patientInfo['Studies'][0]}')
+                if d_patientInfo['MainDicomTags']['PatientName'] in df_procData.index and d_patientInfo['IsStable']:
+                    df_procData.loc[d_patientInfo['MainDicomTags']['PatientName'],'stableFlag'] = True
         except Exception as e:
-            print("Error Message: {0}".format(e))
+            # print("Error Message: {0}".format(e))
             exc_type, exc_obj, exc_tb = sys.exc_info()
             fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
-            print(exc_type, fname, exc_tb.tb_lineno)
+            traceback.print_exc()
         # ls_patientNames = []  
-                
-        for k in df_procData.keys():
-            if not df_procData[k]['stableFlag']:
+
+
+        #Do some additional stuff for datasets that have been fully transferred
+        subsToDrop = []    
+        # print(len(df_procData))
+        for idx, row in df_procData.iterrows():
+
+            #check if "patient" is stable - fully transferred
+            if not row['stableFlag']:
+                print(f"subject {idx} is not stable")
                 continue
-            elif df_procData[k]['stableFlag'] and df_procData[k]['continueFlag']: #do 1 more pass for good measure
+            elif row['stableFlag'] and row['continueFlag']: #do 1 more pass for good measure
 
-                write_log('\tPatient ' + k + ' is stable but performing one more loop @ ' + datetime.now().strftime('%m%d%Y %H:%M:%S'))
-                tm.sleep(240)
-                df_procData[k]['continueFlag'] = False
+                print(f"subject {idx} is stable, 1 more loop for good measure")
+                write_log(f"\tPatient {idx} is stable but performing one more loop @ {datetime.now().strftime('%m%d%Y %H:%M:%S')}")
+                tm.sleep(180)
+                df_procData.loc[idx,'continueFlag'] = False
                 continue
 
-
-            write_log('\tPatient ' + k + ' is stable, processing data @ ' + datetime.now().strftime('%m%d%Y %H:%M:%S'))
-            write_log('\tclearing patient from PACS database @ ' + datetime.now().strftime('%m%d%Y %H:%M:%S'))
+            write_log(f"\tPatient {idx} is stable, processing data @ {datetime.now().strftime('%m%d%Y %H:%M:%S')}")
+            write_log(f"\tclearing patient from PACS database @ {datetime.now().strftime('%m%d%Y %H:%M:%S')}")
             patientUIDs = st.RestToolbox.DoGet(URL + '/patients') 
             for patientUID in patientUIDs:
                 d_patientInfo = st.RestToolbox.DoGet(URL + '/patients/' + patientUID)
                 if not 'MainDicomTags' in d_patientInfo.keys():
                     st.RestToolbox.DoDelete(URL + '/patients/' + patientUID)
                     continue
-                if d_patientInfo['MainDicomTags']['PatientName'] == k:
+                if d_patientInfo['MainDicomTags']['PatientName'] == idx:
+                    subsToDrop.append(idx)
                     st.RestToolbox.DoDelete(URL + '/patients/' + patientUID)
             
 
 
             # list files and add to table/resshare/projects/2023_UES/EPIC/sourcedata/sub-1106/ses-20240610-1A/acq-06_123445_B0_map
-            for destFilePath in df_procData[k]['ls_rawDcm']:
+            for destFilePath in row['ls_rawDcm']:
                 try:
 
                     write_log('\t' + destFilePath)
@@ -376,7 +450,7 @@ def main():
                     # d['fullpath'] = fullpath
                     # d['filename'] = filename
 
-                    tmp_project = df_procData[k]['project']
+                    tmp_project = row['project']
                     st.creds.read(tmp_project)
                     #print(tmp_project + ' ' + destFilePath)
                     #sql_table_insert(creds.searchSourceTable,d)
@@ -414,10 +488,10 @@ def main():
                         st.mysql.sql_table_insert(st.creds.searchTable,d)
 
                 except Exception as e:
-                    print("Error Message: {0}".format(e))
+                    # print("Error Message: {0}".format(e))
                     exc_type, exc_obj, exc_tb = sys.exc_info()
                     fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
-                    print(exc_type, fname, exc_tb.tb_lineno)
+                    traceback.print_exc()
 
                     write_log("\t\tError Message: {0}".format(e))
                     write_log('\t\t' + str(exc_type) + ' ' + str(fname) + ' ' + str(exc_tb.tb_lineno))
@@ -425,24 +499,27 @@ def main():
 
             write_log("\tEvaluating files in subject rawdata directory")
             try:
-                st.evaluate_source_file_transfer(df_procData[k]['project'],df_procData[k]['sourcedataDir'])
+                # print(df_procData.loc[idx])
+                st.evaluate_source_file_transfer(row['project'], row['sourcedataDir'])
             except Exception as e:
-                print("Error Message: {0}".format(e))
+                # print("Error Message: {0}".format(e))
                 exc_type, exc_obj, exc_tb = sys.exc_info()
                 fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
-                print(exc_type, fname, exc_tb.tb_lineno)
+                traceback.print_exc()
 
                 write_log("\t\tError Message: {0}".format(e))
                 write_log('\t\t' + str(exc_type) + ' ' + str(fname) + ' ' + str(exc_tb.tb_lineno))
-
-                
-            df_procData = df_procData.drop(k,axis='columns')
 
 
             write_log('\tFinished processing DICOM group @ ' + datetime.now().strftime('%m%d%Y %H:%M:%S'))
             write_log('Checking /PACS_m2 for new files...')
             writeLoopFlag = True
             continueFlag = True
+
+        if subsToDrop:
+            for item in subsToDrop:
+                print(f"finalized subject {item}")
+                df_procData = df_procData.drop(item)
 
                        
                 

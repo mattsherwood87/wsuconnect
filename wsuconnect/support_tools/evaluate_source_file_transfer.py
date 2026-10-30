@@ -12,9 +12,9 @@ import argparse
 from pathlib import Path
 
 #append path if necessary
-REALPATH = Path(*Path(os.path.realpath(__file__)).parts[:-3]).resolve()
-if not str(REALPATH) in sys.path:
-    sys.path.append(REALPATH)
+# REALPATH = Path(*Path(os.path.realpath(__file__)).parts[:-3]).resolve()
+# if not str(REALPATH) in sys.path:
+#     sys.path.append(REALPATH)
 
 
 # ******************* PARSE COMMAND LINE ARGUMENTS ********************
@@ -83,7 +83,7 @@ def evaluate_source_file_transfer(project: str,inDir: str) -> bool:
                 bidsDir = scanId[k]['BidsDir']
                 if not 'bids_labels' in scanId[k].keys():
                     continue
-                scanName = st.bids.get_bids_filename(**scanId[k]['bids_labels'])
+                scanName = st.mybids.get_bids_filename(**scanId[k]['bids_labels'])
 
                 inTargFiles = glob(os.path.join(st.creds.dataDir,'rawdata','sub-' + st.subject.id,'ses-' + st.subject.sesNum,bidsDir,'sub-' + st.subject.id + '_' + 'ses-' + st.subject.sesNum + scanName + '.nii.gz'))
                 
@@ -112,6 +112,8 @@ def evaluate_source_file_transfer(project: str,inDir: str) -> bool:
                                 else:
                                     d_txt[k] = [d_txt[k],x]
                         seriesDateMoYr = d_txt['DateTime'][0:6]
+                    else:
+                        allFiles = False
 
 
         if allFiles:

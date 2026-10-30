@@ -19,13 +19,14 @@ import json
 import pandas as pd
 import time
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
+from pathlib import Path
 
 
 #local import
-REALPATH = os.path.realpath(__file__)
-
-sys.path.append(os.path.dirname(REALPATH))
-import support_tools as st
+REALPATH = Path(*Path(os.path.realpath(__file__)).parts[:-1]).resolve()
+if not any(Path(p).resolve() == str(REALPATH) for p in sys.path if Path(p).exists()):
+    sys.path.append(str(REALPATH))
+import wsuconnect.support_tools as st
 
 
 # GLOBAL INFO
@@ -238,6 +239,19 @@ if __name__ == '__main__':
                                                             docker_mount_if=st.creds.dockerMountIf,
                                                             request_cpus=1,
                                                             request_memory=1000)
+            job_genstl = st.condor.create_python_condor_job('generate_stl',
+                                                            'generate_stl.py',
+                                                            st.creds.machineNames,
+                                                            submit,
+                                                            error,
+                                                            output,
+                                                            log,
+                                                            dagman,
+                                                            docker=True,
+                                                            docker_image='wsuconnect/neuro:docker',
+                                                            docker_mount_if=st.creds.dockerMountIf,
+                                                            request_cpus=1,
+                                                            request_memory=4000)
             job_mvhtml = st.condor.create_bin_condor_job('move-html',
                                                             'docker',
                                                             st.creds.machineNames,
@@ -258,6 +272,10 @@ if __name__ == '__main__':
                                         '--subject',
                                         participant_id])
             )
+            job_genstl.add_arg(' '.join([
+                os.path.join(st.creds.dataDir,'derivatives','sourcedata','freesurfer',participant_id),
+                "--progress"])
+            )
 
 
             #create docker argument string with initial mount commands
@@ -272,7 +290,7 @@ if __name__ == '__main__':
                 argStr += " -v /resshare22:/resshare22:rw"
 
             #add remaining docker commands to the argument string
-            argStr += f' --user=root --entrypoint bash -m 1g --cpus=1 nipreps/fmriprep {os.path.join(os.path.dirname(REALPATH),"support_tools","python_wrapper.sh")} {os.path.join(os.path.dirname(REALPATH),"support_tools","move_html.py")} '
+            argStr += f' --user=root --entrypoint bash -m 1g --cpus=1 nipreps/fmriprep {REALPATH / "support_tools" / "python_wrapper.sh"} {REALPATH / "support_tools" / "move_html.py"} '
 
             argStr += ' '.join(['--data-dir',
                                         st.creds.dataDir,
@@ -282,8 +300,8 @@ if __name__ == '__main__':
                                         'fmriprep'])
             
             job_mvhtml.add_arg(argStr)
-
             job_mvhtml.add_child(job_applymask)
+            job_mvhtml.add_child(job_genstl)
             job_fmriprep.add_child(job_mvhtml)
 
             dagman.build_submit()

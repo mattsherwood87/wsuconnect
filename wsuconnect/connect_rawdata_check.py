@@ -20,10 +20,10 @@ import json
 
 
 #local import
-REALPATH = os.path.dirname(os.path.realpath(__file__))
-sys.path.append(REALPATH)
+# REALPATH = os.path.dirname(os.path.realpath(__file__))
+# sys.path.append(REALPATH)
 
-import support_tools as st
+import wsuconnect.support_tools as st
 
 
 # GLOBAL INFO

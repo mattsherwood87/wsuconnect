@@ -16,10 +16,10 @@ import json
 
 #local import
 
-REALPATH = os.path.realpath(__file__)
-sys.path.append(os.path.dirname(REALPATH))
+# REALPATH = os.path.realpath(__file__)
+# sys.path.append(os.path.dirname(REALPATH))
 
-import support_tools as st
+import wsuconnect.support_tools as st
 
 
 # GLOBAL INFO
@@ -81,7 +81,7 @@ def prepare_pipeline(options: dict,submit: str=None, error: str=None, output: st
         print("Error Message: {0}".format(e))
         sys.exit()
 
-    regexStr = st.bids.get_bids_filename(**reconallInput['main_image_params']['input_bids_labels'])
+    regexStr = st.mybids.get_bids_filename(**reconallInput['main_image_params']['input_bids_labels'])
 
     if not incExcDict:
         filesToProcess = st.mysql.sql_query(database=st.creds.database,searchtable=st.creds.searchTable,searchcol='fullpath',regex=regexStr,progress=False)

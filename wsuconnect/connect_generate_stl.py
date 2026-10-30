@@ -15,13 +15,15 @@ import sys
 import json
 import pandas as pd
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
+from pathlib import Path
 
 
 #local import
-REALPATH = os.path.realpath(__file__)
 
-sys.path.append(os.path.dirname(REALPATH))
-import support_tools as st
+REALPATH = Path(*Path(os.path.realpath(__file__)).parts[:-1]).resolve()
+if not any(Path(p).resolve() == str(REALPATH) for p in sys.path if Path(p).exists()):
+    sys.path.append(str(REALPATH))
+import wsuconnect.support_tools as st
 
 
 # GLOBAL INFO
