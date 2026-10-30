@@ -21,3 +21,6 @@ distutils/*
 # Python bytecode (any directory)
 __pycache__/
 *.pyc
+
+# Cron and processing logs (contain project IDs)
+logs/
