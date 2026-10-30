@@ -49,7 +49,7 @@ node execute {
         port p1 as "bind:ro"
         port p2 as "bind:rw"
         rectangle "<img:IMAGESSURL/docker-icon.png>\nDocker" <<special>> as C {
-            note "Ubuntu24.04\nFSL\nFreeSurfer\nAFNI\nMATLAB\npython3.10_venv" as m 
+            note "Ubuntu24.04\nFSL\nFreeSurfer\nAFNI\nMATLAB\npython3.12_venv" as m 
         }
     }
 }

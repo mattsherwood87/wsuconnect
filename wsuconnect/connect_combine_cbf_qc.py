@@ -1,5 +1,5 @@
 #!/resshare/python3_venv/bin/python
-# the command above ^^^ sets python 3.10.9 as the interpreter for this program
+# the command above ^^^ sets python 3.12.3 as the interpreter for this program
 
 # Created by Matthew Sherwood (matt.sherwood@wright.edu, matthew.sherwood.7.ctr@us.af.mil)
 # Created on 21 Nov 2024

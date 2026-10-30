@@ -1,5 +1,5 @@
 #!/resshare/general_processing_codes/python3_venv/bin/python
-# the command above ^^^ sets python 3.10.10 as the interpreter for this program
+# the command above ^^^ sets python 3.12.3 as the interpreter for this program
 
 # Parses a Presentation (neurobs.com) logfile.
 
