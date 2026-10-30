@@ -4,6 +4,7 @@ wsuconnect/distutils/*
 wsuconnect/logs/*
 wsuconnect/old_versions/*
 wsuconnect/data/*
+!wsuconnect/data/requirements.txt
 wsuconnect/licenses/*
 wsuconnect/__pycache__/*
 wsuconnect/support_tools/old_versions/*
@@ -16,3 +17,7 @@ distutils/*
 # macOS Finder metadata (any directory)
 .DS_Store
 ._*
+
+# Python bytecode (any directory)
+__pycache__/
+*.pyc

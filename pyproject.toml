@@ -7,7 +7,7 @@ name = "wsuconnect"
 version = "0.1.0"
 description = "WSU CoNNECT utilities"
 authors = [{ name="Matthew Sherwood" }]
-readme = "README.md"
+readme = "README.rst"
 requires-python = ">=3.12"
 dependencies = []
 
