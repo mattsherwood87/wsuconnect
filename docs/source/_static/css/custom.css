@@ -13,3 +13,10 @@ pre {
     white-space: pre-wrap !important; 
     word-break: break-all;            
 }
+
+/* compact multi-line function signatures (one parameter per line) */
+dt.sig > dl { margin: 0; }
+dt.sig > dl > dd { margin: 0 0 0 2em; line-height: 1.4; }
+
+/* wrap long unbroken text, such as usage lines in docstrings */
+.rst-content dl.py dd p { overflow-wrap: anywhere; }

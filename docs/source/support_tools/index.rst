@@ -4,6 +4,10 @@
 CoNNECT Support Tools
 *********************
 
+.. contents:: On this page
+   :local:
+   :depth: 1
+
 
 Several custom support tools have been created to aid in the batch processing. These tools support parallel processing via :term:`HTCondor` (including its SGE-style ``condor_qsub`` interface), as implemented in the custom batch processing 
 described in the previous section.

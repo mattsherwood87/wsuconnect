@@ -4,6 +4,10 @@
 Systems Overview
 ****************
 
+.. contents:: On this page
+   :local:
+   :depth: 2
+
 
 The CoNNECT MRI facility consists of several components described below.
 
