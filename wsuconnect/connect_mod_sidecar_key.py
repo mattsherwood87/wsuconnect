@@ -35,7 +35,7 @@ parser = argparse.ArgumentParser(description="Update NIfTI JSON sidecars from th
 
 
 # ******************* PARSE COMMAND LINE ARGUMENTS ********************
-parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="select a project: " + ' '.join(st.creds.projects), default=None)
+parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="select a project (project identifier in credentials.json)", default=None)
 parser.add_argument('--progress', help="Show progress (default FALSE)", action="store_true", dest="progress", default=False)
 parser.add_argument('-v', '--version', help="Display the current version", action="store_true", dest="version")
   

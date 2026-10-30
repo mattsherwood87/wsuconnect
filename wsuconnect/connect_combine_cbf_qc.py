@@ -30,7 +30,7 @@ DATE = '21 Nov 2024'
 
 # ******************* PARSE COMMAND LINE ARGUMENTS ********************
 parser = argparse.ArgumentParser(description="Combine each participant's ASLPrep CBF quality control file (desc-qualitycontrol_cbf.tsv) into one project-level file in derivatives.")
-parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="select a project: " + ' '.join(st.creds.projects))
+parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="select a project (project identifier in credentials.json)")
 parser.add_argument('-v', '--version', action="store_true", dest="version", help="Display the current version")
 parser.add_argument('--progress', action="store_true", dest="progress", help="Show progress (default FALSE)", default=False)
 

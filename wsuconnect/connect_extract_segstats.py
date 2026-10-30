@@ -36,7 +36,7 @@ DATE = '15 July 2024'
 parser = argparse.ArgumentParser(description="Extract segmentation statistics with FreeSurfer mri_segstats, as defined in the project's extract_segstats_input.json.")
 
     #input options for main()
-parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="select a project: " + ' '.join(st.creds.projects), default=None)
+parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="select a project (project identifier in credentials.json)", default=None)
 parser.add_argument('--cbf', action="store_true", dest="cbf", help="Extract segstats for CBF")
 parser.add_argument('--apt', action="store_true", dest="apt", help="Extract segstats for APT")
 parser.add_argument('--dti', action="store_true", dest="dti", help="Extract segstats for DTI")

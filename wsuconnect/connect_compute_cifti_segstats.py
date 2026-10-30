@@ -35,7 +35,7 @@ DATE = '7 November 2025'
 # ******************* PARSE COMMAND LINE ARGUMENTS ********************
 parser = argparse.ArgumentParser(description="Compute segmentation statistics for CIFTI images, as defined in the project's cifti_segstats_input.json.")
 parser.add_argument('--type', action="store", dest="TYPE", help="type (must be in project's cifti_segstats_input.json), ex. func", required=True)
-parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="select a project: " + ' '.join(st.creds.projects))
+parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="select a project (project identifier in credentials.json)")
 parser.add_argument('--overwrite', action="store_true", dest="OVERWRITE", help="Force processing by skipping directory and database checking", default=False)
 parser.add_argument('--subjects', action='store', dest='SUBJECTS', default=None, nargs='+', help='optional subject identifier(s), skips check of participants.tsv. Multiple inputs accepted through space delimiter')
 parser.add_argument('-t', '--task-id', action='store', dest='TASKID', help='select a specific task to be processed', default=None)

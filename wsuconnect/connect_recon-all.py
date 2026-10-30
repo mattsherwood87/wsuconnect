@@ -32,7 +32,7 @@ FSLDIR = os.environ["FSLDIR"]
 # ******************* PARSE COMMAND LINE ARGUMENTS ********************
 #input argument parser
 parser = argparse.ArgumentParser(description="Run FreeSurfer recon-all (stage 1) and brainmask refinement (stage 2) for a project, as defined in the project's freesurfer_recon-all_input.json.")
-parser.add_argument('-p','--project', required=True,action="store", dest="PROJECT", help="Perform FreeSurfer recon-all and/or recon-all refinement for the selected project: " + ' '.join(st.creds.projects), default=None)
+parser.add_argument('-p','--project', required=True,action="store", dest="PROJECT", help="Perform FreeSurfer recon-all and/or recon-all refinement for the selected project (project identifier in credentials.json)", default=None)
 
 parser.add_argument('--stage1', action="store_true", dest="STAGE1", help="only perform recon-all without brainmask refinement", default=False)
 parser.add_argument('--stage2', action="store_true", dest="STAGE2", help="perform brainmask refinement", default=False)

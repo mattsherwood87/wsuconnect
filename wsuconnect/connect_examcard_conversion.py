@@ -30,7 +30,7 @@ DATE = '23 April 2024'
 # ******************* PARSE COMMAND LINE ARGUMENTS ********************
 #input argument parser
 parser = argparse.ArgumentParser(description="Convert a project's Philips ExamCard text exports (listed in scanorder.txt) to MySQL tables and an examcard.html summary.")
-parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="load the selected projects examcards from scanorder.txt: " + ' '.join(st.creds.projects), default=None)
+parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="load the selected projects examcards from scanorder.txt (project identifier in credentials.json)", default=None)
 # parser.add_argument('-r','--raw', action="store_true", dest="RAW", help="Command line argument to update the raw_data table for the selected project (default FALSE)", default=False)
 parser.add_argument('-v', '--version', help="Display the current version", action="store_true", dest="version")
 parser.add_argument('-i', '--in-dir', help="Use a specific directory rather than a project directory", action="store", default=None, dest="INDIR")

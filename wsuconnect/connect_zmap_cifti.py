@@ -38,7 +38,7 @@ DATE = '7 November 2025'
 
 # ******************* PARSE COMMAND LINE ARGUMENTS ********************
 parser = argparse.ArgumentParser(description="Map a project's FEAT z-statistic images to CIFTI format in the fMRIPrep Docker image.")
-parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="select a project: " + ' '.join(st.creds.projects))
+parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="select a project (project identifier in credentials.json)")
 parser.add_argument('--overwrite', action="store_true", dest="OVERWRITE", help="Force processing by skipping directory and database checking", default=False)
 parser.add_argument('--subjects', action='store', dest='SUBJECTS', default=None, nargs='+', help='optional subject identifier(s), skips check of participants.tsv. Multiple inputs accepted through space delimiter')
 parser.add_argument('-t', '--task-id', action='store', dest='TASKID', help='select a specific task to be processed', default=None)

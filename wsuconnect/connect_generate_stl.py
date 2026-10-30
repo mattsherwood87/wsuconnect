@@ -35,7 +35,7 @@ DATE = '19 Feb 2025'
 
 # ******************* PARSE COMMAND LINE ARGUMENTS ********************
 parser = argparse.ArgumentParser(description="Generate 3D-printable STL brain models from FreeSurfer pial surfaces for a project's participants.")
-parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="select a project: " + ' '.join(st.creds.projects))
+parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="select a project (project identifier in credentials.json)")
 parser.add_argument('--overwrite', action="store_true", dest="OVERWRITE", help="Force processing by skipping directory and database checking", default=False)
 parser.add_argument('--subjects', action='store', dest='SUBJECTS', default=None, nargs='+', help='optional subject identifier(s), skips check of participants.tsv. Multiple inputs accepted through space delimiter')
 # parser.add_argument('--docker', action="store_true", dest="DOCKER", help="Submit jobs to HTCondor and process in the wsuconnect/neuro Docker container (default FALSE)", default=False)

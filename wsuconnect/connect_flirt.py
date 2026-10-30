@@ -42,7 +42,7 @@ STD2MM_BRAIN = os.path.join(FSLDIR,'data','standard','MNI152_T1_2mm_brain.nii.gz
 # ******************* PARSE COMMAND LINE ARGUMENTS ********************
 #input argument parser
 parser = argparse.ArgumentParser(description="Register ASL, APT or structural images to structural and standard space with FSL FLIRT, as defined in the project's <modality>_flirt_input.json.")
-parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="Perform FLIRT for the selected project: " + ' '.join(st.creds.projects), default=None)
+parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="Perform FLIRT for the selected project (project identifier in credentials.json)", default=None)
 
 parser.add_argument('--asl', action="store_true", dest="ASL", help="Perform registration between ASL and structural (and standard if structural to standard exists", default=False)
 parser.add_argument('--T1', action="store_true", dest="STRUC", help="Perform registration between structural and standard (MNI T1 2mm)", default=False)

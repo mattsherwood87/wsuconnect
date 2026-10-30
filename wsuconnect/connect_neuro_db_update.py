@@ -40,7 +40,7 @@ DATE = '25 Feb 2025'
 
 #input argument parser
 parser = argparse.ArgumentParser(description="Update a project's MySQL searchTable or searchSourceTable with the files on centralized storage.")
-parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="update the tables for the selected project, or all for every project: all " + ' '.join(st.creds.projects), default=None)
+parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="update the tables for the selected project, or all for every project (project identifier in credentials.json)", default=None)
 # parser.add_argument('-r','--raw', action="store_true", dest="RAW", help="Command line argument to update the raw_data table for the selected project (default FALSE)", default=False)
 
 parser.add_argument('-s', '--source', help="update the searchSourceTable", action="store_true", dest="SOURCE")

@@ -30,7 +30,7 @@ DATE = '3 March 2025'
 
 # ******************* PARSE COMMAND LINE ARGUMENTS ********************
 parser = argparse.ArgumentParser(description="Split each participant's ASLPrep HTML report into one report per figure type.")
-parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="select a project: " + ' '.join(st.creds.projects))
+parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="select a project (project identifier in credentials.json)")
 parser.add_argument('-t', '--test', action="store_true", dest="TEST", help="print the planned changes only, do not apply them", default=False)
 parser.add_argument('-v', '--version', action="store_true", dest="version", help="Display the current version")
 parser.add_argument('--progress', action="store_true", dest="progress", help="Show progress (default FALSE)", default=False)
