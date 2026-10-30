@@ -38,12 +38,12 @@ FSLDIR = os.environ["FSLDIR"]
 
 # ******************* PARSE COMMAND LINE ARGUMENTS ********************
 #input argument parser
-parser = argparse.ArgumentParser()
+parser = argparse.ArgumentParser(description="Run FSL FEAT first-level fMRI analysis for a project, as defined in the project's feat_full_firstlevel_input.json.")
 parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="Perform full firstlevel FEAT for the selected project: " + ' '.join(st.creds.projects), default=None)
 
-parser.add_argument('--overwrite', action="store_true", dest="OVERWRITE", help="Force conversion by skipping directory and database checking", default=False)
-parser.add_argument('-s', '--submit', action="store_true", dest="SUBMIT", help="Submit conversion to condor for parallel conversion", default=False)
-parser.add_argument('--docker', action="store_true", dest="DOCKER", help="Submit conversion to HTCondor and process in wsuconnect/neuro docker container [default=False]", default=False)
+parser.add_argument('--overwrite', action="store_true", dest="OVERWRITE", help="Force processing by skipping directory and database checking", default=False)
+parser.add_argument('-s', '--submit', action="store_true", dest="SUBMIT", help="Submit jobs to HTCondor for parallel processing", default=False)
+parser.add_argument('--docker', action="store_true", dest="DOCKER", help="Submit jobs to HTCondor and process in the wsuconnect/neuro Docker container (default FALSE)", default=False)
 parser.add_argument('--skip-id-check', action="store_true", dest="SKIPIDCHECK", help="Skip subject id checking in participants.tsv file", default=False)
 parser.add_argument('-v', '--version', action="store_true", dest="version", help="Display the current version")
 parser.add_argument('--progress', action="store_true", dest="progress", help="Show progress (default FALSE)", default=False)

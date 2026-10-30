@@ -31,13 +31,13 @@ FSLDIR = os.environ["FSLDIR"]
 
 # ******************* PARSE COMMAND LINE ARGUMENTS ********************
 #input argument parser
-parser = argparse.ArgumentParser()
-parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="Perform DTI preprocessing for the selected project: " + ' '.join(st.creds.projects), default=None)
+parser = argparse.ArgumentParser(description="Extract physiological recordings from XDF files and align them to the MRI scan with the Philips scan log, as defined in the project's physio_extraction_input.json.")
+parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="Extract physiological recordings for the selected project: " + ' '.join(st.creds.projects), default=None)
 
-parser.add_argument('--overwrite', action="store_true", dest="OVERWRITE", help="Force conversion by skipping directory and database checking", default=False)
+parser.add_argument('--overwrite', action="store_true", dest="OVERWRITE", help="Force processing by skipping directory and database checking", default=False)
 parser.add_argument('--subjects', action='store', dest='SUBJECTS', default=None, nargs='+', help='optional subject identifier(s), skips check of participants.tsv. Multiple inputs accepted through space delimiter')
 parser.add_argument('--dynamic-exclusion', action='store', dest='DYNAMIC_EXCLUSION', default=None, help='sequence to skip when looking for first dynamic. default search is "fmri"')
-#parser.add_argument('-s', '--submit', action="store_true", dest="SUBMIT", help="Submit conversion to condor for parallel conversion", default=False)
+#parser.add_argument('-s', '--submit', action="store_true", dest="SUBMIT", help="Submit jobs to HTCondor for parallel processing", default=False)
 parser.add_argument('-v', '--version', action="store_true", dest="version", help="Display the current version")
 parser.add_argument('--progress', action="store_true", dest="progress", help="Show progress (default FALSE)", default=False)
 

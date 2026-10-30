@@ -41,16 +41,16 @@ STD2MM_BRAIN = os.path.join(FSLDIR,'data','standard','MNI152_T1_2mm_brain.nii.gz
 
 # ******************* PARSE COMMAND LINE ARGUMENTS ********************
 #input argument parser
-parser = argparse.ArgumentParser()
+parser = argparse.ArgumentParser(description="Register ASL, APT or structural images to structural and standard space with FSL FLIRT, as defined in the project's <modality>_flirt_input.json.")
 parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="Perform FLIRT for the selected project: " + ' '.join(st.creds.projects), default=None)
 
 parser.add_argument('--asl', action="store_true", dest="ASL", help="Perform registration between ASL and structural (and standard if structural to standard exists", default=False)
 parser.add_argument('--T1', action="store_true", dest="STRUC", help="Perform registration between structural and standard (MNI T1 2mm)", default=False)
 parser.add_argument('--apt', action="store_true", dest="APT", help="Perform registration between APT and structural (and standard if structural to standard exists", default=False)
 
-parser.add_argument('--overwrite', action="store_true", dest="OVERWRITE", help="Force conversion by skipping directory and database checking", default=False)
-parser.add_argument('-s', '--submit', action="store_true", dest="SUBMIT", help="Submit conversion to condor for parallel conversion", default=False)
-parser.add_argument('--docker', action="store_true", dest="DOCKER", help="Submit conversion to HTCondor and process in wsuconnect/neuro docker container [default=False]", default=False)
+parser.add_argument('--overwrite', action="store_true", dest="OVERWRITE", help="Force processing by skipping directory and database checking", default=False)
+parser.add_argument('-s', '--submit', action="store_true", dest="SUBMIT", help="Submit jobs to HTCondor for parallel processing", default=False)
+parser.add_argument('--docker', action="store_true", dest="DOCKER", help="Submit jobs to HTCondor and process in the wsuconnect/neuro Docker container (default FALSE)", default=False)
 parser.add_argument('-v', '--version', action="store_true", dest="version", help="Display the current version")
 parser.add_argument('--progress', action="store_true", dest="progress", help="Show progress (default FALSE)", default=False)
 

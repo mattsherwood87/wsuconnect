@@ -54,7 +54,7 @@ MACHINE_NAMES = ['afh1.nist.local', 'afh2.nist.local', 'npc-core1a', 'npc-core1b
  
 # ******************* PARSE COMMAND LINE ARGUMENTS ********************
 #input argument parser
-parser = argparse.ArgumentParser(os.path.basename(REALPATH) + ' - GUI to add a project entry to credentials.json')
+parser = argparse.ArgumentParser(description='Open a GUI to add a new project entry to credentials.json. A timestamped backup of the file is written first.')
 parser.add_argument('-c','--creds', action="store", dest="CREDS", help="fullpath to credentials.json (default: package data/credentials.json)", default=DEFAULT_CREDS)
 parser.add_argument('-v', '--version', help="Display the current version", action="store_true", dest="version")
  

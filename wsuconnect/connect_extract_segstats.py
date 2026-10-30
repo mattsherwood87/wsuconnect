@@ -33,15 +33,15 @@ DATE = '15 July 2024'
 # ******************* PARSE COMMAND LINE ARGUMENTS ********************
 
 #input argument parser
-parser = argparse.ArgumentParser()
+parser = argparse.ArgumentParser(description="Extract segmentation statistics with FreeSurfer mri_segstats, as defined in the project's extract_segstats_input.json.")
 
     #input options for main()
-parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="update the selected project: " + ' '.join(st.creds.projects), default=None)
-parser.add_argument('--cbf', action="store_true", dest="cbf", help="Compute segstats for CBF")
-parser.add_argument('--apt', action="store_true", dest="apt", help="Compute segstats for APT")
-parser.add_argument('--dti', action="store_true", dest="dti", help="Compute segstats for DTI")
-parser.add_argument('--t1w', action="store_true", dest="T1w", help="Compute segstats for T1W")
-parser.add_argument('-s', '--submit', action="store_true", dest="SUBMIT", help="Submit conversion to condor for parallel conversion", default=False)
+parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="select a project: " + ' '.join(st.creds.projects), default=None)
+parser.add_argument('--cbf', action="store_true", dest="cbf", help="Extract segstats for CBF")
+parser.add_argument('--apt', action="store_true", dest="apt", help="Extract segstats for APT")
+parser.add_argument('--dti', action="store_true", dest="dti", help="Extract segstats for DTI")
+parser.add_argument('--t1w', action="store_true", dest="T1w", help="Extract segstats for T1W")
+parser.add_argument('-s', '--submit', action="store_true", dest="SUBMIT", help="Submit jobs to HTCondor for parallel processing", default=False)
 parser.add_argument('-v', '--version', action="store_true", dest="version", help="Display the current version")
 parser.add_argument('--overwrite', action="store_true", dest="OVERWRITE", help="Force segstats computation", default=False)
 parser.add_argument('--progress', action="store_true", dest="progress", help="Show progress (default FALSE)", default=False)

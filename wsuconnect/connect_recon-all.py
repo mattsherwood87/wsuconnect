@@ -31,13 +31,13 @@ FSLDIR = os.environ["FSLDIR"]
 
 # ******************* PARSE COMMAND LINE ARGUMENTS ********************
 #input argument parser
-parser = argparse.ArgumentParser()
+parser = argparse.ArgumentParser(description="Run FreeSurfer recon-all (stage 1) and brainmask refinement (stage 2) for a project, as defined in the project's freesurfer_recon-all_input.json.")
 parser.add_argument('-p','--project', required=True,action="store", dest="PROJECT", help="Perform FreeSurfer recon-all and/or recon-all refinement for the selected project: " + ' '.join(st.creds.projects), default=None)
 
 parser.add_argument('--stage1', action="store_true", dest="STAGE1", help="only perform recon-all without brainmask refinement", default=False)
 parser.add_argument('--stage2', action="store_true", dest="STAGE2", help="perform brainmask refinement", default=False)
-parser.add_argument('--overwrite', action="store_true", dest="OVERWRITE", help="Force conversion by skipping directory and database checking", default=False)
-parser.add_argument('-s', '--submit', action="store_true", dest="SUBMIT", help="Submit conversion to condor for parallel conversion", default=False)
+parser.add_argument('--overwrite', action="store_true", dest="OVERWRITE", help="Force processing by skipping directory and database checking", default=False)
+parser.add_argument('-s', '--submit', action="store_true", dest="SUBMIT", help="Submit jobs to HTCondor for parallel processing", default=False)
 parser.add_argument('-v', '--version', action="store_true", dest="version", help="Display the current version")
 parser.add_argument('--progress', action="store_true", dest="progress", help="Show progress (default FALSE)", default=False)
    

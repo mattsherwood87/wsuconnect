@@ -42,20 +42,21 @@ VERSION = '2.0.1'
 DATE = '1 August 2024' 
 
 #input argument parser
-parser = argparse.ArgumentParser()
+parser = argparse.ArgumentParser(description="Extract the scan events in a Philips MRI system log and write a philips-scan-log.csv for each subject/session to the project's sourcedata and rawdata directories.")
 
 
 time_offset = None
 
 # ******************* PARSE COMMAND LINE ARGUMENTS ********************
-def parse_arguments():
+#input options for main()
+requiredNamed = parser.add_argument_group('required arguments')
+requiredNamed.add_argument('-i','--in', action="store", dest="INLOGFILE", help="input Philips system logfile", default=None)
+requiredNamed.add_argument('--offset', action="store", dest="OFFSET", help="hour offset (int) to apply to all logfile times", default=None)
+parser.add_argument('-v', '--version', action="store_true", dest="version", help="Display the current version")
+# parser.add_argument('--progress', action="store_true", dest="progress", help="Show progress (default FALSE)", default=False)
 
-    #input options for main()
-    requiredNamed = parser.add_argument_group('required arguments')
-    requiredNamed.add_argument('-i','--in', action="store", dest="INLOGFILE", help="input Philips system logfile", default=None)
-    requiredNamed.add_argument('--offset', action="store", dest="OFFSET", help="hour offset (int) to apply to all logfile times", default=None)
-    parser.add_argument('-v', '--version', action="store_true", dest="version", help="Display the current version")
-    # parser.add_argument('--progress', action="store_true", dest="progress", help="Show progress (default FALSE)", default=False)
+
+def parse_arguments():
     options = parser.parse_args()
 
     return options

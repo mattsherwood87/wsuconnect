@@ -27,7 +27,7 @@ lastSessionNum = ''
 
 # ******************* PARSE COMMAND LINE ARGUMENTS ********************
 #input argument parser
-parser = argparse.ArgumentParser('connect_neuro_db_query.py: Query tables in the MySQL databases to search the AWS S3 bucket for specific files.')
+parser = argparse.ArgumentParser(description="Query a project's MySQL searchTable or searchSourceTable for files on centralized storage.")
 parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="search the selected table: " + ' '.join(st.creds.projects), default=None)
 parser.add_argument('-r','--regex', required=True, action="store", dest="REGEXSTR", help="search string (no wildcards, matches if the search string appears anywhere in the field specified by -w|--where)", default=None)
 parser.add_argument('-c','--col', action="store", dest="RETURNCOL", help="column to return: fullpath (default), filename, basename, extension, modDate, modTime", default='fullpath')

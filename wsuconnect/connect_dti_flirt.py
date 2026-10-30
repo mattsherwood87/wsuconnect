@@ -35,13 +35,13 @@ DATE = '2 September 2025'
 # ******************* PARSE COMMAND LINE ARGUMENTS ********************
 
 #input argument parser
-parser = argparse.ArgumentParser()
+parser = argparse.ArgumentParser(description="Register DTI images to structural and standard space with FSL FLIRT, as defined in the project's dti_flirt_input.json.")
 
 #input options for main()
 parser.add_argument('-p','--project', required=True,action="store", dest="PROJECT", help="Perform FLIRT for the selected project: " + ' '.join(st.creds.projects), default=None)
 parser.add_argument('--subjects', action='store', dest='SUBJECTS', default=None, nargs='+', help='optional subject identifier(s), skips check of participants.tsv. Multiple inputs accepted through space delimiter')
-parser.add_argument('--overwrite', action="store_true", dest="OVERWRITE", help="Force conversion by skipping directory and database checking", default=False)
-parser.add_argument('-s', '--submit', action="store_true", dest="SUBMIT", help="Submit conversion to condor for parallel processing via Docker container", default=False)
+parser.add_argument('--overwrite', action="store_true", dest="OVERWRITE", help="Force processing by skipping directory and database checking", default=False)
+parser.add_argument('-s', '--submit', action="store_true", dest="SUBMIT", help="Submit jobs to HTCondor for parallel processing in a Docker container", default=False)
 parser.add_argument('-v', '--version', action="store_true", dest="version", help="Display the current version")
 parser.add_argument('--progress', action="store_true", dest="progress", help="Show progress (default FALSE)", default=False)
 
