@@ -6,6 +6,7 @@ import sphinx_rtd_theme
 
 # sys.path.insert(0, os.path.abspath('..'))
 sys.path.insert(0, os.path.abspath(os.path.join('..', 'wsuconnect')))
+sys.path.insert(0, os.path.abspath('_ext'))
 
 
 # -- Project information
@@ -30,7 +31,8 @@ extensions = [
     'sphinx.ext.intersphinx',
     'sphinx.ext.graphviz',
     'sphinxarg.ext',
-    'sphinxcontrib.autoprogram'
+    'sphinxcontrib.autoprogram',
+    'connect_cli'
 ]
 
 intersphinx_mapping = {

@@ -27,24 +27,14 @@ connect_add_project_creds.py
 
 This program requires PyQt5.
 
-.. argparse::
-   :module: wsuconnect.connect_add_project_creds
-   :func: parser
-   :prog: connect_add_project_creds.py
-   :nodefault:
-   :nodefaultconst:
+.. connect-cli:: wsuconnect.connect_add_project_creds
 
 .. _connect_update_creds_db_python:
 
 connect_update_creds_db.py
 --------------------------
 
-.. argparse::
-   :module: wsuconnect.connect_update_creds_db
-   :func: parser
-   :prog: connect_update_creds_db.py
-   :nodefault:
-   :nodefaultconst:
+.. connect-cli:: wsuconnect.connect_update_creds_db
 
 .. _connect_create_project_db_python:
 
@@ -53,24 +43,14 @@ connect_create_project_db.py
 
 This program creates the Project's searchTable and searchSourceTable, as defined via the credentials JSON file loaded by :ref:`read_creds_python`.
 
-.. argparse::
-   :module: wsuconnect.connect_create_project_db
-   :func: parser
-   :prog: connect_create_project_db.py
-   :nodefault:
-   :nodefaultconst:
+.. connect-cli:: wsuconnect.connect_create_project_db
 
 .. _connect_examcard_conversion_python:
 
 connect_examcard_conversion.py
 ------------------------------
 
-.. argparse::
-   :module: wsuconnect.connect_examcard_conversion
-   :func: parser
-   :prog: connect_examcard_conversion.py
-   :nodefault:
-   :nodefaultconst:
+.. connect-cli:: wsuconnect.connect_examcard_conversion
 
 Data Transfer and Database
 ==========================
@@ -116,12 +96,7 @@ series is stored in its own folder within the session folder.
 
 .. note:: This program runs continuously in the background on the CoNNECT NPC master node (and is loaded at startup) as the pacs-grabber.service. Stop the pacs-grabber.service before running it from the command line.
 
-.. argparse::
-   :module: wsuconnect.connect_pacs_dicom_grabber
-   :func: parser
-   :prog: connect_pacs_dicom_grabber.py
-   :nodefault:
-   :nodefaultconst:
+.. connect-cli:: wsuconnect.connect_pacs_dicom_grabber
 
 .. _connect_neuro_db_update_python:
 
@@ -133,12 +108,7 @@ and/or source (:ref:`searchSourceTable <read_creds_python>`) MySQL database tabl
 
 .. note:: This program runs nightly. Run it after new files are created.
 
-.. argparse::
-   :module: wsuconnect.connect_neuro_db_update
-   :func: parser
-   :prog: connect_neuro_db_update.py
-   :nodefault:
-   :nodefaultconst:
+.. connect-cli:: wsuconnect.connect_neuro_db_update
 
 .. _connect_neuro_db_query_python:
 
@@ -147,12 +117,7 @@ connect_neuro_db_query.py
 
 This program queries the Project's MySQL :ref:`searchTable or searchSourceTable <read_creds_python>` using the search criteria defined below.
 
-.. argparse::
-   :module: wsuconnect.connect_neuro_db_query
-   :func: parser
-   :prog: connect_neuro_db_query.py
-   :nodefault:
-   :nodefaultconst:
+.. connect-cli:: wsuconnect.connect_neuro_db_query
 
 BIDS Rawdata
 ============
@@ -171,12 +136,7 @@ conversion. The NIfTI images created are then stored in the same sourcedata dire
 .. seealso::
     `dcm2niix <https://www.nitrc.org/plugins/mwiki/index.php/dcm2nii:MainPage>`_ is the most common tool for DICOM-to-NIfTI conversion, and is implemented on our Ubuntu 24.04 CoNNECT NPC nodes.
 
-.. argparse::
-   :module: wsuconnect.connect_dcm2nii
-   :func: parser
-   :prog: connect_dcm2nii.py
-   :nodefault:
-   :nodefaultconst:
+.. connect-cli:: wsuconnect.connect_dcm2nii
 
 .. _connect_create_raw_nii_python:
 
@@ -193,48 +153,28 @@ This program moves NIfTI images in sourcedata (and their sidecar JSON and text f
 
    Required prerequisite files for execution of connect_create_raw_nii.py.
 
-.. argparse::
-   :module: wsuconnect.connect_create_raw_nii
-   :func: parser
-   :prog: connect_create_raw_nii.py
-   :nodefault:
-   :nodefaultconst:
+.. connect-cli:: wsuconnect.connect_create_raw_nii
 
 .. _connect_add_sidecar_key_python:
 
 connect_add_sidecar_key.py
 --------------------------
 
-.. argparse::
-   :module: wsuconnect.connect_add_sidecar_key
-   :func: parser
-   :prog: connect_add_sidecar_key.py
-   :nodefault:
-   :nodefaultconst:
+.. connect-cli:: wsuconnect.connect_add_sidecar_key
 
 .. _connect_mod_sidecar_key_python:
 
 connect_mod_sidecar_key.py
 --------------------------
 
-.. argparse::
-   :module: wsuconnect.connect_mod_sidecar_key
-   :func: parser
-   :prog: connect_mod_sidecar_key.py
-   :nodefault:
-   :nodefaultconst:
+.. connect-cli:: wsuconnect.connect_mod_sidecar_key
 
 .. _connect_rename_rawdata_python:
 
 connect_rename_rawdata.py
 -------------------------
 
-.. argparse::
-   :module: wsuconnect.connect_rename_rawdata
-   :func: parser
-   :prog: connect_rename_rawdata.py
-   :nodefault:
-   :nodefaultconst:
+.. connect-cli:: wsuconnect.connect_rename_rawdata
 
 .. _connect_rawdata_check_python:
 
@@ -245,24 +185,14 @@ This program creates a table indicating the absence (0) or presence (1) of MRI r
 :ref:`scan ID JSON control file <scan_id_json>`. An output table in CSV format is created in the Project's 'processing_logs' directory titled
 <project_identifier>_rawdata_check.csv.
 
-.. argparse::
-   :module: wsuconnect.connect_rawdata_check
-   :func: parser
-   :prog: connect_rawdata_check.py
-   :nodefault:
-   :nodefaultconst:
+.. connect-cli:: wsuconnect.connect_rawdata_check
 
 .. _connect_derivatives_check_python:
 
 connect_derivatives_check.py
 ----------------------------
 
-.. argparse::
-   :module: wsuconnect.connect_derivatives_check
-   :func: parser
-   :prog: connect_derivatives_check.py
-   :nodefault:
-   :nodefaultconst:
+.. connect-cli:: wsuconnect.connect_derivatives_check
 
 Logs and Scan Time
 ==================
@@ -276,72 +206,42 @@ connect_exp_log_grabber_p1.py
 
 .. note:: This program runs on the MRI stimulus computer, not on the CoNNECT NPC.
 
-.. argparse::
-   :module: wsuconnect.connect_exp_log_grabber_p1
-   :func: parser
-   :prog: connect_exp_log_grabber_p1.py
-   :nodefault:
-   :nodefaultconst:
+.. connect-cli:: wsuconnect.connect_exp_log_grabber_p1
 
 .. _connect_exp_log_grabber_p2_python:
 
 connect_exp_log_grabber_p2.py
 -----------------------------
 
-.. argparse::
-   :module: wsuconnect.connect_exp_log_grabber_p2
-   :func: parser
-   :prog: connect_exp_log_grabber_p2.py
-   :nodefault:
-   :nodefaultconst:
+.. connect-cli:: wsuconnect.connect_exp_log_grabber_p2
 
 .. _connect_mri_system_log_grabber_python:
 
 connect_mri_system_log_grabber.py
 ---------------------------------
 
-.. argparse::
-   :module: wsuconnect.connect_mri_system_log_grabber
-   :func: parser
-   :prog: connect_mri_system_log_grabber.py
-   :nodefault:
-   :nodefaultconst:
+.. connect-cli:: wsuconnect.connect_mri_system_log_grabber
 
 .. _connect_mri_system_log_grabber_p2_python:
 
 connect_mri_system_log_grabber_p2.py
 ------------------------------------
 
-.. argparse::
-   :module: wsuconnect.connect_mri_system_log_grabber_p2
-   :func: parser
-   :prog: connect_mri_system_log_grabber_p2.py
-   :nodefault:
-   :nodefaultconst:
+.. connect-cli:: wsuconnect.connect_mri_system_log_grabber_p2
 
 .. _connect_physio_extraction_python:
 
 connect_physio_extraction.py
 ----------------------------
 
-.. argparse::
-   :module: wsuconnect.connect_physio_extraction
-   :func: parser
-   :prog: connect_physio_extraction.py
-   :nodefault:
-   :nodefaultconst:
+.. connect-cli:: wsuconnect.connect_physio_extraction
 
 .. _connect_scantime_evaluator_python:
 
 connect_scantime_evaluator.py
 -----------------------------
 
-.. argparse::
-   :module: wsuconnect.connect_scantime_evaluator
-   :func: parser
-   :prog: connect_scantime_evaluator.py
-   :nodefault:
-   :nodefaultconst:
+.. connect-cli:: wsuconnect.connect_scantime_evaluator
 
 Processing Pipelines
 ====================
@@ -353,120 +253,70 @@ Programs that run preprocessing and analysis pipelines, most of which can submit
 connect_aslprep.py
 ------------------
 
-.. argparse::
-   :module: wsuconnect.connect_aslprep
-   :func: parser
-   :prog: connect_aslprep.py
-   :nodefault:
-   :nodefaultconst:
+.. connect-cli:: wsuconnect.connect_aslprep
 
 .. _connect_fmriprep_python:
 
 connect_fmriprep.py
 -------------------
 
-.. argparse::
-   :module: wsuconnect.connect_fmriprep
-   :func: parser
-   :prog: connect_fmriprep.py
-   :nodefault:
-   :nodefaultconst:
+.. connect-cli:: wsuconnect.connect_fmriprep
 
 .. _connect_recon-all_python:
 
 connect_recon-all.py
 --------------------
 
-.. argparse::
-   :module: wsuconnect.connect_recon-all
-   :func: parser
-   :prog: connect_recon-all.py
-   :nodefault:
-   :nodefaultconst:
+.. connect-cli:: wsuconnect.connect_recon-all
 
 .. _connect_feat_full_firstlevel_python:
 
 connect_feat_full_firstlevel.py
 -------------------------------
 
-.. argparse::
-   :module: wsuconnect.connect_feat_full_firstlevel
-   :func: parser
-   :prog: connect_feat_full_firstlevel.py
-   :nodefault:
-   :nodefaultconst:
+.. connect-cli:: wsuconnect.connect_feat_full_firstlevel
 
 .. _connect_flirt_python:
 
 connect_flirt.py
 ----------------
 
-.. argparse::
-   :module: wsuconnect.connect_flirt
-   :func: parser
-   :prog: connect_flirt.py
-   :nodefault:
-   :nodefaultconst:
+.. connect-cli:: wsuconnect.connect_flirt
 
 .. _connect_dti_preprocess_python:
 
 connect_dti_preprocess.py
 -------------------------
 
-.. argparse::
-   :module: wsuconnect.connect_dti_preprocess
-   :func: parser
-   :prog: connect_dti_preprocess.py
-   :nodefault:
-   :nodefaultconst:
+.. connect-cli:: wsuconnect.connect_dti_preprocess
 
 .. _connect_dti_flirt_python:
 
 connect_dti_flirt.py
 --------------------
 
-.. argparse::
-   :module: wsuconnect.connect_dti_flirt
-   :func: parser
-   :prog: connect_dti_flirt.py
-   :nodefault:
-   :nodefaultconst:
+.. connect-cli:: wsuconnect.connect_dti_flirt
 
 .. _connect_slicer_python:
 
 connect_slicer.py
 -----------------
 
-.. argparse::
-   :module: wsuconnect.connect_slicer
-   :func: parser
-   :prog: connect_slicer.py
-   :nodefault:
-   :nodefaultconst:
+.. connect-cli:: wsuconnect.connect_slicer
 
 .. _connect_generate_stl_python:
 
 connect_generate_stl.py
 -----------------------
 
-.. argparse::
-   :module: wsuconnect.connect_generate_stl
-   :func: parser
-   :prog: connect_generate_stl.py
-   :nodefault:
-   :nodefaultconst:
+.. connect-cli:: wsuconnect.connect_generate_stl
 
 .. _connect_zmap_cifti_python:
 
 connect_zmap_cifti.py
 ---------------------
 
-.. argparse::
-   :module: wsuconnect.connect_zmap_cifti
-   :func: parser
-   :prog: connect_zmap_cifti.py
-   :nodefault:
-   :nodefaultconst:
+.. connect-cli:: wsuconnect.connect_zmap_cifti
 
 Statistics and Quality Control
 ==============================
@@ -478,105 +328,60 @@ Programs that compute and combine regional statistics and quality control measur
 connect_compute_segstats.py
 ---------------------------
 
-.. argparse::
-   :module: wsuconnect.connect_compute_segstats
-   :func: parser
-   :prog: connect_compute_segstats.py
-   :nodefault:
-   :nodefaultconst:
+.. connect-cli:: wsuconnect.connect_compute_segstats
 
 .. _connect_compute_cifti_segstats_python:
 
 connect_compute_cifti_segstats.py
 ---------------------------------
 
-.. argparse::
-   :module: wsuconnect.connect_compute_cifti_segstats
-   :func: parser
-   :prog: connect_compute_cifti_segstats.py
-   :nodefault:
-   :nodefaultconst:
+.. connect-cli:: wsuconnect.connect_compute_cifti_segstats
 
 .. _connect_extract_segstats_python:
 
 connect_extract_segstats.py
 ---------------------------
 
-.. argparse::
-   :module: wsuconnect.connect_extract_segstats
-   :func: parser
-   :prog: connect_extract_segstats.py
-   :nodefault:
-   :nodefaultconst:
+.. connect-cli:: wsuconnect.connect_extract_segstats
 
 .. _connect_organize_segstats_python:
 
 connect_organize_segstats.py
 ----------------------------
 
-.. argparse::
-   :module: wsuconnect.connect_organize_segstats
-   :func: parser
-   :prog: connect_organize_segstats.py
-   :nodefault:
-   :nodefaultconst:
+.. connect-cli:: wsuconnect.connect_organize_segstats
 
 .. _connect_combine_cbf_qc_python:
 
 connect_combine_cbf_qc.py
 -------------------------
 
-.. argparse::
-   :module: wsuconnect.connect_combine_cbf_qc
-   :func: parser
-   :prog: connect_combine_cbf_qc.py
-   :nodefault:
-   :nodefaultconst:
+.. connect-cli:: wsuconnect.connect_combine_cbf_qc
 
 .. _connect_combine_feat_mc_rms_python:
 
 connect_combine_feat_mc_rms.py
 ------------------------------
 
-.. argparse::
-   :module: wsuconnect.connect_combine_feat_mc_rms
-   :func: parser
-   :prog: connect_combine_feat_mc_rms.py
-   :nodefault:
-   :nodefaultconst:
+.. connect-cli:: wsuconnect.connect_combine_feat_mc_rms
 
 .. _connect_combine_fmriprep_fd_python:
 
 connect_combine_fmriprep_fd.py
 ------------------------------
 
-.. argparse::
-   :module: wsuconnect.connect_combine_fmriprep_fd
-   :func: parser
-   :prog: connect_combine_fmriprep_fd.py
-   :nodefault:
-   :nodefaultconst:
+.. connect-cli:: wsuconnect.connect_combine_fmriprep_fd
 
 .. _connect_split_aslprep_report_python:
 
 connect_split_aslprep_report.py
 -------------------------------
 
-.. argparse::
-   :module: wsuconnect.connect_split_aslprep_report
-   :func: parser
-   :prog: connect_split_aslprep_report.py
-   :nodefault:
-   :nodefaultconst:
+.. connect-cli:: wsuconnect.connect_split_aslprep_report
 
 .. _connect_build_report_python:
 
 connect_build_report.py
 -----------------------
 
-.. argparse::
-   :module: wsuconnect.connect_build_report
-   :func: parser
-   :prog: connect_build_report.py
-   :nodefault:
-   :nodefaultconst:
+.. connect-cli:: wsuconnect.connect_build_report
