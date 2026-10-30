@@ -22,6 +22,38 @@ See :ref:`connect_pacs_dicom_grabber.py <connect_pacs_dicom_grabber_python>` for
    PACS data transfer from MRI to centralized storage via CoNNECT NPC.
 
 
+Python
+------
+
+The CoNNECT NPC uses Python 3.12.3, the system Python on Ubuntu 24.04. The wsuconnect package and its dependencies
+are installed in a shared virtual environment (venv) at ``<storage_mount>/python3_venv``, so every node in the cluster
+uses the same packages. The first line of each wsuconnect script points to this venv, and HTCondor vanilla universe
+jobs run their Python programs from it.
+
+To build the venv, run the commands below from any NPC node. ``<storage_mount>/wsuconnect`` is the clone of the
+`wsuconnect GitHub repository <https://github.com/mattsherwood87/wsuconnect>`__.
+
+.. code-block:: shell-session
+
+    $ sudo apt install python3.12-venv python3.12-dev
+    $ python3.12 -m venv <storage_mount>/python3_venv
+    $ source <storage_mount>/python3_venv/bin/activate
+    $ pip install --upgrade pip
+    $ pip install -r <storage_mount>/wsuconnect/wsuconnect/data/requirements.txt
+    $ pip install -e <storage_mount>/wsuconnect
+
+The ``-e`` (editable) install links the venv to the repository, so changes pulled from GitHub take effect without
+reinstalling. Run ``deactivate`` to leave the venv.
+
+
+R and RStudio
+-------------
+
+R is available through `RStudio Server <https://posit.co/products/open-source/rstudio-server/>`__ in the
+wsuconnect/rstudio Docker image, built from the `rocker/rstudio <https://rocker-project.org/>`__ base image.
+See :doc:`/cluster_computing/containerized_processing` for the image version and the commands to start it.
+
+
 Image Viewing and Analysis Software
 -----------------------------------
 

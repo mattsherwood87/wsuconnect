@@ -38,7 +38,7 @@ Requirements
 ------------
 
 - An NPC node running Ubuntu 24.04, with access to the HTCondor pool and the centralized storage bucket mounts.
-- Python 3.12 or newer.
+- Python 3.12.3 (the Ubuntu 24.04 system Python), in the shared virtual environment described in the manual.
 - Docker, for jobs that run in HTCondor's Docker universe. Other jobs run in the vanilla universe as Python or
   bash.
 - A FreeSurfer license file in the package's ``licenses/`` folder. It is not tracked in git.
