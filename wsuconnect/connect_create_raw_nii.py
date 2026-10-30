@@ -48,7 +48,7 @@ DATE = '25 October 2024'
 #input argument parser
 
 # ******************* PARSE COMMAND LINE ARGUMENTS ********************
-parser = argparse.ArgumentParser('connect_create_raw_nii.py: copy raw nifti images (after dcm2nii conversion) to appropriate processed_data directory (will rename files according to parameters specific in <project>_scan_id.py within the Funding sub-directory within project_specific_functions directory')
+parser = argparse.ArgumentParser(description="Copy NIfTI images in sourcedata (after DICOM conversion) to the project's rawdata directory, renamed according to the project's scan_id.json.")
 
 parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="select a project from the credentials.json file", default=None)
 parser.add_argument('-i','--in-dir', action="store", dest="IN_DIR", help="path to individual subject/session to search for raw nifti images", default=None)

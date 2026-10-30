@@ -31,7 +31,7 @@ VERSION = '1.0.0'
 DATE = '29 October 2024'
 
 #input argument parser
-parser = argparse.ArgumentParser('connect_add_sidecar_key.py: adds JSON sidecar keys from scan_id.json (Units or TaskName) to each appropriate NIfTI sidecar (json)')
+parser = argparse.ArgumentParser(description="Update NIfTI JSON sidecars from the project's scan_id.json, including SliceTiming, TaskName, Units, SeriesDescription and IntendedFor.")
 
 
 # ******************* PARSE COMMAND LINE ARGUMENTS ********************

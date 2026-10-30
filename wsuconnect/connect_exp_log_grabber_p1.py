@@ -29,7 +29,7 @@ import time
 # REALPATH = os.path.dirname(os.path.realpath(__file__))
 
 # ******************* PARSE COMMAND LINE ARGUMENTS ********************
-parser = argparse.ArgumentParser()
+parser = argparse.ArgumentParser(description='Copy new experiment log files (.log, .csv) from the stimulus computer desktop to the temporary behavioral log folder on centralized storage. Runs on the stimulus computer.')
 parser.add_argument('-v', '--version', action="store_true", dest="version", help="Display the current version")
 
 

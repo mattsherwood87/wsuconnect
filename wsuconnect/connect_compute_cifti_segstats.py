@@ -33,14 +33,14 @@ DATE = '7 November 2025'
 
 
 # ******************* PARSE COMMAND LINE ARGUMENTS ********************
-parser = argparse.ArgumentParser("This program is the batch wrapper command to perform the preprocessing pipeline using fmriprep. The program searches the specified project's searchSourceTable for acquisition folders (acq-*) which contain DICOM images and runs wsuconnect.support_tools.convert_dicoms for each returned directory.")
+parser = argparse.ArgumentParser(description="Compute segmentation statistics for CIFTI images, as defined in the project's cifti_segstats_input.json.")
 parser.add_argument('--type', action="store", dest="TYPE", help="type (must be in project's cifti_segstats_input.json), ex. func", required=True)
-parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="update the selected project: " + ' '.join(st.creds.projects))
-parser.add_argument('--overwrite', action="store_true", dest="OVERWRITE", help="Force conversion by skipping directory and database checking", default=False)
+parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="select a project: " + ' '.join(st.creds.projects))
+parser.add_argument('--overwrite', action="store_true", dest="OVERWRITE", help="Force processing by skipping directory and database checking", default=False)
 parser.add_argument('--subjects', action='store', dest='SUBJECTS', default=None, nargs='+', help='optional subject identifier(s), skips check of participants.tsv. Multiple inputs accepted through space delimiter')
 parser.add_argument('-t', '--task-id', action='store', dest='TASKID', help='select a specific task to be processed', default=None)
-parser.add_argument('-s', '--submit', action="store_true", dest="SUBMIT", help="Submit conversion to condor for parallel conversion", default=False)
-parser.add_argument('--image', action="store", dest="IMAGE", help="docker selected image for aslprep - default pennlinc/aslprep:latest", default="pennlinc/aslprep:latest")
+parser.add_argument('-s', '--submit', action="store_true", dest="SUBMIT", help="Submit jobs to HTCondor for parallel processing", default=False)
+parser.add_argument('--image', action="store", dest="IMAGE", help="Docker image to use, default pennlinc/aslprep:latest", default="pennlinc/aslprep:latest")
 parser.add_argument('-v', '--version', action="store_true", dest="version", help="Display the current version")
 parser.add_argument('--progress', action="store_true", dest="progress", help="Show progress (default FALSE)", default=False)
 parser.add_argument('--test', action="store_true", dest="test", help="only print command lines to execute, do not run", default=False)

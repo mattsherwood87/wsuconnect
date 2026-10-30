@@ -29,8 +29,8 @@ DATE = '21 Nov 2024'
 
 
 # ******************* PARSE COMMAND LINE ARGUMENTS ********************
-parser = argparse.ArgumentParser("This program is the batch wrapper command to perform DICOM to NIfTI conversion using dcm2niix. The program searches the specified project's searchSourceTable for acquisition folders (acq-*) which contain DICOM images and runs wsuconnect.support_tools.convert_dicoms for each returned directory.")
-parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="update the selected project: " + ' '.join(st.creds.projects))
+parser = argparse.ArgumentParser(description="Combine each participant's fMRIPrep framewise displacement (desc-confounds_timeseries.tsv) into one project-level file in derivatives.")
+parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="select a project: " + ' '.join(st.creds.projects))
 parser.add_argument('-v', '--version', action="store_true", dest="version", help="Display the current version")
 parser.add_argument('--progress', action="store_true", dest="progress", help="Show progress (default FALSE)", default=False)
 

@@ -46,9 +46,9 @@ from wsuconnect.data import load as load_data
 
 
 
-parser = argparse.ArgumentParser('flirt.py: perform FLIRT registration between input and reference/standard brain images')
+parser = argparse.ArgumentParser(description='Create the monthly CoNNECT scan time invoice PDF for each project from the monthly scan log.')
 
-parser.add_argument('-m','--month', action='store',dest='YEARMONTH', help=' fullpath to a NIfTI file')
+parser.add_argument('-m','--month', action='store',dest='YEARMONTH', help='month to invoice, as YYYYMM')
 # parser.add_argument('DATA_DIR', help="fullpath to the project's data directory (project's 'dataDir' credential)")
 # parser.add_argument('FLIRT_PARAMS', help="fullpath to project's FLIRT parameter control file")
 # parser.add_argument('--bet-params',action='store',dest='BET_PARAMS', help="fullpath to project's BET parameter control file",default=None)

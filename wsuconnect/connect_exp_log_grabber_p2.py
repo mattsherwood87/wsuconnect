@@ -35,7 +35,7 @@ DATE = '6 Sep 2024'
 
 
 # ******************* PARSE COMMAND LINE ARGUMENTS ********************
-parser = argparse.ArgumentParser()
+parser = argparse.ArgumentParser(description="Identify the project for each experiment log in the temporary behavioral log folder and move it to that project's subject/session sourcedata and rawdata directories.")
 parser.add_argument('-v', '--version', action="store_true", dest="version", help="Display the current version")
 
 

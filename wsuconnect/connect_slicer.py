@@ -34,7 +34,7 @@ FSLDIR = os.environ["FSLDIR"]
 
 # ******************* PARSE COMMAND LINE ARGUMENTS ********************
 #input argument parser
-parser = argparse.ArgumentParser()
+parser = argparse.ArgumentParser(description='Overlay a statistical NIfTI image on a reference brain and save PNG slices in each plane with FSL overlay and slicer.')
 parser.add_argument('-i','--in', required=True, action="store", dest="INFILE", help="fullpath to input NIfTI image to overlay and slice", default=None)
 parser.add_argument('--start', action="store", dest="START", type=int, help="Start slice number, default 0", default=None)
 parser.add_argument('--end', action="store", dest="END", type=int, help="End slice number, default all slices", default=None)

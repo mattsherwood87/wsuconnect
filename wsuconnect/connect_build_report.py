@@ -51,8 +51,8 @@ small_style.fontSize = 6  # Set the font size to 6 (smaller than normal)
 # ******************* PARSE COMMAND LINE ARGUMENTS ********************
 
 #input argument parser
-parser = argparse.ArgumentParser('connect_build_report.py: build a report')
-parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="update the selected table: all " + ' '.join(st.creds.projects), default=None)
+parser = argparse.ArgumentParser(description="Build a PDF report of each participant's CBF images in MNI space.")
+parser.add_argument('-p','--project', required=True, action="store", dest="PROJECT", help="select a project: " + ' '.join(st.creds.projects), default=None)
 # parser.add_argument('-r','--raw', action="store_true", dest="RAW", help="Command line argument to update the raw_data table for the selected project (default FALSE)", default=False)
 parser.add_argument('-v', '--version', help="Display the current version", action="store_true", dest="version")
 parser.add_argument('--progress', help="Show progress (default FALSE)", action="store_true", dest="progress", default=False)

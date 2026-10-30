@@ -44,7 +44,7 @@ os.environ["FSLDIR"] = '/usr/local/fsl'
 os.system('FSLDIR=' + os.environ["FSLDIR"])
 
 #input argument parser
-parser = argparse.ArgumentParser(f'This program monitors a source directory ({DCMPATH}) for new files (DICOM), determines the associated project and subject information, moves the files to the target sourcedata directory, converts to NIfTI, and creates the rawdata directory according to BIDS structure.')
+parser = argparse.ArgumentParser(description="Monitor the PACS storage location for new DICOM images, move them to the project's subject/session sourcedata directory, convert them to NIfTI, and create the rawdata directory according to BIDS.")
 parser.add_argument('-v', '--version', action="store_true", dest="version", help="Display the current version")
  
 

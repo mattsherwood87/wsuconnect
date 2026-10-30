@@ -33,7 +33,7 @@ REALPATH = os.path.dirname(os.path.realpath(__file__))
 from wsuconnect.connect_mri_system_log_grabber_p2 import connect_mri_system_log_grabber_p2
 
 # ******************* PARSE COMMAND LINE ARGUMENTS ********************
-parser = argparse.ArgumentParser()
+parser = argparse.ArgumentParser(description="Copy the previous day's Philips MRI system log to centralized storage and extract each project's scan log with connect_mri_system_log_grabber_p2.")
 parser.add_argument('-v', '--version', action="store_true", dest="version", help="Display the current version")
 
 

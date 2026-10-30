@@ -26,7 +26,7 @@ DATE = '29 Oct 2026'
 
 # ******************* PARSE COMMAND LINE ARGUMENTS ********************
 #input argument parser
-parser = argparse.ArgumentParser(os.path.basename(REALPATH) + ' - Create or update the MySQL project credentials table from credentials.json')
+parser = argparse.ArgumentParser(description='Create or update the MySQL project credentials table from credentials.json.')
 parser.add_argument('-t','--table', action="store", dest="TABLE", help="target table in the database (default projects)", default='projects')
 parser.add_argument('-d','--database', action="store", dest="DATABASE", help="target MySQL database (default CoNNECT)", default='CoNNECT')
 parser.add_argument('-v', '--version', help="Display the current version", action="store_true", dest="version")
