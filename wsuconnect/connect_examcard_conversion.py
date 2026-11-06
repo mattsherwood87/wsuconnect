@@ -14,7 +14,7 @@ import html
 from itertools import zip_longest
 
 from reportlab.lib import colors
-from reportlab.lib.pagesizes import letter, landscape
+from reportlab.lib.pagesizes import letter
 from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.units import inch
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, PageBreak, KeepInFrame
@@ -180,7 +180,7 @@ def build_columns(d_dict: dict) -> list:
 # ******************* PDF OUTPUT ********************
 def write_pdf(outFile: str, ls_seq: list):
     """
-    Write the ExamCard report as a PDF (letter, landscape) using reportlab.
+    Write the ExamCard report as a PDF (letter, portrait) using reportlab.
 
     The first page lists the scan order, then each sequence gets one page. A sequence with
     too many parameters to fit is scaled down to fit its page.
@@ -191,7 +191,7 @@ def write_pdf(outFile: str, ls_seq: list):
     :type ls_seq: list
     """
     created = datetime.datetime.today().strftime('%B %d, %Y @ %H:%M:%S')
-    pagesize = landscape(letter)
+    pagesize = letter
     margin = 0.4*inch
     width = pagesize[0] - 2*margin
 

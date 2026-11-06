@@ -11,7 +11,7 @@ def prepare_examcard_html():
     """
     Prepares the html header for the examcard html file when converting examcards from txt to html.
 
-    The stylesheet prints each sequence on its own landscape letter page, repeats the table
+    The stylesheet prints each sequence on its own portrait letter page, repeats the table
     title and column headers if a table runs onto a second page, and avoids blank pages.
 
     :return: html document header, through the opening <body> and page header
@@ -23,7 +23,7 @@ def prepare_examcard_html():
 <meta charset="utf-8">
 <title>ExamCard</title>
 <style>
-    @page { size: letter landscape; margin: 0.4in; }
+    @page { size: letter portrait; margin: 0.4in; }
 
     body { font-family: Arial, Helvetica, sans-serif; font-size: 9px; margin: 0; }
     header { font-size: 12px; text-align: center; margin-bottom: 8px; }
