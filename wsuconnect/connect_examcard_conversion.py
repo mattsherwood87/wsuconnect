@@ -262,7 +262,7 @@ if __name__ == '__main__':
                 strCat = 'dyn'
             elif ('Preparation phases' in a[0] or a[0] == 'Images') and not 'pro' in strCat and not 'inf' in strCat:
                 strCat = 'pro'
-            elif 'Total scan duration' in a[0] or (a[0].startswith('Act. TR') and not bIndented):
+            elif 'Total scan duration' in a[0] or (a[0].startswith('Act. ') and not bIndented):
                 strCat = 'inf'
             elif a[0] in ['Stack','Beam','Shim volume'] and not bIndented:
                 # newer software exports the stack geometry at the end of the file
