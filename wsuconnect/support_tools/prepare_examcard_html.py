@@ -3,73 +3,68 @@
 # Copywrite:= Matthew Sherwood (matt.sherwood@wright.edu, matthew.sherwood.7.ctr@us.af.mil)
 # Created on 24 April 2024
 #
-# 
+#
 
 
 
 def prepare_examcard_html():
     """
     Prepares the html header for the examcard html file when converting examcards from txt to html.
+
+    The stylesheet prints each sequence on its own landscape letter page, repeats the table
+    title and column headers if a table runs onto a second page, and avoids blank pages.
+
+    :return: html document header, through the opening <body> and page header
+    :rtype: str
     """
-    newD = f"""
-<!DOCTYPE html>
+    newD = """<!DOCTYPE html>
 <html>
 <head>
+<meta charset="utf-8">
+<title>ExamCard</title>
 <style>
+    @page { size: letter landscape; margin: 0.4in; }
 
-    footer {{
-    font-size: 9px;
-    text-align: center;
-    }}
+    body { font-family: Arial, Helvetica, sans-serif; font-size: 9px; margin: 0; }
+    header { font-size: 12px; text-align: center; margin-bottom: 8px; }
+    footer { font-size: 8px; text-align: center; margin-top: 8px; }
 
-    header {{
-    font-size: 9px;
-    text-align: center;
-    }}
+    table { border-collapse: collapse; }
+    td, th { padding: 1px 3px; vertical-align: middle; }
 
-    @page {{s
-    size: 8.5in 11in; margin: 0.5in 0.5in 0.5in 0.5in;
-    }}
-    .tab {{
-    display: inline-block;
-    margin-left: 2em;
-    }}
+    table.order { width: 60%; font-size: 12px; margin-bottom: 12px; }
+    table.order td, table.order th { border: 1px solid #000; text-align: left; }
+    table.order th { background: #E6E6E6; }
 
-    @media print {{
-    table {{
-    page-break-inside: avoid; empty-cells: hide; }}
-    .pagebreak {{
-    page-break-before: always; }}
-    footer {{
-    position: fixed; bottom: 0; }}
-    header {{
-    position: fixed; top: 0; overflow: avoid; text-align: center; }}
-    .content-block, p {{
-    page-break-inside: avoid;
-    position: relative;
-    width: 100%;
-    left:0px;
-    right:0px; }}
-    html, body {{
-    width: 8.5in; height: 11in; }}
+    table.examcard { width: 100%; table-layout: fixed; }
+    table.examcard col.k { width: 19.5%; }
+    table.examcard col.v { width: 12.5%; }
+    table.examcard col.gap { width: 1%; }
+    table.examcard td { border: 1px solid #000; word-wrap: break-word; }
+    table.examcard td.gap, table.examcard td.empty { border: none; }
+    table.examcard th.title { font-size: 16px; padding: 6px; border: none; }
+    table.examcard th.sect { background: #046A38; color: #FFFFFF; border: 1px solid #000; font-size: 10px; }
+    td.lvl1 { padding-left: 2em; }
+    td.lvl2 { padding-left: 4em; }
 
-    .hidden-print {{
-    display: none; }}
-    }}
+    section.sequence { margin-top: 16px; }
 
-    .border-none td {{
-    border: 1px solid black;
-    }} 
-
-    body {{
-    font-size: 10px; font-family: arial;
-    }}
+    @media print {
+        * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        body { font-size: 7.5px; }
+        table.examcard th.title { font-size: 13px; padding: 3px; }
+        .hidden-print { display: none; }
+        section.sequence { break-before: page; margin-top: 0; }
+        thead { display: table-header-group; }
+        tr { break-inside: avoid; }
+        header, footer { display: none; }
+    }
 </style>
 </head>
 <body>
 <button class="hidden-print" onClick="window.print()">Print</button>
 
-<header><font face="arial" size="+1">Wright State University | Center of Neuroimaging and Neuro-Evaluation of Cognitive Technology<br></br></font></header>
+<header>Wright State University | Center of Neuroimaging and Neuro-Evaluation of Cognitive Technology</header>
 """
-                            
+
     return newD
