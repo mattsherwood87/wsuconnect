@@ -4,7 +4,8 @@
 # Created by Matthew Sherwood (matt.sherwood@wright.edu, matthew.sherwood.7.ctr@us.af.mil)
 # Created on 31 Jan 2023
 #
-# Last Modified on 5 July 2024 - add removal of processed participants from the PACS database
+# Last Modified on 12 Nov 2026 - submit SimNIBS charm jobs to HTCondor for projects with "simnibs" enabled
+# Modified on 5 July 2024 - add removal of processed participants from the PACS database
 # Modified on 11 June 2024 - changes to allow for the acceptance of classic DICOMs
 # Modified on 28 Feb 2023 - slight changes to grab path of script automatically 
 
@@ -22,8 +23,8 @@ from pathlib import Path
 from datetime import datetime, timedelta, time
 import traceback
 #versioning
-VERSION = '4.0.1'
-DATE = '25 October 2024'
+VERSION = '4.1.0'
+DATE = '12 Nov 2026'
 
 
 # ******* LOCAL IMPORTS ******
@@ -126,6 +127,13 @@ def main():
         projectIDs = loads(load_data.readable('credentials.json').read_text())
         loopFlag = False
         tm.sleep(30)
+
+        # copy finished SimNIBS charm jobs into derivatives and log them
+        try:
+            st.simnibs.collect_finished(write_log)
+        except Exception as e:
+            traceback.print_exc()
+            write_log(f"\tcharm collect error: {e} @ {datetime.now().strftime('%m%d%Y %H:%M:%S')}")
         for root, dirs, files in os.walk(DCMPATH, topdown=True):
             
             for filename in files:
@@ -510,6 +518,14 @@ def main():
                 write_log("\t\tError Message: {0}".format(e))
                 write_log('\t\t' + str(exc_type) + ' ' + str(fname) + ' ' + str(exc_tb.tb_lineno))
 
+
+            # submit a SimNIBS charm job for this subject/session if the project opted in
+            # (row.name, not idx: idx is reused for a filename index above)
+            try:
+                st.simnibs.submit_session(row['project'], row['sourcedataDir'], row.name, write_log)
+            except Exception as e:
+                traceback.print_exc()
+                write_log(f"\tcharm submit error for {row.name}: {e} @ {datetime.now().strftime('%m%d%Y %H:%M:%S')}")
 
             write_log('\tFinished processing DICOM group @ ' + datetime.now().strftime('%m%d%Y %H:%M:%S'))
             write_log('Checking /PACS_m2 for new files...')

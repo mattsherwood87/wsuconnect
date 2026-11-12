@@ -32,6 +32,7 @@ creds.masterMachineName = _fullCredentials['master_machine_name']
 #import modules
 from wsuconnect.support_tools import mybids
 from wsuconnect.support_tools import condor
+from wsuconnect.support_tools import simnibs
 from wsuconnect.support_tools import RestToolbox
 
 from .apply_brainmask import apply_brainmask
@@ -51,6 +52,7 @@ from . import mysql
 from .move_html import move_html
 from .prepare_examcard_html import prepare_examcard_html
 from .remove_dirs import remove_dirs
+from .set_connect_perms import set_connect_perms
 from .xdf_extract_physio import xdf_extract_physio
 
 
@@ -94,4 +96,4 @@ def import_dti_preprocess_wf():
 specBase = specBase()
 
 
-__all__ = ['apply_brainmask','bids','check_rawdata','compute_segstats','convert_dicoms','copy_dirs','condor','dti_flirt','evaluate_source_file_transfer','feat_full_firstlevel','flirt_pngappend','fmriprep_clean_workdir','fsreconall_stage1','fsreconall_stage2','get_scan_id','import_flirt','import_dti_preprocess','mysql','prepare_examcard_html','remove_dirs','RestToolbox','creds','subject','specBase','xdf_extract_physio']
+__all__ = ['apply_brainmask','bids','check_rawdata','compute_segstats','convert_dicoms','copy_dirs','condor','dti_flirt','evaluate_source_file_transfer','feat_full_firstlevel','flirt_pngappend','fmriprep_clean_workdir','fsreconall_stage1','fsreconall_stage2','get_scan_id','import_flirt','import_dti_preprocess','mysql','prepare_examcard_html','remove_dirs','RestToolbox','set_connect_perms','simnibs','creds','subject','specBase','xdf_extract_physio']

@@ -4,13 +4,31 @@
 # Created on 23 Dec 2020
 
 #versioning
-_VERSION = '2.0.2'
-_DATE = '17 June 2026'
+_VERSION = '2.1.0'
+_DATE = '12 Nov 2026'
 
 
+import copy as _copy
 import os as _os
 from pathlib import Path as _Path
 _REALPATH = _Path(_os.path.realpath(__file__)).parts[:-2]
+
+
+# Defaults for a project's optional "simnibs" block in credentials.json (SimNIBS
+# charm + brain_print HTCondor jobs submitted by connect_pacs_dicom_grabber.py).
+# A project only lists the keys it changes, e.g. "simnibs": {"enabled": true}.
+_SIMNIBS_DEFAULTS = {
+    'enabled': False,                       # submit charm jobs for this project
+    'condor_user': 'nw028mss',              # non-root account that owns the HTCondor jobs
+    't1_label': '',                         # text before _T1w (e.g. 'rec-axial'); '' = any T1w
+    't2_label': '',                         # text before _T2w; '' = any T2w
+    'machines': ['npc-core-gpu1'],          # execute hosts that have the image loaded
+    'image': 'wsuconnect/simnibs:4.6.0',    # docker image with charm_brain_print in /usr/bin
+    'extra_args': '',                       # extra charm_brain_print args, e.g. '--skull -- --brainstem'
+    'request_cpus': 4,
+    'request_memory': '16g',
+    'request_disk': '30GB',
+}
 
 
 class _InvalidProjectError(Exception):
@@ -44,6 +62,7 @@ class creds:
         self.searchSourceTable = ""
         self.searchTable = ""
         self.dockerMountIf = ""
+        self.simnibs = _copy.deepcopy(_SIMNIBS_DEFAULTS)
         self.contact = ["matt.sherwood@wright.edu","kelsie.pyle@wright.edu"]
         # self.read()
 
@@ -73,8 +92,14 @@ class creds:
         #find project credentials
         try: 
             if project in self.projects:
+                # reset per-project optional settings so one project's values never
+                # carry over to the next project read through this shared object
+                self.simnibs = _copy.deepcopy(_SIMNIBS_DEFAULTS)
                 for k in fullCredentials[project].keys():
                     if not '__comment__' in k:
+                        if k == "simnibs":
+                            self.simnibs.update({sk: sv for sk, sv in fullCredentials[project][k].items() if sk in _SIMNIBS_DEFAULTS})
+                            continue
                         setattr(self,k,fullCredentials[project][k])
                         if k == "dataDir":
                             setattr(self, "dataPath", _Path(fullCredentials[project][k]))
