@@ -85,6 +85,56 @@ record. For pilot studies, a short name may be used in place of the IRB number.
    * - contact
      - list[string]
      - Email addresses of the project contacts
+   * - simnibs
+     - dictionary
+     - Optional. SimNIBS charm + brain_print jobs submitted by connect_pacs_dicom_grabber.py, described in :numref:`credentials_simnibs_table`
+
+|
+
+.. _credentials_simnibs_table:
+
+.. list-table:: Keys of the optional ``simnibs`` dictionary. Missing keys take the default; a project with no ``simnibs`` entry is disabled.
+   :widths: 20 15 25 40
+   :header-rows: 1
+
+   * - **Key**
+     - **Data Type**
+     - **Default**
+     - **Description**
+   * - enabled
+     - bool
+     - false
+     - Submit a charm job for each new subject/session
+   * - condor_user
+     - string
+     - nw028mss
+     - Non-root account that owns the HTCondor jobs (HTCondor will not run root jobs)
+   * - t1_label
+     - string
+     - ""
+     - Text right before ``_T1w`` in the BIDS filename, e.g. ``rec-axial``, to pick one orientation; empty = any T1w
+   * - t2_label
+     - string
+     - ""
+     - The same for ``_T2w``
+   * - machines
+     - list[string]
+     - ["npc-core-gpu1"]
+     - Execute hosts that have the SimNIBS image loaded (used instead of machineNames)
+   * - image
+     - string
+     - wsuconnect/simnibs:4.6.0
+     - Docker image with charm_brain_print in /usr/bin
+   * - extra_args
+     - string
+     - ""
+     - Extra charm_brain_print arguments, e.g. ``--skull -- --brainstem``
+   * - request_cpus, request_memory, request_disk
+     - int, string, string
+     - 4, 16g, 30GB
+     - HTCondor resource requests
+
+Minimal entry: ``"simnibs": {"enabled": true}``
 
 .. note:: No command-line interface (CLI) support.
 
@@ -94,7 +144,8 @@ Python Implementation
 The project credentials are loaded into the ``creds`` object of the support_tools module (an instance of the ``creds`` class in
 ``wsuconnect/classes/creds.py``). When support_tools is imported, ``st.creds.projects`` and ``st.creds.masterMachineName`` are set from
 credentials.json. Calling ``st.creds.read()`` then sets every key of the selected project as an attribute of ``st.creds``, for example
-``st.creds.dataDir`` or ``st.creds.searchTable``.
+``st.creds.dataDir`` or ``st.creds.searchTable``. The optional ``simnibs`` entry is reset to its defaults on every ``read()`` and
+then merged with the project's values, so ``st.creds.simnibs`` always holds every key and never carries over from a previously read project.
 
 .. code-block:: python
 

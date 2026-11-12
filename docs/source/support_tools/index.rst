@@ -92,6 +92,14 @@ described in the previous section.
      - No
      - No
      - REST requests (GET, POST, PUT, DELETE) to the Orthanc PACS
+   * - :ref:`set_connect_perms <set_connect_perms_python>`
+     - No
+     - No
+     - Applies the CoNNECT permission rule (0770, storage group) to a file or folder tree
+   * - :ref:`simnibs <simnibs_python>`
+     - Yes (connect_simnibs.py)
+     - Yes
+     - Submits SimNIBS charm + brain_print HTCondor jobs and collects the results
 
 
 
@@ -365,5 +373,18 @@ Python Implementation
     :special-members:
 
 
+.. _set_connect_perms_python:
+
+set_connect_perms.py
+====================
+
+.. note:: No command-line interface (CLI) support.
+
+Python Implementation
+---------------------
+
+.. automodule:: wsuconnect.support_tools.set_connect_perms
+    :members:
 
 
+.. include:: simnibs.rst
