@@ -5,7 +5,7 @@ simnibs
 
 Segments a subject/session with SimNIBS ``charm`` and prepares a print-ready brain (``brain_print.3mf``) in the
 ``wsuconnect/simnibs`` Docker image, through :term:`HTCondor`. ``connect_pacs_dicom_grabber.py`` calls it automatically for
-projects with ``"simnibs": {"enabled": true}`` in credentials.json (see :numref:`credentials_simnibs_table`).
+the sessions selected by a project's ``"simnibs": {"include_sessions": [...]}`` in credentials.json (see :numref:`credentials_simnibs_table`).
 
 How it works
 ------------

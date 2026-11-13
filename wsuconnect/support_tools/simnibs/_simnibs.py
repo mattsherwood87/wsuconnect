@@ -228,11 +228,35 @@ def parse_job_log(log_path: str) -> dict:
     return out
 
 
+# ******************* SESSION SELECTION ********************
+def _ses_key(x) -> str:
+    """0, '0', 'ses-0' -> '0'"""
+    x = str(x).strip()
+    return x[4:] if x.startswith('ses-') else x
+
+
+def session_selected(cfg: dict, ses: str) -> bool:
+    """
+    Whether the "simnibs" settings select this session: it must be in include_sessions
+    ("*" = every session) and not in exclude_sessions. Entries may be numbers or strings,
+    with or without "ses-" (0, "0" and "ses-0" all match ses-0). An empty
+    include_sessions selects nothing, so simnibs is off for the project.
+
+    :param cfg: the project's simnibs settings (st.creds.simnibs)
+    :param ses: session folder name, e.g. 'ses-0'
+    """
+    include = {_ses_key(s) for s in (cfg.get('include_sessions') or [])}
+    exclude = {_ses_key(s) for s in (cfg.get('exclude_sessions') or [])}
+    key = _ses_key(ses)
+    return ('*' in include or key in include) and key not in exclude
+
+
 # ******************* SUBMIT ********************
 def submit_session(project: str, sourcedata_dir: str, patient: str = '', log=None) -> int:
     """
-    Submit a SimNIBS charm + brain_print job for one subject/session, if the project has
-    "simnibs": {"enabled": true} in credentials.json and the session wasn't done before.
+    Submit a SimNIBS charm + brain_print job for one subject/session, if the project's
+    "simnibs" settings in credentials.json select the session (include_sessions /
+    exclude_sessions, see session_selected) and it wasn't done before.
 
     :param project: project identifier in credentials.json
     :type project: str
@@ -254,10 +278,9 @@ def submit_session(project: str, sourcedata_dir: str, patient: str = '', log=Non
 
     st.creds.read(project)
     cfg = st.creds.simnibs
-    if not cfg.get('enabled'):
-        return None
-
     sub, ses = _session_from_sourcedata(sourcedata_dir)
+    if not session_selected(cfg, ses):
+        return None
     label = f'{project} {sub}/{ses}'
     data_dir = st.creds.dataDir
     dest = os.path.join(data_dir, 'derivatives', sub, ses, 'anat', 'charm')

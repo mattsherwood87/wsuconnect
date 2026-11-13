@@ -101,10 +101,14 @@ record. For pilot studies, a short name may be used in place of the IRB number.
      - **Data Type**
      - **Default**
      - **Description**
-   * - enabled
-     - bool
-     - false
-     - Submit a charm job for each new subject/session
+   * - include_sessions
+     - list
+     - []
+     - Sessions to run charm on, e.g. ``[0]`` or ``[1, 2]``. Numbers or strings, with or without ``ses-`` (``0``, ``"0"`` and ``"ses-0"`` all mean ``ses-0``). ``["*"]`` = every session. Empty = simnibs is off for the project
+   * - exclude_sessions
+     - list
+     - []
+     - Sessions never to run, same format; useful with ``["*"]``
    * - condor_user
      - string
      - nw028mss
@@ -134,7 +138,7 @@ record. For pilot studies, a short name may be used in place of the IRB number.
      - 4, 16g, 30GB
      - HTCondor resource requests
 
-Minimal entry: ``"simnibs": {"enabled": true}``
+Minimal entry: ``"simnibs": {"include_sessions": [0]}`` (charm for ses-0 of every subject)
 
 .. note:: No command-line interface (CLI) support.
 

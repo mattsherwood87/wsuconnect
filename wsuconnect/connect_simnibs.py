@@ -28,7 +28,7 @@ DATE = '12 Nov 2026'
 
 # ******************* PARSE COMMAND LINE ARGUMENTS ********************
 parser = argparse.ArgumentParser(description="Submit SimNIBS charm + brain_print HTCondor jobs for a project's sessions, or collect finished ones. "
-                                             "connect_pacs_dicom_grabber.py does both automatically for projects with \"simnibs\": {\"enabled\": true} in credentials.json; "
+                                             "connect_pacs_dicom_grabber.py does both automatically for the sessions a project's \"simnibs\" settings in credentials.json select (include_sessions / exclude_sessions); "
                                              "use this by hand to test, to backfill older sessions, or to collect results. Run as root (or as the project's simnibs condor_user).")
 parser.add_argument('-p','--project', action="store", dest="PROJECT", help="select a project (project identifier in credentials.json)", default=None)
 parser.add_argument('--subjects', action='store', dest='SUBJECTS', default=None, nargs='+', help='subject identifier(s), e.g. sub-1106 (default: every sub-* in rawdata)')
@@ -58,8 +58,8 @@ if __name__ == '__main__':
 
     if not st.creds.read(options.PROJECT):
         sys.exit(1)
-    if not st.creds.simnibs.get('enabled'):
-        print(f'simnibs is not enabled for {options.PROJECT} in credentials.json ("simnibs": {{"enabled": true}})')
+    if not st.creds.simnibs.get('include_sessions'):
+        print(f'simnibs is off for {options.PROJECT}: set "simnibs": {{"include_sessions": [...]}} in credentials.json')
         sys.exit(1)
     dataDir = st.creds.dataDir
 
@@ -69,6 +69,9 @@ if __name__ == '__main__':
         sessions = options.SESSIONS or sorted(os.path.basename(d) for d in glob.glob(os.path.join(dataDir, 'rawdata', sub, 'ses-*')) if os.path.isdir(d))
         for ses in sessions:
             ses = ses if ses.startswith('ses-') else f'ses-{ses}'
+            if not st.simnibs.session_selected(st.creds.simnibs, ses):
+                print(f'{sub}/{ses}: not submitted (not selected by include_sessions/exclude_sessions)')
+                continue
             # submit_session takes the grabber's sourcedata path and reads the images from rawdata
             cluster = st.simnibs.submit_session(options.PROJECT, os.path.join(dataDir, 'sourcedata', sub, ses), f'{sub} {ses}')
             print(f'{sub}/{ses}: ' + (f'submitted cluster {cluster}' if cluster else 'not submitted (reason above and in the grabber log)'))
