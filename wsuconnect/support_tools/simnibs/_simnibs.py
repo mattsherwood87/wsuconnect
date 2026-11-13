@@ -40,6 +40,22 @@ STATUS_DONE = 'done'
 STATUS_FAILED = 'failed'
 
 
+# Runs inside the container. Always leaves m2m_<id> behind, so a charm failure comes
+# back as a normal exit code with its logs instead of an output-transfer hold.
+WRAPPER_NAME = 'run_charm.sh'
+WRAPPER = """#!/bin/bash
+sub="$1"
+echo "[$(date '+%F %T')] $(hostname) uid=$(id -u) pwd=$PWD"
+echo "charm_brain_print $*"
+charm_brain_print "$@"
+rc=$?
+mkdir -p "m2m_$sub"
+echo "$rc" > "m2m_$sub/condor_exit_code"
+echo "[$(date '+%F %T')] charm_brain_print exit $rc"
+exit "$rc"
+"""
+
+
 # ******************* LOGGING ********************
 def _stamp() -> str:
     return datetime.now().strftime('%m%d%Y %H:%M:%S')
@@ -261,6 +277,11 @@ def submit_session(project: str, sourcedata_dir: str, patient: str = '', log=Non
             shutil.copyfile(src, os.path.join(jobdir, name))
             imgs.append(name)
 
+    wrapper = os.path.join(jobdir, WRAPPER_NAME)
+    with open(wrapper, 'w') as f:
+        f.write(WRAPPER)
+    os.chmod(wrapper, 0o755)
+
     args = ' '.join([charm_id, *imgs, cfg.get('extra_args', '')]).strip()
     job = st.condor.create_bin_condor_job(
         JOB_NAME, 'charm_brain_print', cfg.get('machines') or st.creds.machineNames,
@@ -271,7 +292,7 @@ def submit_session(project: str, sourcedata_dir: str, patient: str = '', log=Non
         extra_lines=[
             f'initialdir = {jobdir}',
             f"request_disk = {cfg.get('request_disk', '30GB')}",
-            'transfer_executable = false',
+            'transfer_executable = true',
             'should_transfer_files = YES',
             'when_to_transfer_output = ON_EXIT',
             'transfer_input_files = ' + ','.join(imgs),
@@ -281,6 +302,7 @@ def submit_session(project: str, sourcedata_dir: str, patient: str = '', log=Non
             'periodic_remove = (JobStatus == 5) && (time() - EnteredCurrentStatus > 7200)',
             f'batch_name = simnibs_{charm_id}',
         ])
+    job.executable = wrapper   # the image's charm_brain_print, called through the wrapper
     job.add_arg(args)
     job.build(makedirs=False, fancyname=False)
 
