@@ -16,9 +16,10 @@ _REALPATH = _Path(_os.path.realpath(__file__)).parts[:-2]
 
 # Defaults for a project's optional "simnibs" block in credentials.json (SimNIBS
 # charm + brain_print HTCondor jobs submitted by connect_pacs_dicom_grabber.py).
-# A project only lists the keys it changes, e.g. "simnibs": {"enabled": true}.
+# A project only lists the keys it changes, e.g. "simnibs": {"include_sessions": [0]}.
 _SIMNIBS_DEFAULTS = {
-    'enabled': False,                       # submit charm jobs for this project
+    'include_sessions': [],                 # sessions to run, e.g. [0] or [1, 2] (= ses-0 / ses-1, ses-2); ["*"] = all; [] = simnibs off
+    'exclude_sessions': [],                 # sessions never to run, e.g. with ["*"] above
     'condor_user': 'nw028mss',              # non-root account that owns the HTCondor jobs
     't1_label': 'T1w.nii.gz',               # filename ending, nothing added: 'rec-ax_T1w.nii.gz' -> *rec-ax_T1w.nii.gz; '' = any *T1w.nii.gz
     't2_label': '',                         # filename ending of a 2nd charm image, e.g. 'acq-fracture_T1w.nii.gz'; '' = none

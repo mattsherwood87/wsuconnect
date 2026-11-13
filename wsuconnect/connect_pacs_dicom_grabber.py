@@ -4,7 +4,7 @@
 # Created by Matthew Sherwood (matt.sherwood@wright.edu, matthew.sherwood.7.ctr@us.af.mil)
 # Created on 31 Jan 2023
 #
-# Last Modified on 12 Nov 2026 - submit SimNIBS charm jobs to HTCondor for projects with "simnibs" enabled
+# Last Modified on 12 Nov 2026 - submit SimNIBS charm jobs to HTCondor for the sessions selected in a project's "simnibs" settings
 # Modified on 5 July 2024 - add removal of processed participants from the PACS database
 # Modified on 11 June 2024 - changes to allow for the acceptance of classic DICOMs
 # Modified on 28 Feb 2023 - slight changes to grab path of script automatically 
