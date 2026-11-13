@@ -217,9 +217,12 @@ def submit_session(project: str, sourcedata_dir: str, patient: str = '', log=Non
 
     # already done, or already queued (a session's DICOMs can arrive in two batches)
     if os.path.isfile(os.path.join(dest, 'brain_print.3mf')):
+        _emit(log, f"charm skipped for {label}: already done ({os.path.join(dest, 'brain_print.3mf')} exists)")
         return None
     for sf in _job_dirs(key):
-        if _read_state(sf).get('status') in (STATUS_SUBMITTED, STATUS_DONE):
+        status = _read_state(sf).get('status')
+        if status in (STATUS_SUBMITTED, STATUS_DONE):
+            _emit(log, f"charm skipped for {label}: job already {status} in {os.path.dirname(sf)}")
             return None
 
     # images
