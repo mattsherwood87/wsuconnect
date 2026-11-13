@@ -111,12 +111,12 @@ record. For pilot studies, a short name may be used in place of the IRB number.
      - Non-root account that owns the HTCondor jobs (HTCondor will not run root jobs)
    * - t1_label
      - string
-     - ""
-     - Text right before ``_T1w`` in the BIDS filename, e.g. ``rec-axial``, to pick one orientation; empty = any T1w
+     - T1w.nii.gz
+     - End of the T1 filename in rawdata/sub-X/ses-Y/anat. Nothing is added: ``rec-ax_T1w.nii.gz`` matches ``*rec-ax_T1w.nii.gz``. Empty = any ``*T1w.nii.gz``. Without a ``.nii``/``.nii.gz`` extension both are accepted. Several matches: highest ``run-``, then newest file
    * - t2_label
      - string
      - ""
-     - The same for ``_T2w``
+     - End of the filename of a second charm input (charm's T2 slot), matched the same way, e.g. ``acq-fracture_T1w.nii.gz``. Empty = no second image. This file is never used as the T1
    * - machines
      - list[string]
      - ["npc-core-gpu1"]
