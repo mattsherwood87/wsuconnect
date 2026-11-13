@@ -20,8 +20,8 @@ _REALPATH = _Path(_os.path.realpath(__file__)).parts[:-2]
 _SIMNIBS_DEFAULTS = {
     'enabled': False,                       # submit charm jobs for this project
     'condor_user': 'nw028mss',              # non-root account that owns the HTCondor jobs
-    't1_label': '',                         # text before _T1w (e.g. 'rec-axial'); '' = any T1w
-    't2_label': '',                         # text before _T2w; '' = any T2w
+    't1_label': 'T1w.nii.gz',               # filename ending, nothing added: 'rec-ax_T1w.nii.gz' -> *rec-ax_T1w.nii.gz; '' = any *T1w.nii.gz
+    't2_label': '',                         # filename ending of a 2nd charm image, e.g. 'acq-fracture_T1w.nii.gz'; '' = none
     'machines': ['npc-core-gpu1'],          # execute hosts that have the image loaded
     'image': 'wsuconnect/simnibs:4.6.0',    # docker image with charm_brain_print in /usr/bin
     'extra_args': '',                       # extra charm_brain_print args, e.g. '--skull -- --brainstem'

@@ -93,21 +93,31 @@ def _run_number(path: str) -> int:
     return int(m.group(1)) if m else 0
 
 
-def find_image(anat_dir: str, suffix: str, label: str = '') -> str:
+def find_image(anat_dir: str, label: str, exclude=()) -> str:
     """
-    Find one BIDS image in anat_dir, e.g. suffix 'T1w' and label 'rec-axial' matches
-    *_rec-axial_T1w.nii.gz. With several matches the highest run- (then newest file) wins.
+    Find one image in anat_dir whose filename ends with label. Nothing is added to the
+    label: 'T1w.nii.gz' matches any *T1w.nii.gz, 'rec-ax_T1w.nii.gz' matches
+    *rec-ax_T1w.nii.gz. A label without a .nii/.nii.gz extension matches either one.
+    With several matches the highest run- (then newest file) wins.
 
-    :return: fullpath, or None when nothing matches
+    :param exclude: paths that may not be returned (e.g. the image already used as T2)
+    :return: fullpath, or None when label is empty or nothing matches
     """
-    tag = f'_{label}' if label else ''
-    matches = []
-    for ext in ('.nii.gz', '.nii'):
-        matches += glob.glob(os.path.join(anat_dir, f'*{tag}_{suffix}{ext}'))
+    label = (label or '').strip().lstrip('*')
+    if not label:
+        return None
+    if label.endswith(('.nii.gz', '.nii')):
+        patterns = [f'*{label}']
+    else:
+        patterns = [f'*{label}.nii.gz', f'*{label}.nii']
+    skip = {os.path.realpath(f) for f in exclude if f}
+    matches = set()
+    for pat in patterns:
+        matches.update(f for f in glob.glob(os.path.join(anat_dir, pat))
+                       if os.path.realpath(f) not in skip)
     if not matches:
         return None
-    matches.sort(key=lambda f: (_run_number(f), os.path.getmtime(f)))
-    return matches[-1]
+    return max(matches, key=lambda f: (_run_number(f), os.path.getmtime(f)))
 
 
 def _makedirs_top(path: str) -> str:
@@ -214,11 +224,17 @@ def submit_session(project: str, sourcedata_dir: str, patient: str = '', log=Non
 
     # images
     anat = os.path.join(data_dir, 'rawdata', sub, ses, 'anat')
-    t1 = find_image(anat, 'T1w', cfg.get('t1_label', ''))
-    t2 = find_image(anat, 'T2w', cfg.get('t2_label', ''))
+    # labels are filename endings ('' T1 = any *T1w.nii.gz, '' T2 = no second image);
+    # the T2 is found first so a broad T1 label can't pick the same file
+    t1_label = cfg.get('t1_label') or 'T1w.nii.gz'
+    t2_label = cfg.get('t2_label') or ''
+    t2 = find_image(anat, t2_label)
+    t1 = find_image(anat, t1_label, exclude=[t2])
     if not t1:
-        _emit(log, f"charm skipped for {label}: no T1w matching '{cfg.get('t1_label', '')}' in {anat}")
+        _emit(log, f"charm skipped for {label}: no file matching '*{t1_label}' in {anat}")
         return None
+    if t2_label and not t2:
+        _emit(log, f"charm for {label}: no file matching '*{t2_label}' in {anat}, running T1 only")
 
     # job account
     user = cfg.get('condor_user')
