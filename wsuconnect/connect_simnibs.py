@@ -71,4 +71,4 @@ if __name__ == '__main__':
             ses = ses if ses.startswith('ses-') else f'ses-{ses}'
             # submit_session takes the grabber's sourcedata path and reads the images from rawdata
             cluster = st.simnibs.submit_session(options.PROJECT, os.path.join(dataDir, 'sourcedata', sub, ses), f'{sub} {ses}')
-            print(f'{sub}/{ses}: ' + (f'submitted cluster {cluster}' if cluster else 'not submitted (disabled, already done/queued, no T1w, or submit failed; see the log)'))
+            print(f'{sub}/{ses}: ' + (f'submitted cluster {cluster}' if cluster else 'not submitted (reason above and in the grabber log)'))

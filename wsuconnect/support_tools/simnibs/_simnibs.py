@@ -7,16 +7,20 @@
 # collect the results. Called from connect_pacs_dicom_grabber.py (which runs as root)
 # and from connect_simnibs.py (by hand).
 #
-# Design (see the project plan):
+# Design:
 #  * HTCondor will not run root-owned jobs, so jobs are submitted as an ordinary
 #    account (st.creds.simnibs['condor_user']) by running condor_submit with that uid.
-#  * Root stages the T1/T2 into a local job folder owned by that account; the job
-#    gets its inputs and returns m2m_<id> through HTCondor file transfer, so the job
-#    account never needs rights to the project data.
-#  * Root copies finished results to <dataDir>/derivatives/sub-X/ses-Y/anat/charm and
-#    applies the CoNNECT permission rule (0770, storage group).
-#  * Job state lives in <STAGING_DIR>/<job>/state.json, so nothing is lost when the
-#    grabber restarts.
+#  * No file transfer: /resshare* is mounted on every execute host. Root creates
+#    <dataDir>/derivatives/sub-X/ses-Y/anat/charm (owned by the job account, storage
+#    group, 2770) and the job runs charm_brain_print there in the simnibs image (docker
+#    universe, storage mounted by +MOUNT_RESSHAREnn), reading
+#    the T1/T2 straight from rawdata. Results land in anat/charm/m2m_<sub>_<ses>.
+#  * The submit/log/output/error files and the job scripts go to
+#    <dataDir>/code/processing_logs/connect_simnibs/<sub>_<ses>_<time>/.
+#  * When a job finishes, root applies the CoNNECT permission rule (0770, storage group)
+#    to the results.
+#  * Job state lives in <STAGING_DIR>/<job>/state.json (local, root only), so nothing
+#    is lost when the grabber restarts.
 
 import glob
 import json
@@ -38,6 +42,51 @@ JOB_NAME = 'simnibs'           # pycondor job name -> simnibs.submit/.log/.outpu
 STATUS_SUBMITTED = 'submitted'
 STATUS_DONE = 'done'
 STATUS_FAILED = 'failed'
+
+
+# Job script, written to the job's log folder on /resshare and run in the simnibs image
+# (docker universe; the +MOUNT_RESSHAREnn attributes mount the project storage). It cds
+# to anat/charm, always leaves m2m_<id> with condor_exit_code behind, and runs
+# charm_brain_print through its interpreter when the image installed it without the
+# execute bit for other users.
+CHARM_SCRIPT_NAME = 'run_charm.sh'
+CHARM_SCRIPT = r"""#!/bin/bash
+# usage: run_charm.sh WORKDIR SUBID T1 [T2] [charm_brain_print options]
+cd "$1" || { echo "cannot cd to $1" >&2; exit 2; }
+shift
+# The container runs as the job account's uid, which has no home in the image.
+export HOME=/tmp/home
+export XDG_CACHE_HOME="$HOME/.cache" MPLCONFIGDIR="$HOME/.cache/matplotlib" \
+       NUMBA_CACHE_DIR="$HOME/.cache/numba" XDG_RUNTIME_DIR="$HOME/.runtime" TMPDIR="$HOME/tmp"
+mkdir -p "$MPLCONFIGDIR" "$NUMBA_CACHE_DIR" "$TMPDIR"; mkdir -p -m 700 "$XDG_RUNTIME_DIR"
+export PATH="/opt/conda/envs/simnibs_env/bin:/opt/conda/bin:/usr/local/bin:/usr/bin:/bin:$PATH"
+export LANG=C.UTF-8 LC_ALL=C.UTF-8 MPLBACKEND=Agg QT_QPA_PLATFORM=offscreen
+
+sub="$1"
+echo "[$(date '+%F %T')] in container uid=$(id -u) gid=$(id -g) pwd=$PWD"
+cbp=$(command -v charm_brain_print)
+for d in /usr/bin /usr/local/bin /opt/conda/envs/simnibs_env/bin /opt/conda/bin; do
+    [ -n "$cbp" ] && break; [ -e "$d/charm_brain_print" ] && cbp="$d/charm_brain_print"
+done
+cbp=${cbp:-/usr/bin/charm_brain_print}
+ls -l "$cbp"
+echo "charm_brain_print $*"
+if [ -x "$cbp" ]; then
+    "$cbp" "$@"
+elif [ -r "$cbp" ]; then
+    interp=$(head -1 "$cbp" | sed -n 's/^#! *//p')
+    echo "$cbp is not executable for uid $(id -u), running it with ${interp:-bash}" >&2
+    ${interp:-bash} "$cbp" "$@"
+else
+    echo "$cbp is not readable for uid $(id -u); rebuild the image with chmod 755 on it" >&2
+    false
+fi
+rc=$?
+mkdir -p "m2m_$sub"
+echo "$rc" > "m2m_$sub/condor_exit_code"
+echo "[$(date '+%F %T')] charm_brain_print exit $rc"
+exit "$rc"
+"""
 
 
 # ******************* LOGGING ********************
@@ -214,12 +263,16 @@ def submit_session(project: str, sourcedata_dir: str, patient: str = '', log=Non
     dest = os.path.join(data_dir, 'derivatives', sub, ses, 'anat', 'charm')
     key = _clean(f'{project}_{sub}_{ses}')
     charm_id = _clean(f'{sub}_{ses}')
+    m2m = os.path.join(dest, f'm2m_{charm_id}')
 
     # already done, or already queued (a session's DICOMs can arrive in two batches)
-    if os.path.isfile(os.path.join(dest, 'brain_print.3mf')):
+    if os.path.isfile(os.path.join(m2m, 'brain_print.3mf')):
+        _emit(log, f"charm skipped for {label}: already done ({os.path.join(m2m, 'brain_print.3mf')} exists)")
         return None
     for sf in _job_dirs(key):
-        if _read_state(sf).get('status') in (STATUS_SUBMITTED, STATUS_DONE):
+        status = _read_state(sf).get('status')
+        if status in (STATUS_SUBMITTED, STATUS_DONE):
+            _emit(log, f"charm skipped for {label}: job already {status} (state in {os.path.dirname(sf)})")
             return None
 
     # images
@@ -246,53 +299,63 @@ def submit_session(project: str, sourcedata_dir: str, patient: str = '', log=Non
     if not as_root and os.geteuid() != pw.pw_uid:
         raise PermissionError(f'run as root or as {user} to submit SimNIBS jobs')
 
-    # staging folder: owned by the job account, storage group, setgid so what
-    # HTCondor writes back keeps the group
-    os.makedirs(STAGING_DIR, mode=0o755, exist_ok=True)
-    jobdir = os.path.join(STAGING_DIR, f"{key}_{datetime.now().strftime('%Y%m%d-%H%M%S')}")
-    os.makedirs(jobdir)
-    imgs = []
-    for tag, src in (('T1', t1), ('T2', t2)):
-        if src:
-            name = tag + ('.nii.gz' if src.endswith('.nii.gz') else '.nii')
-            shutil.copyfile(src, os.path.join(jobdir, name))
-            imgs.append(name)
+    def job_perms(path):
+        """owned by the job account, storage group, setgid so new files keep the group"""
+        if not as_root:
+            return []
+        return set_connect_perms(path, uid=pw.pw_uid, group_path=data_dir, mode=0o770, dir_mode=0o2770)
 
-    args = ' '.join([charm_id, *imgs, cfg.get('extra_args', '')]).strip()
+    stamp = datetime.now().strftime('%Y%m%d-%H%M%S')
+
+    # output folder in derivatives; a leftover m2m from a failed run is kept aside
+    if os.path.isdir(m2m):
+        os.rename(m2m, f'{m2m}.prev_{stamp}')
+    top = _makedirs_top(dest)
+    bad = job_perms(top or dest)
+
+    # log folder: submit file, HTCondor log/output/error and the job scripts
+    logdir = os.path.join(data_dir, 'code', 'processing_logs', 'connect_simnibs', f'{charm_id}_{stamp}')
+    top = _makedirs_top(logdir)
+    charm_script = os.path.join(logdir, CHARM_SCRIPT_NAME)
+    with open(charm_script, 'w') as f:
+        f.write(CHARM_SCRIPT)
+    os.chmod(charm_script, 0o770)
+    bad += job_perms(top or logdir)
+    if bad:
+        _emit(log, f'charm permissions for {label}: could not change {len(bad)} path(s), e.g. {bad[0]}')
+
+    args = ' '.join([dest, charm_id, t1, *([t2] if t2 else []), cfg.get('extra_args', '')]).strip()
     job = st.condor.create_bin_condor_job(
-        JOB_NAME, 'charm_brain_print', cfg.get('machines') or st.creds.machineNames,
-        submit=jobdir, error=jobdir, output=jobdir, log=jobdir, dagman=None,
+        JOB_NAME, CHARM_SCRIPT_NAME, cfg.get('machines') or st.creds.machineNames,
+        submit=logdir, error=logdir, output=logdir, log=logdir, dagman=None,
         docker=True, docker_image=cfg.get('image'), docker_mount_if=st.creds.dockerMountIf,
         request_cpus=cfg.get('request_cpus', 4), request_memory=cfg.get('request_memory', '16g'),
         requirements='(HasDocker =?= true)',
         extra_lines=[
-            f'initialdir = {jobdir}',
-            f"request_disk = {cfg.get('request_disk', '30GB')}",
+            f'initialdir = {dest}',
+            'should_transfer_files = NO',
             'transfer_executable = false',
-            'should_transfer_files = YES',
-            'when_to_transfer_output = ON_EXIT',
-            'transfer_input_files = ' + ','.join(imgs),
-            f'transfer_output_files = m2m_{charm_id}',
-            'environment = "HOME=/tmp MPLCONFIGDIR=/tmp/mpl NUMBA_CACHE_DIR=/tmp/numba XDG_CACHE_HOME=/tmp/cache"',
             # a job held for 2 h is removed, so collect_finished always gets an end state
             'periodic_remove = (JobStatus == 5) && (time() - EnteredCurrentStatus > 7200)',
             f'batch_name = simnibs_{charm_id}',
         ])
+    job.executable = charm_script
     job.add_arg(args)
     job.build(makedirs=False, fancyname=False)
+    job_perms(job.submit_file)
 
+    # state stays on local disk, readable by root only
+    os.makedirs(STAGING_DIR, mode=0o700, exist_ok=True)
+    jobdir = os.path.join(STAGING_DIR, f'{key}_{stamp}')
+    os.makedirs(jobdir)
     state_file = os.path.join(jobdir, 'state.json')
     state = {
         'status': STATUS_FAILED, 'cluster': None, 'project': project, 'patient': patient,
         'subject': sub, 'session': ses, 'charm_id': charm_id, 'data_dir': data_dir,
-        'dest': dest, 't1': t1, 't2': t2, 'jobdir': jobdir,
+        'dest': dest, 'm2m': m2m, 't1': t1, 't2': t2, 'jobdir': jobdir, 'logdir': logdir,
         'submitted': datetime.now().isoformat(timespec='seconds'), 'hold_logged': '',
     }
     _write_state(state_file, state)
-    if as_root:
-        bad = set_connect_perms(jobdir, uid=pw.pw_uid, group_path=data_dir, mode=0o770, dir_mode=0o2770)
-        if bad:
-            _emit(log, f'charm staging permissions for {label}: could not change {len(bad)} path(s), e.g. {bad[0]}')
 
     # submit as the job account
     env = {'PATH': os.environ.get('PATH', '/usr/bin:/bin'), 'HOME': pw.pw_dir,
@@ -304,43 +367,28 @@ def submit_session(project: str, sourcedata_dir: str, patient: str = '', log=Non
         run_as = {'user': pw.pw_uid, 'group': pw.pw_gid,
                   'extra_groups': os.getgrouplist(pw.pw_name, pw.pw_gid)}
     try:
-        res = subprocess.run(['condor_submit', '-terse', job.submit_file], cwd=jobdir, env=env,
+        res = subprocess.run(['condor_submit', '-terse', job.submit_file], cwd=logdir, env=env,
                              capture_output=True, text=True, timeout=120, **run_as)
         m = re.match(r'\s*(\d+)', res.stdout or '')
         if res.returncode != 0 or not m:
             raise RuntimeError((res.stderr or res.stdout or f'exit {res.returncode}').strip().splitlines()[-1])
     except Exception as e:
-        _emit(log, f'charm submit FAILED for {label}: {e} (see {jobdir})')
+        _emit(log, f'charm submit FAILED for {label}: {e} (see {logdir})')
         return None
 
     state['cluster'] = int(m.group(1))
     state['status'] = STATUS_SUBMITTED
     _write_state(state_file, state)
     images = ', '.join(os.path.basename(f) for f in (t1, t2) if f)
-    _emit(log, f"charm started for {label} images {images} (cluster {state['cluster']})")
+    _emit(log, f"charm started for {label} images {images} (cluster {state['cluster']}) -> {m2m}")
     return state['cluster']
 
 
 # ******************* COLLECT ********************
-def _copy_logs(state: dict, set_perms):
-    """Copy the HTCondor log/output/error to <dataDir>/code/processing_logs/connect_simnibs/."""
-    logdir = os.path.join(state['data_dir'], 'code', 'processing_logs', 'connect_simnibs')
-    top = _makedirs_top(logdir)
-    if top:
-        set_perms(top)
-    base = os.path.basename(state['jobdir'])
-    for ext in ('log', 'output', 'error'):
-        src = os.path.join(state['jobdir'], f'{JOB_NAME}.{ext}')
-        if os.path.isfile(src):
-            dst = os.path.join(logdir, f'{base}.{ext}')
-            shutil.copyfile(src, dst)
-            set_perms(dst)
-
-
 def collect_finished(log=None) -> list:
     """
-    Check every submitted job; copy finished results into
-    <dataDir>/derivatives/sub-X/ses-Y/anat/charm and log the outcome. Cheap when
+    Check every submitted job; set permissions on finished results in
+    <dataDir>/derivatives/sub-X/ses-Y/anat/charm/m2m_<id> and log the outcome. Cheap when
     nothing is pending, so the grabber can call it on every loop.
 
     :param log: function taking one string, e.g. the grabber's write_log; defaults to default_log
@@ -359,7 +407,7 @@ def collect_finished(log=None) -> list:
                 continue
             label = f"{state['project']} {state['subject']}/{state['session']}"
             jobdir = state['jobdir']
-            ev = parse_job_log(os.path.join(jobdir, f'{JOB_NAME}.log'))
+            ev = parse_job_log(os.path.join(state.get('logdir') or jobdir, f'{JOB_NAME}.log'))
 
             if ev['state'] in ('running',):
                 continue
@@ -371,33 +419,24 @@ def collect_finished(log=None) -> list:
                 continue
 
             def perms(p):
-                return set_connect_perms(p, uid=0)
+                return set_connect_perms(p, uid=0, group_path=state['data_dir'])
 
-            m2m = os.path.join(jobdir, f"m2m_{state['charm_id']}")
+            # jobs submitted before the switch to in-place runs kept m2m in the job folder
+            m2m = state.get('m2m') or os.path.join(jobdir, f"m2m_{state['charm_id']}")
+            logdir = state.get('logdir') or jobdir
             ok = ev['state'] == 'done' and ev['exit'] == 0 and os.path.isfile(os.path.join(m2m, 'brain_print.3mf'))
+            bad = [p for p in (m2m, logdir) if os.path.exists(p) for p in perms(p)]
+            if bad:
+                _emit(log, f'charm results permissions for {label}: could not change {len(bad)} path(s), e.g. {bad[0]}')
             if ok:
-                dest = state['dest']
-                if os.path.exists(dest):
-                    os.rename(dest, f"{dest}.prev_{datetime.now().strftime('%Y%m%d-%H%M%S')}")
-                # new parent folders get the same permissions as the results
-                top = _makedirs_top(os.path.dirname(dest)) or dest
-                shutil.copytree(m2m, dest)
-                bad = perms(top)
-                if bad:
-                    _emit(log, f'charm results permissions for {label}: could not change {len(bad)} path(s), e.g. {bad[0]}')
-                _copy_logs(state, perms)
-                for f in glob.glob(os.path.join(jobdir, 'T[12].nii*')):
-                    os.remove(f)
-                shutil.rmtree(m2m, ignore_errors=True)
                 state['status'] = STATUS_DONE
-                _emit(log, f'charm finished for {label} -> {dest}')
+                _emit(log, f'charm finished for {label} -> {m2m}')
             else:
-                _copy_logs(state, perms)
                 state['status'] = STATUS_FAILED
                 why = f"exit {ev['exit']}" if ev['state'] == 'done' else 'removed from the queue'
                 if ev['state'] == 'aborted' and state.get('hold_logged'):
                     why += f" after hold: {state['hold_logged']}"
-                _emit(log, f"charm FAILED for {label} ({why}), see {jobdir}/{JOB_NAME}.error and "
+                _emit(log, f"charm FAILED for {label} ({why}), see {logdir}/{JOB_NAME}.error and "
                            f"{m2m}/charm_brain_print.log")
             state['finished'] = datetime.now().isoformat(timespec='seconds')
             _write_state(state_file, state)
