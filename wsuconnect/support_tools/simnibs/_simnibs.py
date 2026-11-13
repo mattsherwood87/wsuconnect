@@ -43,11 +43,36 @@ STATUS_FAILED = 'failed'
 # Runs inside the container. Always leaves m2m_<id> behind, so a charm failure comes
 # back as a normal exit code with its logs instead of an output-transfer hold.
 WRAPPER_NAME = 'run_charm.sh'
-WRAPPER = """#!/bin/bash
+WRAPPER = r"""#!/bin/bash
+# The container runs as the job account's uid, which has no home in the image:
+# point HOME and the caches at the job's scratch folder, and restate the image's PATH.
+export HOME="${_CONDOR_SCRATCH_DIR:-$PWD}"
+export XDG_CACHE_HOME="$HOME/.cache" MPLCONFIGDIR="$HOME/.cache/matplotlib" \
+       NUMBA_CACHE_DIR="$HOME/.cache/numba" XDG_RUNTIME_DIR="$HOME/.runtime" TMPDIR="$HOME/tmp"
+mkdir -p "$MPLCONFIGDIR" "$NUMBA_CACHE_DIR" "$TMPDIR"; mkdir -p -m 700 "$XDG_RUNTIME_DIR"
+export PATH="/opt/conda/envs/simnibs_env/bin:/opt/conda/bin:/usr/local/bin:/usr/bin:/bin:$PATH"
+export LANG=C.UTF-8 LC_ALL=C.UTF-8 MPLBACKEND=Agg QT_QPA_PLATFORM=offscreen
+
 sub="$1"
-echo "[$(date '+%F %T')] $(hostname) uid=$(id -u) pwd=$PWD"
+echo "[$(date '+%F %T')] $(hostname) uid=$(id -u) gid=$(id -g) pwd=$PWD"
+cbp=$(command -v charm_brain_print)
+for d in /usr/bin /usr/local/bin /opt/conda/envs/simnibs_env/bin /opt/conda/bin; do
+    [ -n "$cbp" ] && break; [ -e "$d/charm_brain_print" ] && cbp="$d/charm_brain_print"
+done
+cbp=${cbp:-/usr/bin/charm_brain_print}
+ls -l "$cbp"
 echo "charm_brain_print $*"
-charm_brain_print "$@"
+if [ -x "$cbp" ]; then
+    "$cbp" "$@"
+elif [ -r "$cbp" ]; then
+    # installed without the execute bit for other users: run it through its interpreter
+    interp=$(head -1 "$cbp" | sed -n 's/^#! *//p')
+    echo "$cbp is not executable for uid $(id -u), running it with ${interp:-bash}" >&2
+    ${interp:-bash} "$cbp" "$@"
+else
+    echo "$cbp is not readable for uid $(id -u); rebuild the image with chmod 755 on it" >&2
+    false
+fi
 rc=$?
 mkdir -p "m2m_$sub"
 echo "$rc" > "m2m_$sub/condor_exit_code"
@@ -297,7 +322,6 @@ def submit_session(project: str, sourcedata_dir: str, patient: str = '', log=Non
             'when_to_transfer_output = ON_EXIT',
             'transfer_input_files = ' + ','.join(imgs),
             f'transfer_output_files = m2m_{charm_id}',
-            'environment = "HOME=/tmp MPLCONFIGDIR=/tmp/mpl NUMBA_CACHE_DIR=/tmp/numba XDG_CACHE_HOME=/tmp/cache"',
             # a job held for 2 h is removed, so collect_finished always gets an end state
             'periodic_remove = (JobStatus == 5) && (time() - EnteredCurrentStatus > 7200)',
             f'batch_name = simnibs_{charm_id}',
